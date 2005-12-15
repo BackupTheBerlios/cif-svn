@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="Properties">
+
+  <property name="ProjectCodeLineName"      value="Current" overwrite="false"/>
+  
+  <property name="ProjectsDirectory"        value="c:\Projects" overwrite="false"/>
+  <property name="ProjectRootDirectory"     value="${ProjectsDirectory}\${ProjectName}"  overwrite="false"/>
+  <property name="ProjectCodeLineDirectory" value="${ProjectRootDirectory}\${ProjectCodeLineName}" overwrite="false"/>
+  <property name="ProductDirectory"         value="${ProjectRootDirectory}\${ProjectCodeLineName}\Product"  overwrite="false"/>
+  <property name="ThirdPartyDirectory"      value="${ProjectRootDirectory}\${ProjectCodeLineName}\Third Party"  overwrite="false"/>
+  <property name="ProductionDirectory"      value="${ProductDirectory}\Production"  overwrite="false"/>
+  <property name="InstallDirectory"         value="${ProductDirectory}\Install"  overwrite="false"/>
+  <property name="UnitTestDirectory"        value="${ProductDirectory}\Unit Test"  overwrite="false"/>
+  <property name="BuildDirectory"           value="${ProjectsDirectory}\${ProjectName}\${ProjectCodeLineName}\Build"  overwrite="false"/>
+  <property name="BuildPackagesDirectory"   value="${BuildDirectory}\Packages"  overwrite="false"/>
+  <property name="VSSRootShare"             value="\\saturn\Source Safe" overwrite="false"/>
+  
+</project>

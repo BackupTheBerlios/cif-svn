@@ -1,0 +1,271 @@
+<html>
+  <head>
+    <title>MbUnit Test Report</title>
+    <style>
+				h1 				{ font-family:Verdana; font-weight:Bold; font-size:14pt; margin-bottom:0pt; }
+				h2 				{ font-family:Verdana; font-weight:Bold; font-size:12pt; margin-bottom:0pt; }
+				p,li			{ font-family:Verdana; font-size:9pt;}
+			    table 			{ font-family:Verdana; font-weight:normal; font-size:8pt; color:black; }
+				tr.heading    	{ background-color:#D0D0FF; font-weight:Bold; font-size:12pt; }
+				tr.titles     	{ background-color:#B0B0FF; font-weight:Bold; font-size:9pt; }
+				tr.assemblysetupteardown     	{ background-color:#DDDDFF; font-weight:Bold; font-size:9pt; }
+				tr.fixture     	{ background-color:#B0B0FF; font-weight:Bold; font-size:9pt; }
+				tr.fixturesetupteardown     	{ background-color:#DDDDFF; font-weight:Bold; font-size:9pt; }
+				tr.assemblySummary { font-weight:Bold; }
+				tr.fixtureSummary  {}
+				tr.successEven  { background-color:#EFFFEF; }
+				tr.successOdd   { background-color:#C0FFC0; }
+				tr.failureEven  { background-color:#FFEEDE; font-weight:Bold; }
+				tr.failureOdd   { background-color:#FFD0C0; font-weight:bold; }
+				tr.skippedEven 	{ background-color:#FFEEEE; }
+				tr.skippedOdd  	{ background-color:#FFD0D0; }
+				tr.exceptionType  { background-color:#DDDDDD; font-weight:Bold; }
+				tr.notRunEven 	{ background-color:#F0F0FF; }
+				tr.notRunOdd  	{ background-color:#D8D8FF; }
+				tr.ignoreEven 	{ background-color:#FFFFEF; }
+				tr.ignoreOdd  	{ background-color:#FFFFC0; }
+				td.smallLeft  	{ font-size:7pt; font-weight: normal; text-align:left; vertical-align:top; }
+				td.smallRight 	{ font-size:7pt; font-weight: normal; text-align:right; vertical-align:top; }
+				pre.console     { }
+				pre.stackTrace  { }
+				counter         { font-size:7pt;}
+                time            { font-size:8pt;}
+				</style>
+    <script language="JavaScript">
+				function toggle (field)
+				{ field.style.display = (field.style.display == "block") ? "none" : "block"; }
+
+				function SwitchAll(how)
+				{	var len = document.all.length-1;
+					for(i=0;i!=len;i++)	{
+						var block = document.all[i];
+						if (block != null)
+							if (block.id != '')
+								block.style.display=how;
+					}
+				}
+
+				if (document.images)
+				{
+					populator = new Image();
+					fixture = new Image();
+					category = new Image();
+					test = new Image();
+					fixture.src = "Fixture.png";
+					test.src = "Test.png"
+					category.src = "Category.png"
+					populator.src = "Populator.png"
+				}
+
+				function ExpandAll()
+				{SwitchAll('block');}
+
+				function CollapseAll()
+				{SwitchAll('none');}
+				</script>
+  </head>
+  <body>
+    <img src="mbunitlogo.png" />
+    <br />
+    <h1>Test Summary</h1>
+    <ul>
+      <li>
+        <strong>Date:</strong>2005-12-14T19:47:50.9995312-05:00</li>
+      <li>
+        <strong>Duration:</strong>
+        <span class="time">0.13s</span>
+      </li>
+    </ul>
+    <table border="0" cellpadding="1" cellspacing="1">
+      <tr class="titles">
+        <td>Total</td>
+        <td>
+          <div style="position:relative;background-color:#DDDDDD;border-color:black;width:100px;height:14px;">
+            <div style="position:absolute;top:0px;left:0px;height:14px;background-color:lightgreen;font-size:1px;width:100px;">
+            </div>
+            <div style="position:absolute;top:0px;left:102px;height:14px;font-size:12px;font-family:Verdana;">10/10/0/0/0/115</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="titles">
+        <td>
+          <a href="#Test.TrackerAssembly">
+            <img width="16" height="16" border="0" src="Populator.png">
+            </img>Test.Tracker</a>
+        </td>
+        <td>
+          <div style="position:relative;background-color:#DDDDDD;border-color:black;width:100px;height:12px;">
+            <div style="position:absolute;top:0px;left:0px;height:12px;background-color:lightgreen;font-size:1px;width:100px;">
+            </div>
+            <div style="position:absolute;top:0px;left:102px;height:12px;font-size:10px;font-family:Verdana;">10/10/0/0/0/115</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="fixtureSummary">
+        <td>
+          <a href="#Test.Tracker.tTrackerServer.tTrackerServer">
+            <img width="16" height="16" border="0" src="Fixture.png">
+            </img>Test.Tracker.tTrackerServer.tTrackerServer</a>
+        </td>
+        <td>
+          <div style="position:relative;background-color:#DDDDDD;border-color:black;width:100px;height:10px;">
+            <div style="position:absolute;top:0px;left:0px;height:10px;background-color:lightgreen;font-size:1px;width:100px;">
+            </div>
+            <div style="position:absolute;top:0px;left:102px;height:10px;font-size:8px;font-family:Verdana;">10/10/0/0/0/115</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <h1>Warnings</h1>
+    <table>
+    </table>
+    <h1>Test result details</h1>
+    <h2 id="Test.TrackerAssembly">
+      <img width="16" height="16" border="0" src="Populator.png">
+      </img>Test.Tracker</h2>
+    <ul>
+      <li>
+        <strong>Full Name:</strong>Test.Tracker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</li>
+      <li>
+        <strong>Results:</strong>10 test,
+		10 success,
+		0 failures,
+        0 skipped,
+		0 ignored,
+		115 asserts
+	</li>
+      <li>
+        <strong>Duration:</strong>
+        <span class="time">0.13s</span>
+      </li>
+    </ul>
+    <table width="800" border="0" cellpadding="1" cellspacing="1">
+      <col width="700" />
+      <col width="50" />
+      <col width="50" />
+      <tr id="Test.Tracker.tTrackerServer.tTrackerServer">
+        <td>
+          <div style="position:relative;background-color:#DDDDDD;border-color:black;width:100px;height:10px;">
+            <div style="position:absolute;top:0px;left:0px;height:10px;background-color:lightgreen;font-size:1px;width:100px;">
+            </div>
+            <div style="position:absolute;top:0px;left:102px;height:10px;font-size:8px;font-family:Verdana;">10/10/0/0/0/115</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="fixture">
+        <td>
+          <img width="16" height="16" border="0" src="Fixture.png">
+          </img>Test.Tracker.tTrackerServer.tTrackerServer
+
+		    	(<span class="time">0.13s</span>)
+			</td>
+      </tr>
+      <tr>
+        <td>
+          <table width="100%" border="0" cellpadding="1" cellspacing="1">
+            <tr class="successOdd">
+              <td>
+                <img width="16" height="16" border="0" src="Test.png">
+                </img>tTrackerServer.tLogout.TearDown</td>
+              <td>
+                <span class="time">90.130ms</span>
+              </td>
+              <td>0.82 Kb, 1</td>
+            </tr>
+            <tr class="successEven">
+              <td>
+                <img width="16" height="16" border="0" src="Test.png">
+                </img>tTrackerServer.tLogin.TearDown</td>
+              <td>
+                <span class="time">10.014ms</span>
+              </td>
+              <td>0.00 Kb, 8</td>
+            </tr>
+            <tr class="successOdd">
+              <td>
+                <img width="16" height="16" border="0" src="Test.png">
+                </img>tTrackerServer.tAddNote.TearDown</td>
+              <td>
+                <span class="time">0.000ms</span>
+              </td>
+              <td>0.00 Kb, 19</td>
+            </tr>
+            <tr class="successEven">
+              <td>
+                <img width="16" height="16" border="0" src="Test.png">
+                </img>tTrackerServer.tGetDescription.TearDown</td>
+              <td>
+                <span class="time">10.014ms</span>
+              </td>
+              <td>0.00 Kb, 9</td>
+            </tr>
+            <tr class="successOdd">
+              <td>
+                <img width="16" height="16" border="0" src="Test.png">
+                </img>tTrackerServer.tGetFieldValueInteger.TearDown</td>
+              <td>
+                <span class="time">0.000ms</span>
+              </td>
+              <td>0.82 Kb, 4</td>
+            </tr>
+            <tr class="successEven">
+              <td>
+                <img width="16" height="16" border="0" src="Test.png">
+                </img>tTrackerServer.tGetFieldValueString.TearDown</td>
+              <td>
+                <span class="time">0.000ms</span>
+              </td>
+              <td>0.00 Kb, 4</td>
+            </tr>
+            <tr class="successOdd">
+              <td>
+                <img width="16" height="16" border="0" src="Test.png">
+                </img>tTrackerServer.tGetNoteList.TearDown</td>
+              <td>
+                <span class="time">10.014ms</span>
+              </td>
+              <td>0.00 Kb, 22</td>
+            </tr>
+            <tr class="successEven">
+              <td>
+                <img width="16" height="16" border="0" src="Test.png">
+                </img>tTrackerServer.tGetSCRIDListFromQuery.TearDown</td>
+              <td>
+                <span class="time">0.000ms</span>
+              </td>
+              <td>0.82 Kb, 12</td>
+            </tr>
+            <tr class="successOdd">
+              <td>
+                <img width="16" height="16" border="0" src="Test.png">
+                </img>tTrackerServer.tSaveNumericFieldValue.TearDown</td>
+              <td>
+                <span class="time">10.014ms</span>
+              </td>
+              <td>0.00 Kb, 18</td>
+            </tr>
+            <tr class="successEven">
+              <td>
+                <img width="16" height="16" border="0" src="Test.png">
+                </img>tTrackerServer.tSaveStringFieldValue.TearDown</td>
+              <td>
+                <span class="time">0.000ms</span>
+              </td>
+              <td>0.00 Kb, 18</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <table width="800" border="0" cellpadding="1" cellspacing="1">
+      <col width="700" />
+      <col width="50" />
+      <col width="50" />
+    </table>
+    <br />
+    <p>
+      <img src="mbuniticon.gif" />
+					This report was generated using <a href="http://mbunit.tigris.org">MbUnit</a>.
+				</p>
+  </body>
+</html>
