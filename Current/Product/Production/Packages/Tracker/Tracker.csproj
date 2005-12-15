@@ -12,6 +12,11 @@
     <AssemblyName>Tracker.Tasks</AssemblyName>
     <StartupObject>
     </StartupObject>
+    <SccProjectName>Current/Product/Production/Packages/Tracker</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>MSSCCI:PushOk SVN Proxy</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
