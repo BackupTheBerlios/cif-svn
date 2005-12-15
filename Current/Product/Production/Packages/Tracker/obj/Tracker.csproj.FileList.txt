@@ -1,5 +1,0 @@
-Package\Tracker\bin\Tracker.Tasks.dll
-Package\Tracker\bin\Tracker.Tasks.pdb
-obj\Debug\ResolveAssemblyReference.cache
-obj\Debug\Tracker.Tasks.dll
-obj\Debug\Tracker.Tasks.pdb
