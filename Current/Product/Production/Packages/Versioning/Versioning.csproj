@@ -44,7 +44,6 @@
   </Target>
   -->
   <ItemGroup>
-    <Content Include="Package\Versioning\bin\UpdateVersion.Tasks.dll" />
     <Content Include="Package\Versioning\Versioning.Properties.xml" />
     <Content Include="Package\Versioning\Versioning.Target.xml" />
   </ItemGroup>
@@ -66,5 +65,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Package\Versioning\bin\" />
   </ItemGroup>
 </Project>
