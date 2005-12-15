@@ -44,7 +44,6 @@
   </Target>
   -->
   <ItemGroup>
-    <Content Include="Package\InstallShield\bin\Nant.Contrib.BuildInstallShield.Tasks.dll" />
     <Content Include="Package\InstallShield\InstallShield.Properties.xml" />
     <Content Include="Package\InstallShield\InstallShield.Target.xml" />
   </ItemGroup>
@@ -57,5 +56,8 @@
       <HintPath>..\..\..\..\Third Party\nAnt\bin\NAnt.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Package\InstallShield\bin\" />
   </ItemGroup>
 </Project>
