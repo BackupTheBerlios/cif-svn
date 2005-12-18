@@ -42,12 +42,12 @@
   </Target>
   -->
   <ItemGroup>
+    <Content Include="Package\Install\Install.xml" />
     <Content Include="Package\VisualSourceSafe\HistoryPaths.xsl" />
     <Content Include="Package\VisualSourceSafe\Build\VSS.Properties.xml" />
     <Content Include="Package\VisualSourceSafe\Build\VSS.Target.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Package\Install\" />
     <Folder Include="Package\VisualSourceSafe\EnvScripts\" />
     <Folder Include="Package\VisualSourceSafe\Report\" />
   </ItemGroup>
