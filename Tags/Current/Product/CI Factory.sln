@@ -1,0 +1,176 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation", "Production\Foundation\Foundation.csproj", "{BC89E437-9DC2-42DB-85BA-1D6FD1FAEDBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CI Installer", "Production\CI Installer\CI Installer.csproj", "{AD0DAE5E-A366-49A1-9122-B2093AB16E2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{5915E34D-25E0-4BB3-B3B3-D7FA5F71B631}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deployment", "Production\Packages\Deployment\Deployment.csproj", "{744AFE04-769B-447F-81B2-9B283BD8219E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracker", "Production\Packages\Tracker\Tracker.csproj", "{D4C8C890-0DF5-4612-AF4F-F82CDE0A2E04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI Installer", "CI Installer", "{C91D6A34-9178-48E8-9960-6C9D710FD399}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Test", "Unit Test", "{4AA36A51-F589-4A0F-96D7-C09E6DDBAD94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Tracker", "Unit Test\Packages\Test.Tracker\Test.Tracker.csproj", "{65D87CD1-4049-446A-996C-DCEC30449CDD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{6EFF764A-0C98-4366-A9D2-3445B27A333B}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Common.Tasks", "Production\Common\Common.Tasks\Common.Tasks.vbproj", "{ADB63057-43C2-4073-AED1-2401F47F140A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetUnitTest", "Production\Packages\DotNetUnitTest\DotNetUnitTest.csproj", "{74C7FD0A-DA42-4CEF-85DC-C3FBD323A543}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallShield", "Production\Packages\InstallShield\InstallShield.csproj", "{3E2EE397-A00B-4CE3-9E73-8FEC69641E7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SourceModificationReport", "Production\Packages\SourceModificationReport\SourceModificationReport.csproj", "{A20B8DB9-182B-4930-95D4-F6692DA6AEB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Versioning", "Production\Packages\Versioning\Versioning.csproj", "{B0D56C9A-1198-4E60-A0A1-D764A08EA470}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualSourceSafe", "Production\Packages\VisualSourceSafe\VisualSourceSafe.csproj", "{9A9CA364-4937-47F1-A74B-AF4669C5A4DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VS.NETCompile", "Production\Packages\VS.NETCompile\VS.NETCompile.csproj", "{83DAB51C-AF7C-4BC2-BEE7-C42C342FC441}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VSS.Tasks", "Production\Common\VSS.Tasks\VSS.Tasks.vbproj", "{59AA4906-A033-4FE3-91CC-3CC5FBFA8DE1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI Factory Packager", "CI Factory Packager", "{4B9FB8AD-C291-466A-A3D6-F8EDA29B9682}"
+	ProjectSection(SolutionItems) = preProject
+		Install\CI Factory\Packager.xml = Install\CI Factory\Packager.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 14
+		SccProjectName0 = Current/Product
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:PushOk\u0020SVN\u0020Proxy
+		CanCheckoutShared = false
+		SccProjectUniqueName1 = Production\\Foundation\\Foundation.csproj
+		SccProjectTopLevelParentUniqueName1 = CI\u0020Factory.sln
+		SccProjectName1 = Current/Product/Production/Foundation
+		SccLocalPath1 = Production\\Foundation
+		CanCheckoutShared = false
+		SccProjectUniqueName2 = Production\\CI\u0020Installer\\CI\u0020Installer.csproj
+		SccProjectTopLevelParentUniqueName2 = CI\u0020Factory.sln
+		SccProjectName2 = Current/Product/Production/CI\u0020Installer
+		SccLocalPath2 = Production\\CI\u0020Installer
+		CanCheckoutShared = false
+		SccProjectUniqueName3 = Production\\Packages\\Deployment\\Deployment.csproj
+		SccProjectTopLevelParentUniqueName3 = CI\u0020Factory.sln
+		SccProjectName3 = Current/Product/Production/Packages/Deployment
+		SccLocalPath3 = Production\\Packages\\Deployment
+		CanCheckoutShared = false
+		SccProjectUniqueName4 = Production\\Packages\\Tracker\\Tracker.csproj
+		SccProjectTopLevelParentUniqueName4 = CI\u0020Factory.sln
+		SccProjectName4 = Current/Product/Production/Packages/Tracker
+		SccLocalPath4 = Production\\Packages\\Tracker
+		CanCheckoutShared = false
+		SccProjectUniqueName5 = Unit\u0020Test\\Packages\\Test.Tracker\\Test.Tracker.csproj
+		SccProjectTopLevelParentUniqueName5 = CI\u0020Factory.sln
+		SccProjectName5 = Current/Product/Unit\u0020Test/Packages/Test.Tracker
+		SccLocalPath5 = Unit\u0020Test\\Packages\\Test.Tracker
+		CanCheckoutShared = false
+		SccProjectUniqueName6 = Production\\Common\\Common.Tasks\\Common.Tasks.vbproj
+		SccProjectTopLevelParentUniqueName6 = CI\u0020Factory.sln
+		SccProjectName6 = Current/Product/Production/Common/Common.Tasks
+		SccLocalPath6 = Production\\Common\\Common.Tasks
+		CanCheckoutShared = false
+		SccProjectUniqueName7 = Production\\Packages\\DotNetUnitTest\\DotNetUnitTest.csproj
+		SccProjectTopLevelParentUniqueName7 = CI\u0020Factory.sln
+		SccProjectName7 = Current/Product/Production/Packages/DotNetUnitTest
+		SccLocalPath7 = Production\\Packages\\DotNetUnitTest
+		CanCheckoutShared = false
+		SccProjectUniqueName8 = Production\\Packages\\InstallShield\\InstallShield.csproj
+		SccProjectTopLevelParentUniqueName8 = CI\u0020Factory.sln
+		SccProjectName8 = Current/Product/Production/Packages/InstallShield
+		SccLocalPath8 = Production\\Packages\\InstallShield
+		CanCheckoutShared = false
+		SccProjectUniqueName9 = Production\\Packages\\SourceModificationReport\\SourceModificationReport.csproj
+		SccProjectTopLevelParentUniqueName9 = CI\u0020Factory.sln
+		SccProjectName9 = Current/Product/Production/Packages/SourceModificationReport
+		SccLocalPath9 = Production\\Packages\\SourceModificationReport
+		CanCheckoutShared = false
+		SccProjectUniqueName10 = Production\\Packages\\Versioning\\Versioning.csproj
+		SccProjectTopLevelParentUniqueName10 = CI\u0020Factory.sln
+		SccProjectName10 = Current/Product/Production/Packages/Versioning
+		SccLocalPath10 = Production\\Packages\\Versioning
+		CanCheckoutShared = false
+		SccProjectUniqueName11 = Production\\Packages\\VisualSourceSafe\\VisualSourceSafe.csproj
+		SccProjectTopLevelParentUniqueName11 = CI\u0020Factory.sln
+		SccProjectName11 = Current/Product/Production/Packages/VisualSourceSafe
+		SccLocalPath11 = Production\\Packages\\VisualSourceSafe
+		CanCheckoutShared = false
+		SccProjectUniqueName12 = Production\\Packages\\VS.NETCompile\\VS.NETCompile.csproj
+		SccProjectTopLevelParentUniqueName12 = CI\u0020Factory.sln
+		SccProjectName12 = Current/Product/Production/Packages/VS.NETCompile
+		SccLocalPath12 = Production\\Packages\\VS.NETCompile
+		CanCheckoutShared = false
+		SccProjectUniqueName13 = Production\\Common\\VSS.Tasks\\VSS.Tasks.vbproj
+		SccProjectTopLevelParentUniqueName13 = CI\u0020Factory.sln
+		SccProjectName13 = Current/Product/Production/Common/VSS.Tasks
+		SccLocalPath13 = Production\\Common\\VSS.Tasks
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC89E437-9DC2-42DB-85BA-1D6FD1FAEDBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC89E437-9DC2-42DB-85BA-1D6FD1FAEDBE}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0DAE5E-A366-49A1-9122-B2093AB16E2B}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0DAE5E-A366-49A1-9122-B2093AB16E2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{744AFE04-769B-447F-81B2-9B283BD8219E}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{744AFE04-769B-447F-81B2-9B283BD8219E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4C8C890-0DF5-4612-AF4F-F82CDE0A2E04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4C8C890-0DF5-4612-AF4F-F82CDE0A2E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4C8C890-0DF5-4612-AF4F-F82CDE0A2E04}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4C8C890-0DF5-4612-AF4F-F82CDE0A2E04}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{65D87CD1-4049-446A-996C-DCEC30449CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D87CD1-4049-446A-996C-DCEC30449CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65D87CD1-4049-446A-996C-DCEC30449CDD}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D87CD1-4049-446A-996C-DCEC30449CDD}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{ADB63057-43C2-4073-AED1-2401F47F140A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB63057-43C2-4073-AED1-2401F47F140A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB63057-43C2-4073-AED1-2401F47F140A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB63057-43C2-4073-AED1-2401F47F140A}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{74C7FD0A-DA42-4CEF-85DC-C3FBD323A543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74C7FD0A-DA42-4CEF-85DC-C3FBD323A543}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E2EE397-A00B-4CE3-9E73-8FEC69641E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E2EE397-A00B-4CE3-9E73-8FEC69641E7B}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{A20B8DB9-182B-4930-95D4-F6692DA6AEB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A20B8DB9-182B-4930-95D4-F6692DA6AEB2}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D56C9A-1198-4E60-A0A1-D764A08EA470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D56C9A-1198-4E60-A0A1-D764A08EA470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0D56C9A-1198-4E60-A0A1-D764A08EA470}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D56C9A-1198-4E60-A0A1-D764A08EA470}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{9A9CA364-4937-47F1-A74B-AF4669C5A4DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A9CA364-4937-47F1-A74B-AF4669C5A4DC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{83DAB51C-AF7C-4BC2-BEE7-C42C342FC441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83DAB51C-AF7C-4BC2-BEE7-C42C342FC441}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{59AA4906-A033-4FE3-91CC-3CC5FBFA8DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59AA4906-A033-4FE3-91CC-3CC5FBFA8DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59AA4906-A033-4FE3-91CC-3CC5FBFA8DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59AA4906-A033-4FE3-91CC-3CC5FBFA8DE1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AD0DAE5E-A366-49A1-9122-B2093AB16E2B} = {C91D6A34-9178-48E8-9960-6C9D710FD399}
+		{BC89E437-9DC2-42DB-85BA-1D6FD1FAEDBE} = {C91D6A34-9178-48E8-9960-6C9D710FD399}
+		{744AFE04-769B-447F-81B2-9B283BD8219E} = {5915E34D-25E0-4BB3-B3B3-D7FA5F71B631}
+		{D4C8C890-0DF5-4612-AF4F-F82CDE0A2E04} = {5915E34D-25E0-4BB3-B3B3-D7FA5F71B631}
+		{74C7FD0A-DA42-4CEF-85DC-C3FBD323A543} = {5915E34D-25E0-4BB3-B3B3-D7FA5F71B631}
+		{3E2EE397-A00B-4CE3-9E73-8FEC69641E7B} = {5915E34D-25E0-4BB3-B3B3-D7FA5F71B631}
+		{A20B8DB9-182B-4930-95D4-F6692DA6AEB2} = {5915E34D-25E0-4BB3-B3B3-D7FA5F71B631}
+		{B0D56C9A-1198-4E60-A0A1-D764A08EA470} = {5915E34D-25E0-4BB3-B3B3-D7FA5F71B631}
+		{9A9CA364-4937-47F1-A74B-AF4669C5A4DC} = {5915E34D-25E0-4BB3-B3B3-D7FA5F71B631}
+		{83DAB51C-AF7C-4BC2-BEE7-C42C342FC441} = {5915E34D-25E0-4BB3-B3B3-D7FA5F71B631}
+		{65D87CD1-4049-446A-996C-DCEC30449CDD} = {4AA36A51-F589-4A0F-96D7-C09E6DDBAD94}
+		{ADB63057-43C2-4073-AED1-2401F47F140A} = {6EFF764A-0C98-4366-A9D2-3445B27A333B}
+		{59AA4906-A033-4FE3-91CC-3CC5FBFA8DE1} = {6EFF764A-0C98-4366-A9D2-3445B27A333B}
+	EndGlobalSection
+EndGlobal

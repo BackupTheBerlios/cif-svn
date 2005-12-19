@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="VSSInstaller" >
+
+  <property name="Private.VSS.dbpath" value="${VSSRootShare}\${ProjectName}\srcsafe.ini"/>
+  <property name="Private.VSS.UserName" value="build"/>
+  <property name="Private.VSS.Password" value="password"/>
+
+  <target name="VSS.Install" depends="VSS.ValidateParameters" >
+    <mkdir if="${directory::exists(VSSRootShare + '\' + ProjectName) == false}" dir="${VSSRootShare}\${ProjectName}"/>
+    <unzip todir="${VSSRootShare}\${ProjectName}" zipfile="Zips\Template.zip"/>
+    <!--Will need to modify this to support creation of additional codelines.-->
+    <vssaddproject
+      dbpath="${Private.VSS.dbpath}"
+      username="${Private.VSS.UserName}"
+      password="${Private.VSS.Password}"
+      path="$/"
+      project="${ProjectName}"
+      comment="Created by Instant CI script"
+    />
+    <vssadd
+      dbpath="${Private.VSS.dbpath}"
+      username="${Private.VSS.UserName}"
+      password="${Private.VSS.Password}"
+      path="$/${ProjectName}"
+      comment="Initial load buy Instant CI script" 
+            >
+      <fileset basedir="${ProjectRootDirectory}">
+        <include name="**/*"/>
+        <exclude name="**/*.scc"/>
+      </fileset>
+    </vssadd>
+  </target>
+  
+  <target name="VSS.ValidateParameters">
+    
+  </target>
+  
+</project>
