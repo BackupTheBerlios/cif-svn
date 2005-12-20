@@ -94,7 +94,8 @@
 				<import namespace="System.Xml"/>
 				<import namespace="System.Text.RegularExpressions"/>
 			</imports >
-			<code><![CDATA[                 
+			<code>
+              <![CDATA[                 
 					
 					public static void ScriptMain(Project project)
 					{
@@ -102,6 +103,8 @@
 						string targetfilename = project.Properties["Compile.LogFileDirectory"] + "\\" + project.Properties["Compile.XmlLogFileName"];
 						
 						Regex error = new Regex(@"error[^s]");
+            Regex errorReport = new Regex(@"/errorreport");
+            Regex warnAsError = new Regex(@"/warnaserror");
 						XmlTextWriter writer = new XmlTextWriter(targetfilename,System.Text.Encoding.UTF8);
 						writer.Formatting = Formatting.Indented;
 						writer.WriteStartDocument();
@@ -113,7 +116,9 @@
 							{
 								line = line.Replace("\0",string.Empty);
 								bool isError = error.IsMatch(line);
-								if (isError)
+                bool notErrorReport = errorReport.IsMatch(line) == false;
+                bool notWarnAsError = warnAsError.IsMatch(line) == false;
+								if (isError && notErrorReport && notWarnAsError)
 								{
 									writer.WriteStartElement("builderror");
 									writer.WriteStartElement("message");
