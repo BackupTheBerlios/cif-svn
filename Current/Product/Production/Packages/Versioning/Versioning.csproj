@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -51,14 +51,15 @@
     <Content Include="Package\Versioning\Versioning.Target.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Tasks\GenerateAssemblyInfoList.cs" />
-    <Compile Include="Tasks\IncrementVersion.cs" />
-    <Compile Include="Tasks\UpdateProductVersion.cs" />
-    <Compile Include="Versioning\Options.cs" />
-    <Compile Include="Versioning\RunUpdateVersion.cs" />
-    <Compile Include="Versioning\VersionCalculator.cs" />
-    <Compile Include="Versioning\VersionUpdater.cs" />
+    <Compile Include="Source\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\ProjectInfo.cs" />
+    <Compile Include="Source\Tasks\GenerateAssemblyInfoList.cs" />
+    <Compile Include="Source\Tasks\IncrementVersion.cs" />
+    <Compile Include="Source\Tasks\UpdateProductVersion.cs" />
+    <Compile Include="Source\Versioning\Options.cs" />
+    <Compile Include="Source\Versioning\RunUpdateVersion.cs" />
+    <Compile Include="Source\Versioning\VersionCalculator.cs" />
+    <Compile Include="Source\Versioning\VersionUpdater.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NAnt.Core, Version=0.85.1932.0, Culture=neutral">
