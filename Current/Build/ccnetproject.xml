@@ -44,7 +44,7 @@
         <filename>SourceModificationReport.xml</filename>
         <path>c:\Projects\CI Factory\Current\Build\SourceModificationReports</path>
       </modificationWriter>
-      <!--<nant>
+      <nant>
         <executable>c:\Projects\CI Factory\Current\Build\nAnt\bin\nant.exe</executable>
         <baseDirectory>c:\Projects\CI Factory\Current\Build</baseDirectory>
         <logger>NAnt.Core.XmlLogger </logger>
@@ -54,8 +54,7 @@
         </targetList>
 
         <buildTimeoutSeconds>300</buildTimeoutSeconds>
-      </nant>-->
-      <nullTask/>
+      </nant>
     </tasks>
     <publishers>
       <merge>
