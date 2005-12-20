@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="CI Factory Packager" default="Create">
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="CI Factory Packager" default="Packager.Create">
 
-  <target name="Create">
+  <target name="Packager.Create">
     
     <zip zipfile="Zip\CI Factory.zip" includeemptydirs="true">
       <fileset basedir="..\..\Production\CI Installer" >
