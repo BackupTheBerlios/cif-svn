@@ -78,13 +78,27 @@
     <property name="Private.SourceControl.CheckOut.Path" value="${string::replace(SourceControl.CheckOut.File, ProjectCodeLineDirectory, SVN.URI + '/' + SVN.PackageName)}"/>
     <property name="Private.SourceControl.CheckOut.Path" value="${string::replace(Private.SourceControl.CheckOut.Path, '\', '/')}"/>
 
-    <exec program="svn" >
-      <arg line="lock" />
-      <arg line="--non-interactive" />
-      <arg line="--username ${SVN.Username}" />
-      <arg line="--password ${SVN.Password}" />
-      <arg line='"${Private.SourceControl.CheckOut.Path}"' />
-    </exec>
+    <trycatch>
+      <try>
+        <exec program="svn" >
+          <arg line="lock" />
+          <arg line="--non-interactive" />
+          <arg line="--username ${SVN.Username}" />
+          <arg line="--password ${SVN.Password}" />
+          <arg line='"${Private.SourceControl.CheckOut.Path}"' />
+        </exec>
+      </try>
+      <catch property="Exception.Message">
+        <exec program="svn" >
+          <arg line="status" />
+          <arg line="--non-interactive" />
+          <arg line="--username ${SVN.Username}" />
+          <arg line="--password ${SVN.Password}" />
+          <arg line='"${Private.SourceControl.CheckOut.Path}"' />
+        </exec>
+        <fail message="Exception.Message" />
+      </catch>
+    </trycatch>
   </target>
 
   <!--
@@ -98,6 +112,7 @@
       <arg line="--non-interactive" />
       <arg line="--username ${SVN.Username}" />
       <arg line="--password ${SVN.Password}" />
+      <arg line='-m "Modified by build script in build ${CCNetLabel}"' />
       <arg line='"${SourceControl.CheckIn.File}"' />
     </exec>
   </target>
