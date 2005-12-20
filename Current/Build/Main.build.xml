@@ -12,8 +12,6 @@
   <include buildfile=".\Packages\Deployment\Deployment.Target.xml"/>
   <include buildfile=".\Packages\SourceModificationReport\SourceModificationReport.Target.xml"/>
 
-  <include buildfile="..\Product\Install\CI Factory\Packager.xml"/>
-
 	<target name="Triggered" depends="SetUps" >
     <trycatch>
       <try>
@@ -34,7 +32,7 @@
     		
 		    <call target="UnitTest.RunTests" />
 
-        <call target="Packager.Create"/>
+        <nant buildfile="..\Product\Install\CI Factory\Packager.xml" inheritrefs="false" inheritall="true" />
 
         <property name="Deployment.SourceFileName"  value="CI Factory.zip"/>
         <property name="Deployment.SourceDir"	      value="${ProductDirectory}\Install\CI Factory\Zip"/>
