@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -129,7 +129,7 @@
     <Content Include="Default\Build\server\xsl\cruisecontrol.css" />
     <Content Include="Default\Build\server\xsl\header.xsl" />
     <Content Include="Default\Build\server\xsl\modifications.xsl" />
-    <Content Include="Default\Product\ProjectInfo.vb" />
+    <Content Include="Default\Product\ProjectInfo.vb.remove" />
     <Content Include="Default\Third Party\MbUnit\MbUnit.Core.dll" />
     <Content Include="Default\Third Party\MbUnit\MbUnit.Framework.1.1.dll" />
     <Content Include="Default\Third Party\MbUnit\MbUnit.Framework.dll" />
