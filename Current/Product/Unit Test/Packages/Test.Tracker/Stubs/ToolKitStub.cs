@@ -8,7 +8,7 @@ using MbUnit.Core.Framework;
 namespace Test.Tracker.Stubs
 {
     
-    class ToolKitStub : IPVCSToolKit
+    public class ToolKitStub : IPVCSToolKit
     {
         #region IPVCSToolKit Members
 

@@ -8,7 +8,7 @@ using Tracker;
 namespace Test.Tracker
 {
     [TestFixture]
-    class tServerHelper
+    public class tServerHelper
     {
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]

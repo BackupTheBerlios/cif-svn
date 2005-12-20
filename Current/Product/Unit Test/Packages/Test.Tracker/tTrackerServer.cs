@@ -9,7 +9,7 @@ using Tracker;
 namespace Test.Tracker
 {
     [TestFixture]
-    class tTrackerServer
+    public class tTrackerServer
     {
         
 #region Fields
