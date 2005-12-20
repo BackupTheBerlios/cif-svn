@@ -10,6 +10,9 @@
   <property name="ProductDirectory" value="${ProjectCodeLineDirectory}\Product" />
   <property name="ThirdPartyDirectory" value="${ProjectCodeLineDirectory}\Third Party" />
   <property name="ProductionDirectory"  value="${ProductDirectory}\Production" />
+  <property name="UnitTestDirectory"        value="${ProductDirectory}\Unit Test"  overwrite="false"/>
   <property name="BuildDirectory" value="${ProjectCodeLineDirectory}\Build" />
+  <property name="BuildPackagesDirectory"   value="${BuildDirectory}\Packages"  overwrite="false"/>
+  <property name="InstallDirectory"         value="${ProductDirectory}\Install"  overwrite="false"/>
   
 </project>
