@@ -36,6 +36,9 @@
   </project>
   <project name="CI Factory">
     <webURL>http:/JFLOWERSXP4/CI Factory</webURL>
+    <externalLinks>
+        <externalLink name="Home Page" url="http://www.mertner.com/confluence/display/CIF/CI+Factory+Home" />
+    </externalLinks>
     <state type="state" />
     <triggers>
       <intervalTrigger seconds="90" />
