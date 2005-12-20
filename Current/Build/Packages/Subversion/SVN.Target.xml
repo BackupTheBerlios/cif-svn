@@ -27,6 +27,7 @@
     <property name="Private.SourceControl.CleanGetOfThirdPartyDirectory.ThirdPartyHistoryFile" value="${Private.SVN.ReportDirectory}\ThirdPartyHistory.xml"/>
     <exec program="svn" output="${Private.SourceControl.CleanGetOfThirdPartyDirectory.ThirdPartyHistoryFile}">
       <arg line="log" />
+      <arg line="--non-interactive" />
       <arg line="--xml" />
       <arg line="-r HEAD" />
       <arg line="${SVN.URI}" />
@@ -74,16 +75,15 @@
   <property name="SourceControl.CheckOut.File" value="${Private.Versioning.AssemblyInfoFile}"/>
   -->
   <target name="SourceControl.CheckOut" >
-    <property name="Private.SourceControl.CheckOut.Path" value="${string::replace(SourceControl.CheckOut.File, ProjectCodeLineDirectory, SVN.PackageName)}"/>
+    <property name="Private.SourceControl.CheckOut.Path" value="${string::replace(SourceControl.CheckOut.File, ProjectCodeLineDirectory, SVN.URI + '/' + SVN.PackageName)}"/>
     <property name="Private.SourceControl.CheckOut.Path" value="${string::replace(Private.SourceControl.CheckOut.Path, '\', '/')}"/>
-
-    <delete file="${SourceControl.CheckOut.File}" />
 
     <exec program="svn" >
       <arg line="lock" />
+      <arg line="--non-interactive" />
       <arg line="--username ${SVN.Username}" />
       <arg line="--password ${SVN.Password}" />
-      <arg line="${Private.SourceControl.CheckOut.Path}" />
+      <arg line='"${Private.SourceControl.CheckOut.Path}"' />
     </exec>
   </target>
 
@@ -93,14 +93,12 @@
   <property name="SourceControl.CheckIn.File" value="${Private.Versioning.AssemblyInfoFile}"/>
   -->
   <target name="SourceControl.CheckIn" >
-    <property name="Private.SourceControl.CheckIn.Path" value="${string::replace(SourceControl.CheckIn.File, ProjectCodeLineDirectory, SVN.PackageName)}"/>
-    <property name="Private.SourceControl.CheckIn.Path" value="${string::replace(Private.SourceControl.CheckIn.Path, '\', '/')}"/>
-
     <exec program="svn" >
       <arg line="commit" />
+      <arg line="--non-interactive" />
       <arg line="--username ${SVN.Username}" />
       <arg line="--password ${SVN.Password}" />
-      <arg line="${Private.SourceControl.CheckOut.Path}" />
+      <arg line='"${SourceControl.CheckIn.File}"' />
     </exec>
   </target>
 
