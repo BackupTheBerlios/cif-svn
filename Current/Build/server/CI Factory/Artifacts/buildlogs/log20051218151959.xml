@@ -1,0 +1,12 @@
+<cruisecontrol project="CI Factory">
+  <modifications />
+  <build date="12/18/2005 3:19:59 PM" buildtime="00:00:01" buildcondition="IfModificationExists" />
+  <exception><![CDATA[ThoughtWorks.CruiseControl.Core.CruiseControlException: Source control operation failed: svn: PROPFIND request failed on '/svnroot/repos/cif/Current'
+svn: PROPFIND of '/svnroot/repos/cif/Current': could not connect to server (https://svn.berlios.de)
+. Process command: svn.exe log https://svn.berlios.de/svnroot/repos/cif/Current -r "{2005-12-18T20:17:19Z}:{2005-12-18T20:19:59Z}" --verbose --xml --username jflowers --password T3stabl3 --non-interactive
+   at ThoughtWorks.CruiseControl.Core.Sourcecontrol.ProcessSourceControl.Execute(ProcessInfo processInfo)
+   at ThoughtWorks.CruiseControl.Core.Sourcecontrol.Svn.GetModifications(IIntegrationResult from, IIntegrationResult to)
+   at ThoughtWorks.CruiseControl.Core.Sourcecontrol.FilteredSourceControl.GetModifications(IIntegrationResult from, IIntegrationResult to)
+   at ThoughtWorks.CruiseControl.Core.Sourcecontrol.QuietPeriod.GetModifications(ISourceControl sourceControl, IIntegrationResult lastBuild, IIntegrationResult thisBuild)
+   at ThoughtWorks.CruiseControl.Core.IntegrationRunner.RunIntegration(BuildCondition buildCondition)]]></exception>
+</cruisecontrol>

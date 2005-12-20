@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="Tracker">
+
+  <loadtasks assembly="Packages\Tracker\bin\dll" />
+  
+  <property name="Tracker.FilesToDeleteAtSetup" value="" overwrite="false"/>
+	<property name="Tracker.Debug" value="false" overwrite="false"/>
+	<property name="Tracker.FailForNone" value="false" overwrite="false" />
+  <property name="Tracker.ReportDirectory" value="${BuildDirectory}\Tracker Reports" />
+  
+  <include buildfile="Tracker.Properties.xml" />
+
+  <!--
+  The following properties should be specified in the calling script.
+
+  <trackerconnectionproperty name="Tracker.Connection">
+    <connectioninformation
+		  username=""
+		  password=""
+		  dbmsserver=""
+		  dbmstype=""
+		  dbmsname=""
+		  dbmsloginmode=""
+		  dbmsusername=""
+		  dbmspassword=""
+		  projectname=""
+      />
+  </trackerconnectionproperty>
+
+  <trackerfieldproperty name="Tracker.QueryFields" >
+    <readfields>
+      <field name=""/>
+    </readfields>
+  </trackerfieldproperty>
+  
+  <property name="Tracker.Query" value="" />
+  <property name="Tracker.ReportFile" value="" />
+  <property name="Tracker.QueryScrList" value=""/>
+
+  <trackerfieldproperty name="Tracker.ChangeFields" >
+    <writefields>
+      <field name="" value=""/>
+    </writefields>
+  </trackerfieldproperty>
+  
+  <property name="Tracker.NoteTitleForMoveTrackersTo" value="" />
+  
+  <property name="Tracker.FilesToDeleteAtSetup" value="" />
+  
+  -->
+  
+  <!-- The following properties are for internal use only -->
+  <property name="Private.Tracker.NoteForMoveTrackersTo" value="" overwrite="false" />
+  
+  <target name="Tracker.MoveTrackersTo" depends="Tracker.Queries">
+    <call target="Private.Tracker.ConstructTrackerNote"/>
+
+    <foreach item="String" in="${Tracker.QueryScrList}" delim="," property="Private.Tracker.MoveTrackersTo.foreach.Id">
+      <trackerchange 
+        trackerfields="Tracker.ChangeFields" 
+        connectioninformation="Tracker.Connection" 
+        scrid="${Private.Tracker.MoveTrackersTo.foreach.Id}" 
+      />
+      <trackeraddnote 
+        connectioninformation="Tracker.Connection"  
+        title="${Tracker.NoteTitleForMoveTrackersTo}" 
+        text="${Private.Tracker.NoteForMoveTrackersTo}" 
+        scrid="${Private.Tracker.MoveTrackersTo.foreach.Id}" 
+      />
+    </foreach>
+  </target>
+  
+  <target name="Tracker.Queries">
+    <property name="Private.Tracker.Queries.Count" value=""/>
+    <trackerquery 
+      connectioninformation="Tracker.Connection" 
+      trackerfields="Tracker.QueryFields" 
+      countproperty ="${Private.Tracker.Queries.Count}" 
+      idsproperty ="${Tracker.QueryScrList}" 
+      reportfile="${Tracker.ReportFile}" 
+      query="${Tracker.Query}" 
+    />
+    
+    <if test="${Tracker.FailForNone}" >
+      <ifnot test="${Private.Tracker.Queries.Count == 0}">
+	      <fail message="No Trackers put in pending build for this checkin" />
+      </ifnot>
+    </if>
+   </target>
+
+  <target name="Private.Tracker.ConstructTrackerNote" >
+    <property name="Private.Tracker.ModificationTextReport" value="${Tracker.ReportDirectory}\ModificationTextReport.txt" />
+    <style style="Packages\Tracker\ModificationsText.xsl" in="${SourceModificationReport.ReportFile}" out="${Private.Tracker.ModificationTextReport}" />
+
+    <property name="Private.Tracker.ModificationList" value="" />
+    <loadfile file="${Private.Tracker.ModificationTextReport}" property="ModificationList" />
+
+    <loadfile file="Packages\Tracker\TrackerNote.txt" property="Private.Tracker.NoteForMoveTrackersTo">
+      <filterchain>
+        <replacestring from="%Modifications%" to="${ModificationList}" />
+      </filterchain>
+    </loadfile>
+
+  </target>
+
+  <target name="Tracker.SetUp">
+    <mkdir if="${directory::exists(Tracker.ReportDirectory) == false}" dir="${Tracker.ReportDirectory}"/>
+    <property name="Common.FilesToDelete" value="${Tracker.FilesToDeleteAtSetup}"/>
+    <call target="Common.DeleteFiles"/>
+  </target>
+
+  <target name="Tracker.TearDown">
+
+  </target>
+
+</project>
