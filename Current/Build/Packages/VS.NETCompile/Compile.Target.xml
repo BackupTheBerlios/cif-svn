@@ -31,7 +31,7 @@
   <target name="Compile.CompileSource">
 		<property name="Private.Compile.LogFileName" value="${path::get-temp-file-name()}" />
     <exec 
-	    program="C:\Program Files\Microsoft Visual Studio .NET 2003\Common7\IDE\devenv.exe"
+	    program="C:\Program Files\Microsoft Visual Studio 8\Common7\IDE\devenv.exe"
 	    commandline='"${Compile.SolutionFile}" /build ${Compile.ConfigName} /out "${Private.Compile.LogFileName}"'
 	    failonerror="false"
 	    resultproperty="Private.Compile.Result"
