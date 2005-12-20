@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="Common">
+
+  <property name="Common.SourceFile" value="" overwrite="false"/>
+  <property name="Common.TargetFile" value="" overwrite="false"/>
+
+  <target name="Common.InstallFile" >
+    <fail message="The property Common.SourceFile was not specified." if="${Common.SourceFile == ''}"/>
+    <fail message="The property Common.TargetFile was not specified." if="${Common.TargetFile == ''}"/>
+    <echo message="Copying ${Common.SourceFile} to ${Common.TargetFile}."/>
+    
+    <copy tofile="${Common.TargetFile}" file="${Common.SourceFile}">
+      <filterchain>
+        <replacestring from="%ProjectName%"  to="${ProjectName}"   />
+        <replacestring from="%ProjectCodeLineName%" to="${ProjectCodeLineName}"  />
+
+        <replacestring from="%ProjectsDirectory%"        to="${ProjectsDirectory}"  />
+        <replacestring from="%ProjectRootDirectory%"     to="${ProjectRootDirectory}"  />
+        <replacestring from="%ProjectCodeLineDirectory%" to="${ProjectCodeLineDirectory}"  />
+        <replacestring from="%ProductDirectory%"         to="${ProductDirectory}"  />
+        <replacestring from="%ThirdPartyDirectory%"      to="${ThirdPartyDirectory}"  />
+        <replacestring from="%ProductionDirectory%"      to="${ProductionDirectory}"  />
+        <replacestring from="%InstallDirectory%"         to="${InstallDirectory}"  />
+        <replacestring from="%UnitTestDirectory%"        to="${UnitTestDirectory}"  />
+        <replacestring from="%BuildDirectory%"           to="${BuildDirectory}"  />
+        <replacestring from="%VSSRootShare%"             to="${VSSRootShare}"  />
+      </filterchain>
+    </copy>
+  </target>
+
+</project>
