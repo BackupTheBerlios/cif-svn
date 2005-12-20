@@ -5,7 +5,6 @@
 
   <include buildfile="Properties.build.xml"/>
   <include buildfile="Common.Build.xml" />
-  <include buildfile=".\Packages\Tracker\Tracker.Target.xml" />
   <include buildfile=".\Packages\Subversion\SVN.Target.xml" />
   <include buildfile=".\Packages\Versioning\Versioning.Target.xml" />
   <include buildfile=".\Packages\VS.NETCompile\Compile.Target.xml" />
@@ -26,6 +25,9 @@
 		    <call target="SourceControl.CleanGetOfProductDirectory" />
 
         <call target="Versioning.IncrementBuildNumberOfModifiedAssemblies"/>
+        <property name="Versioning.ProductInformationFile" value="ProjectInfo.vb" />
+        <call target="Versioning.IncreamentBuildNumberOfProduct"/>
+        <property name="Versioning.ProductInformationFile" value="ProjectInfo.cs" />
         <call target="Versioning.IncreamentBuildNumberOfProduct"/>
     		
 		    <call target="Compile.CompileSource" />
@@ -59,7 +61,6 @@
     <call target="Versioning.SetUp"/>
     <call target="Compile.SetUp"/>
     <call target="UnitTest.SetUp"/>
-    <call target="Install.SetUp"/>
     <call target="Deployment.SetUp"/>
     <call target="SourceModificationReport.SetUp"/>
 	</target>
@@ -70,7 +71,6 @@
     <call target="Versioning.TearDown"/>
     <call target="Compile.TearDown"/>
     <call target="UnitTest.TearDown"/>
-    <call target="Install.TearDown"/>
     <call target="Deployment.TearDown"/>
     <call target="SourceModificationReport.TearDown"/>
   </target>
