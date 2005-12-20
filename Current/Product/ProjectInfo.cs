@@ -1,7 +1,6 @@
-Imports System
-Imports System.Reflection
-Imports System.Runtime.InteropServices
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
-<Assembly: AssemblyCompany("NGIT")> 
-<Assembly: AssemblyProduct("TestProject")> 
-<Assembly: AssemblyInformationalVersion("1.0.0.2")> 
+[assembly: AssemblyProduct("CI Factory")]
+[assembly: AssemblyInformationalVersion("1.0.0.2")]
