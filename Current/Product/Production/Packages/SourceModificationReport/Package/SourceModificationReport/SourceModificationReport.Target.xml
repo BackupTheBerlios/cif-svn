@@ -38,7 +38,7 @@
 						ModificationList = Deserialize(GetType(ThoughtWorks.CruiseControl.Core.Modification()), pd("SourceModificationReport.ReportFile"))
 						
             For Each modification As ThoughtWorks.CruiseControl.Core.Modification In ModificationList
-						  If OldestModificationTime.CompareTo(modification.ModifiedTime) Then
+						  If OldestModificationTime.CompareTo(modification.ModifiedTime) < 0 Then
                 OldestModificationTime = modification.ModifiedTime
               End If
             Next

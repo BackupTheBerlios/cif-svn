@@ -1,4 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE cruisecontrol [
+  <!ENTITY email '<email from="%ProjectName%.Build@noreply.com" mailhost="localhost" includeDetails="true">
+        <users>
+          <user name="%BuildMaster.Name%" group="buildmaster" address="%BuildMaster.Email%"/>
+        </users>
+        <groups>
+          <group name="buildmaster" notification="failed"/>
+        </groups>
+      </email>'>
+  <!ENTITY labller '<labeller type="defaultlabeller">
+      <prefix>1.0.0.</prefix>
+    </labeller>'>
+]>
 <cruisecontrol>
   <project name="CI Factory Build">
     <webURL>%CCNETServer.webURL%</webURL>
@@ -7,46 +20,27 @@
       <intervalTrigger seconds="90" />
     </triggers>
     <modificationDelaySeconds>120</modificationDelaySeconds>
-    <sourcecontrol  type="svn" tagOnSuccess="false" autoGetSource="true" >
-      <trunkUrl>https://svn.berlios.de/svnroot/repos/cif/Current/Build</trunkUrl>
-      <workingDirectory>c:\Projects\CI Factory\Current\Build</workingDirectory>
-      <username>cifactorybuild</username>
-      <password>C0ntinuou2</password>
-      <webUrlBuilder type="websvn">
-        <url>http://svn.berlios.de/wsvn/cif</url>
-      </webUrlBuilder>
-    </sourcecontrol>
-    <labeller type="defaultlabeller">
-      <prefix>1.0.0.</prefix>
-    </labeller>
-    <tasks>
-      <nullTask/>
-    </tasks>
-    <publishers>
-      <xmllogger />
-      <email from="CIFactory@gmail.com" mailhost="localhost" includeDetails="true">
-        <users>
-          <user name="Jay Flowers" group="buildmaster" address="jay.flowers@gmail.com"/>
-        </users>
-        <groups>
-          <group name="buildmaster" notification="failed"/>
-        </groups>
-      </email>
-    </publishers>
-  </project>
-  <project name="%ProjectName%">
-    <webURL>%CCNETServer.webURL%</webURL>
-    <state type="state" />
-    <triggers>
-      <intervalTrigger seconds="90" />
-    </triggers>
-    <modificationDelaySeconds>120</modificationDelaySeconds>
-    %SourceControl.MainBuildBlock%
-    <labeller type="defaultlabeller">
-      <prefix>1.0.0.</prefix>
-    </labeller>
-    <tasks>
-      <modificationWriter>
+    %SourceControl.BuildUpdateBlock%
+    &labller;
+  <tasks>
+    <nullTask/>
+  </tasks>
+  <publishers>
+    <xmllogger />
+    &email;
+  </publishers>
+</project>
+<project name="%ProjectName%">
+  <webURL>%CCNETServer.webURL%</webURL>
+  <state type="state" />
+  <triggers>
+    <intervalTrigger seconds="90" />
+  </triggers>
+  <modificationDelaySeconds>120</modificationDelaySeconds>
+  %SourceControl.MainBuildBlock%
+  &labller;
+  <tasks>
+    <modificationWriter>
         <filename>SourceModificationReport.xml</filename>
         <path>%BuildDirectory%\SourceModificationReports</path>
       </modificationWriter>
@@ -71,14 +65,7 @@
         </files>
       </merge>
       <xmllogger />
-      <email from="%ProjectName%.Build@NGIT.com" mailhost="localhost" includeDetails="true">
-        <users>
-          <user name="Jay Flowers" group="buildmaster" address="jay.flowers@integic-hc.com"/>
-        </users>
-        <groups>
-          <group name="buildmaster" notification="failed"/>
-        </groups>
-      </email>
+      &email;
     </publishers>
   </project>
 </cruisecontrol>
