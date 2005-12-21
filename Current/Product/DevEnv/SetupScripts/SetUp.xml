@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<project name="DevEnvSetUp" default="SetUp">
+  <target name="SetUp">
+    <property name="SchemaFile" value="..\..\NAnt.xsd"/>
+    <nantschema output="${SchemaFile}" target-ns="http://nant.sf.net/schemas/nant.xsd"/>
+  </target>
+</project>

@@ -1,5 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <cruisecontrol>
+  <project name="CI Factory Build">
+    <webURL>%CCNETServer.webURL%</webURL>
+    <state type="state" />
+    <triggers>
+      <intervalTrigger seconds="90" />
+    </triggers>
+    <modificationDelaySeconds>120</modificationDelaySeconds>
+    <sourcecontrol  type="svn" tagOnSuccess="false" autoGetSource="true" >
+      <trunkUrl>https://svn.berlios.de/svnroot/repos/cif/Current/Build</trunkUrl>
+      <workingDirectory>c:\Projects\CI Factory\Current\Build</workingDirectory>
+      <username>cifactorybuild</username>
+      <password>C0ntinuou2</password>
+      <webUrlBuilder type="websvn">
+        <url>http://svn.berlios.de/wsvn/cif</url>
+      </webUrlBuilder>
+    </sourcecontrol>
+    <labeller type="defaultlabeller">
+      <prefix>1.0.0.</prefix>
+    </labeller>
+    <tasks>
+      <nullTask/>
+    </tasks>
+    <publishers>
+      <xmllogger />
+      <email from="CIFactory@gmail.com" mailhost="localhost" includeDetails="true">
+        <users>
+          <user name="Jay Flowers" group="buildmaster" address="jay.flowers@gmail.com"/>
+        </users>
+        <groups>
+          <group name="buildmaster" notification="failed"/>
+        </groups>
+      </email>
+    </publishers>
+  </project>
   <project name="%ProjectName%">
     <webURL>%CCNETServer.webURL%</webURL>
     <state type="state" />
@@ -7,33 +41,7 @@
       <intervalTrigger seconds="90" />
     </triggers>
     <modificationDelaySeconds>120</modificationDelaySeconds>
-    <sourcecontrol type="filtered">
-      <sourceControlProvider  type="vss" applyLabel="true">
-        <executable>C:\Program Files\Microsoft Visual Studio\VSS\win32\SS.EXE</executable>
-        <project>$/%ProjectName%/%ProjectCodeLineName%</project>
-        <username>Build</username>
-        <password>password</password>
-        <ssdir>%VSSRootShare%\%ProjectName%</ssdir>
-        <workingDirectory>%ProjectCodeLineDirectory%</workingDirectory>
-      </sourceControlProvider >
-      <exclusionFilters>
-        <pathFilter>
-          <pattern>$/%ProjectName%/%ProjectCodeLineName%/Product/**/AssemblyInfo.*</pattern>
-        </pathFilter>
-        <pathFilter>
-          <pattern>$/%ProjectName%/%ProjectCodeLineName%/Product/ProjectInfo.*</pattern>
-        </pathFilter>
-        <pathFilter>
-          <pattern>$/%ProjectName%/%ProjectCodeLineName%/Product/**/ProjectInfo.*</pattern>
-        </pathFilter>
-        <pathFilter>
-          <pattern>$/%ProjectName%/%ProjectCodeLineName%/Build/*.*</pattern>
-        </pathFilter>
-        <pathFilter>
-          <pattern>$/%ProjectName%/%ProjectCodeLineName%/Build/**/*.*</pattern>
-        </pathFilter>
-      </exclusionFilters>
-    </sourcecontrol>
+    
     <labeller type="defaultlabeller">
       <prefix>1.0.0.</prefix>
     </labeller>

@@ -1,1 +1,40 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="VSS.Installer" default="VSS.Install">
+
+  <largeproperty name="VSS.CCNETMain">
+    <value>
+      <![CDATA[<sourcecontrol type="filtered">
+      <sourceControlProvider  type="vss" applyLabel="true">
+        <executable>C:\Program Files\Microsoft Visual Studio\VSS\win32\SS.EXE</executable>
+        <project>$/%ProjectName%/%ProjectCodeLineName%</project>
+        <username>Build</username>
+        <password>password</password>
+        <ssdir>%VSSRootShare%\%ProjectName%</ssdir>
+        <workingDirectory>%ProjectCodeLineDirectory%</workingDirectory>
+      </sourceControlProvider >
+      <exclusionFilters>
+        <pathFilter>
+          <pattern>$/%ProjectName%/%ProjectCodeLineName%/Product/**/AssemblyInfo.*</pattern>
+        </pathFilter>
+        <pathFilter>
+          <pattern>$/%ProjectName%/%ProjectCodeLineName%/Product/ProjectInfo.*</pattern>
+        </pathFilter>
+        <pathFilter>
+          <pattern>$/%ProjectName%/%ProjectCodeLineName%/Product/**/ProjectInfo.*</pattern>
+        </pathFilter>
+        <pathFilter>
+          <pattern>$/%ProjectName%/%ProjectCodeLineName%/Build/*.*</pattern>
+        </pathFilter>
+        <pathFilter>
+          <pattern>$/%ProjectName%/%ProjectCodeLineName%/Build/**/*.*</pattern>
+        </pathFilter>
+      </exclusionFilters>
+    </sourcecontrol>]]>
+    </value>
+  </largeproperty>
+
+  <target name="VSS.Install">
+    <echo message="${VSS.CCNETMain}" />
+  </target>
+  
+</project>

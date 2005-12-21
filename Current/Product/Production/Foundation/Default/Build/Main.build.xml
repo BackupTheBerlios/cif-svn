@@ -5,8 +5,8 @@
 
   <include buildfile="Properties.build.xml"/>
   <include buildfile="Common.Build.xml" />
-  <!--<include buildfile=".\Packages\Tracker\Tracker.Target.xml" />-->
-  <include buildfile=".\Packages\VisualSourceSafe\VSS.Target.xml" />
+  
+  <include buildfile="%SourceControl.TargetFile%" />
   <include buildfile=".\Packages\Versioning\Versioning.Target.xml" />
   <include buildfile=".\Packages\VS.NETCompile\Compile.Target.xml" />
   <include buildfile=".\Packages\DotNetUnitTest\UnitTest.Target.xml" />
@@ -18,11 +18,10 @@
     <trycatch>
       <try>
         <description>Begin Main Build</description>
+        
         <call target="SourceModificationReport.ConsolidateReports" />
-		    <!--<call target="Tracker.Queries" />-->
     		
 		    <call target="SourceControl.CleanGetOfThirdPartyDirectory" />
-    		
 		    <call target="SourceControl.CleanGetOfProductDirectory" />
 
         <call target="Versioning.IncrementBuildNumberOfModifiedAssemblies"/>
@@ -34,8 +33,6 @@
     		
 		    <call target="Install.CreateSetup" />
 
-        <!--<call target="InstallShield.BuildSetup" />
-        <call target="Tracker.MoveTrackersTo" />-->
         <description>End Main Build</description>
       </try>
       <finally>
@@ -47,7 +44,6 @@
 	</target>
 
 	<target name="SetUps" >
-    <!--<call target="Tracker.SetUp"/>-->
     <call target="SourceControl.SetUp"/>
     <call target="Versioning.SetUp"/>
     <call target="Compile.SetUp"/>
@@ -58,7 +54,6 @@
 	</target>
 
   <target name="TearDowns">
-    <!--<call target="Tracker.TearDown"/>-->
     <call target="SourceControl.TearDown"/>
     <call target="Versioning.TearDown"/>
     <call target="Compile.TearDown"/>
