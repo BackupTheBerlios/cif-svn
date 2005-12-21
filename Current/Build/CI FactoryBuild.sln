@@ -98,6 +98,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Subversion", "Subversion", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SetupScripts", "SetupScripts", "{DF5E3D67-4B04-40F8-9249-CBC8E9EBB576}"
 	ProjectSection(SolutionItems) = preProject
+		SetupScripts\run.bat = SetupScripts\run.bat
 		SetupScripts\Setup.xml = SetupScripts\Setup.xml
 	EndProjectSection
 EndProject
