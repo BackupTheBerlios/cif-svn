@@ -37,7 +37,9 @@
   </Target>
   -->
   <ItemGroup>
-    <Folder Include="Package\Install\" />
+    <Content Include="Package\Install\Install.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Package\Subversion\Build\" />
     <Folder Include="Package\Subversion\EnvScripts\" />
     <Folder Include="Package\Subversion\Report\" />
