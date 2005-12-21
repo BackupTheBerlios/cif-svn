@@ -41,7 +41,7 @@
       <intervalTrigger seconds="90" />
     </triggers>
     <modificationDelaySeconds>120</modificationDelaySeconds>
-    
+    %SourceControl.MainBuildBlock%
     <labeller type="defaultlabeller">
       <prefix>1.0.0.</prefix>
     </labeller>

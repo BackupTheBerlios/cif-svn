@@ -5,19 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9A9CA364-4937-47F1-A74B-AF4669C5A4DC}</ProjectGuid>
+    <ProjectGuid>{0B5660AE-8D08-4EEB-BE9E-7A24437003DA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DotNetUnitTest</RootNamespace>
-    <AssemblyName>DotNetUnitTest</AssemblyName>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <RootNamespace>Subversion</RootNamespace>
+    <AssemblyName>Subversion</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,13 +37,9 @@
   </Target>
   -->
   <ItemGroup>
-    <Content Include="Package\Install\Install.xml" />
-    <Content Include="Package\VisualSourceSafe\Build\HistoryPaths.xsl" />
-    <Content Include="Package\VisualSourceSafe\Build\VSS.Properties.xml" />
-    <Content Include="Package\VisualSourceSafe\Build\VSS.Target.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Package\VisualSourceSafe\EnvScripts\" />
-    <Folder Include="Package\VisualSourceSafe\Report\" />
+    <Folder Include="Package\Install\" />
+    <Folder Include="Package\Subversion\Build\" />
+    <Folder Include="Package\Subversion\EnvScripts\" />
+    <Folder Include="Package\Subversion\Report\" />
   </ItemGroup>
 </Project>
