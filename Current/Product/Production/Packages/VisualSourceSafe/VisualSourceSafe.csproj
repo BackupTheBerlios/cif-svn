@@ -46,6 +46,7 @@
   -->
   <ItemGroup>
     <Content Include="Package\Install\Install.xml" />
+    <Content Include="Package\Install\Properties.xml" />
     <Content Include="Package\VisualSourceSafe\Build\HistoryPaths.xsl" />
     <Content Include="Package\VisualSourceSafe\Build\VSS.Properties.xml" />
     <Content Include="Package\VisualSourceSafe\Build\VSS.Target.xml" />

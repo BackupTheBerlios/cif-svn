@@ -38,9 +38,12 @@
   -->
   <ItemGroup>
     <Content Include="Package\Install\Install.xml" />
+    <Content Include="Package\Install\Properties.xml" />
+    <Content Include="Package\Subversion\Build\HistoryPaths.xsl" />
+    <Content Include="Package\Subversion\Build\SVN.Properties.xml" />
+    <Content Include="Package\Subversion\Build\SVN.Target.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Package\Subversion\Build\" />
     <Folder Include="Package\Subversion\EnvScripts\" />
     <Folder Include="Package\Subversion\Report\" />
   </ItemGroup>
