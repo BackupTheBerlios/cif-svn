@@ -75,22 +75,25 @@
   <target name="Tracker.Queries">
     <property name="Private.Tracker.Queries.Count" value=""/>
     <trackerquery
-      countproperty ="${Private.Tracker.Queries.Count}" 
-      idsproperty ="${Tracker.QueryScrList}"
+      countproperty ="Private.Tracker.Queries.Count" 
+      idsproperty ="Tracker.QueryScrList"
       query="${Tracker.Query}" 
     >
       <connectioninformation refid="Tracker.Connection"/>
     </trackerquery>
 
-    <trackerreport reportfile="${Tracker.ReportFile}" ScrIdList="Tracker.QueryScrList">
+    <trackerreport reportfile="${Tracker.ReportFile}" ScrIdList="${Tracker.QueryScrList}">
       <connectioninformation refid="Tracker.Connection"/>
       <trackerfields refid="Tracker.QueryFields" />
     </trackerreport>
     
     <if test="${Tracker.FailForNone}" >
-      <ifnot test="${Private.Tracker.Queries.Count == 0}">
-	      <fail message="No Trackers put in pending build for this checkin" />
-      </ifnot>
+      <if test="${string::get-length(Private.Tracker.Queries.Count) == 0}">
+        <fail message="No Trackers put in pending build for this checkin" />
+      </if>
+      <if test="${int::parse(Private.Tracker.Queries.Count) == 0}">
+        <fail message="No Trackers put in pending build for this checkin" />
+      </if>
     </if>
    </target>
 
