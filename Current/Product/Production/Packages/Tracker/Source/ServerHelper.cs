@@ -309,7 +309,7 @@ namespace Tracker
 
         public string MakeBigEmptyString(int size)
         {
-            return new string(string.Empty.ToCharArray()[0], size);
+            return new string('\0', size);
         }
 
     }
