@@ -13,6 +13,8 @@ namespace Tracker.Tasks
     [TaskName("trackerquery")]
     public class TrackerQuery : BaseTrackerTask
     {
+        private const string ID_LIST_DELIMITER = ",";
+
         // Methods
         public TrackerQuery()
         {
@@ -20,49 +22,76 @@ namespace Tracker.Tasks
 
         protected override void ExecuteTask()
         {
+#if (DEBUG)   
+            System.Diagnostics.Debugger.Break();
+#endif
+            ExecuteQuery();
+        }
+
+        public void ExecuteQuery()
+        {
             if ((this.ScrIdsProperty == null) && (this.ScrCountProperty == null))
             {
-                throw new BuildException("trackerquery was called and not output was specified, should you have specified: scridsproperty or scrcountproperty?");
+                throw new BuildException("\"trackerquery\" was called, but no output was specified. Should you have specified: scridsproperty or scrcountproperty?");
             }
-            this.Login();
-            int[] numArray1 = this.TrackerServer.GetSCRIDListFromQuery(this.Query);
-            if (this.ScrCountProperty != null)
+            try
             {
-                this.Properties[this.ScrCountProperty] = numArray1.Length.ToString();
+                this.Login();
+                int[] IDs = this.TrackerServer.GetSCRIDListFromQuery(this.Query);
+                if (this.ScrCountProperty != null)
+                {
+                    this.Properties[this.ScrCountProperty] = IDs.Length.ToString();
+                }
+                if (this.ScrIdsProperty != null)
+                {
+                    this.Properties[this.ScrIdsProperty] = this.FormatIdList(IDs);
+                }
+                this.Logout();
             }
-            if (this.ScrIdsProperty != null)
+            catch (NAnt.Core.BuildException eNAntException)
             {
-                this.Properties[this.ScrIdsProperty] = this.FormatIdList(numArray1);
+                this.Logout();
+                throw eNAntException;
             }
-            this.Logout();
+            catch (Exception e)
+            {
+                this.Logout();
+                throw new NAnt.Core.BuildException(e.Message);
+            }
         }
 
         private string FormatIdList(int[] IDs)
         {
-            StringBuilder builder1 = new StringBuilder();
-            builder1.Append(IDs[0]);
-            int num2 = IDs.Length - 1;
-            for (int num1 = 1; num1 <= num2; num1++)
+            try
             {
-                builder1.Append(",");
-                builder1.Append(IDs[num1]);
+                StringBuilder builder = new StringBuilder();
+                builder.Append(IDs[0]);
+                for (int i = 1; i < IDs.Length; ++i)
+                {
+                    builder.Append(ID_LIST_DELIMITER);
+                    builder.Append(IDs[i]);
+                }
+                return builder.ToString();
             }
-            return builder1.ToString();
+            catch (Exception e)
+            {
+                throw new NAnt.Core.BuildException(e.Message);
+            }
         }
 
         public void Test()
         {
             this.Query = "For Me";
             this.ConnectionInformation = new ConnectionInformation();
-            ConnectionInformation information1 = this.ConnectionInformation;
-            information1.DBMSLoginMode = 2;
-            information1.DBMSServer = "Jupiter";
-            information1.DBMSType = "Tracker SQL Server Sys";
-            information1.DBMSPassword = "tracker12";
-            information1.DBMSUserName = "tracker";
-            information1.ProjectName = "EF";
-            information1.UserName = "jflowers";
-            information1.UserPWD = "password";
+            ConnectionInformation information = this.ConnectionInformation;
+            information.DBMSLoginMode = 2;
+            information.DBMSServer = "Jupiter";
+            information.DBMSType = "Tracker SQL Server Sys";
+            information.DBMSPassword = "tracker12";
+            information.DBMSUserName = "tracker";
+            information.ProjectName = "EF";
+            information.UserName = "jflowers";
+            information.UserPWD = "password";
             try
             {
                 this.ExecuteTask();
@@ -121,4 +150,4 @@ namespace Tracker.Tasks
         private string _ScrCountProperty;
         private string _ScrIdsProperty;
     }
-     }
+}
