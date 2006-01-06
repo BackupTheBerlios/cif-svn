@@ -201,23 +201,20 @@ namespace Tracker
                 RecordHandle = this.GetSCRRecordHandle(scrId, 1);
 
                 int FieldType = this.GetFieldType(fieldName);
-                switch (FieldType)
+                if (TRK_FIELD_TYPE_NUMBER == FieldType)
                 {
-                    case TRK_FIELD_TYPE_NUMBER:
-                        int IntegerValue = 0;
-                        Status = PVCSToolKit.TrkGetNumericFieldValue(RecordHandle, ref fieldName, ref IntegerValue);
-                        this.Helper.CheckStatus("Unable to retrieve field value.", Status);
-                        return IntegerValue;
-                    case TRK_FIELD_TYPE_STRING:
-                        string StringValue = this.Helper.MakeBigEmptyString(255);
-                        Status = PVCSToolKit.TrkGetStringFieldValue(RecordHandle, ref fieldName, StringValue.Length, ref StringValue);
-                        this.Helper.CheckStatus("Unable to retrieve field value.", Status);
-                        return this.Helper.CleanupString(StringValue);
-                    default:
-                        Debug.Assert(false);
-                        break;
+                    int IntegerValue = 0;
+                    Status = PVCSToolKit.TrkGetNumericFieldValue(RecordHandle, ref fieldName, ref IntegerValue);
+                    this.Helper.CheckStatus("Unable to retrieve field value.", Status);
+                    return IntegerValue;
                 }
-                return null;
+                else // TRK_FIELD_TYPE_STRING or if other type, then convert to string
+                {
+                    string StringValue = this.Helper.MakeBigEmptyString(255);
+                    Status = PVCSToolKit.TrkGetStringFieldValue(RecordHandle, ref fieldName, StringValue.Length, ref StringValue);
+                    this.Helper.CheckStatus("Unable to retrieve field value.", Status);
+                    return this.Helper.CleanupString(StringValue);
+                }
             }
             finally
             {
