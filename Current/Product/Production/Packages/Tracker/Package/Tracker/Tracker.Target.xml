@@ -90,12 +90,11 @@
         <fail message="No Trackers put in pending build for this checkin" />
       </if>
     </if>
+    <trackerreport reportfile="${Tracker.ReportFile}" ScrIdList="${Tracker.QueryScrList}">
+      <connectioninformation refid="Tracker.Connection"/>
+      <trackerfields refid="Tracker.QueryFields" />
+    </trackerreport>
    </target>
-
-  <trackerreport reportfile="${Tracker.ReportFile}" ScrIdList="${Tracker.QueryScrList}">
-    <connectioninformation refid="Tracker.Connection"/>
-    <trackerfields refid="Tracker.QueryFields" />
-  </trackerreport>
 
   <target name="Private.Tracker.ConstructTrackerNote" >
     <property name="Private.Tracker.ModificationTextReport" value="${Tracker.ReportDirectory}\ModificationTextReport.txt" />
