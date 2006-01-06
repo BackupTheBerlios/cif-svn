@@ -1,0 +1,99 @@
+<project xmlns="http://nant.sf.net/schemas/nant.xsd">
+	<property name="Coverage.ReportsPath" value="C:\projects\EFBuild\Current\CoverageEye\reports\"/>
+	<property name="Coverage.CopyToPath" value=""/>
+	<property name="Coverage.TestsFilePath" value="C:\projects\EFBuild\Current\nant\${ProjectName}\tests.txt"/>
+
+	<property name="Coverage.CompiledDLLs" value="\**\bin\*.dll"/>
+	<property name="Coverage.CompiledEXEs" value="\**\bin\*.exe"/>
+	<property name="Coverage.CompiledPDBs" value="\**\bin\*.pdb"/>
+	
+	<property name="Private.Coverage.Shim" value="CoverageShim.build.xml" />
+
+	<target name="Private.Coverage.PrepareFor">
+		<copy failonerror="true" overwrite="true" flatten="true" todir="${WorkingBinPath}">
+			<fileset>
+				<include name="${CompiledDLLs}" />
+				<include name="${CompiledEXEs}" />
+				<include name="${DebugPDBs}" />
+			</fileset>
+		</copy>
+		
+		<script language="VB">
+				<code><![CDATA[
+				Public Shared Sub ScriptMain(ByVal project As Project)
+					Dim pd As PropertyDictionary = project.Properties
+					Dim configFile As String = "C:\Program Files\Microsoft\Microsoft UK SDC CoverageEye.NET 1.1.1538.0\Configuration\CoverageConfiguration.xml"
+					Dim ReportDirectory As String = pd("CE.ReportsPath") & pd("ProjectName")
+					Dim bin As String = pd("WorkingBinPath")
+					Save(configFile, GetAssemblyArray(bin), ReportDirectory)
+				End Sub
+				
+				Public Shared Function GetAssemblyArray(ByVal bin As String) As ArrayList
+					Dim aDir As New IO.DirectoryInfo(bin)
+					Dim PatternArray() As String = New String(3) {"EF*.dll", "EF*.exe", "MSMQ.dll", "Plugin.dll"}
+					GetAssemblyArray = New ArrayList
+					For Each SearchPattern As String In PatternArray
+						For Each aFile As IO.FileInfo In aDir.GetFiles(SearchPattern)
+							GetAssemblyArray.Add(aFile.Name)
+						Next
+					Next
+
+				End Function
+
+				Public Shared Sub Save(ByVal configFile As String, ByRef AssemblyArray As ArrayList, ByVal ReportDirectory As String)
+					Dim document As New System.Xml.XmlDocument
+					document.LoadXml(document.CreateElement("c:CoverageConfiguration", "urn:CoverageConfiguration").OuterXml)
+					Dim root As System.Xml.XmlElement = document.DocumentElement
+				
+					For Each AssemblyName As String In AssemblyArray
+						Dim nn As System.Xml.XmlNode = document.CreateNode(Xml.XmlNodeType.Element, Nothing, "Assembly", Nothing)
+						Dim an As System.Xml.XmlAttribute = document.CreateNode(Xml.XmlNodeType.Attribute, Nothing, "AssemblyName", Nothing)
+						an.Value = AssemblyName.ToLower()
+						Dim reports As System.Xml.XmlAttribute = document.CreateNode(Xml.XmlNodeType.Attribute, Nothing, "ReportDirectory", Nothing)
+						reports.Value = ReportDirectory
+						nn.Attributes.Append(an)
+						nn.Attributes.Append(reports)
+						root.AppendChild(nn)
+					Next
+					document.Save(configFile)
+				End Sub
+
+				]]></code>
+			</script>
+	</target>
+	
+	<target name="Private.Coverage.MergeReports">
+		<exec program="cemerge.exe" 
+			basedir="C:\projects\EFBuild\Current\CoverageEye">
+			<arg value="${CE.ReportsPath}\coverage.xml" />
+			<arg value="${WorkingBinPath}" />
+			<arg value="${CE.ReportsPath}\Report.*.xml" />
+		</exec>
+	</target>
+	
+	<target name="Coverage.CleanUp">
+		<delete verbose="True" >
+			<fileset basedir="${Coverage.ReportsPath}" >
+				<include name="Report.*.xml" />
+				<include name="coverage.xml" />
+			</fileset>
+		</delete>
+	</target>
+	
+	<target name="Coverage.ExecuteTests" >
+		<call target="Private.Coverage.PrepareFor"/>
+		<exec program="${nant::get-assembly()}">
+			<environment>
+				<variable name="Cor_Enable_Profiling" value="1"/>
+				<variable name="Cor_Profiler" value="{18656C37-035D-41CD-82C2-85DEF2DD5F7B}"/>
+			</environment>
+			<arg line="-BuildFile:${Private.Coverage.Shim}"/>
+			<arg line="-D:UnitTest.TestPath=${UnitTest.TestPath}"/>
+			<arg line="-D:UnitTest.TestAssemblyFormat=${UnitTest.TestAssemblyFormat}"/>
+			<arg line="-D:UnitTest.ReportFolder=${UnitTest.ReportFolder}"/>
+			<arg line="-D:UnitTest.ReportNameFormat=${UnitTest.ReportNameFormat}"/>
+			<arg line="-D:UnitTest.WithCoverage=${UnitTest.WithCoverage}"/>
+		</exec>
+		<call target="Private.Coverage.MergeReports"/>
+	</target>
+</project>
