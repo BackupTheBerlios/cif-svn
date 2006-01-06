@@ -23,12 +23,6 @@ namespace Tracker.Tasks
 
         protected override void ExecuteTask()
         {
-#if (DEBUG)
-            if (DialogResult.Yes == MessageBox.Show("Would you like to debug Tracker.Tasks.ExecuteTask?", "Tracker.Tasks.ExecuteTask", MessageBoxButtons.YesNo))
-            {
-                System.Diagnostics.Debugger.Break();
-            }
-#endif
             ExecuteQuery();
         }
 
