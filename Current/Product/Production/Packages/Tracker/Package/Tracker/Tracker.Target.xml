@@ -81,11 +81,6 @@
     >
       <connectioninformation refid="Tracker.Connection"/>
     </trackerquery>
-
-    <trackerreport reportfile="${Tracker.ReportFile}" ScrIdList="${Tracker.QueryScrList}">
-      <connectioninformation refid="Tracker.Connection"/>
-      <trackerfields refid="Tracker.QueryFields" />
-    </trackerreport>
     
     <if test="${Tracker.FailForNone}" >
       <if test="${string::get-length(Private.Tracker.Queries.Count) == 0}">
@@ -96,6 +91,11 @@
       </if>
     </if>
    </target>
+
+  <trackerreport reportfile="${Tracker.ReportFile}" ScrIdList="${Tracker.QueryScrList}">
+    <connectioninformation refid="Tracker.Connection"/>
+    <trackerfields refid="Tracker.QueryFields" />
+  </trackerreport>
 
   <target name="Private.Tracker.ConstructTrackerNote" >
     <property name="Private.Tracker.ModificationTextReport" value="${Tracker.ReportDirectory}\ModificationTextReport.txt" />
