@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections;
 using System.IO;
 using System.Xml;
+using System.Windows.Forms;
 
 using NAnt.Core;
 using NAnt.Core.Attributes;
@@ -22,8 +23,11 @@ namespace Tracker.Tasks
 
         protected override void ExecuteTask()
         {
-#if (DEBUG)   
-            System.Diagnostics.Debugger.Break();
+#if (DEBUG)
+            if (DialogResult.Yes == MessageBox.Show("Would you like to debug Tracker.Tasks.ExecuteTask?", "Tracker.Tasks.ExecuteTask", MessageBoxButtons.YesNo))
+            {
+                System.Diagnostics.Debugger.Break();
+            }
 #endif
             ExecuteQuery();
         }
@@ -34,50 +38,46 @@ namespace Tracker.Tasks
             {
                 throw new BuildException("\"trackerquery\" was called, but no output was specified. Should you have specified: scridsproperty or scrcountproperty?");
             }
-            try
+            this.Login();
+            int[] IDs = this.TrackerServer.GetSCRIDListFromQuery(this.Query);
+            if (this.ScrCountProperty != null)
             {
-                this.Login();
-                int[] IDs = this.TrackerServer.GetSCRIDListFromQuery(this.Query);
-                if (this.ScrCountProperty != null)
+                try
                 {
                     this.Properties[this.ScrCountProperty] = IDs.Length.ToString();
                 }
-                if (this.ScrIdsProperty != null)
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                    this.Properties[this.ScrCountProperty] = "0";
+                }
+            }
+            if (this.ScrIdsProperty != null)
+            {
+                try
                 {
                     this.Properties[this.ScrIdsProperty] = this.FormatIdList(IDs);
                 }
-                this.Logout();
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                    this.Properties[this.ScrIdsProperty] = "";
+                }
             }
-            catch (NAnt.Core.BuildException eNAntException)
-            {
-                this.Logout();
-                throw eNAntException;
-            }
-            catch (Exception e)
-            {
-                this.Logout();
-                throw new NAnt.Core.BuildException(e.Message);
-            }
+            this.Logout();
         }
 
         private string FormatIdList(int[] IDs)
         {
-            try
+            StringBuilder builder = new StringBuilder();
+            builder.Append(IDs[0]);
+            for (int i = 1; i < IDs.Length; ++i)
             {
-                StringBuilder builder = new StringBuilder();
-                builder.Append(IDs[0]);
-                for (int i = 1; i < IDs.Length; ++i)
-                {
-                    builder.Append(ID_LIST_DELIMITER);
-                    builder.Append(IDs[i]);
-                }
-                return builder.ToString();
+                builder.Append(ID_LIST_DELIMITER);
+                builder.Append(IDs[i]);
             }
-            catch (Exception e)
-            {
-                throw new NAnt.Core.BuildException(e.Message);
-            }
-        }
+            return builder.ToString();
+         }
 
         public void Test()
         {
