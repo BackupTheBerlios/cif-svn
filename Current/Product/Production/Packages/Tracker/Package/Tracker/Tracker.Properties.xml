@@ -24,7 +24,7 @@
   <property name="Tracker.QueryScrList" value=""/>
 
   <writefieldset id="Tracker.ChangeFields">
-    <field name="SubStatus" value="Complete Build"/>
+    <field name="Status" value="Complete Build"/>
     <field name="Assignee" value="moyers"/>
   </writefieldset>
     
