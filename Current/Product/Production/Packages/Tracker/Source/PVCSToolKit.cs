@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Diagnostics;
 
 namespace Tracker
 {
     public class PVCSToolKit : Tracker.IPVCSToolKit
     {
-
+        private const int TRK_FIELD_TYPE_STRING = 2;
+        private const int TRK_FIELD_TYPE_NUMBER = 3;
+ 
         #region Fields
 
         private int _TrackerHandle;
@@ -184,41 +187,44 @@ namespace Tracker
             int Status;
             int FieldType = 0;
             Status = PVCSToolKit.TrkGetFieldType(this.TrackerHandle, ref fieldName, 1, ref FieldType);
-            this.Helper.CheckStatus("Unable to retrieve field type.", Status);
+            this.Helper.CheckStatus("Unable to retrieve field type: " + fieldName, Status);
             return FieldType;
         }
 
         public object GetFieldValue(int scrId, string fieldName)
         {
-            int Status;
-            int FieldType = 0;
             int RecordHandle = 0;
 
             try
             {
+                int Status = 0;
                 RecordHandle = this.GetSCRRecordHandle(scrId, 1);
 
-                FieldType = this.GetFieldType(fieldName);
-
-                if (FieldType == 3)
+                int FieldType = this.GetFieldType(fieldName);
+                switch (FieldType)
                 {
-                    int IntegerValue = 0;
-                    Status = PVCSToolKit.TrkGetNumericFieldValue(RecordHandle, ref fieldName, ref IntegerValue);
-                    this.Helper.CheckStatus("Unable to retrieve field value.", Status);
-                    return IntegerValue;
+                    case TRK_FIELD_TYPE_NUMBER:
+                        int IntegerValue = 0;
+                        Status = PVCSToolKit.TrkGetNumericFieldValue(RecordHandle, ref fieldName, ref IntegerValue);
+                        this.Helper.CheckStatus("Unable to retrieve field value.", Status);
+                        return IntegerValue;
+                    case TRK_FIELD_TYPE_STRING:
+                        string StringValue = this.Helper.MakeBigEmptyString(255);
+                        Status = PVCSToolKit.TrkGetStringFieldValue(RecordHandle, ref fieldName, StringValue.Length, ref StringValue);
+                        this.Helper.CheckStatus("Unable to retrieve field value.", Status);
+                        return this.Helper.CleanupString(StringValue);
+                    default:
+                        Debug.Assert(false);
+                        break;
                 }
-                else
-                {
-                    string StringValue = this.Helper.MakeBigEmptyString(255);
-                    Status = PVCSToolKit.TrkGetStringFieldValue(RecordHandle, ref fieldName, StringValue.Length, ref StringValue);
-                    this.Helper.CheckStatus("Unable to retrieve field value.", Status);
-                    return this.Helper.CleanupString(StringValue);
-                }
+                return null;
             }
             finally
             {
-                if (RecordHandle != 0)
+                if (0 != RecordHandle)
+                {
                     this.ReleaseRecordHandle(RecordHandle);
+                }
             }
         }
 
