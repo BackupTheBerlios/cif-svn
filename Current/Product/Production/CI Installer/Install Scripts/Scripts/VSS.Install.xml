@@ -22,7 +22,7 @@
       username="${Private.VSS.UserName}"
       password="${Private.VSS.Password}"
       path="$/${ProjectName}"
-      comment="Initial load buy Instant CI script" 
+      comment="Initial load by Instant CI script" 
             >
       <fileset basedir="${ProjectRootDirectory}">
         <include name="**/*"/>
