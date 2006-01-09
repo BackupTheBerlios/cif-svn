@@ -1,163 +1,266 @@
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using Microsoft.Win32;
 using NAnt;
 using NAnt.Core;
 using NAnt.Core.Attributes;
 using NAnt.Core.Tasks;
-using System.Text;
 
-namespace InstallShield.Tasks
+namespace Nant.Contrib.BuildInstallShield.Tasks
 {
-
 	public abstract class BuildInstallShieldBase : ExternalProgramBase
 	{
-        public const string BEGIN_PROPERTY_TABLE = "<table name=\"Property\">";
-        public const string END_TABLE = "</table>";
-        public const string END_OF_ELEMENT_START_OF_NEW = "</td><td>";
-        public const string ELEM_VALUE_TO_REPLACE = "ProductVersion";
-        public const string TEMP_FILE_EXT = ".tmp";
+		private const string UNINSTALL_KEY = "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\";
 
-        private string _IsmFile;
-        private string _Release;
-        private string _BuildLocation;
-        private string _UpdateProductVersion;
-        private string _ProgramFile;
+		private string m_sIsmFile;
+		private string m_sRelease;
+		private string m_sStandAloneBuildExe;
+		private string m_sBuildLocation;
+		private string m_sUpdateProductVersion;
+		private bool m_bBuildSilently = false;
+		private bool m_bStopOnError = false;
+		private bool m_bWarningAsError = false;
+		private bool m_bNoCompile = false;
 
-        [TaskAttribute("ismfile", Required = true)]
-        public string IsmFile
-        {
-            get { return _IsmFile; }
-            set { _IsmFile = value; }
-        }
+		[TaskAttribute("p", Required=true)]
+		public string p
+		{
+			get { return m_sIsmFile; }
+			set { m_sIsmFile = value; }
+		}
 
-        [TaskAttribute("release", Required = false)]
-        public string Release
-        {
-            get { return _Release; }
-            set { _Release = value; }
-        }
+		[TaskAttribute("r", Required=false)]
+		public string r
+		{
+			get { return m_sRelease; }
+			set { m_sRelease = value; }
+		}
 
-        [TaskAttribute("buildlocation", Required = false)]
-        public string BuildLocation
-        {
-            get { return _BuildLocation; }
-            set { _BuildLocation = value; }
-        }
+		[TaskAttribute("standalonebuildexe", Required=true)]
+		public string standalonebuildexe
+		{
+			get { return m_sStandAloneBuildExe; }
+			set { m_sStandAloneBuildExe = value; }
+		}
 
-        [TaskAttribute("updateproductversion", Required = false)]
-        public string UpdateProductVersion
-        {
-            get { return _UpdateProductVersion; }
-            set { _UpdateProductVersion = value; }
-        }
+		[TaskAttribute("b", Required=false)]
+		public string b
+		{
+			get { return m_sBuildLocation; }
+			set { m_sBuildLocation = value; }
+		}
 
-        [TaskAttribute("programfile", Required = false)]
-        public string ProgramFile
-        {
-            set 
-            { 
-                this._ProgramFile = value; 
-            }
-        }
+		[TaskAttribute("updateproductversion", Required=false)]
+		public string updateproductversion
+		{
+			get { return m_sUpdateProductVersion; }
+			set { m_sUpdateProductVersion = value; }
+		}
 
-        public override string ProgramFileName
-        {
-            get
-            {
-                return this._ProgramFile;
-            }
-        }
+		[TaskAttribute("s", Required=false)]
+		[BooleanValidator()]
+		public bool s
+		{
+			get { return m_bBuildSilently; }
+			set { m_bBuildSilently = value; }
+		}
 
-        protected void ChangeProductVersion()
-        {
-            if (!File.Exists(this.IsmFile))
-            {
-                return;
-            }
+		[TaskAttribute("x", Required=false)]
+		[BooleanValidator()]
+		public bool x
+		{
+			get { return m_bStopOnError; }
+			set { m_bStopOnError = value; }
+		}
 
-            System.IO.FileAttributes FileAttribs = File.GetAttributes(this.IsmFile);
+		[TaskAttribute("w", Required=false)]
+		[BooleanValidator()]
+		public bool w
+		{
+			get { return m_bWarningAsError; }
+			set { m_bWarningAsError = value; }
+		}
 
-			string TempFile = this.IsmFile + TEMP_FILE_EXT;
+		[TaskAttribute("n", Required=false)]
+		[BooleanValidator()]
+		public bool n
+		{
+			get { return m_bNoCompile; }
+			set { m_bNoCompile = value; }
+		}
 
-			if (File.Exists(TempFile))
+		public override string ProgramFileName 
+		{
+			// The path and file name to the InstallShield stand alone build.
+			get { return GetISSAExe(); }
+		}
+
+		// The base class calls this to build the command-line string.
+		public abstract override string ProgramArguments 
+		{
+			get;
+		}
+
+		protected override void ExecuteTask() 
+		{
+			// we’ll let the base task do all the work.
+			base.ExecuteTask();
+		}
+
+		protected string GetBaseArguments()
+		{
+			if (updateproductversion != null)
 			{
-				File.SetAttributes(TempFile, System.IO.FileAttributes.Normal);
-				File.Delete(TempFile);
+				ChangeProductVersion();
 			}
 
-			bool Replaced = false;
+			string sCmdLine;
+			sCmdLine = "-p " + "\"" + ismfile + "\"";
 
-			using (StreamWriter Writer = new StreamWriter(TempFile))
+			if (release != null)
+			{
+				sCmdLine += " -r " + "\"" + release + "\"";
+			}
+
+			if (buildlocation != null)
+			{
+				sCmdLine += " -b " + "\"" + buildlocation + "\"";
+			}
+
+			if (buildsilently)
+			{
+				sCmdLine += " -s";
+			}
+
+			if (warningaserror)
+			{
+				sCmdLine += " -w";
+			}
+
+			if (stoponerror)
+			{
+				sCmdLine += " -x";
+			}
+
+			if (n)
+			{
+				sCmdLine += " -n";
+			}
+
+			return sCmdLine;
+		}
+
+		private string GetISSAExe()
+		{
+			string sExe = m_sStandAloneBuildExe;
+			if ('{' == sExe[0])
+			{
+				string sKey = Path.Combine(UNINSTALL_KEY, sExe);
+
+				RegistryKey reg = Registry.LocalMachine.OpenSubKey(sKey);
+				string sValue = (string)reg.GetValue("InstallLocation");
+
+				sExe = Path.Combine(sValue, "IsSABld.exe");
+				reg.Close();
+
+				// format it
+				sExe = " " + sExe + " ";
+			}
+			return sExe;
+		}
+
+		protected void ChangeProductVersion()
+		{
+			if (!File.Exists(m_sIsmFile))
+			{
+				return;
+			}
+
+			System.IO.FileAttributes fileAttribs = File.GetAttributes(m_sIsmFile);
+
+			const string TEMP_FILE_EXT = ".tmp";
+			string sTempFile = m_sIsmFile + TEMP_FILE_EXT;
+
+			if (File.Exists(sTempFile))
+			{
+				File.SetAttributes(sTempFile, System.IO.FileAttributes.Normal);
+				File.Delete(sTempFile);
+			}
+
+			bool bReplaced = false;
+
+			try 
+			{
+				using (StreamWriter sw = new StreamWriter(sTempFile))
 				{
-					using (StreamReader Reader = new StreamReader(this.IsmFile)) 
+					using (StreamReader sr = new StreamReader(m_sIsmFile)) 
 					{
-						bool FoundPropertySection = false;
-						bool FoundEndOfPropertySection = false;
+						const string BEGIN_PROPERTY_TABLE = "<table name=\"Property\">";
+						const string END_TABLE = "</table>";
+						const string END_OF_ELEMENT_START_OF_NEW = "</td><td>";
+						const string ELEM_VALUE_TO_REPLACE = "ProductVersion";
 
-						int Position = -1;
-						string Line;
-						while ((Line = Reader.ReadLine()) != null)
+						bool bFoundPropertySection = false;
+						bool bFoundEndOfPropertySection = false;
+
+						int nPos = -1;
+						string sLine;
+						while ((sLine = sr.ReadLine()) != null)
 						{
-							if (!Replaced && !FoundEndOfPropertySection)
+							if (!bReplaced && !bFoundEndOfPropertySection)
 							{
-								if (FoundPropertySection)
+								if (bFoundPropertySection)
 								{
-									FoundEndOfPropertySection = (-1 < Line.LastIndexOf(END_TABLE));
+									bFoundEndOfPropertySection = (-1 < sLine.LastIndexOf(END_TABLE));
 								}
 								else
 								{
-									FoundPropertySection = (-1 < Line.LastIndexOf(BEGIN_PROPERTY_TABLE));
+									bFoundPropertySection = (-1 < sLine.LastIndexOf(BEGIN_PROPERTY_TABLE));
 								}
 
-								if (!FoundEndOfPropertySection && FoundPropertySection && -1 < (Position = Line.LastIndexOf(ELEM_VALUE_TO_REPLACE)))
+								if (!bFoundEndOfPropertySection && bFoundPropertySection && -1 < (nPos = sLine.LastIndexOf(ELEM_VALUE_TO_REPLACE)))
 								{
 									// Found "ProductVersion"
 
-									Position += ELEM_VALUE_TO_REPLACE.Length + END_OF_ELEMENT_START_OF_NEW.Length;
-									string sBegin = Line.Substring(0, Position);
+									nPos += ELEM_VALUE_TO_REPLACE.Length + END_OF_ELEMENT_START_OF_NEW.Length;
+									string sBegin = sLine.Substring(0, nPos);
 
 									// Find the end of the ProductVersion value
 									// (if the version is "1.0.0.0", find the
 									// position of the last '0')
-									while (Line[Position++] != '<');
+									while (sLine[nPos++] != '<');
 
-									string End = Line.Substring(--Position, Line.Length - Position);
+									--nPos;
+									string sEnd = sLine.Substring(nPos, sLine.Length - nPos);
+
 									
-									Line = sBegin + _UpdateProductVersion + End;
-									Replaced = true;
+									sLine = sBegin + m_sUpdateProductVersion + sEnd;
+									bReplaced = true;
 								}
 							}
-							Writer.WriteLine(Line);
+							sw.WriteLine(sLine);
 						}
 					}
 				}
-
-			if (Replaced)
-			{
-				File.SetAttributes(this.IsmFile, System.IO.FileAttributes.Normal);
-				File.Delete(this.IsmFile);
-				File.Move(TempFile, this.IsmFile);
-				File.SetAttributes(this.IsmFile, FileAttribs);
+				if (bReplaced)
+				{
+					File.SetAttributes(m_sIsmFile, System.IO.FileAttributes.Normal);
+					File.Delete(m_sIsmFile);
+					File.Move(sTempFile, m_sIsmFile);
+					File.SetAttributes(m_sIsmFile, fileAttribs);
+				}
 			}
+			catch (Exception ex) 
+			{
+				Debug.Assert(false, ex.ToString(), ex.Message);
+				return;
+			}
+
+			Debug.Assert(bReplaced);
 		}
-
-        protected override void ExecuteTask()
-        {
-            if (this.UpdateProductVersion != null)
-			{
-                this.ChangeProductVersion();
-			}
-            base.ExecuteTask();
-        }
-
-        public string MakeOptionPair(string option, string value)
-        {
-        	return String.Format(" {0} \"{1}\" ", option, value);
-        }
-    
-    }
+	}
 
 	[TaskName("buildinstallscript")]
 	public class BuildInstallScript : BuildInstallShieldBase
@@ -165,16 +268,9 @@ namespace InstallShield.Tasks
 		// The base class calls this to build the command-line string.
 		public override string ProgramArguments 
 		{
-			get 
+			get
 			{
-				StringBuilder CmdLineBuilder = new StringBuilder();
-				CmdLineBuilder.Append(this.MakeOptionPair("-p", this.IsmFile));
-
-				if (this.Release != null)
-				{
-					CmdLineBuilder.Append(this.MakeOptionPair("-r", this.Release));
-				}
-                return CmdLineBuilder.ToString();
+				return base.GetBaseArguments();
 			}
 		}
 	}
@@ -182,88 +278,106 @@ namespace InstallShield.Tasks
 	[TaskName("buildinstallshieldmsi")]
 	public class BuildInstallShieldMsi : BuildInstallShieldBase
 	{
-		private string _ProductConfiguration;
-		private string _ReleaseConfiguration;
-		private string _MergeModuleSearchPath;
-		private bool _SkipUpgrade;
-		private string _DotNetFrameworkPath;
-		private string _MinimumTargetMsiVersion;
-		private string _MinimumTargetDotNetFrameworkVersion;
-		private bool _CreateSetupExe = true;
-		private string _ReleaseFlags;
-		private bool _BuildSilently = false;
+		private string m_sProductConfiguration;
+		private string m_sReleaseConfiguration;
+		private string m_sMergeModuleSearchPath;
+		private bool m_bSkipUpgrade = false;
+		private string m_sDotNetFrameworkPath;
+		private string m_sMinimumTargetMsiVersion;
+		private string m_sMinimumTargetDotNetFrameworkVersion;
+		private bool m_bCreateSetupExe = false;
+		private string m_sReleaseFlags;
+		private bool m_bQ1 = false;
+		private bool m_bQ2 = false;
+		private bool m_bQ3 = false;
 
-		[TaskAttribute("productconfiguration", Required=false)]
-		public string ProductConfiguration
+		[TaskAttribute("a", Required=false)]
+		public string a
 		{
-			get { return _ProductConfiguration; }
-			set { _ProductConfiguration = value; }
+			get { return m_sProductConfiguration; }
+			set { m_sProductConfiguration = value; }
 		}
 
-		[TaskAttribute("releaseconfiguration", Required=false)]
-		public string ReleaseConfiguration
+		[TaskAttribute("c", Required=false)]
+		public string c
 		{
-			get { return _ReleaseConfiguration; }
-			set { _ReleaseConfiguration = value; }
+			get { return m_sReleaseConfiguration; }
+			set { m_sReleaseConfiguration = value; }
 		}
 
-		[TaskAttribute("mergemodulesearchpath", Required=false)]
-		public string MergeModuleSearchPath
+		[TaskAttribute("o", Required=false)]
+		public string o
 		{
-			get { return _MergeModuleSearchPath; }
-			set { _MergeModuleSearchPath = value; }
+			get { return m_sMergeModuleSearchPath; }
+			set { m_sMergeModuleSearchPath = value; }
 		}
 
-		[TaskAttribute("skipupgrade", Required=false)]
+		[TaskAttribute("h", Required=false)]
 		[BooleanValidator()]
-		public bool SkipupGrade
+		public bool h
 		{
-			get { return _SkipUpgrade; }
-			set { _SkipUpgrade = value; }
+			get { return m_bSkipUpgrade; }
+			set { m_bSkipUpgrade = value; }
 		}
 
-		[TaskAttribute("dotnetframeworkpath", Required=false)]
-		public string DotNetFrameworkPath
+		[TaskAttribute("t", Required=false)]
+		public string t
 		{
-			get { return _DotNetFrameworkPath; }
-			set { _DotNetFrameworkPath = value; }
+			get { return m_sDotNetFrameworkPath; }
+			set { m_sDotNetFrameworkPath = value; }
 		}
 
-		[TaskAttribute("minimumtargetmsiversion", Required=false)]
-		public string MinimumTargetMsiVersion
+		[TaskAttribute("g", Required=false)]
+		public string g
 		{
-			get { return _MinimumTargetMsiVersion; }
-			set { _MinimumTargetMsiVersion = value; }
+			get { return m_sMinimumTargetMsiVersion; }
+			set { m_sMinimumTargetMsiVersion = value; }
 		}
 
-		[TaskAttribute("minimumtargetdotnetframeworkversion", Required=false)]
-		public string MinimumTargetDotNetFrameworkVersion
+		[TaskAttribute("j", Required=false)]
+		public string j
 		{
-			get { return _MinimumTargetDotNetFrameworkVersion; }
-			set { _MinimumTargetDotNetFrameworkVersion = value; }
+			get { return m_sMinimumTargetDotNetFrameworkVersion; }
+			set { m_sMinimumTargetDotNetFrameworkVersion = value; }
 		}
 
-		[TaskAttribute("createsetupexe", Required=false)]
+		[TaskAttribute("e", Required=false)]
 		[BooleanValidator()]
-		public bool CreateSetupExe
+		public bool e
 		{
-			get { return _CreateSetupExe; }
-			set { _CreateSetupExe = value; }
+			get { return m_bCreateSetupExe; }
+			set { m_bCreateSetupExe = value; }
 		}
 
-		[TaskAttribute("releaseflags", Required=false)]
-		public string ReleaseFlags
+		[TaskAttribute("f", Required=false)]
+		public string f
 		{
-			get { return _ReleaseFlags; }
-			set { _ReleaseFlags = value; }
+			get { return m_sReleaseFlags; }
+			set { m_sReleaseFlags = value; }
 		}
 
-		[TaskAttribute("buildsilently", Required=false)]
+		[TaskAttribute("q1", Required=false)]
 		[BooleanValidator()]
-		public bool BuildSilently
+		public bool q1
 		{
-			get { return _BuildSilently; }
-			set { _BuildSilently = value; }
+			get { return m_bQ1; }
+			set { m_bQ1 = value; }
+		}
+
+		[TaskAttribute("q2", Required=false)]
+		[BooleanValidator()]
+		public bool q2
+		{
+			get { return m_bQ2; }
+			set { m_bQ2 = value; }
+		}
+
+		[TaskAttribute("q3", Required=false)]
+		[BooleanValidator()]
+		public bool q3
+		{
+			get { return m_bQ3; }
+			set { m_bQ3 = value; }
 		}
 
 		// The base class calls this to build the command-line string.
@@ -271,74 +385,73 @@ namespace InstallShield.Tasks
 		{
 			get 
 			{
-                StringBuilder CmdLineBuilder = new StringBuilder();
-				CmdLineBuilder.Append(this.MakeOptionPair("-p", this.IsmFile));
+				string sCmdLine = base.GetBaseArguments();
 
-				if (this.ProductConfiguration != null)
+				if (null != a)
 				{
-                    CmdLineBuilder.Append(this.MakeOptionPair("-a", this.ProductConfiguration));
+					sCmdLine += " -a " + "\"" + productconfiguration + "\"";
 				}
 
-                if (this.Release != null)
+				if (null != o)
 				{
-					CmdLineBuilder.Append(this.MakeOptionPair("-r", this.Release));
+					sCmdLine += " -o " + "\"" + mergemodulesearchpath + "\"";
 				}
 
-				if (this.MergeModuleSearchPath != null)
+                if (null != c)
 				{
-                    CmdLineBuilder.Append(this.MakeOptionPair("-o", this.MergeModuleSearchPath));
+					sCmdLine += " -c " + "\"" + releaseconfiguration + "\"";
 				}
 
-				if (this.ReleaseConfiguration != null)
+				if (h)
 				{
-                    CmdLineBuilder.Append(this.MakeOptionPair("-c", this.ReleaseConfiguration));
+					sCmdLine += " -h";
 				}
 
-				if (this.SkipupGrade)
+                if (null != t)
 				{
-					CmdLineBuilder.Append(" -h");
+					sCmdLine += " -t " + "\"" + dotnetframeworkpath + "\"";
 				}
 
-				if (this.DotNetFrameworkPath != null)
+                if (null != g)
 				{
-                    CmdLineBuilder.Append(this.MakeOptionPair("-t", this.DotNetFrameworkPath));
+					sCmdLine += " -g " + "\"" + minimumtargetmsiversion + "\"";
 				}
 
-				if (this.MinimumTargetMsiVersion != null)
+                if (null != j)
 				{
-                    CmdLineBuilder.Append(this.MakeOptionPair("-g", this.MinimumTargetMsiVersion));
+					sCmdLine += " -j " + "\"" + minimumtargetdotnetframeworkversion + "\"";
 				}
 
-				if (this.MinimumTargetDotNetFrameworkVersion != null)
+				if (e)
 				{
-                    CmdLineBuilder.Append(this.MakeOptionPair("-j", this.MinimumTargetDotNetFrameworkVersion));
-				}
-
-				if (this.BuildLocation != null)
-				{
-					CmdLineBuilder.Append(this.MakeOptionPair("-b", this.BuildLocation));
-				}
-
-				if (this.CreateSetupExe)
-				{
-					CmdLineBuilder.Append(" -e y");
+					sCmdLine += " -e y";
 				}
 				else
 				{
-					CmdLineBuilder.Append(" -e n");
+					sCmdLine += " -e n";
 				}
 
-				if (this.ReleaseFlags != null)
+                if (null != f)
 				{
-                    CmdLineBuilder.Append(this.MakeOptionPair("-f", this.ReleaseFlags));
+					sCmdLine += " -f " + "\"" + releaseflags + "\"";
 				}
 
-				if (this.BuildSilently)
+				if (q1)
 				{
-                    CmdLineBuilder.Append(" -s");
+					sCmdLine += " -q1";
 				}
 
-                return CmdLineBuilder.ToString();
+				if (q2) 
+				{
+					sCmdLine += " -q2";
+				}
+
+				if (q3) 
+				{
+					sCmdLine += " -q3";
+				}
+
+				return sCmdLine;
 			}
 		}
 	}
