@@ -8,9 +8,6 @@ namespace Tracker
 {
     public class PVCSToolKit : Tracker.IPVCSToolKit
     {
-        private const int TRK_FIELD_TYPE_STRING = 2;
-        private const int TRK_FIELD_TYPE_NUMBER = 3;
- 
         #region Fields
 
         private int _TrackerHandle;
@@ -52,9 +49,8 @@ namespace Tracker
 
         public void Login(string userName, string password, string projectName, string dbmsUserName, string dbmsPassword, string dbmsServer, string dbmsType, int dbmsLoginMode)
         {
-            int Status;
             int Handle = 0;
-            Status = PVCSToolKit.TrkHandleAlloc(ServerHelper.TRK_VERSION_ID, ref Handle);
+            int Status = PVCSToolKit.TrkHandleAlloc(ServerHelper.TRK_VERSION_ID, ref Handle);
             this.Helper.CheckStatus("Failed to allocate tracker handle.", Status);
             this.TrackerHandle = Handle;
             Status = PVCSToolKit.TrkProjectLogin(this.TrackerHandle, ref userName, ref password, ref projectName, ref dbmsType, ref dbmsServer, ref dbmsUserName, ref dbmsPassword, dbmsLoginMode);
@@ -75,8 +71,7 @@ namespace Tracker
         public void AddNote(string noteTitle, string noteText, int noteHandle)
         {
             int RecordSize = 0;
-            int Status;
-            Status = PVCSToolKit.TrkAddNewNote(noteHandle);
+            int Status = PVCSToolKit.TrkAddNewNote(noteHandle);
             this.Helper.CheckStatus("Unable to add new note.", Status);
 
             Status = PVCSToolKit.TrkSetNoteTitle(noteHandle, ref noteTitle);
@@ -103,27 +98,26 @@ namespace Tracker
 
         public int GetNoteHandle(int recordHandle)
         {
-            int Status;
             int NoteHandle = 0;
-            Status = PVCSToolKit.TrkNoteHandleAlloc(recordHandle, ref NoteHandle);
+            int Status = PVCSToolKit.TrkNoteHandleAlloc(recordHandle, ref NoteHandle);
             this.Helper.CheckStatus("Unable to get Note Handle.", Status);
             return NoteHandle;
         }
 
         public void BeginUpdate(int recordHandle)
         {
-            int Status;
-            Status = PVCSToolKit.TrkUpdateRecordBegin(recordHandle);
+            int Status = PVCSToolKit.TrkUpdateRecordBegin(recordHandle);
             this.Helper.CheckStatus("Unable to begin record update.", Status);
         }
 
         public int GetNoteTransactionId(int noteHandle)
         {
-            int Status;
             int TransactionId = 0;
-            Status = PVCSToolKit.TrkGetNoteTransactionID(noteHandle, ref TransactionId);
-            if (Status != ServerHelper.TRK_E_NO_CURRENT_NOTE)
+            int Status = PVCSToolKit.TrkGetNoteTransactionID(noteHandle, ref TransactionId);
+            if ((int)ServerHelper._TrkError.TRK_E_NO_CURRENT_NOTE != Status)
+            {
                 this.Helper.CheckStatus("Unable to get Transaction ID.", Status);
+            }
             return TransactionId;
         }
 
@@ -137,8 +131,8 @@ namespace Tracker
         {
             int num2 = 0;
             string text1 = "Id";
-            int num3 = PVCSToolKit.TrkGetNumericFieldValue(recordHandle, ref text1, ref num2);
-            this.Helper.CheckStatus("Unable to retrieve field value.", num3);
+            int Status = PVCSToolKit.TrkGetNumericFieldValue(recordHandle, ref text1, ref num2);
+            this.Helper.CheckStatus("Unable to retrieve field value.", Status);
             return num2;
         }
 
@@ -152,9 +146,8 @@ namespace Tracker
         
         public int GetSCRRecordHandle(int scrId, [Optional] int recordType /* = 1 */)
         {
-            int Status;
             int RecordHandle = this.AllocateRecordHandle();
-            Status = PVCSToolKit.TrkGetSingleRecord(RecordHandle, scrId, recordType);
+            int Status = PVCSToolKit.TrkGetSingleRecord(RecordHandle, scrId, recordType);
             this.Helper.CheckStatus("Unable to retrieve SCR handle.", Status);
             return RecordHandle;
         }
@@ -162,19 +155,16 @@ namespace Tracker
         public int GetDescriptionLength(int recordHandle)
         {
             int Remainder = 0;
-            int Status;
-            Status = PVCSToolKit.TrkGetDescriptionDataLength(recordHandle, ref Remainder);
+            int Status = PVCSToolKit.TrkGetDescriptionDataLength(recordHandle, ref Remainder);
             this.Helper.CheckStatus("Unable to get description length.", Status);
             return Remainder;
         }
 
         public string GetDescriptionPart(ref int remainder, int recordHandle)
         {
-            string DescriptionPart;
-            int Status;
-            DescriptionPart = this.Helper.MakeBigEmptyString(255);
-            Status = PVCSToolKit.TrkGetDescriptionData(recordHandle, DescriptionPart.Length, ref DescriptionPart, ref remainder);
-            if ((ServerHelper.StatusCodes)Status != ServerHelper.StatusCodes.Success && (ServerHelper.StatusCodes)Status != ServerHelper.StatusCodes.DataTruncated)
+            string DescriptionPart = this.Helper.MakeBigEmptyString(ServerHelper.MAX_BUFFER_LENGTH);
+            int Status = PVCSToolKit.TrkGetDescriptionData(recordHandle, DescriptionPart.Length, ref DescriptionPart, ref remainder);
+            if (Status != (int)ServerHelper._TrkError.TRK_E_DATA_TRUNCATED)
             {
                 this.Helper.CheckStatus("Unable to retrieve part of the description.", Status);
             }
@@ -184,9 +174,8 @@ namespace Tracker
 
         public int GetFieldType(string fieldName)
         {
-            int Status;
             int FieldType = 0;
-            Status = PVCSToolKit.TrkGetFieldType(this.TrackerHandle, ref fieldName, 1, ref FieldType);
+            int Status = PVCSToolKit.TrkGetFieldType(this.TrackerHandle, ref fieldName, 1, ref FieldType);
             this.Helper.CheckStatus("Unable to retrieve field type: " + fieldName, Status);
             return FieldType;
         }
@@ -201,16 +190,16 @@ namespace Tracker
                 RecordHandle = this.GetSCRRecordHandle(scrId, 1);
 
                 int FieldType = this.GetFieldType(fieldName);
-                if (TRK_FIELD_TYPE_NUMBER == FieldType)
+                if ((int)ServerHelper._TrkFieldType.TRK_FIELD_TYPE_NUMBER == FieldType)
                 {
                     int IntegerValue = 0;
                     Status = PVCSToolKit.TrkGetNumericFieldValue(RecordHandle, ref fieldName, ref IntegerValue);
                     this.Helper.CheckStatus("Unable to retrieve field value.", Status);
                     return IntegerValue;
                 }
-                else // TRK_FIELD_TYPE_STRING or if other type, then convert to string
+                else // ServerHelper._TrkFieldType.TRK_FIELD_TYPE_STRING or if other type, then convert to string
                 {
-                    string StringValue = this.Helper.MakeBigEmptyString(255);
+                    string StringValue = this.Helper.MakeBigEmptyString(ServerHelper.MAX_BUFFER_LENGTH);
                     Status = PVCSToolKit.TrkGetStringFieldValue(RecordHandle, ref fieldName, StringValue.Length, ref StringValue);
                     this.Helper.CheckStatus("Unable to retrieve field value.", Status);
                     return this.Helper.CleanupString(StringValue);
@@ -234,20 +223,16 @@ namespace Tracker
         public bool GetNextNote(int noteHandle)
         {
             int Status = PVCSToolKit.TrkGetNextNote(noteHandle);
-            if ((Status != 0) && (Status != 9))
+            if ((int)ServerHelper._TrkError.TRK_END_OF_LIST != Status)
             {
                 this.Helper.CheckStatus("Unable to get next note.", Status);
             }
-            else if (Status == 9)
-            {
-                return false;
-            }
-            return true;
+            return !((int)ServerHelper._TrkError.TRK_END_OF_LIST == Status);
         }
         
         public string GetNoteTitle(int noteHandle)
         {
-            string NoteTitle = this.Helper.MakeBigEmptyString(255);
+            string NoteTitle = this.Helper.MakeBigEmptyString(ServerHelper.MAX_BUFFER_LENGTH);
             int Status = PVCSToolKit.TrkGetNoteTitle(noteHandle, NoteTitle.Length, ref    NoteTitle);
             this.Helper.CheckStatus("Unable to get note title.", Status);
             NoteTitle = this.Helper.CleanupString(NoteTitle);
@@ -256,7 +241,7 @@ namespace Tracker
         
         public string GetNoteAuthor(int noteHandle)
         {
-            string NoteText = this.Helper.MakeBigEmptyString(255);
+            string NoteText = this.Helper.MakeBigEmptyString(ServerHelper.MAX_BUFFER_LENGTH);
             int Status = PVCSToolKit.TrkGetNoteAuthor(noteHandle, NoteText.Length, ref NoteText);
             this.Helper.CheckStatus("Unable to get note author.", Status);
             NoteText = this.Helper.CleanupString(NoteText);
@@ -275,13 +260,12 @@ namespace Tracker
         public string GetNoteText(int noteHandle)
         {
             int Remainder = 1;
-            int Status;
             StringBuilder NoteTextBuilder = new StringBuilder();
             while (Remainder != 0)
             {
-                string NoteTextPart = this.Helper.MakeBigEmptyString(255);
-                Status = PVCSToolKit.TrkGetNoteData(noteHandle, NoteTextPart.Length, ref NoteTextPart, ref Remainder);
-                if ((Status != 0) && (Status != 6))
+                string NoteTextPart = this.Helper.MakeBigEmptyString(ServerHelper.MAX_BUFFER_LENGTH);
+                int Status = PVCSToolKit.TrkGetNoteData(noteHandle, NoteTextPart.Length, ref NoteTextPart, ref Remainder);
+                if ((int)ServerHelper._TrkError.TRK_E_DATA_TRUNCATED != Status)
                 {
                     this.Helper.CheckStatus("Unable to retrieve part of the note text.", Status);
                 }
@@ -292,55 +276,45 @@ namespace Tracker
 
         public void InitalizeRecordList(int recordHandle, string queryName)
         {
-            int Status;
             int TransactionId = 0;
             int NewTransactionId = 0;
-            Status = PVCSToolKit.TrkQueryInitRecordList(recordHandle, ref queryName, TransactionId, ref NewTransactionId);
+            int Status = PVCSToolKit.TrkQueryInitRecordList(recordHandle, ref queryName, TransactionId, ref NewTransactionId);
             this.Helper.CheckStatus("Unable to initalize query record list.", Status);
         }
 
         public bool GetNextScrId(int recordHandle)
         {
-            int Status;
-            Status = PVCSToolKit.TrkGetNextRecord(recordHandle);
-            if ((Status != 0) && (Status != 9))
+            int Status = PVCSToolKit.TrkGetNextRecord(recordHandle);
+            if ((int)ServerHelper._TrkError.TRK_E_END_OF_LIST != Status)
             {
                 this.Helper.CheckStatus("Unable to get next SCR handle.", Status);
             }
-            else if (Status == 9)
-            {
-                return false;
-            }
-            return true;
+            return !(((int)ServerHelper._TrkError.TRK_E_END_OF_LIST != Status));
         }
 
         public int GetFieldTransactionId(string fieldName, int recordHandle)
         {
-            int Status;
             int TransactionId = 0;
-            Status = PVCSToolKit.TrkGetFieldTransactionID(recordHandle, ref fieldName, ref TransactionId);
+            int Status = PVCSToolKit.TrkGetFieldTransactionID(recordHandle, ref fieldName, ref TransactionId);
             this.Helper.CheckStatus("Unable to get transaction id.", Status);
             return TransactionId;
         }
 
         public void SaveNumericFieldValue(string fieldName, int newValue, int recordHandle)
         {
-            int Status;
-            Status = PVCSToolKit.TrkSetNumericFieldValue(recordHandle, ref fieldName, newValue);
+            int Status = PVCSToolKit.TrkSetNumericFieldValue(recordHandle, ref fieldName, newValue);
             this.Helper.CheckStatus("Unable to save field value.", Status);
         }
 
         public void SaveStringFieldValue(string fieldName, string newValue, int recordHandle)
         {
-            int Status;
-            Status = PVCSToolKit.TrkSetStringFieldValue(recordHandle, ref fieldName, ref newValue);
+            int Status = PVCSToolKit.TrkSetStringFieldValue(recordHandle, ref fieldName, ref newValue);
             this.Helper.CheckStatus("Unable to save field value.", Status);
         }
 
         //private void GetFieldNamesExtracted()
         //{
-        //    int Status;
-        //    Status = TrackerServer.TrkInitFieldList(this.TrackerHandle, 1);
+        //    int Status = TrackerServer.TrkInitFieldList(this.TrackerHandle, 1);
         //    this.CheckStatus("Unable to initalize field list.", Status);
         //}
         #endregion

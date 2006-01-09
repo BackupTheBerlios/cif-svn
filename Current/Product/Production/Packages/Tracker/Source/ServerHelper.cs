@@ -10,106 +10,283 @@ namespace Tracker
 
         #region Enums
 
-        public enum StatusCodes
+        public enum _TrkError
         {
-            Success = TRK_SUCCESS,
-            VersionMismatch = TRK_E_VERSION_MISMATCH,
-            OutOfMemeory = TRK_E_OUT_OF_MEMORY,
-            BadHandle = TRK_E_BAD_HANDLE,
-            BadInputPointer = TRK_E_BAD_INPUT_POINTER,
-            BadInputValue = TRK_E_BAD_INPUT_VALUE,
-            DataTruncated = TRK_E_DATA_TRUNCATED,
-            NoMoreData = TRK_E_NO_MORE_DATA,
-            ListNotInitalized = TRK_E_LIST_NOT_INITIALIZED,
-            EndOfList = TRK_E_END_OF_LIST,
-            NotLoggedIn = TRK_E_NOT_LOGGED_IN,
-            ServerNotPrepared = TRK_E_SERVER_NOT_PREPARED,
-            BadDatabaseVersion = TRK_E_BAD_DATABASE_VERSION,
-            UnableToConnect = TRK_E_UNABLE_TO_CONNECT,
-            UnableToDisconnect = TRK_E_UNABLE_TO_DISCONNECT,
-            UnableToStartTimer = TRK_E_UNABLE_TO_START_TIMER,
-            NoDataSources = TRK_E_NO_DATA_SOURCES,
-            NoProjects = TRK_E_NO_PROJECTS,
-            FailedWrite = TRK_E_WRITE_FAILED,
-            PermissionDenied = TRK_E_PERMISSION_DENIED,
-            SetFieldDenied = TRK_E_SET_FIELD_DENIED,
-            ItemNotFound = TRK_E_ITEM_NOT_FOUND,
-            CannotAccessDatabase = TRK_E_CANNOT_ACCESS_DATABASE,
-            CannotAccessQuery = TRK_E_CANNOT_ACCESS_QUERY,
-            CannotAccesIntray = TRK_E_CANNOT_ACCESS_INTRAY,
-            CannotOpenFile = TRK_E_CANNOT_OPEN_FILE,
-            InvalidDBMSType = TRK_E_INVALID_DBMS_TYPE,
-            InvalidRecordType = TRK_E_INVALID_RECORD_TYPE,
-            InvalidField = TRK_E_INVALID_FIELD,
-            InvalidChoice = TRK_E_INVALID_CHOICE,
-            InvalidUser = TRK_E_INVALID_USER,
-            InvalidSubmitter = TRK_E_INVALID_SUBMITTER,
-            InvalidOwner = TRK_E_INVALID_OWNER,
-            InvalidDate = TRK_E_INVALID_DATE,
-            InvalidStoredQuery = TRK_E_INVALID_STORED_QUERY,
-            InvalidMode = TRK_E_INVALID_MODE,
-            InvalidMessage = TRK_E_INVALID_MESSAGE,
-            ValueOutOfRange = TRK_E_VALUE_OUT_OF_RANGE,
-            WRONGFIELDTYPE = TRK_E_WRONG_FIELD_TYPE,
-            NOCURRENTRECORD = TRK_E_NO_CURRENT_RECORD,
-            NOCURRENTNOTE = TRK_E_NO_CURRENT_NOTE,
-            NOCURRENTATTACHEDFILE = TRK_E_NO_CURRENT_ATTACHED_FILE,
-            NOCURRENTASSOCIATION = TRK_E_NO_CURRENT_ASSOCIATION,
-            NORECORDBEGIN = TRK_E_NO_RECORD_BEGIN,
-            NOMODULE = TRK_E_NO_MODULE,
-            USERCANCELLED = TRK_E_USER_CANCELLED,
-            SEMAPHORETIMEOUT = TRK_E_SEMAPHORE_TIMEOUT,
-            SEMAPHOREERROR = TRK_E_SEMAPHORE_ERROR,
-            INVALIDSERVERNAME = TRK_E_INVALID_SERVER_NAME,
-            NOTLICENSED = TRK_E_NOT_LICENSED,
-            NUMBEROFERRORCODES = TRK_NUMBER_OF_ERROR_CODES,
-            ERRORCODEBASE = TRKEXP_ERROR_CODE_BASE,
-            EXPORTWRONGVERSION = TRKEXP_E_EXPORT_WRONG_VERSION,
-            EXPORTSETNOTINIT = TRKEXP_E_EXPORTSET_NOT_INIT,
-            NOEXPSETNAME = TRKEXP_E_NO_EXPSET_NAME,
-            BADEXPSETNAME = TRKEXP_E_BAD_EXPSET_NAME,
-            EXPSETFAILCREATE = TRKEXP_E_EXPSET_FAIL_CREATE,
-            IMPORTMAPNOTINIT = TRKEXP_E_IMPORTMAP_NOT_INIT,
-            NOIMPMAPNAME = TRKEXP_E_NO_IMPMAP_NAME,
-            BADIMPMAPNAME = TRKEXP_E_BAD_IMPMAP_NAME,
-            IMPMAPFAILCREATE = TRKEXP_E_IMPMAP_FAIL_CREATE,
-            IMPVALIDATEFAIL = TRKEXP_E_IMP_VALIDATE_FAIL,
-            USERNOEXIST = TRKEXP_E_USER_NOEXIST,
-            USERADD = TRKEXP_E_USER_ADD,
-            IMPORTNOTINIT = TRKEXP_E_IMPORT_NOT_INIT,
-            BADEMBEDDEDQUOTEARG = TRKEXP_E_BAD_EMBEDDED_QUOTE_ARG,
-            BADDATEFORMATARG = TRKEXP_E_BAD_DATEFORMAT_ARG,
-            BADTIMEFORMATARG = TRKEXP_E_BAD_TIMEFORMAT_ARG,
-            BADCHOICEOPTIONARG = TRKEXP_E_BAD_CHOICE_OPTION_ARG,
-            BADUSEROPTIONARG = TRKEXP_E_BAD_USER_OPTION_ARG,
-            BADNUMBEROPTIONARG = TRKEXP_E_BAD_NUMBER_OPTION_ARG,
-            BADDATEOPTIONARG = TRKEXP_E_BAD_DATE_OPTION_ARG,
-            ALLNOTESSELECTED = TRKEXP_E_ALL_NOTES_SELECTED,
-            READEXPORTHDR = TRKEXP_E_READ_EXPORTHDR,
-            WRITEEXPORTHDR = TRKEXP_E_WRITE_EXPORTHDR,
-            READRECORDHDR = TRKEXP_E_READ_RECORDHDR,
-            WRITERECORDHDR = TRKEXP_E_WRITE_RECORDHDR,
-            WRITEFIELD = TRKEXP_E_WRITE_FIELD,
-            OPENFILE = TRKEXP_E_OPEN_FILE,
-            READFIELD = TRKEXP_E_READ_FIELD,
-            READFIELDWRONGTYPE = TRKEXP_E_READ_FIELD_WRONG_TYPE,
-            BADITEMTYPE = TRKEXP_E_BAD_ITEM_TYPE,
-            READFROMDB = TRKEXP_E_READ_FROM_DB,
-            WRITETODB = TRKEXP_E_WRITE_TO_DB,
-            BADDATE = TRKEXP_E_BAD_DATE,
-            BADCHOICE = TRKEXP_E_BAD_CHOICE,
-            BADNUMBER = TRKEXP_E_BAD_NUMBER,
-            OPENERRORLOG = TRKEXP_E_OPEN_ERRORLOG,
-            BADERRORLOGPATH = TRKEXP_E_BAD_ERRORLOG_PATH,
-            LOGGINGERROR = TRKEXP_E_LOGGING_ERROR,
-            IMPORTPERMISSION = TRKEXP_E_IMPORT_PERMISSION,
-            EXPORTPERMISSION = TRKEXP_E_EXPORT_PERMISSION,
-            NEWUSERPERMISSION = TRKEXP_E_NEW_USER_PERMISSION,
-            CLOSEERRORLOG = TRKEXP_E_CLOSE_ERRORLOG,
-            NEWCHOICESYSFLD = TRKEXP_E_NEWCHOICE_SYSFLD,
-            EXTRAFIELDS = TRKEXP_E_EXTRA_FIELDS,
-            EXPNUMBEROFERRORCODES = TRKEXP_NUMBER_OF_ERROR_CODES
-        }
+            TRK_SUCCESS = 0,
+            TRK_E_VERSION_MISMATCH = 1,
+            TRK_E_OUT_OF_MEMORY = 2,
+            TRK_E_BAD_HANDLE = 3,
+            TRK_E_BAD_INPUT_POINTER = 4,
+            TRK_E_BAD_INPUT_VALUE = 5,
+            TRK_E_DATA_TRUNCATED = 6,
+            TRK_E_NO_MORE_DATA = 7,
+            TRK_E_LIST_NOT_INITIALIZED = 8,
+            TRK_E_END_OF_LIST = 9,
+            TRK_E_NOT_LOGGED_IN = 10,
+            TRK_E_SERVER_NOT_PREPARED = 11,
+            TRK_E_BAD_DATABASE_VERSION = 12,
+            TRK_E_UNABLE_TO_CONNECT = 13,
+            TRK_E_UNABLE_TO_DISCONNECT = 14,
+            TRK_E_UNABLE_TO_START_TIMER = 15,
+            TRK_E_NO_DATA_SOURCES = 16,
+            TRK_E_NO_PROJECTS = 17,
+            TRK_E_WRITE_FAILED = 18,
+            TRK_E_PERMISSION_DENIED = 19,
+            TRK_E_SET_FIELD_DENIED = 20,
+            TRK_E_ITEM_NOT_FOUND = 21,
+            TRK_E_CANNOT_ACCESS_DATABASE = 22,
+            TRK_E_CANNOT_ACCESS_QUERY = 23,
+            TRK_E_CANNOT_ACCESS_INTRAY = 24,
+            TRK_E_CANNOT_OPEN_FILE = 25,
+            TRK_E_INVALID_DBMS_TYPE = 26,
+            TRK_E_INVALID_RECORD_TYPE = 27,
+            TRK_E_INVALID_FIELD = 28,
+            TRK_E_INVALID_CHOICE = 29,
+            TRK_E_INVALID_USER = 30,
+            TRK_E_INVALID_SUBMITTER = 31,
+            TRK_E_INVALID_OWNER = 32,
+            TRK_E_INVALID_DATE = 33,
+            TRK_E_INVALID_STORED_QUERY = 34,
+            TRK_E_INVALID_MODE = 35,
+            TRK_E_INVALID_MESSAGE = 36,
+            TRK_E_VALUE_OUT_OF_RANGE = 37,
+            TRK_E_WRONG_FIELD_TYPE = 38,
+            TRK_E_NO_CURRENT_RECORD = 39,
+            TRK_E_NO_CURRENT_NOTE = 40,
+            TRK_E_NO_CURRENT_ATTACHED_FILE = 41,
+            TRK_E_NO_CURRENT_ASSOCIATION = 42,
+            TRK_E_NO_RECORD_BEGIN = 43,
+            TRK_E_NO_MODULE = 44,
+            TRK_E_USER_CANCELLED = 45,
+            TRK_E_SEMAPHORE_TIMEOUT = 46,
+            TRK_E_SEMAPHORE_ERROR = 47,
+            TRK_E_INVALID_SERVER_NAME = 48,
+            TRK_E_NOT_LICENSED = 49,
+            TRK_E_RECORD_LOCKED = 50,
+            TRK_E_RECORD_NOT_LOCKED = 51,
+            TRK_E_UNMATCHED_PARENS = 52,
+            TRK_E_NO_CURRENT_TRANSITION = 53,
+            TRK_E_NO_CURRENT_RULE = 54,
+            TRK_E_UNKNOWN_RULE = 55,
+            TRK_E_RULE_ASSERTION_FAILED = 56,
+            TRK_E_ITEM_UNCHANGED = 57,
+            TRK_E_TRANSITION_NOT_ALLOWED = 58,
+            TRK_E_NO_CURRENT_STYLESHEET = 59,
+            TRK_E_NO_CURRENT_FORM = 60,
+            TRK_E_NO_CURRENT_VALUE = 61,
+            TRK_E_FORM_FIELD_ACCESS = 62,
+            TRK_E_INVALID_QBID_STRING = 63,
+            TRK_E_FORM_INVALID_FIELD = 64,
+            TRK_E_PARTIAL_SUCCESS = 65,
+            TRK_END_OF_LIST,
+            TRK_NUMBER_OF_ERROR_CODES = TRK_END_OF_LIST - 1,
+
+            //
+            // Export/Import error codes follow:
+            TRKEXP_ERROR_CODE_BASE = 10000,
+            TRKEXP_E_EXPORT_WRONG_VERSION = TRKEXP_ERROR_CODE_BASE,
+            TRKEXP_E_EXPORTSET_NOT_INIT = 10001,
+            TRKEXP_E_NO_EXPSET_NAME = 10002,
+            TRKEXP_E_BAD_EXPSET_NAME = 10003,
+            TRKEXP_E_EXPSET_FAIL_CREATE = 10004,
+            TRKEXP_E_IMPORTMAP_NOT_INIT = 10005,
+            TRKEXP_E_NO_IMPMAP_NAME = 10006,
+            TRKEXP_E_BAD_IMPMAP_NAME = 10007,
+            TRKEXP_E_IMPMAP_FAIL_CREATE = 10008,
+            TRKEXP_E_IMP_VALIDATE_FAIL = 10009,
+            TRKEXP_E_USER_NOEXIST = 10010,
+            TRKEXP_E_USER_ADD = 10011,
+            TRKEXP_E_IMPORT_NOT_INIT = 10012,
+            TRKEXP_E_BAD_EMBEDDED_QUOTE_ARG = 10013,
+            TRKEXP_E_BAD_DATEFORMAT_ARG = 10014,
+            TRKEXP_E_BAD_TIMEFORMAT_ARG = 10015,
+            TRKEXP_E_BAD_CHOICE_OPTION_ARG = 10016,
+            TRKEXP_E_BAD_USER_OPTION_ARG = 10017,
+            TRKEXP_E_BAD_NUMBER_OPTION_ARG = 10018,
+            TRKEXP_E_BAD_DATE_OPTION_ARG = 10019,
+            TRKEXP_E_ALL_NOTES_SELECTED = 10020,
+            TRKEXP_E_READ_EXPORTHDR = 10021,
+            TRKEXP_E_WRITE_EXPORTHDR = 10022,
+            TRKEXP_E_READ_RECORDHDR = 10023,
+            TRKEXP_E_WRITE_RECORDHDR = 10024,
+            TRKEXP_E_WRITE_FIELD = 10025,
+            TRKEXP_E_OPEN_FILE = 10026,
+            TRKEXP_E_READ_FIELD = 10027,
+            TRKEXP_E_READ_FIELD_WRONG_TYPE = 10028,
+            TRKEXP_E_BAD_ITEM_TYPE = 10029,
+            TRKEXP_E_READ_FROM_DB = 10030,
+            TRKEXP_E_WRITE_TO_DB = 10031,
+            TRKEXP_E_BAD_DATE = 10032,
+            TRKEXP_E_BAD_CHOICE = 10033,
+            TRKEXP_E_BAD_NUMBER = 10034,
+            TRKEXP_E_OPEN_ERRORLOG = 10035,
+            TRKEXP_E_BAD_ERRORLOG_PATH = 10036,
+            TRKEXP_E_LOGGING_ERROR = 10037,
+            TRKEXP_E_IMPORT_PERMISSION = 10038,
+            TRKEXP_E_EXPORT_PERMISSION = 10039,
+            TRKEXP_E_NEW_USER_PERMISSION = 10040,
+            TRKEXP_E_CLOSE_ERRORLOG = 10041,
+            TRKEXP_E_NEWCHOICE_SYSFLD = 10042,
+            TRKEXP_E_USER_ALREADY_IN_GROUP = 10043,
+            TRKEXP_E_BAD_STRING_OPTION_ARG = 10044,
+            TRKEXP_E_STRING_TOO_LONG = 10045,
+            TRKEXP_E_EXTRA_FIELDS = 10046,
+            TRKEXP_END_OF_LIST,
+            TRKEXP_NUMBER_OF_ERROR_CODES = TRKEXP_END_OF_LIST - 1,
+            //
+            // Internal error codes follow:
+            // (Clients of the DLL should never see these.)
+            TRK_INTERNAL_ERROR_CODE_BASE = 20000,
+            TRK_E_INTERNAL_ERROR = TRK_INTERNAL_ERROR_CODE_BASE
+        };
+
+        public enum _TrkDBMSLoginMode
+        {
+            TRK_USE_INI_FILE_DBMS_LOGIN = 0,
+            TRK_USE_SPECIFIED_DBMS_LOGIN = 1,
+            TRK_USE_DEFAULT_DBMS_LOGIN = 2
+        };
+
+        public enum _TrkAttributeId
+        {
+            TRK_TRKTOOL_ATTRIBUTE_ID_BASE = 0,
+            TRK_CANCEL_INTRAY = 1,
+            TRK_CANCEL_QUERY = 2,
+            TRK_CANCEL_IMPORT = 3,
+            TRK_NO_KEEP_ALIVE = 4,
+            TRK_NO_TIMER = 5,
+            TRK_NO_RECORD_CACHE = 6,
+            TRK_NO_RECORD_LOCK = 7,
+            TRK_CONCURRENT_DB_TIMEOUT = 8,
+            TRK_CACHE_PROJECT = 9,
+            TRK_IGNORE_STATE_TRANSITION_RULES = 10,
+            TRK_PROGRAM_TYPE = 11,
+            TRK_NO_XREFRESH = 12,
+            //
+            // (Clients of the DLL are free to use values at or
+            // above this threshhold.)
+            TRK_USER_ATTRIBUTE_ID_BASE = 1000
+        };
+
+        // Provide an enumeration of all Fields defined in the
+        // current project.
+
+        public enum _TrkFieldType
+        {
+            TRK_FIELD_TYPE_NONE = 0,
+            TRK_FIELD_TYPE_CHOICE = 1,
+            TRK_FIELD_TYPE_STRING = 2,
+            TRK_FIELD_TYPE_NUMBER = 3,
+            TRK_FIELD_TYPE_DATE = 4,
+            TRK_FIELD_TYPE_SUBMITTER = 5,
+            TRK_FIELD_TYPE_OWNER = 6,
+            TRK_FIELD_TYPE_USER = 7,
+            TRK_FIELD_TYPE_ELAPSED_TIME = 8,
+            TRK_FIELD_TYPE_STATE = 9
+        };
+
+        public enum _TrkFieldAccessMode
+        {
+            TRK_READ_ONLY = 0,
+            TRK_READ_WRITE = 2
+        };
+
+        public enum _TrkFileStorageMode
+        {
+            TRK_FILE_BINARY = 0,
+            TRK_FILE_ASCII = 1,
+            TRK_FILE_GUESS = 2
+        };
+
+        public enum _TrkExportFormat
+        {
+            TRK_EXPORT_FORMAT_SIMPLE = 0,
+            TRK_EXPORT_FORMAT_TRACKER = 1,
+            TRK_EXPORT_FORMAT_PDIFF = 2,
+            TRK_EXPORT_FORMAT_XML = 3
+        };
+
+        public enum _TrkEmbeddedQuote
+        {
+            TRK_DOUBLE_QUOTE = 1,
+            TRK_BACKSLASH_QUOTE = 2
+        };
+
+        public enum _TrkDateFormat
+        {
+            TRK_CONTROL_PANEL_DATE = 1,
+            TRK_DBASE_FORMAT = 2
+        };
+
+        public enum _TrkTimeFormat
+        {
+            TRK_CONTROL_PANEL_TIME = 1,
+            TRK_24HOUR = 2,
+            TRK_24HOUR_LEADING_ZERO = 3
+        };
+
+        public enum _TrkDateOption
+        {
+            TRK_FAIL_DATE = 0,
+            TRK_SET_CURRENT = 1,
+            TRK_SET_TO_SPECIFIED = 2
+        };
+
+        public enum _TrkChoiceOption
+        {
+            TRK_FAIL_CHOICE = 0,
+            TRK_DEFAULT_CHOICE = 1,
+            TRK_NEW_CHOICE = 2
+        };
+
+        public enum _TrkUserOption
+        {
+            TRK_FAIL_USER = 0,
+            TRK_ADD_USER = 1,
+            TRK_ADD_USER_WITH_GROUP = 2,
+            TRK_DEFAULT_USER = 3
+        };
+
+        public enum _TrkNumberOption
+        {
+            TRK_FAIL_NUMBER = 0,
+            TRK_DEFAULT_NUMBER = 1
+        };
+
+        public enum _TrkStringOption
+        {
+            TRK_FAIL_STRING = 0,
+            TRK_TRUNCATE_STRING = 1,
+            TRK_EMPTY_STRING = 2
+        };
+
+        public enum _TrkCallbackMessage
+        {
+            TRK_MSG_API_TRACE = 1,
+            TRK_MSG_API_EXIT = 2,
+            TRK_MSG_ODBC_ERROR = 3,
+            TRK_MSG_INVALID_FIELD_VALUE = 4,
+            TRK_MSG_DATA_TRUNCATED = 5,
+            TRK_MSG_FORCE_LOGOUT = 6,
+            TRK_MSG_IMPORT_ERROR = 7,
+            TRK_MSG_INTRAY_PROGRESS = 8,
+            TRK_MSG_QUERY_PROGRESS = 9,
+            TRK_MSG_IMPORT_PROGRESS = 10,
+            TRK_MSG_CONSTRAINT_VIOLATION = 11,
+            TRK_LAST_CALLBACK_MSG
+        };	// (not a message; marks end of list)
+
+        public enum _TrkCallbackReturnCode
+        {
+            TRK_MSG_NOT_HANDLED = 0,
+            TRK_MSG_HANDLED = 1
+        };
+
+        public enum _TrkLinkOrder
+        {
+            TRK_LIST_ADD_HEAD = 0,
+            TRK_LIST_ADD_TAIL = 1
+        };
 
         public enum StorageMode
         {
@@ -121,165 +298,11 @@ namespace Tracker
 
         #region Const
 
-        public const double DateModifier = 25568.791666666668;
-        public const int MaxBufferLength = 0xff;
-        public const int TRK_24HOUR = 2;
-        public const int TRK_24HOUR_LEADING_ZERO = 3;
-        public const int TRK_ADD_USER = 1;
-        public const int TRK_BACKSLASH_QUOTE = 2;
-        public const int TRK_CANCEL_IMPORT = 3;
-        public const int TRK_CANCEL_INTRAY = 1;
-        public const int TRK_CANCEL_QUERY = 2;
-        public const int TRK_CONTROL_PANEL_DATE = 1;
-        public const int TRK_CONTROL_PANEL_TIME = 1;
-        public const int TRK_DBASE_FORMAT = 2;
-        public const int TRK_DEFAULT_CHOICE = 1;
-        public const int TRK_DEFAULT_NUMBER = 1;
-        public const int TRK_DOUBLE_QUOTE = 1;
-        public const int TRK_E_BAD_DATABASE_VERSION = 12;
-        public const int TRK_E_BAD_HANDLE = 3;
-        public const int TRK_E_BAD_INPUT_POINTER = 4;
-        public const int TRK_E_BAD_INPUT_VALUE = 5;
-        public const int TRK_E_CANNOT_ACCESS_DATABASE = 0x16;
-        public const int TRK_E_CANNOT_ACCESS_INTRAY = 0x18;
-        public const int TRK_E_CANNOT_ACCESS_QUERY = 0x17;
-        public const int TRK_E_CANNOT_OPEN_FILE = 0x19;
-        public const int TRK_E_DATA_TRUNCATED = 6;
-        public const int TRK_E_END_OF_LIST = 9;
-        public const int TRK_E_INTERNAL_ERROR = 0x4e20;
-        public const int TRK_E_INVALID_CHOICE = 0x1d;
-        public const int TRK_E_INVALID_DATE = 0x21;
-        public const int TRK_E_INVALID_DBMS_TYPE = 0x1a;
-        public const int TRK_E_INVALID_FIELD = 0x1c;
-        public const int TRK_E_INVALID_MESSAGE = 0x24;
-        public const int TRK_E_INVALID_MODE = 0x23;
-        public const int TRK_E_INVALID_OWNER = 0x20;
-        public const int TRK_E_INVALID_RECORD_TYPE = 0x1b;
-        public const int TRK_E_INVALID_SERVER_NAME = 0x30;
-        public const int TRK_E_INVALID_STORED_QUERY = 0x22;
-        public const int TRK_E_INVALID_SUBMITTER = 0x1f;
-        public const int TRK_E_INVALID_USER = 30;
-        public const int TRK_E_ITEM_NOT_FOUND = 0x15;
-        public const int TRK_E_LIST_NOT_INITIALIZED = 8;
-        public const int TRK_E_NO_CURRENT_ASSOCIATION = 0x2a;
-        public const int TRK_E_NO_CURRENT_ATTACHED_FILE = 0x29;
-        public const int TRK_E_NO_CURRENT_NOTE = 40;
-        public const int TRK_E_NO_CURRENT_RECORD = 0x27;
-        public const int TRK_E_NO_DATA_SOURCES = 0x10;
-        public const int TRK_E_NO_MODULE = 0x2c;
-        public const int TRK_E_NO_MORE_DATA = 7;
-        public const int TRK_E_NO_PROJECTS = 0x11;
-        public const int TRK_E_NO_RECORD_BEGIN = 0x2b;
-        public const int TRK_E_NOT_LICENSED = 0x31;
-        public const int TRK_E_NOT_LOGGED_IN = 10;
-        public const int TRK_E_OUT_OF_MEMORY = 2;
-        public const int TRK_E_PERMISSION_DENIED = 0x13;
-        public const int TRK_E_SEMAPHORE_ERROR = 0x2f;
-        public const int TRK_E_SEMAPHORE_TIMEOUT = 0x2e;
-        public const int TRK_E_SERVER_NOT_PREPARED = 11;
-        public const int TRK_E_SET_FIELD_DENIED = 20;
-        public const int TRK_E_UNABLE_TO_CONNECT = 13;
-        public const int TRK_E_UNABLE_TO_DISCONNECT = 14;
-        public const int TRK_E_UNABLE_TO_START_TIMER = 15;
-        public const int TRK_E_USER_CANCELLED = 0x2d;
-        public const int TRK_E_VALUE_OUT_OF_RANGE = 0x25;
-        public const int TRK_E_VERSION_MISMATCH = 1;
-        public const int TRK_E_WRITE_FAILED = 0x12;
-        public const int TRK_E_WRONG_FIELD_TYPE = 0x26;
-        public const int TRK_FAIL_CHOICE = 0;
-        public const int TRK_FAIL_DATE = 0;
-        public const int TRK_FAIL_NUMBER = 0;
-        public const int TRK_FAIL_USER = 0;
-        public const int TRK_FIELD_TYPE_CHOICE = 1;
-        public const int TRK_FIELD_TYPE_DATE = 4;
-        public const int TRK_FIELD_TYPE_ELAPSED_TIME = 8;
-        public const int TRK_FIELD_TYPE_NONE = 0;
-        public const int TRK_FIELD_TYPE_NUMBER = 3;
-        public const int TRK_FIELD_TYPE_OWNER = 6;
-        public const int TRK_FIELD_TYPE_STRING = 2;
-        public const int TRK_FIELD_TYPE_SUBMITTER = 5;
-        public const int TRK_FIELD_TYPE_USER = 7;
-        public const int TRK_FILE_ASCII = 1;
-        public const int TRK_FILE_BINARY = 0;
-        public const int TRK_INTERNAL_ERROR_CODE_BASE = 0x4e20;
-        public const int TRK_LAST_CALLBACK_MSG = 11;
-        public const int TRK_LIST_ADD_HEAD = 0;
-        public const int TRK_LIST_ADD_TAIL = 1;
-        public const int TRK_MAX_STRING = 0xff;
-        public const int TRK_MSG_API_EXIT = 2;
-        public const int TRK_MSG_API_TRACE = 1;
-        public const int TRK_MSG_DATA_TRUNCATED = 5;
-        public const int TRK_MSG_FORCE_LOGOUT = 6;
-        public const int TRK_MSG_HANDLED = 1;
-        public const int TRK_MSG_IMPORT_ERROR = 7;
-        public const int TRK_MSG_IMPORT_PROGRESS = 10;
-        public const int TRK_MSG_INTRAY_PROGRESS = 8;
-        public const int TRK_MSG_INVALID_FIELD_VALUE = 4;
-        public const int TRK_MSG_NOT_HANDLED = 0;
-        public const int TRK_MSG_ODBC_ERROR = 3;
-        public const int TRK_MSG_QUERY_PROGRESS = 9;
-        public const int TRK_NEW_CHOICE = 2;
-        public const int TRK_NO_KEEP_ALIVE = 4;
-        public const int TRK_NO_TIMER = 5;
-        public const int TRK_NUMBER_OF_ERROR_CODES = 0x31;
-        public const int TRK_READ_ONLY = 0;
-        public const int TRK_READ_WRITE = 2;
-        public const long TRK_RECORD_TYPE = 1;
-        public const int TRK_SET_CURRENT = 1;
-        public const int TRK_SET_TO_SPECIFIED = 2;
-        public const int TRK_SUCCESS = 0;
-        public const int TRK_TRKTOOL_ATTRIBUTE_ID_BASE = 0;
-        public const int TRK_USE_DEFAULT_DBMS_LOGIN = 2;
-        public const int TRK_USE_INI_FILE_DBMS_LOGIN = 0;
-        public const int TRK_USE_SPECIFIED_DBMS_LOGIN = 1;
-        public const int TRK_USER_ATTRIBUTE_ID_BASE = 0x3e8;
-        public const int TRK_VERSION_ID = 0x7a121;
-        public const int TRKEXP_E_ALL_NOTES_SELECTED = 0x2724;
-        public const int TRKEXP_E_BAD_CHOICE = 0x2731;
-        public const int TRKEXP_E_BAD_CHOICE_OPTION_ARG = 0x2720;
-        public const int TRKEXP_E_BAD_DATE = 0x2730;
-        public const int TRKEXP_E_BAD_DATE_OPTION_ARG = 0x2723;
-        public const int TRKEXP_E_BAD_DATEFORMAT_ARG = 0x271e;
-        public const int TRKEXP_E_BAD_EMBEDDED_QUOTE_ARG = 0x271d;
-        public const int TRKEXP_E_BAD_ERRORLOG_PATH = 0x2734;
-        public const int TRKEXP_E_BAD_EXPSET_NAME = 0x2713;
-        public const int TRKEXP_E_BAD_IMPMAP_NAME = 0x2717;
-        public const int TRKEXP_E_BAD_ITEM_TYPE = 0x272d;
-        public const int TRKEXP_E_BAD_NUMBER = 0x2732;
-        public const int TRKEXP_E_BAD_NUMBER_OPTION_ARG = 0x2722;
-        public const int TRKEXP_E_BAD_TIMEFORMAT_ARG = 0x271f;
-        public const int TRKEXP_E_BAD_USER_OPTION_ARG = 0x2721;
-        public const int TRKEXP_E_CLOSE_ERRORLOG = 0x2739;
-        public const int TRKEXP_E_EXPORT_PERMISSION = 0x2737;
-        public const int TRKEXP_E_EXPORT_WRONG_VERSION = 0x2710;
-        public const int TRKEXP_E_EXPORTSET_NOT_INIT = 0x2711;
-        public const int TRKEXP_E_EXPSET_FAIL_CREATE = 0x2714;
-        public const int TRKEXP_E_EXTRA_FIELDS = 0x273b;
-        public const int TRKEXP_E_IMP_VALIDATE_FAIL = 0x2719;
-        public const int TRKEXP_E_IMPMAP_FAIL_CREATE = 0x2718;
-        public const int TRKEXP_E_IMPORT_NOT_INIT = 0x271c;
-        public const int TRKEXP_E_IMPORT_PERMISSION = 0x2736;
-        public const int TRKEXP_E_IMPORTMAP_NOT_INIT = 0x2715;
-        public const int TRKEXP_E_LOGGING_ERROR = 0x2735;
-        public const int TRKEXP_E_NEW_USER_PERMISSION = 0x2738;
-        public const int TRKEXP_E_NEWCHOICE_SYSFLD = 0x273a;
-        public const int TRKEXP_E_NO_EXPSET_NAME = 0x2712;
-        public const int TRKEXP_E_NO_IMPMAP_NAME = 0x2716;
-        public const int TRKEXP_E_OPEN_ERRORLOG = 0x2733;
-        public const int TRKEXP_E_OPEN_FILE = 0x272a;
-        public const int TRKEXP_E_READ_EXPORTHDR = 0x2725;
-        public const int TRKEXP_E_READ_FIELD = 0x272b;
-        public const int TRKEXP_E_READ_FIELD_WRONG_TYPE = 0x272c;
-        public const int TRKEXP_E_READ_FROM_DB = 0x272e;
-        public const int TRKEXP_E_READ_RECORDHDR = 0x2727;
-        public const int TRKEXP_E_USER_ADD = 0x271b;
-        public const int TRKEXP_E_USER_NOEXIST = 0x271a;
-        public const int TRKEXP_E_WRITE_EXPORTHDR = 0x2726;
-        public const int TRKEXP_E_WRITE_FIELD = 0x2729;
-        public const int TRKEXP_E_WRITE_RECORDHDR = 0x2728;
-        public const int TRKEXP_E_WRITE_TO_DB = 0x272f;
-        public const int TRKEXP_ERROR_CODE_BASE = 0x2710;
-        public const int TRKEXP_NUMBER_OF_ERROR_CODES = 0x273b;
+        public const int TRK_MAX_STRING = 255;
+        public const int TRK_VERSION_ID = 500001;
+
+        public const double DATE_MODIFIER = 25568.791666666668;
+        public const int MAX_BUFFER_LENGTH = 255;
 
         #endregion
 
@@ -290,10 +313,13 @@ namespace Tracker
 
         public void CheckStatus(string exceptionMessage, int status)
         {
-            if ((StatusCodes)status == StatusCodes.Success)
-                return;
 
-            throw new InvalidOperationException(string.Format("{0}: Code = {1}", exceptionMessage, Enum.GetName(typeof(StatusCodes), status)));
+            if ((int)_TrkError.TRK_SUCCESS == status)
+            {
+                return;
+            }
+
+            throw new InvalidOperationException(string.Format("{0}: Code = {1}", exceptionMessage, Enum.GetName(typeof(_TrkError), status)));
         }
 
         public string CleanupString(string dirtyString)
@@ -304,14 +330,12 @@ namespace Tracker
 
         public string ConvertDateToString(int dateTime)
         {
-            return System.DateTime.FromOADate((((((double)dateTime) / 60) / 60) / 24) + DateModifier).ToString();
+            return System.DateTime.FromOADate((((((double)dateTime) / 60) / 60) / 24) + DATE_MODIFIER).ToString();
         }
 
         public string MakeBigEmptyString(int size)
         {
             return new string('\0', size);
         }
-
     }
-
 }

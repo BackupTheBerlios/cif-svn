@@ -250,20 +250,17 @@ namespace Tracker
 
         public string GetDescription(int scrId)
         {
-            int Remainder;
             int RecordHandle = 0;
-            StringBuilder Builder;
-            string DescriptionPart;
             try
             {
-                Builder = new StringBuilder();
+                StringBuilder Builder = new StringBuilder();
                 RecordHandle = this.ToolKit.GetSCRRecordHandle(scrId, 1);
 
-                Remainder = this.ToolKit.GetDescriptionLength(RecordHandle);
+                int Remainder = this.ToolKit.GetDescriptionLength(RecordHandle);
 
                 while (Remainder != 0)
                 {
-                    DescriptionPart = this.ToolKit.GetDescriptionPart(ref Remainder, RecordHandle);
+                    string DescriptionPart = this.ToolKit.GetDescriptionPart(ref Remainder, RecordHandle);
                     Builder.Append(DescriptionPart);
                 }
                 return Builder.ToString();
@@ -271,7 +268,9 @@ namespace Tracker
             finally
             {
                 if (RecordHandle != 0)
+                {
                     this.ToolKit.ReleaseRecordHandle(RecordHandle);
+                }
             }
         }
 
@@ -318,7 +317,6 @@ namespace Tracker
         public StringCollection GetNoteList(int scrId)
         {
             int NoteHandle = 0;
-            StringCollection NoteList = new StringCollection();
             int RecordHandle = 0;
 
             try
@@ -328,17 +326,13 @@ namespace Tracker
 
                 this.ToolKit.InitalizeNoteList(NoteHandle);
 
+                StringCollection NoteList = new StringCollection();
                 while (this.ToolKit.GetNextNote(NoteHandle))
                 {
-                    string NoteCreationTime;
-                    string NoteTitle;
-                    string NoteAuthor;
-                    string NoteText;
-
-                    NoteTitle = this.ToolKit.GetNoteTitle(NoteHandle);
-                    NoteAuthor = this.ToolKit.GetNoteAuthor(NoteHandle);
-                    NoteCreationTime = this.ToolKit.GetNoteCreateTime(NoteHandle);
-                    NoteText = this.ToolKit.GetNoteText(NoteHandle);
+                    string NoteTitle = this.ToolKit.GetNoteTitle(NoteHandle);
+                    string NoteAuthor = this.ToolKit.GetNoteAuthor(NoteHandle);
+                    string NoteCreationTime = this.ToolKit.GetNoteCreateTime(NoteHandle);
+                    string NoteText = this.ToolKit.GetNoteText(NoteHandle);
 
                     NoteList.Add(string.Format("{0} ({1}) {2}, {3}", NoteTitle, NoteAuthor, NoteCreationTime, NoteText));
                 }
@@ -347,16 +341,19 @@ namespace Tracker
             finally
             {
                 if (RecordHandle != 0)
+                {
                     this.ToolKit.ReleaseRecordHandle(RecordHandle);
+                }
                 if (NoteHandle != 0)
+                {
                     this.ToolKit.ReleaseNoteHandle(NoteHandle);
+                }
             }
         }
 
         public int[] GetSCRIDListFromQuery(string queryName)
         {
             int RecordHandle = 0;
-            ArrayList IdList = new ArrayList();
 
             try
             {
@@ -364,6 +361,7 @@ namespace Tracker
 
                 this.ToolKit.InitalizeRecordList(RecordHandle ,queryName);
 
+                ArrayList IdList = new ArrayList();
                 while (this.ToolKit.GetNextScrId(RecordHandle))
                 {
                     IdList.Add(this.ToolKit.GetSCRID(RecordHandle));
@@ -377,58 +375,58 @@ namespace Tracker
             finally
             {
                 if (RecordHandle != 0)
+                {
                     this.ToolKit.ReleaseRecordHandle(RecordHandle);
+                }
             }
         }
 
         public void SaveNumericFieldValue(int scrId, string fieldName, int newValue)
         {
             int RecordHandle = 0;
-            int FieldType = 0;
-            int TransactionId = 0;
             try
             {
                 fieldName = fieldName.Trim();
 
                 RecordHandle = this.ToolKit.GetSCRRecordHandle(scrId, 1);
-                FieldType = this.ToolKit.GetFieldType(fieldName);
+                int FieldType = this.ToolKit.GetFieldType(fieldName);
                 this.ToolKit.BeginUpdate(RecordHandle);
 
-               TransactionId = this.ToolKit.GetFieldTransactionId(fieldName, RecordHandle);
+                int TransactionId = this.ToolKit.GetFieldTransactionId(fieldName, RecordHandle);
 
-               if (FieldType == 3)
-               {
-                   this.ToolKit.SaveNumericFieldValue(fieldName, newValue, RecordHandle);
-               }
-               else
-               {
-                   throw new InvalidOperationException("The field value is a string not a numeral.");
-               }
+                if ((int)ServerHelper._TrkFieldType.TRK_FIELD_TYPE_NUMBER == FieldType)
+                {
+                    this.ToolKit.SaveNumericFieldValue(fieldName, newValue, RecordHandle);
+                }
+                else
+                {
+                    throw new InvalidOperationException("The field value is a string not a numeral.");
+                }
                 this.ToolKit.CommitRecord(TransactionId, RecordHandle);
             }
             finally
             {
                 if (RecordHandle != 0)
+                {
                     this.ToolKit.ReleaseRecordHandle(RecordHandle);
+                }
             }
         }
 
         public void SaveStringFieldValue(int scrId, string fieldName, string newValue)
         {
             int RecordHandle = 0;
-            int FieldType = 0;
-            int TransactionId = 0;
             try
             {
                 fieldName = fieldName.Trim();
 
                 RecordHandle = this.ToolKit.GetSCRRecordHandle(scrId, 1);
-                FieldType = this.ToolKit.GetFieldType(fieldName);
+                int FieldType = this.ToolKit.GetFieldType(fieldName);
                 this.ToolKit.BeginUpdate(RecordHandle);
 
-                TransactionId = this.ToolKit.GetFieldTransactionId(fieldName, RecordHandle);
+                int TransactionId = this.ToolKit.GetFieldTransactionId(fieldName, RecordHandle);
 
-                if (FieldType == 3)
+                if ((int)ServerHelper._TrkFieldType.TRK_FIELD_TYPE_NUMBER == FieldType)
                 {
                     throw new InvalidOperationException("The field value is a string not a numeral.");
                 }
@@ -441,12 +439,13 @@ namespace Tracker
             finally
             {
                 if (RecordHandle != 0)
+                {
                     this.ToolKit.ReleaseRecordHandle(RecordHandle);
+                }
             }
         }
 
 #endregion
 
     }
-
 }
