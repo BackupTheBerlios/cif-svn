@@ -26,10 +26,10 @@
 
   <target name="InstallShield.BuildMsi">
     <buildinstallshieldmsi
-		    ismfile="${Private.InstallDirectory}\${ProjectName}\${InstallShield.IsmFile}"
-		    buildguid="${InstallShield.Guid}"
-		    mergemodulesearchpath="${InstallShield.Msi.MergeModuleSearchPaths}"
-		    createsetupexe="${InstallShield.Msi.CreateSetupExe}"
+		    p="${Private.InstallDirectory}\${ProjectName}\${InstallShield.IsmFile}"
+		    standalonebuildexe="${InstallShield.Guid}"
+		    o="${InstallShield.Msi.MergeModuleSearchPaths}"
+		    e="${InstallShield.Msi.CreateSetupExe}"
 	  />
   </target>
 
@@ -37,16 +37,16 @@
     <if propertyexists="InstallShield.BuildConfigurations">
       <foreach item="String" in="${InstallShield.BuildConfigurations}" delim="," property="BuildConfig">
         <buildinstallscript
-			    ismfile="${Private.InstallDirectory}\${ProjectName}\${InstallShield.IsmFile}"
-			    buildguid="${InstallShield.Guid}"
-          release="${BuildConfig}"
+			    p="${Private.InstallDirectory}\${ProjectName}\${InstallShield.IsmFile}"
+			    standalonebuildexe="${InstallShield.Guid}"
+          r="${BuildConfig}"
 			  />
       </foreach>
     </if>
     <ifnot propertyexists="InstallShield.BuildConfigurations">
       <buildinstallscript
-			    ismfile="${Private.InstallDirectory}\${ProjectName}\${InstallShield.IsmFile}"
-			    buildguid="${InstallShield.Guid}"
+			    p="${Private.InstallDirectory}\${ProjectName}\${InstallShield.IsmFile}"
+			    standalonebuildexe="${InstallShield.Guid}"
   	    />
     </ifnot>
   </target>
