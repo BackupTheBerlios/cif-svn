@@ -15,7 +15,7 @@ namespace Test.Tracker
         public void tCheckStatus()
         {
             ServerHelper Helper = new ServerHelper();
-            Helper.CheckStatus("This is a test of the emergancy broadcasting system!", 40);
+            Helper.CheckStatus("This is a test of the emergency broadcasting system!", 40);
         }
     }
 }
