@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="VSS.Installer">
 
-  <property name="SourceControl.TargetFile" value=".\Packages\VisualSourceSafe\VSS.Target.xml"/>
+  <property name="SourceControl.TargetFile" value=".\Packages\VisualSourceSafe\Build\VSS.Target.xml"/>
 
   <largeproperty name="SourceControl.MainBuildBlock">
     <value>
