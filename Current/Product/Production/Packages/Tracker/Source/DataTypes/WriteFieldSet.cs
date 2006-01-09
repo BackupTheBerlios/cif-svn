@@ -8,7 +8,7 @@ using NAnt.Core;
 using NAnt.Core.Attributes;
 
 namespace Tracker.Tasks
- {
+{
      
     [Serializable, ElementName("writefieldset")]
     public class WriteFieldSet : DataTypeBase
@@ -37,4 +37,4 @@ namespace Tracker.Tasks
         // Fields
         private WriteField[] _Fields;
     }
-     }
+}

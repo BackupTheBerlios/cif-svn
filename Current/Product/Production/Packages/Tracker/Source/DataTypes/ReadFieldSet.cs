@@ -8,7 +8,7 @@ using NAnt.Core;
 using NAnt.Core.Attributes;
 
 namespace Tracker.Tasks
- {
+{
      
     [Serializable, ElementName("readfieldset")]
     public class ReadFieldSet : DataTypeBase
@@ -67,4 +67,4 @@ namespace Tracker.Tasks
         private ReadField[] _Fields;
         private bool _LastNote;
     }
-     }
+}

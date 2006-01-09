@@ -8,7 +8,7 @@ using NAnt.Core;
 using NAnt.Core.Attributes;
 
 namespace Tracker.Tasks
- {
+{
      
     public class WriteField : Element
     {
@@ -60,4 +60,4 @@ namespace Tracker.Tasks
         private string _FieldName;
         private string _FieldValue;
     }
-     }
+}

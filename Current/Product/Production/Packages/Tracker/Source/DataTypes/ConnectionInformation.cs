@@ -8,8 +8,8 @@ using NAnt.Core;
 using NAnt.Core.Attributes;
 
 namespace Tracker.Tasks
- {
-     
+{
+
     [Serializable, ElementName("connectioninformation")]
     public class ConnectionInformation : DataTypeBase
     {
@@ -150,4 +150,4 @@ namespace Tracker.Tasks
         private string _UserName;
         private string _UserPWD;
     }
-     }
+}

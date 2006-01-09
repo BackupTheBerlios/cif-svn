@@ -7,7 +7,7 @@ using System.Xml;
 using NAnt.Core;
 using NAnt.Core.Attributes;
 namespace Tracker.Tasks
- {
+{
      
     public class ReadField : Element
     {
@@ -49,4 +49,4 @@ namespace Tracker.Tasks
         // Fields
         private string _FieldName;
     }
-     }
+}
