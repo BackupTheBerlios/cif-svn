@@ -8,7 +8,7 @@ using NAnt.Core;
 using NAnt.Core.Attributes;
 
 namespace Tracker.Tasks
- {
+{
      
     [TaskName("trackeraddnote")]
     public class TrackerAddNote : BaseTrackerTask
@@ -99,4 +99,4 @@ namespace Tracker.Tasks
         private string _Text;
         private string _Title;
     }
-     }
+}

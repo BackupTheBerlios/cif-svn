@@ -79,7 +79,7 @@ namespace Tracker.Tasks
         }
 
         #endregion
-     
+
 #region State Control
         protected void Login()
         {

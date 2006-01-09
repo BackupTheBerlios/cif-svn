@@ -9,7 +9,7 @@ using NAnt.Core;
 using NAnt.Core.Attributes;
 
 namespace Tracker.Tasks
- {
+{
      
     [TaskName("trackerquery")]
     public class TrackerQuery : BaseTrackerTask

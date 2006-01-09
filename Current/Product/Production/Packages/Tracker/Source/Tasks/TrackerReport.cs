@@ -9,7 +9,7 @@ using NAnt.Core;
 using NAnt.Core.Attributes;
 
 namespace Tracker.Tasks
- {
+{
      
     [TaskName("trackerreport")]
     public class TrackerReport : BaseTrackerTask
@@ -213,4 +213,4 @@ namespace Tracker.Tasks
         private string _ReportFile;
         private ReadFieldSet _TrackerFields;
     }
-     }
+}

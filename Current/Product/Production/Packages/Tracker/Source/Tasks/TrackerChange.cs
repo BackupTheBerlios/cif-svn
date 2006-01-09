@@ -8,7 +8,7 @@ using NAnt.Core;
 using NAnt.Core.Attributes;
 
 namespace Tracker.Tasks
- {
+{
      
     [TaskName("trackerchange")]
     public class TrackerChange : BaseTrackerTask
@@ -91,4 +91,4 @@ namespace Tracker.Tasks
         private int _Id;
         private WriteFieldSet _TrackerFields;
     }
-     }
+}
