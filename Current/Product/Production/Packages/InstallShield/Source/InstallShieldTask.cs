@@ -8,7 +8,7 @@ using NAnt.Core;
 using NAnt.Core.Attributes;
 using NAnt.Core.Tasks;
 
-namespace Nant.Contrib.BuildInstallShield.Tasks
+namespace InstallShield.Tasks
 {
 	public abstract class BuildInstallShieldBase : ExternalProgramBase
 	{
@@ -117,29 +117,29 @@ namespace Nant.Contrib.BuildInstallShield.Tasks
 			}
 
 			string sCmdLine;
-			sCmdLine = "-p " + "\"" + ismfile + "\"";
+			sCmdLine = "-p " + "\"" + p + "\"";
 
-			if (release != null)
+			if (r != null)
 			{
-				sCmdLine += " -r " + "\"" + release + "\"";
+				sCmdLine += " -r " + "\"" + r + "\"";
 			}
 
-			if (buildlocation != null)
+			if (b != null)
 			{
-				sCmdLine += " -b " + "\"" + buildlocation + "\"";
+				sCmdLine += " -b " + "\"" + b + "\"";
 			}
 
-			if (buildsilently)
+			if (s)
 			{
 				sCmdLine += " -s";
 			}
 
-			if (warningaserror)
+			if (w)
 			{
 				sCmdLine += " -w";
 			}
 
-			if (stoponerror)
+			if (x)
 			{
 				sCmdLine += " -x";
 			}
@@ -389,17 +389,17 @@ namespace Nant.Contrib.BuildInstallShield.Tasks
 
 				if (null != a)
 				{
-					sCmdLine += " -a " + "\"" + productconfiguration + "\"";
+					sCmdLine += " -a " + "\"" + a + "\"";
 				}
 
 				if (null != o)
 				{
-					sCmdLine += " -o " + "\"" + mergemodulesearchpath + "\"";
+					sCmdLine += " -o " + "\"" + o + "\"";
 				}
 
                 if (null != c)
 				{
-					sCmdLine += " -c " + "\"" + releaseconfiguration + "\"";
+					sCmdLine += " -c " + "\"" + c + "\"";
 				}
 
 				if (h)
@@ -409,17 +409,17 @@ namespace Nant.Contrib.BuildInstallShield.Tasks
 
                 if (null != t)
 				{
-					sCmdLine += " -t " + "\"" + dotnetframeworkpath + "\"";
+					sCmdLine += " -t " + "\"" + t + "\"";
 				}
 
                 if (null != g)
 				{
-					sCmdLine += " -g " + "\"" + minimumtargetmsiversion + "\"";
+					sCmdLine += " -g " + "\"" + g + "\"";
 				}
 
                 if (null != j)
 				{
-					sCmdLine += " -j " + "\"" + minimumtargetdotnetframeworkversion + "\"";
+					sCmdLine += " -j " + "\"" + j + "\"";
 				}
 
 				if (e)
@@ -433,7 +433,7 @@ namespace Nant.Contrib.BuildInstallShield.Tasks
 
                 if (null != f)
 				{
-					sCmdLine += " -f " + "\"" + releaseflags + "\"";
+					sCmdLine += " -f " + "\"" + f + "\"";
 				}
 
 				if (q1)
