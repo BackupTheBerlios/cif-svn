@@ -64,8 +64,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tracker", "Tracker", "{04E0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VisualSourceSafe", "VisualSourceSafe", "{EFF5E7A9-B002-4550-B31C-BCA799D134F4}"
 	ProjectSection(SolutionItems) = preProject
-		Packages\VisualSourceSafe\VSS.Properties.xml = Packages\VisualSourceSafe\VSS.Properties.xml
-		Packages\VisualSourceSafe\VSS.Target.xml = Packages\VisualSourceSafe\VSS.Target.xml
+		Packages\VisualSourceSafe\VSS.Properties.xml = Packages\VisualSourceSafe\Build\VSS.Properties.xml
+		Packages\VisualSourceSafe\VSS.Target.xml = Packages\VisualSourceSafe\Build\VSS.Target.xml
+		Packages\VisualSourceSafe\HistoryPaths.xsl = Packages\VisualSourceSafe\Build\HistoryPaths.xsl
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VS.NETCompile", "VS.NETCompile", "{1E1A47E8-B6AD-46A5-8242-34019D058DCD}"
