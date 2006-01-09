@@ -6,7 +6,7 @@
   <property name="CCNETServer.ServerPort" value=""/>
   -->
   
-  <property name="CCNETServer.webURL" value="http:/${environment::get-machine-name()}/${ProjectName}"/>
+  <property name="CCNETServer.webURL" value="http://${environment::get-machine-name()}/${ProjectName}/default.aspx?_action_ViewFarmReport=true"/>
   <property name="CCNETServer.ProjectFile" value="${BuildDirectory}\ccnetproject.xml"/>
   <property name="CCNETServer.BatchFile" value="${BuildDirectory}\CCNETServer.Bat"/>
   <property name="CCNETServer.ExeConfigFile" value="${BuildDirectory}\server\ccnet.exe.config"/>
