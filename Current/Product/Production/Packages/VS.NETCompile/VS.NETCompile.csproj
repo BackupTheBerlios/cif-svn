@@ -51,4 +51,7 @@
     <Content Include="Package\VS.NETCompile\Install.Properties.xml" />
     <Content Include="Package\VS.NETCompile\Install.Target.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Package\VS.NETCompile\MSBuild\" />
+  </ItemGroup>
 </Project>
