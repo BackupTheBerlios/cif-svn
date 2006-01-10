@@ -1,21 +1,39 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 	<xsl:output method="html"/>
-	<xsl:template match="/">
+	
+  <xsl:template match="/">
 		<HTML>
 			<HEAD>
 				<TITLE/>
-<STYLE>H4 { height:10px; font: 9pt Courier New;  }</STYLE>
-			</HEAD>
-			<BODY>	
-			<xsl:apply-templates/>
-			</BODY>
+        <STYLE>H4 { height:10px; font: 9pt Courier New;  }</STYLE>
+			  </HEAD>
+			  <BODY>
+          <xsl:for-each select="/cruisecontrol/build/root">
+            <xsl:call-template name="root"/>
+          </xsl:for-each>
+			  </BODY>
 		</HTML>
 	</xsl:template>
-		<xsl:template match="root">
-		<xsl:apply-templates/>
+  
+  <xsl:template name="root">
+    <table>
+      <xsl:for-each select="Assembly">
+        <tr>
+          <td>
+            <xsl:call-template name="Assembly"/>
+          </td>
+        </tr>
+        <tr>
+          <td border="1">
+            <hr/>
+          </td>
+        </tr>
+      </xsl:for-each>
+    </table>
 	</xsl:template>
-	<xsl:template match="Assembly">
+	
+  <xsl:template name="Assembly">
 
 		<TABLE width="800px" align="left" border="0">
 			<TR>
@@ -70,10 +88,13 @@
 					<H4>Function</H4>
 				</TD>
 			</TR>
-			<xsl:apply-templates/>
+      <xsl:for-each select="Function">
+        <xsl:call-template name="Function" />
+      </xsl:for-each>
 		</TABLE>
 	</xsl:template>
-	<xsl:template match="Function">
+	
+  <xsl:template name="Function">
 		<TR style="height:1px">
 
 			<TD style="width:300px;height:10px" valign="bottom">
@@ -103,7 +124,8 @@
 		</TR>
 		<xsl:apply-templates/>
 	</xsl:template>
-	<xsl:template name="CreateBar">
+	
+  <xsl:template name="CreateBar">
 		<xsl:param name="width"></xsl:param>
 		<xsl:param name="colour"></xsl:param>
 		<xsl:element name="TD">

@@ -108,6 +108,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LargePropertyTask.vb" />
+    <Compile Include="Replace.vb" />
+    <Compile Include="SaveProperties.vb" />
     <Compile Include="TextElement.vb">
       <SubType>Code</SubType>
     </Compile>

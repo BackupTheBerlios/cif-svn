@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:nant="http://nant.sf.net/schemas/nant.xsd" elementFormDefault="qualified" targetNamespace="http://nant.sf.net/schemas/nant.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:annotation>
-    <xs:documentation>NAnt schema generated at 12/20/2005 21:58:44</xs:documentation>
+    <xs:documentation>NAnt schema generated at 01/09/2006 11:10:30</xs:documentation>
   </xs:annotation>
   <xs:complexType name="NAnt.Core.TaskContainer">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -455,7 +455,9 @@
     <xs:attribute name="id" use="optional" />
     <xs:attribute name="refid" use="optional" />
   </xs:complexType>
-  <xs:complexType name="Common.Tasks.TextElement" />
+  <xs:complexType name="Common.Tasks.TextElement">
+    <xs:attribute name="xml" use="optional" />
+  </xs:complexType>
   <xs:complexType name="Common.Tasks.LargePropertyTask">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element minOccurs="1" maxOccurs="1" name="value" type="nant:Common.Tasks.TextElement" />

@@ -90,6 +90,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Versioning", "Versioning", 
 		Packages\Versioning\Versioning.Target.xml = Packages\Versioning\Versioning.Target.xml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CoverageEye", "CoverageEye", "{14B4C0F2-1285-492b-854E-391B6109FEB2}"
+	ProjectSection(SolutionItems) = preProject
+		Packages\CoverageEye\CoverageEye.Properties.xml = Packages\CoverageEye\CoverageEye.Properties.xml
+		Packages\CoverageEye\CoverageEye.Target.xml = Packages\CoverageEye\CoverageEye.Target.xml
+		Packages\CoverageEye\CoverageReport.xsl = Packages\CoverageEye\CoverageReport.xsl
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SourceCodeControl) = preSolution
 		SccNumberOfProjects = 1
@@ -112,6 +119,7 @@ Global
 		{1E1A47E8-B6AD-46A5-8242-34019D058DCD} = {ACC8E9C6-A44C-438B-94E1-419BADD4CAD5}
 		{45D6B57A-BFCE-416B-8E67-42A2818180A3} = {ACC8E9C6-A44C-438B-94E1-419BADD4CAD5}
 		{98172691-77C2-450A-A64D-83D425C95F12} = {ACC8E9C6-A44C-438B-94E1-419BADD4CAD5}
+		{14B4C0F2-1285-492b-854E-391B6109FEB2} = {ACC8E9C6-A44C-438B-94E1-419BADD4CAD5}
 		{49007A1B-3369-4215-A0FA-67965773DF4F} = {ACC8E9C6-A44C-438B-94E1-419BADD4CAD5}
 	EndGlobalSection
 EndGlobal

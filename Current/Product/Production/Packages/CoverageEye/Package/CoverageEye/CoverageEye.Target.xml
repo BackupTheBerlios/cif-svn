@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="Coverage" >
 
-  <!--<include buildfile="CoverageEye.Properties.xml" />-->
+  <include buildfile="CoverageEye.Properties.xml" />
 
   <!--
 	The following properties should be specified in the calling script.
@@ -24,9 +24,9 @@
 	<target name="Private.Coverage.WriteConfiguration">
     <call target="Private.Coverage.GetConfigFile"/>
     
-    <write file="${Private.Coverage.ConfigFile}" append="true">
-      <text><?xml version="1.0"?>
-<CoverageConfiguration targetNamespace="urn:CoverageConfiguration">
+    <write file="${Private.Coverage.ConfigFile}" append="false">
+      <text><![CDATA[<?xml version="1.0"?>
+<CoverageConfiguration targetNamespace="urn:CoverageConfiguration">]]>
 </text>
     </write>
     
@@ -37,17 +37,22 @@
       <do>
         <write file="${Private.Coverage.ConfigFile}" append="true">
           <text>
-            <Assembly Owner="bogas@nowhere.com" Description="${path::get-file-name-without-extension(Private.Coverage.PrepareFor.AssemblyPath)}" AssemblyName="${string::to-lower(path::get-file-name(Private.Coverage.PrepareFor.AssemblyPath))}" ReportDirectory="${Coverage.ReportFolder}"/>
-          </text>
+            <![CDATA[<Assembly Owner="bogas@nowhere.com" Description="%Description%" AssemblyName="%AssemblyName%" ReportDirectory="%ReportDirectory%"/>]]>
+        </text>
+        <filterchain>
+          <replacestring from="%Description%" to="${path::get-file-name-without-extension(Private.Coverage.PrepareFor.AssemblyPath)}" />
+          <replacestring from="%AssemblyName%" to="${string::to-lower(path::get-file-name(Private.Coverage.PrepareFor.AssemblyPath))}" />
+          <replacestring from="%ReportDirectory%" to="${Coverage.ReportFolder}" />
+          </filterchain>
         </write>
       </do>
     </foreach>
 
     <write file="${Private.Coverage.ConfigFile}" append="true">
-      <text>        <Asp Selected="false"/>
+      <text><![CDATA[        <Asp Selected="false"/>
         <Services>
         </Services>
-</CoverageConfiguration>
+</CoverageConfiguration>]]>
 </text>
     </write>
 	</target>
@@ -63,34 +68,94 @@
 	
   <target name="UnitTest.RunTests">
     <call target="Private.Coverage.WriteConfiguration"/>
-    <exec program="${nant::get-assembly()}">
-      <environment>
-        <variable name="Cor_Enable_Profiling" value="1"/>
-        <variable name="Cor_Profiler" value="${Private.Coverage.CorProfiler}"/>
-      </environment>
-      <arg line="-BuildFile:${Coverage.UnitTestPackageInclude}"/>
-      <arg line="UnitTest.RunTests}"/>
-    </exec>
-    <call target="Private.Coverage.MergeReports"/>
+    <trycatch>
+      <try>
+        <exec program="${BuildDirectory}\nAnt\bin\nant.exe">
+          <environment>
+            <variable name="Cor_Enable_Profiling" value="1"/>
+            <variable name="Cor_Profiler" value="${Private.Coverage.CorProfiler}"/>
+          </environment>
+          <arg line="-buildfile:${Coverage.UnitTestPackageInclude}"/>
+          <arg line='-D:CCNetBuildCondition="${CCNetBuildCondition}"' />
+          <arg line='-D:CCNetIntegrationStatus="${CCNetIntegrationStatus}"' />
+          <arg line='-D:CCNetLabel="${CCNetLabel}"' />
+          <arg line='-D:CCNetLastIntegrationStatus="${CCNetLastIntegrationStatus}"' />
+          <arg line='-D:CCNetProject="${CCNetProject}"' />
+          <arg line='-D:CCNetBuildDate="${CCNetBuildDate}"' />
+          <arg line='-D:CCNetBuildTime="${CCNetBuildTime}"' />
+          <arg line='-D:CCNetArtifactDirectory="${CCNetArtifactDirectory}"' />
+          <arg line='-D:CCNetWorkingDirectory="${CCNetWorkingDirectory}"' />
+          <arg line='-D:ProjectName="${ProjectName}"' />
+          <arg line='-D:ProjectCodeLineName="${ProjectCodeLineName}"' />
+          <arg line='-D:ProjectsDirectory="${ProjectsDirectory}"' />
+          <arg line='-D:ProjectRootDirectory="${ProjectRootDirectory}"' />
+          <arg line='-D:ProjectCodeLineDirectory="${ProjectCodeLineDirectory}"' />
+          <arg line='-D:ProductDirectory="${ProductDirectory}"' />
+          <arg line='-D:ThirdPartyDirectory="${ThirdPartyDirectory}"' />
+          <arg line='-D:ProductionDirectory="${ProductionDirectory}"' />
+          <arg line='-D:BuildDirectory="${BuildDirectory}"' />
+          <arg line="UnitTest.RunTests"/>
+        </exec>
+      </try>
+      <finally>
+        <call target="Private.Coverage.MergeReports"/>
+      </finally>
+    </trycatch>
   </target>
 
   <target name="UnitTest.SetUp">
     <call target="Private.Coverage.GetConfigFile"/>
-    <delete verbose="True" >
-      <fileset basedir="${Coverage.ReportsPath}" >
-        <include name="*.*" />
-      </fileset>
-    </delete>
-    <exec program="${nant::get-assembly()}">
-      <arg line="-BuildFile:${Coverage.UnitTestPackageInclude}"/>
-      <arg line="UnitTest.SetUp}"/>
+    <mkdir if="${directory::exists(Coverage.ReportFolder) == false}" dir="${Coverage.ReportFolder}"/>
+    
+    <property name="Common.FilesToDelete" value="${Coverage.FilesToDeleteAtSetup}"/>
+    <call target="Common.DeleteFiles"/>
+    
+    <exec program="${BuildDirectory}\nAnt\bin\nant.exe">
+      <arg line="-buildfile:${Coverage.UnitTestPackageInclude}"/>
+      <arg line='-D:CCNetBuildCondition="${CCNetBuildCondition}"' />
+      <arg line='-D:CCNetIntegrationStatus="${CCNetIntegrationStatus}"' />
+      <arg line='-D:CCNetLabel="${CCNetLabel}"' />
+      <arg line='-D:CCNetLastIntegrationStatus="${CCNetLastIntegrationStatus}"' />
+      <arg line='-D:CCNetProject="${CCNetProject}"' />
+      <arg line='-D:CCNetBuildDate="${CCNetBuildDate}"' />
+      <arg line='-D:CCNetBuildTime="${CCNetBuildTime}"' />
+      <arg line='-D:CCNetArtifactDirectory="${CCNetArtifactDirectory}"' />
+      <arg line='-D:CCNetWorkingDirectory="${CCNetWorkingDirectory}"' />
+      <arg line='-D:ProjectName="${ProjectName}"' />
+      <arg line='-D:ProjectCodeLineName="${ProjectCodeLineName}"' />
+      <arg line='-D:ProjectsDirectory="${ProjectsDirectory}"' />
+      <arg line='-D:ProjectRootDirectory="${ProjectRootDirectory}"' />
+      <arg line='-D:ProjectCodeLineDirectory="${ProjectCodeLineDirectory}"' />
+      <arg line='-D:ProductDirectory="${ProductDirectory}"' />
+      <arg line='-D:ThirdPartyDirectory="${ThirdPartyDirectory}"' />
+      <arg line='-D:ProductionDirectory="${ProductionDirectory}"' />
+      <arg line='-D:BuildDirectory="${BuildDirectory}"' />
+      <arg line="UnitTest.SetUp"/>
     </exec>
   </target>
 
   <target name="UnitTest.TearDown">
-    <exec program="${nant::get-assembly()}">
-      <arg line="-BuildFile:${Coverage.UnitTestPackageInclude}"/>
-      <arg line="UnitTest.TearDown}"/>
+    <exec program="${BuildDirectory}\nAnt\bin\nant.exe">
+      <arg line="-buildfile:${Coverage.UnitTestPackageInclude}"/>
+      <arg line='-D:CCNetBuildCondition="${CCNetBuildCondition}"' />
+      <arg line='-D:CCNetIntegrationStatus="${CCNetIntegrationStatus}"' />
+      <arg line='-D:CCNetLabel="${CCNetLabel}"' />
+      <arg line='-D:CCNetLastIntegrationStatus="${CCNetLastIntegrationStatus}"' />
+      <arg line='-D:CCNetProject="${CCNetProject}"' />
+      <arg line='-D:CCNetBuildDate="${CCNetBuildDate}"' />
+      <arg line='-D:CCNetBuildTime="${CCNetBuildTime}"' />
+      <arg line='-D:CCNetArtifactDirectory="${CCNetArtifactDirectory}"' />
+      <arg line='-D:CCNetWorkingDirectory="${CCNetWorkingDirectory}"' />
+      <arg line='-D:ProjectName="${ProjectName}"' />
+      <arg line='-D:ProjectCodeLineName="${ProjectCodeLineName}"' />
+      <arg line='-D:ProjectsDirectory="${ProjectsDirectory}"' />
+      <arg line='-D:ProjectRootDirectory="${ProjectRootDirectory}"' />
+      <arg line='-D:ProjectCodeLineDirectory="${ProjectCodeLineDirectory}"' />
+      <arg line='-D:ProductDirectory="${ProductDirectory}"' />
+      <arg line='-D:ThirdPartyDirectory="${ThirdPartyDirectory}"' />
+      <arg line='-D:ProductionDirectory="${ProductionDirectory}"' />
+      <arg line='-D:BuildDirectory="${BuildDirectory}"' />
+      <arg line="UnitTest.TearDown"/>
     </exec>
   </target>
 </project>

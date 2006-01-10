@@ -9,7 +9,7 @@
   <include buildfile="%SourceControl.TargetFile%" />
   <include buildfile=".\Packages\Versioning\Versioning.Target.xml" />
   <include buildfile=".\Packages\VS.NETCompile\Compile.Target.xml" />
-  <include buildfile=".\Packages\DotNetUnitTest\UnitTest.Target.xml" />
+  <include buildfile=".\Packages\CoverageEye\CoverageEye.Target.xml" />
   <include buildfile=".\Packages\VS.NETCompile\Install.Target.xml" />
   <include buildfile=".\Packages\Deployment\Deployment.Target.xml"/>
   <include buildfile=".\Packages\SourceModificationReport\SourceModificationReport.Target.xml"/>

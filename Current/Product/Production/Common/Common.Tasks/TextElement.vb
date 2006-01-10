@@ -9,11 +9,26 @@ Public Class TextElement
     Inherits Element
 
     Private _Value As String
+    Private _Xml As Boolean = False
+
+    <TaskAttribute("xml", Required:=False), BooleanValidator()> _
+    Public Property Xml() As Boolean
+        Get
+            Return _Xml
+        End Get
+        Set(ByVal value As Boolean)
+            _Xml = Value
+        End Set
+    End Property
 
     Public ReadOnly Property [Value]() As String
         Get
             If Me._Value Is Nothing Then
-                Me._Value = Me.XmlNode.InnerXml
+                If Me.Xml Then
+                    Me._Value = Me.XmlNode.InnerXml
+                Else
+                    Me._Value = Me.XmlNode.InnerText
+                End If
             End If
             Return Me._Value
         End Get
@@ -21,7 +36,11 @@ Public Class TextElement
 
     Protected Overrides ReadOnly Property CustomXmlProcessing() As Boolean
         Get
-            Return True
+            If Me.Xml Then
+                Return True
+            Else
+                Return False
+            End If
         End Get
     End Property
 
