@@ -279,7 +279,7 @@ namespace Tracker
             int TransactionId = 0;
             int NewTransactionId = 0;
             int Status = PVCSToolKit.TrkQueryInitRecordList(recordHandle, ref queryName, TransactionId, ref NewTransactionId);
-            this.Helper.CheckStatus("Unable to initalize query record list.", Status);
+            this.Helper.CheckStatus("Unable to initalize query record list. Query=" + queryName, Status);
         }
 
         public bool GetNextScrId(int recordHandle)
