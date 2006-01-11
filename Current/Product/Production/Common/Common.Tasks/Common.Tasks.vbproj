@@ -1,4 +1,4 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>8.0.50727</ProductVersion>
@@ -110,6 +110,7 @@
     <Compile Include="LargePropertyTask.vb" />
     <Compile Include="Replace.vb" />
     <Compile Include="SaveProperties.vb" />
+    <Compile Include="SaveProperty.vb" />
     <Compile Include="TextElement.vb">
       <SubType>Code</SubType>
     </Compile>
@@ -117,10 +118,14 @@
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|.NET 1.1' ">
+    <OutputPath>bin\.NET 1.1\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Folder Include="My Project\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="C:\Projects\CI Factory\Current\Build\Packages\VS.NETCompile\MSBuild\Microsoft.Public.VisualBasic.targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>

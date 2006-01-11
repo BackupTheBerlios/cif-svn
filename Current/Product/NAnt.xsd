@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:nant="http://nant.sf.net/schemas/nant.xsd" elementFormDefault="qualified" targetNamespace="http://nant.sf.net/schemas/nant.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:annotation>
-    <xs:documentation>NAnt schema generated at 01/09/2006 11:10:30</xs:documentation>
+    <xs:documentation>NAnt schema generated at 01/10/2006 14:14:36</xs:documentation>
   </xs:annotation>
   <xs:complexType name="NAnt.Core.TaskContainer">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
         <xs:element name="write" type="nant:Common.Tasks.WriteTask" />
+        <xs:element name="saveproperties" type="nant:Common.Tasks.SaveProperties" />
+        <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
         <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
         <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
         <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
@@ -458,16 +459,6 @@
   <xs:complexType name="Common.Tasks.TextElement">
     <xs:attribute name="xml" use="optional" />
   </xs:complexType>
-  <xs:complexType name="Common.Tasks.LargePropertyTask">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:element minOccurs="1" maxOccurs="1" name="value" type="nant:Common.Tasks.TextElement" />
-    </xs:sequence>
-    <xs:attribute name="name" use="required" />
-    <xs:attribute name="failonerror" use="optional" />
-    <xs:attribute name="verbose" use="optional" />
-    <xs:attribute name="if" use="optional" />
-    <xs:attribute name="unless" use="optional" />
-  </xs:complexType>
   <xs:complexType name="Common.Tasks.WriteTask">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element minOccurs="1" maxOccurs="1" name="text" type="nant:Common.Tasks.TextElement" />
@@ -475,6 +466,33 @@
     </xs:sequence>
     <xs:attribute name="append" use="optional" />
     <xs:attribute name="file" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Common.Tasks.SaveProperty">
+    <xs:attribute name="name" use="required" />
+    <xs:attribute name="value" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Common.Tasks.SaveProperties">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="property" type="nant:Common.Tasks.SaveProperty" />
+    </xs:sequence>
+    <xs:attribute name="projectname" use="optional" />
+    <xs:attribute name="append" use="optional" />
+    <xs:attribute name="file" use="required" />
+    <xs:attribute name="format" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Common.Tasks.LargePropertyTask">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="value" type="nant:Common.Tasks.TextElement" />
+    </xs:sequence>
+    <xs:attribute name="name" use="required" />
     <xs:attribute name="failonerror" use="optional" />
     <xs:attribute name="verbose" use="optional" />
     <xs:attribute name="if" use="optional" />
@@ -3382,8 +3400,9 @@
       <xs:element minOccurs="0" maxOccurs="1" name="comparefiles" type="nant:NAnt.Core.Types.FileSet" />
       <xs:element minOccurs="0" maxOccurs="1" name="uptodatefiles" type="nant:NAnt.Core.Types.FileSet" />
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
         <xs:element name="write" type="nant:Common.Tasks.WriteTask" />
+        <xs:element name="saveproperties" type="nant:Common.Tasks.SaveProperties" />
+        <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
         <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
         <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
         <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
@@ -3567,8 +3586,9 @@
       <xs:element minOccurs="0" maxOccurs="1" name="comparefiles" type="nant:NAnt.Core.Types.FileSet" />
       <xs:element minOccurs="0" maxOccurs="1" name="uptodatefiles" type="nant:NAnt.Core.Types.FileSet" />
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
         <xs:element name="write" type="nant:Common.Tasks.WriteTask" />
+        <xs:element name="saveproperties" type="nant:Common.Tasks.SaveProperties" />
+        <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
         <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
         <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
         <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
@@ -3787,8 +3807,9 @@
       <xs:element minOccurs="0" maxOccurs="1" name="in" type="nant:NAnt.Core.Tasks.InElement" />
       <xs:element minOccurs="0" maxOccurs="1" name="do" type="nant:NAnt.Core.TaskContainer" />
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
         <xs:element name="write" type="nant:Common.Tasks.WriteTask" />
+        <xs:element name="saveproperties" type="nant:Common.Tasks.SaveProperties" />
+        <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
         <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
         <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
         <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
@@ -4254,8 +4275,9 @@
   </xs:complexType>
   <xs:complexType name="Target">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
       <xs:element name="write" type="nant:Common.Tasks.WriteTask" />
+      <xs:element name="saveproperties" type="nant:Common.Tasks.SaveProperties" />
+      <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
       <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
       <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
       <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
@@ -4447,8 +4469,9 @@
   <xs:element name="project">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
         <xs:element name="write" type="nant:Common.Tasks.WriteTask" />
+        <xs:element name="saveproperties" type="nant:Common.Tasks.SaveProperties" />
+        <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
         <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
         <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
         <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />

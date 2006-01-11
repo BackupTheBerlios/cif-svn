@@ -50,8 +50,11 @@
     <Content Include="Package\VS.NETCompile\DevEnvCompileDetails.xsl" />
     <Content Include="Package\VS.NETCompile\Install.Properties.xml" />
     <Content Include="Package\VS.NETCompile\Install.Target.xml" />
+    <Content Include="Package\VS.NETCompile\MSBuild\MSBee.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Package\VS.NETCompile\MSBuild\" />
+    <None Include="Package\VS.NETCompile\MSBuild\Microsoft.Public.Common.targets" />
+    <None Include="Package\VS.NETCompile\MSBuild\Microsoft.Public.CSharp.targets" />
+    <None Include="Package\VS.NETCompile\MSBuild\Microsoft.Public.VisualBasic.targets" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 <project xmlns="http://nant.sf.net/schemas/nant.xsd"  name="Coverage.Properties">
   
   <property name="Coverage.ReportFolder" value="${BuildDirectory}\Coverage Reports"/>
+  <property name="Coverage.CommonPropertiesFile" value="${Coverage.ReportFolder}\Properties.txt" />
   <property name="Coverage.UnitTestPackageInclude" value="${BuildDirectory}\Packages\DotNetUnitTest\UnitTest.Target.xml" />
 
   <fileset id="Coverage.Targets">

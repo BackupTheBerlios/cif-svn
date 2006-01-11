@@ -88,9 +88,15 @@ Public Class WriteTask
                 Writer.Write(Microsoft.VisualBasic.ChrW(Focus))
             Loop
         Finally
-            Writer.Close()
-            ChainedReader.Close()
-            Reader.Close()
+            If Not Writer Is Nothing Then
+                Writer.Close()
+            End If
+            If Not ChainedReader Is Nothing Then
+                ChainedReader.Close()
+            End If
+            If Not Reader Is Nothing Then
+                Reader.Close()
+            End If
         End Try
     End Sub
 
@@ -100,7 +106,9 @@ Public Class WriteTask
             Writer = Me.GetWriter
             Writer.Write(Me.Text.Value)
         Finally
-            Writer.Close()
+            If Not Writer Is Nothing Then
+                Writer.Close()
+            End If
         End Try
     End Sub
 

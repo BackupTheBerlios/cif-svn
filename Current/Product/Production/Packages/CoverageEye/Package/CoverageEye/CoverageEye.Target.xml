@@ -76,24 +76,7 @@
             <variable name="Cor_Profiler" value="${Private.Coverage.CorProfiler}"/>
           </environment>
           <arg line="-buildfile:${Coverage.UnitTestPackageInclude}"/>
-          <arg line='-D:CCNetBuildCondition="${CCNetBuildCondition}"' />
-          <arg line='-D:CCNetIntegrationStatus="${CCNetIntegrationStatus}"' />
-          <arg line='-D:CCNetLabel="${CCNetLabel}"' />
-          <arg line='-D:CCNetLastIntegrationStatus="${CCNetLastIntegrationStatus}"' />
-          <arg line='-D:CCNetProject="${CCNetProject}"' />
-          <arg line='-D:CCNetBuildDate="${CCNetBuildDate}"' />
-          <arg line='-D:CCNetBuildTime="${CCNetBuildTime}"' />
-          <arg line='-D:CCNetArtifactDirectory="${CCNetArtifactDirectory}"' />
-          <arg line='-D:CCNetWorkingDirectory="${CCNetWorkingDirectory}"' />
-          <arg line='-D:ProjectName="${ProjectName}"' />
-          <arg line='-D:ProjectCodeLineName="${ProjectCodeLineName}"' />
-          <arg line='-D:ProjectsDirectory="${ProjectsDirectory}"' />
-          <arg line='-D:ProjectRootDirectory="${ProjectRootDirectory}"' />
-          <arg line='-D:ProjectCodeLineDirectory="${ProjectCodeLineDirectory}"' />
-          <arg line='-D:ProductDirectory="${ProductDirectory}"' />
-          <arg line='-D:ThirdPartyDirectory="${ThirdPartyDirectory}"' />
-          <arg line='-D:ProductionDirectory="${ProductionDirectory}"' />
-          <arg line='-D:BuildDirectory="${BuildDirectory}"' />
+          <arg line='@"${Coverage.CommonPropertiesFile}"' />
           <arg line="UnitTest.RunTests"/>
         </exec>
       </try>
@@ -103,33 +86,41 @@
     </trycatch>
   </target>
 
+  <target name="Private.Coverage.CreatePropertiesFile">
+    <saveproperties file="${Coverage.CommonPropertiesFile}" format="CommandLine" >
+      <property name="CCNetBuildCondition"/>
+      <property name="CCNetIntegrationStatus"/>
+      <property name="CCNetLabel"/>
+      <property name="CCNetLastIntegrationStatus"/>
+      <property name="CCNetProject"/>
+      <property name="CCNetBuildDate"/>
+      <property name="CCNetBuildTime"/>
+      <property name="CCNetArtifactDirectory"/>
+      <property name="CCNetWorkingDirectory"/>
+      <property name="ProjectName"/>
+      <property name="ProjectCodeLineName"/>
+      <property name="ProjectsDirectory"/>
+      <property name="ProjectRootDirectory"/>
+      <property name="ProjectCodeLineDirectory"/>
+      <property name="ProductDirectory"/>
+      <property name="ThirdPartyDirectory"/>
+      <property name="ProductionDirectory"/>
+      <property name="BuildDirectory"/>
+    </saveproperties>
+  </target>
+
   <target name="UnitTest.SetUp">
     <call target="Private.Coverage.GetConfigFile"/>
     <mkdir if="${directory::exists(Coverage.ReportFolder) == false}" dir="${Coverage.ReportFolder}"/>
     
     <property name="Common.FilesToDelete" value="${Coverage.FilesToDeleteAtSetup}"/>
     <call target="Common.DeleteFiles"/>
+
+    <call target="Private.Coverage.CreatePropertiesFile"/>
     
     <exec program="${BuildDirectory}\nAnt\bin\nant.exe">
       <arg line="-buildfile:${Coverage.UnitTestPackageInclude}"/>
-      <arg line='-D:CCNetBuildCondition="${CCNetBuildCondition}"' />
-      <arg line='-D:CCNetIntegrationStatus="${CCNetIntegrationStatus}"' />
-      <arg line='-D:CCNetLabel="${CCNetLabel}"' />
-      <arg line='-D:CCNetLastIntegrationStatus="${CCNetLastIntegrationStatus}"' />
-      <arg line='-D:CCNetProject="${CCNetProject}"' />
-      <arg line='-D:CCNetBuildDate="${CCNetBuildDate}"' />
-      <arg line='-D:CCNetBuildTime="${CCNetBuildTime}"' />
-      <arg line='-D:CCNetArtifactDirectory="${CCNetArtifactDirectory}"' />
-      <arg line='-D:CCNetWorkingDirectory="${CCNetWorkingDirectory}"' />
-      <arg line='-D:ProjectName="${ProjectName}"' />
-      <arg line='-D:ProjectCodeLineName="${ProjectCodeLineName}"' />
-      <arg line='-D:ProjectsDirectory="${ProjectsDirectory}"' />
-      <arg line='-D:ProjectRootDirectory="${ProjectRootDirectory}"' />
-      <arg line='-D:ProjectCodeLineDirectory="${ProjectCodeLineDirectory}"' />
-      <arg line='-D:ProductDirectory="${ProductDirectory}"' />
-      <arg line='-D:ThirdPartyDirectory="${ThirdPartyDirectory}"' />
-      <arg line='-D:ProductionDirectory="${ProductionDirectory}"' />
-      <arg line='-D:BuildDirectory="${BuildDirectory}"' />
+      <arg line='@"${Coverage.CommonPropertiesFile}"' />
       <arg line="UnitTest.SetUp"/>
     </exec>
   </target>
@@ -137,24 +128,7 @@
   <target name="UnitTest.TearDown">
     <exec program="${BuildDirectory}\nAnt\bin\nant.exe">
       <arg line="-buildfile:${Coverage.UnitTestPackageInclude}"/>
-      <arg line='-D:CCNetBuildCondition="${CCNetBuildCondition}"' />
-      <arg line='-D:CCNetIntegrationStatus="${CCNetIntegrationStatus}"' />
-      <arg line='-D:CCNetLabel="${CCNetLabel}"' />
-      <arg line='-D:CCNetLastIntegrationStatus="${CCNetLastIntegrationStatus}"' />
-      <arg line='-D:CCNetProject="${CCNetProject}"' />
-      <arg line='-D:CCNetBuildDate="${CCNetBuildDate}"' />
-      <arg line='-D:CCNetBuildTime="${CCNetBuildTime}"' />
-      <arg line='-D:CCNetArtifactDirectory="${CCNetArtifactDirectory}"' />
-      <arg line='-D:CCNetWorkingDirectory="${CCNetWorkingDirectory}"' />
-      <arg line='-D:ProjectName="${ProjectName}"' />
-      <arg line='-D:ProjectCodeLineName="${ProjectCodeLineName}"' />
-      <arg line='-D:ProjectsDirectory="${ProjectsDirectory}"' />
-      <arg line='-D:ProjectRootDirectory="${ProjectRootDirectory}"' />
-      <arg line='-D:ProjectCodeLineDirectory="${ProjectCodeLineDirectory}"' />
-      <arg line='-D:ProductDirectory="${ProductDirectory}"' />
-      <arg line='-D:ThirdPartyDirectory="${ThirdPartyDirectory}"' />
-      <arg line='-D:ProductionDirectory="${ProductionDirectory}"' />
-      <arg line='-D:BuildDirectory="${BuildDirectory}"' />
+      <arg line='@"${Coverage.CommonPropertiesFile}"' />
       <arg line="UnitTest.TearDown"/>
     </exec>
   </target>
