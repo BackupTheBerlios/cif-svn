@@ -359,7 +359,7 @@ namespace Tracker
             {
                 RecordHandle = this.ToolKit.AllocateRecordHandle();
 
-                this.ToolKit.InitalizeRecordList(RecordHandle ,queryName);
+                this.ToolKit.InitalizeRecordList(RecordHandle, queryName);
 
                 ArrayList IdList = new ArrayList();
                 while (this.ToolKit.GetNextScrId(RecordHandle))
