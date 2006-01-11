@@ -223,11 +223,11 @@ namespace Tracker
         public bool GetNextNote(int noteHandle)
         {
             int Status = PVCSToolKit.TrkGetNextNote(noteHandle);
-            if ((int)ServerHelper._TrkError.TRK_END_OF_LIST != Status)
+            if ((int)ServerHelper._TrkError.TRK_E_END_OF_LIST != Status)
             {
                 this.Helper.CheckStatus("Unable to get next note.", Status);
             }
-            return !((int)ServerHelper._TrkError.TRK_END_OF_LIST == Status);
+            return !((int)ServerHelper._TrkError.TRK_E_END_OF_LIST == Status);
         }
         
         public string GetNoteTitle(int noteHandle)
@@ -289,7 +289,7 @@ namespace Tracker
             {
                 this.Helper.CheckStatus("Unable to get next SCR handle.", Status);
             }
-            return !(((int)ServerHelper._TrkError.TRK_E_END_OF_LIST != Status));
+            return !(((int)ServerHelper._TrkError.TRK_E_END_OF_LIST == Status));
         }
 
         public int GetFieldTransactionId(string fieldName, int recordHandle)
