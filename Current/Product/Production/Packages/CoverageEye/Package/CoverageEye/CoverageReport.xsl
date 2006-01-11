@@ -70,7 +70,9 @@
 					</TR>
 					</TABLE>		
 				</TD>	
-				<TD colspan="2" style="height:10px; font: 9pt Courier New;"><xsl:value-of select="@InstructionCount"/></TD>			
+				<TD colspan="2" style="height:10px; font: 9pt Courier New;">
+          <xsl:value-of select="@CoveredCount"/>/<xsl:value-of select="@InstructionCount"/>&#160;<xsl:value-of select="@PercentageCovered"/>%
+        </TD>			
 			</TR>
 			<tr>
 				<td colspan="3"><hr/></td>
@@ -112,10 +114,10 @@
 				</TABLE>
 			</TD>			
 			<TD style="height:10px; font: 9pt Courier New;" valign="bottom">
-				
-					<xsl:value-of select="@InstructionCount"/>
-				
-			</TD>
+
+        <xsl:value-of select="@CoveredCount"/>/<xsl:value-of select="@InstructionCount"/>&#160;<xsl:value-of select="@PercentageCovered"/>%
+
+      </TD>
 			<TD style="height:10px; font: 9pt Courier New;" valign="bottom">
 				
 					<xsl:value-of select="@FunctionName"/>
