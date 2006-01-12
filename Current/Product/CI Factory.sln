@@ -55,6 +55,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subversion", "Production\Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoverageEye", "Production\Packages\CoverageEye\CoverageEye.csproj", "{20C9D683-9128-4B08-B6DC-E4048479C045}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nAnt Scratch", "nAnt Scratch", "{3C400F6D-4825-421F-A9DB-7C57B18BF12B}"
+	ProjectSection(SolutionItems) = preProject
+		nAnt Scratch\Scratch.build.xml = nAnt Scratch\Scratch.build.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET 1.1 = Debug|.NET 1.1
