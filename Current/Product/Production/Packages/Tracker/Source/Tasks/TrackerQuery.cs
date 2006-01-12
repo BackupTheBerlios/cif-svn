@@ -3,7 +3,6 @@ using System.Text;
 using System.Collections;
 using System.IO;
 using System.Xml;
-using System.Windows.Forms;
 
 using NAnt.Core;
 using NAnt.Core.Attributes;
@@ -36,25 +35,23 @@ namespace Tracker.Tasks
             int[] IDs = this.TrackerServer.GetSCRIDListFromQuery(this.Query);
             if (this.ScrCountProperty != null)
             {
-                try
+                if (IDs != null)
                 {
                     this.Properties[this.ScrCountProperty] = IDs.Length.ToString();
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine(e.ToString());
                     this.Properties[this.ScrCountProperty] = "0";
                 }
             }
             if (this.ScrIdsProperty != null)
             {
-                try
+                if (IDs != null)
                 {
                     this.Properties[this.ScrIdsProperty] = this.FormatIdList(IDs);
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine(e.ToString());
                     this.Properties[this.ScrIdsProperty] = "";
                 }
             }
