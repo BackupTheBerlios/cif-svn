@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="InstallShield">
 
-  <loadtasks assembly="Packages\InstallShield\bin\Nant.Contrib.BuildInstallShield.Tasks.dll"/>
+  <loadtasks assembly="Packages\InstallShield\bin\InstallShield.Tasks.dll"/>
 
   <include buildfile="InstallShield.Properties.xml"/>
 
