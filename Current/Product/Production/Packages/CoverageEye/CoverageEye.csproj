@@ -41,5 +41,6 @@
     <Content Include="Package\CoverageEye\CoverageEye.Properties.xml" />
     <Content Include="Package\CoverageEye\CoverageEye.Target.xml" />
     <Content Include="Package\CoverageEye\CoverageReport.xsl" />
+    <Content Include="Package\CoverageEye\CoverageSummary.xsl" />
   </ItemGroup>
 </Project>
