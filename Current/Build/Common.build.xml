@@ -5,8 +5,8 @@
 
   <target name="Common.DeleteFiles">
     <echo message="The property Common.FilesToDelete was not specified." if="${Common.FilesToDelete == ''}"/>
-    <foreach item="String" in="${Common.FilesToDelete}" delim=";" property="Private.Common.FileToDelete" if="${Common.FilesToDelete == ''}">
-      <delete file="Private.Common.FileToDelete"/>
+    <foreach item="String" in="${Common.FilesToDelete}" delim=";" property="Private.Common.FileToDelete" unless="${Common.FilesToDelete == ''}">
+      <delete file="${Private.Common.FileToDelete}"/>
     </foreach>
   </target>
   
