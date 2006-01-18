@@ -63,6 +63,7 @@
           <file>%BuildDirectory%\Tracker Reports\*.xml</file>
           <file>%BuildDirectory%\Unit Test Reports\*.xml</file>
           <file>%BuildDirectory%\Coverage Reports\ConsolidatedReport.xml</file>
+          <file>%BuildDirectory%\nDepend\NDependMain.xml</file>
         </files>
       </merge>
       <xmllogger />

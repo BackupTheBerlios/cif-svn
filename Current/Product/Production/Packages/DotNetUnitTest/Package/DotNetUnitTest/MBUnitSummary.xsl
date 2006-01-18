@@ -4,6 +4,7 @@
 
     <xsl:output method="html"/>
 
+  <xsl:variable name="UnitTest.AssertCount" select="sum($nunit2.result.list/@assert-count)"/>
     <xsl:variable name="nunit2.result.list" select="//report-result/counter"/>
     <xsl:variable name="nunit2.testcount" select="sum($nunit2.result.list/@run-count)"/>
     <xsl:variable name="nunit2.failures" select="sum($nunit2.result.list/@failure-count)"/>
@@ -28,7 +29,7 @@
             <!-- Unit Tests -->
             <tr>
                 <td class="unittests-sectionheader" colspan="2">
-                   Tests run: <xsl:value-of select="$nunit2.testcount"/>, Failures: <xsl:value-of select="$nunit2.failures"/>, Not run: <xsl:value-of select="$nunit2.notrun"/>, Time: <xsl:value-of select="$nunit2.time"/> seconds
+                   Tests run: <xsl:value-of select="$nunit2.testcount"/>, Failures: <xsl:value-of select="$nunit2.failures"/>, Not run: <xsl:value-of select="$nunit2.notrun"/>, Asserts: <xsl:value-of select="$UnitTest.AssertCount"/>, Time: <xsl:value-of select="$nunit2.time"/> seconds
                 </td>
             </tr>
 

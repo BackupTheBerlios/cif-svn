@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" 
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:Coverage="http://tempuri.org/CoverageExclusions.xsd"
+  xmlns:AssemblyCount="urn:AssemblyCountScript"
+  xmlns:TotalLines="urn:TotalLinesScript"
+  xmlns:TotalCoveredLines="urn:TotalCoveredLinesScript">
 
-  <xsl:variable name="AssemblyCount" select="count(/cruisecontrol/build/root/Assembly)" />
-  <xsl:variable name="TotalLines" select="sum(/cruisecontrol/build/root/Assembly/@InstructionCount)" />
-  <xsl:variable name="TotalCoveredLines" select="sum(/cruisecontrol/build/root/Assembly/@CoveredCount)" />
-  <xsl:variable name="TotalPercentCoverage" select="round($TotalCoveredLines div $TotalLines * 100)" />
+  <xsl:import href="CoverageStuff.xsl"/>
+
+  <xsl:param name="ExclusionFile" select="'PostExclusion.xml'"/>
+  <xsl:variable name="Exclusions" select="document($ExclusionFile)"/>
   
   <xsl:template match="/">
+    <xsl:apply-templates select="/cruisecontrol/build/root" mode="Statistics"/>
+    <xsl:variable name="TotalPercentCoverage" select="round(TotalCoveredLines:Value() div TotalLines:Value() * 100)" />
     <table class="section-table" cellpadding="2" cellspacing="0" border="0" width="98%">
       <tr class="sectionheader">
         <td class="sectionheader" colspan="5">
@@ -15,7 +22,7 @@
       </tr>
       <TR>
         <td>
-            Assembly Count :<xsl:value-of select="$AssemblyCount"/>
+            Assembly Count :<xsl:value-of select="AssemblyCount:Value()"/>
         </td>
       </TR>
       <TR>
@@ -36,7 +43,7 @@
               </TABLE>
             </td>
             <td>
-              <xsl:value-of select="$TotalCoveredLines"/>/<xsl:value-of select="$TotalLines"/>&#160;<xsl:value-of select="$TotalPercentCoverage"/>%
+              <xsl:value-of select="TotalCoveredLines:Value()"/>/<xsl:value-of select="TotalLines:Value()"/>&#160;<xsl:value-of select="$TotalPercentCoverage"/>%
             </td>
           </table>
         </TD>
@@ -44,19 +51,4 @@
     </table>
   </xsl:template>
 
-  <xsl:template name="CreateBar">
-    <xsl:param name="width"></xsl:param>
-    <xsl:param name="colour"></xsl:param>
-    <xsl:element name="TD">
-      <xsl:attribute name="bgcolor">
-        <xsl:value-of select="$colour"/>
-      </xsl:attribute>
-      <xsl:attribute name="height">10px</xsl:attribute>
-      <xsl:attribute name="width">
-        <xsl:value-of select="$width*3"/>
-      </xsl:attribute>
-      <xsl:attribute name="onmouseover">window.event.srcElement.title='<xsl:value-of select="$width"/>%'</xsl:attribute>
-    </xsl:element>
-  </xsl:template>
-  
 </xsl:stylesheet>

@@ -1,4 +1,4 @@
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>8.0.50727</ProductVersion>
@@ -78,6 +78,10 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.1.40796, Culture=neutral, PublicKeyToken=aaa0f432407c68df">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Third Party\nAnt\bin\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="NAnt.Core, Version=0.85.1932.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Third Party\nAnt\bin\NAnt.Core.dll</HintPath>
@@ -108,19 +112,35 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LargePropertyTask.vb" />
+    <Compile Include="LoopItemContainer.vb" />
+    <Compile Include="LoopItems.vb" />
+    <Compile Include="LoopThrough.vb" />
+    <Compile Include="RegexMatch.vb" />
     <Compile Include="Replace.vb" />
     <Compile Include="SaveProperties.vb" />
     <Compile Include="SaveProperty.vb" />
+    <Compile Include="StringItem.vb" />
+    <Compile Include="StringList.vb" />
     <Compile Include="TextElement.vb">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Write.vb">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="XmlQuery.vb" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|.NET 1.1' ">
     <OutputPath>bin\.NET 1.1\Release\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|.NET 1.1' ">
+    <OutputPath>bin\.NET 1.1\Debug\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="UpdatenAnt.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UpdatenAnt.xml" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="My Project\" />
   </ItemGroup>

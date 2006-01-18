@@ -41,6 +41,16 @@
     <Content Include="Package\CoverageEye\CoverageEye.Properties.xml" />
     <Content Include="Package\CoverageEye\CoverageEye.Target.xml" />
     <Content Include="Package\CoverageEye\CoverageReport.xsl" />
+    <Content Include="Package\CoverageEye\CoverageStuff.xsl" />
     <Content Include="Package\CoverageEye\CoverageSummary.xsl" />
+    <Content Include="Package\CoverageEye\PostExclusion.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Package\CoverageEye\CoverageExclusions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Package\CoverageEye\CoverageExclusions.xsx">
+      <DependentUpon>CoverageExclusions.xsd</DependentUpon>
+    </None>
   </ItemGroup>
 </Project>

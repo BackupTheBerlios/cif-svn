@@ -4,7 +4,7 @@
   <property name="SourceControl.TargetFile" value=".\Packages\VisualSourceSafe\Build\VSS.Target.xml"/>
 
   <largeproperty name="SourceControl.MainBuildBlock">
-    <value>
+    <value xml="true">
       <sourcecontrol type="filtered">
         <sourceControlProvider  type="vss" applyLabel="true">
           <executable>C:\Program Files\Microsoft Visual Studio\VSS\win32\SS.EXE</executable>
@@ -36,7 +36,7 @@
   </largeproperty>
 
   <largeproperty name="SourceControl.BuildUpdateBlock">
-    <value>
+    <value xml="true">
       <sourcecontrol  type="vss" applyLabel="false" autoGetSource="true" >
         <executable>C:\Program Files\Microsoft Visual Studio\VSS\win32\SS.EXE</executable>
         <project>$/%ProjectName%/%ProjectCodeLineName%/Build</project>

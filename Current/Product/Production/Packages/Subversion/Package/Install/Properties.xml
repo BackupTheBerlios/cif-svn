@@ -4,7 +4,7 @@
   <property name="SourceControl.TargetFile" value=".\Packages\SubVersion\SVN.Target.xml"/>
 
   <largeproperty name="SourceControl.BuildUpdateBlock">
-    <value>
+    <value xml="true">
       <sourcecontrol  type="svn" tagOnSuccess="false" autoGetSource="true" >
         <trunkUrl>%SVN.RepoUri%/%ProjectName%/%ProjectCodeLineName%/Build</trunkUrl>
         <workingDirectory>%BuildDirectory%</workingDirectory>
@@ -18,7 +18,7 @@
   </largeproperty>
 
   <largeproperty name="SourceControl.MainBuildBlock">
-    <value>
+    <value xml="true">
       <sourcecontrol type="filtered">
         <sourceControlProvider  type="svn" tagOnSuccess="true">
           <trunkUrl>%SVN.RepoUri%/%ProjectName%/%ProjectCodeLineName%</trunkUrl>

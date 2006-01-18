@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="scratch" default="test" >
+
+  
+  <target name="test">
+    <loopthrough property="string">
+      <items>
+        <xmlquery file="C:\Temp\WithCoverage.xml" query="//cruisecontrol/build/@date" />
+      </items>
+      <do>
+        <echo message="${string}"/>
+      </do>
+    </loopthrough>
+  </target>
+  
+</project>
