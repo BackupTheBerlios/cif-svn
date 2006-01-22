@@ -109,7 +109,7 @@ Public Class LoopItemContainer
                     Else
                         ' fake the getter as null so we process the rest like there is no getter
                         getter = Nothing
-                        logger.Info(String.Format("{0}_get() returned null; will go the route of set method to populate.", propInfo.Name))
+                        Me.Project.Log(Level.Info, String.Format("{0}_get() returned null; will go the route of set method to populate.", propInfo.Name))
                     End If
                 Else
                     elementType = childElement.GetType()
@@ -154,8 +154,6 @@ Public Class LoopItemContainer
             ' return the new/used object
             Return childElement
         End Function
-
-        Private Shared ReadOnly logger As log4net.ILog = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType)
 
     End Class
 

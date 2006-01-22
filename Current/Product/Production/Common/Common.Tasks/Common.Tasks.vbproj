@@ -78,10 +78,6 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.1.40796, Culture=neutral, PublicKeyToken=aaa0f432407c68df">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Third Party\nAnt\bin\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="NAnt.Core, Version=0.85.1932.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Third Party\nAnt\bin\NAnt.Core.dll</HintPath>
@@ -115,6 +111,7 @@
     <Compile Include="LoopItemContainer.vb" />
     <Compile Include="LoopItems.vb" />
     <Compile Include="LoopThrough.vb" />
+    <Compile Include="RegexFilter.vb" />
     <Compile Include="RegexMatch.vb" />
     <Compile Include="Replace.vb" />
     <Compile Include="SaveProperties.vb" />
