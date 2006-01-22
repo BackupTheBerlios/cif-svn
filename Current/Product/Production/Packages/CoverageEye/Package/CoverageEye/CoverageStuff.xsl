@@ -121,8 +121,13 @@
     }
     public bool IsInnerClass(string type)
     {
-      System.Text.RegularExpressions.Regex Rx = new  System.Text.RegularExpressions.Regex("\\.+\\w+$");
-      return Rx.IsMatch(type) == false;
+      System.Text.RegularExpressions.Regex Rx = new  System.Text.RegularExpressions.Regex("^\\w+\\.+\\w+$");
+      return Rx.IsMatch(type);
+    }
+    public string GetInnerClassName(string type)
+    {
+      System.Text.RegularExpressions.Regex Rx = new  System.Text.RegularExpressions.Regex("^(\\w+)\\.+\\w+$");
+      return Rx.Match(type).Groups[1].Value;
     }
     public string GetClassName(string type)
     {
@@ -244,7 +249,8 @@
           <xsl:choose>
             <xsl:when test="$IsInnerClass" >
 
-              <xsl:variable name="InnerClassToBeExcluded" select="($Exclusions)/Coverage:Coverage/Coverage:exclusions/Coverage:classes/Coverage:assembly[@name = $AssemblyName]/Coverage:namespace/Coverage:innerclass[@name = @FunctionName]" />
+              <xsl:variable name="InnerClassName" select="Type:GetInnerClassName(@FunctionName)" />
+              <xsl:variable name="InnerClassToBeExcluded" select="($Exclusions)/Coverage:Coverage/Coverage:exclusions/Coverage:classes/Coverage:assembly[@name = $AssemblyName]/Coverage:namespace/Coverage:innerclass[@name = $InnerClassName]" />
 
               <xsl:if test="count($InnerClassToBeExcluded) = 0">
                 <xsl:variable name="execute3" select="TotalLines:Add(@InstructionCount)" />
