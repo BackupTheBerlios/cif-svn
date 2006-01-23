@@ -1,14 +1,18 @@
 using System;
 using System.Collections;
 using System.Text;
+using NAnt.Core;
+using NAnt.Core.Attributes;
 
-namespace Studio.VisualStudio8.Solution
+namespace Studio.VisualStudio8.DataTypes
 {
-    public class Pair
+    [ElementName("pair8")]
+    public class PairElement : DataTypeBase
     {
         private string _Key;
         private string _Value;
 
+        [TaskAttribute("key", Required=true)]
         public string Key
         {
             get
@@ -17,11 +21,11 @@ namespace Studio.VisualStudio8.Solution
             }
             set
             {
-                if (_Key == value)
-                    return;
                 _Key = value;
             }
         }
+
+        [TaskAttribute("value", Required = true)]
         public string Value
         {
             get
@@ -30,8 +34,6 @@ namespace Studio.VisualStudio8.Solution
             }
             set
             {
-                if (_Value == value)
-                    return;
                 _Value = value;
             }
         }

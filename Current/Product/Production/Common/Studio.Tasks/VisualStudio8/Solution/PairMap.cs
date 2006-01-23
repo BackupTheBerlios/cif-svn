@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using System.Text;
-using ASOGS.Collections;
 
-namespace Studio.Tasks.VisualStudio8.Solution
+namespace Studio.VisualStudio8.Solution
 {
     public class PairMap : DictionaryBase
     {
@@ -41,6 +40,11 @@ namespace Studio.Tasks.VisualStudio8.Solution
             {
                 this.Dictionary[entry] = value;
             }
+        }
+        public string[] Keys()
+        {
+            ArrayList Keys = new ArrayList(this.Dictionary.Keys);
+            return (string[])Keys.ToArray(typeof(string));
         }
 
     }

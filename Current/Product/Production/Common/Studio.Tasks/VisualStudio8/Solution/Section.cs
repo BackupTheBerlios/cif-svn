@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Text;
 
-namespace Studio.Tasks.VisualStudio8.Solution
+namespace Studio.VisualStudio8.Solution
 {
     public abstract class Section
     {

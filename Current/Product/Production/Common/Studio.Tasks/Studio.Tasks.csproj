@@ -7,7 +7,7 @@
     <ProjectGuid>{524DAEC8-95B7-4986-AD0F-E7E47949756E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Studio.Tasks</RootNamespace>
+    <RootNamespace>Studio</RootNamespace>
     <AssemblyName>Studio.Tasks</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -28,17 +28,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ASOGS.Collections, Version=1.0.0.1, Culture=neutral">
+    <Reference Include="NAnt.Core, Version=0.85.1932.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Third Party\ASOGS\ASOGS.Collections.dll</HintPath>
+      <HintPath>..\..\..\..\Third Party\nAnt\bin\NAnt.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VisualStudio8\DataTypes\GlobalElement.cs" />
+    <Compile Include="VisualStudio8\DataTypes\GlobalSectionElement.cs" />
+    <Compile Include="VisualStudio8\DataTypes\PairElement.cs" />
+    <Compile Include="VisualStudio8\DataTypes\ProjectElement.cs" />
+    <Compile Include="VisualStudio8\DataTypes\ProjectSectionElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VisualStudio8\Solution\FileReader.cs" />
+    <Compile Include="VisualStudio8\Solution\SolutionFile.cs" />
     <Compile Include="VisualStudio8\Solution\Global.cs" />
     <Compile Include="VisualStudio8\Solution\GlobalSection.cs" />
     <Compile Include="VisualStudio8\Solution\GlobalSectionList.cs" />
@@ -49,6 +54,16 @@
     <Compile Include="VisualStudio8\Solution\ProjectSection.cs" />
     <Compile Include="VisualStudio8\Solution\Section.cs" />
     <Compile Include="VisualStudio8\Solution\Solution.cs" />
+    <Compile Include="VisualStudio8\Tasks\AddGlobalSection.cs" />
+    <Compile Include="VisualStudio8\Tasks\AddProject.cs" />
+    <Compile Include="VisualStudio8\Tasks\AddProjectSection.cs" />
+    <Compile Include="VisualStudio8\Tasks\AddToGlobalSection.cs" />
+    <Compile Include="VisualStudio8\Tasks\AddToProjectSection.cs" />
+    <Compile Include="VisualStudio8\Tasks\RemoveFromGlobalSection.cs" />
+    <Compile Include="VisualStudio8\Tasks\RemoveFromProjectSection.cs" />
+    <Compile Include="VisualStudio8\Tasks\RemoveGlobalSection.cs" />
+    <Compile Include="VisualStudio8\Tasks\RemoveProject.cs" />
+    <Compile Include="VisualStudio8\Tasks\RemoveProjectSection.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|.NET 1.1' ">
     <OutputPath>bin\.NET 1.1\Release\</OutputPath>
