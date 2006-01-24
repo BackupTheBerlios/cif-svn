@@ -48,7 +48,7 @@ namespace Studio.VisualStudio9.Tasks
             }
         }
 
-        [BuildElementArray("pairs", Required = true)]
+        [BuildElementArray("pairs", ElementType = typeof(PairElement), Required = true)]
         public PairElement[] Pairs
         {
             get

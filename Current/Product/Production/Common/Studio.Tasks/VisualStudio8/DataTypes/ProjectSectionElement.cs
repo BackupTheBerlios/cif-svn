@@ -89,7 +89,7 @@ namespace Studio.VisualStudio8.DataTypes
             }
         }
 
-        [BuildElementArray("pair")]
+        [BuildElementArray("pair", ElementType = typeof(PairElement))]
         public PairElement[] Pairs
         {
             get

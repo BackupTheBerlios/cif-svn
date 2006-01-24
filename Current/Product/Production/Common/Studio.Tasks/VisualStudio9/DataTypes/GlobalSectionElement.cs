@@ -8,7 +8,7 @@ using NAnt.Core.Attributes;
 namespace Studio.VisualStudio9.DataTypes
 {
     [ElementName("globalsection9")]
-    public class GlobalSectionElement
+    public class GlobalSectionElement : DataTypeBase
     {
 
         #region Enums
@@ -89,7 +89,7 @@ namespace Studio.VisualStudio9.DataTypes
             }
         }
 
-        [BuildElementArray("pair")]
+        [BuildElementArray("pair", ElementType = typeof(PairElement))]
         public PairElement[] Pairs
         {
             get

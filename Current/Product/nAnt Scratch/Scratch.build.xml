@@ -11,6 +11,11 @@
         <echo message="${string}"/>
       </do>
     </loopthrough>
+    <addglobalsection8 solutionfile="">
+      <section sectionname="" timetoapply="">
+        <pair key="" value=""/>
+      </section>
+    </addglobalsection8>
   </target>
   
 </project>

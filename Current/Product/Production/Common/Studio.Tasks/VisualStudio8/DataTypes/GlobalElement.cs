@@ -41,7 +41,7 @@ namespace Studio.VisualStudio8.DataTypes
             }
         }
 
-        [BuildElementArray("globalsection")]
+        [BuildElementArray("globalsection", ElementType = typeof(GlobalSectionElement))]
         public GlobalSectionElement[] GlobalSelections
         {
             get

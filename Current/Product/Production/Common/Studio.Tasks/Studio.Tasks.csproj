@@ -1,4 +1,4 @@
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -91,6 +91,12 @@
     <Compile Include="VisualStudio9\Tasks\RemoveGlobalSection.cs" />
     <Compile Include="VisualStudio9\Tasks\RemoveProject.cs" />
     <Compile Include="VisualStudio9\Tasks\RemoveProjectSection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UpdatenAnt.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UpdatenAnt.xml" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|.NET 1.1' ">
     <OutputPath>bin\.NET 1.1\Release\</OutputPath>

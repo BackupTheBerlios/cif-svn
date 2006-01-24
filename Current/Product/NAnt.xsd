@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:nant="http://nant.sf.net/schemas/nant.xsd" elementFormDefault="qualified" targetNamespace="http://nant.sf.net/schemas/nant.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:annotation>
-    <xs:documentation>NAnt schema generated at 01/16/2006 11:47:30</xs:documentation>
+    <xs:documentation>NAnt schema generated at 01/23/2006 21:17:29</xs:documentation>
   </xs:annotation>
   <xs:complexType name="NAnt.Core.TaskContainer">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -142,6 +142,26 @@
         <xs:element name="readregistry" type="nant:NAnt.Win32.Tasks.ReadRegistryTask" />
         <xs:element name="tlbexp" type="nant:NAnt.Win32.Tasks.TlbExpTask" />
         <xs:element name="tlbimp" type="nant:NAnt.Win32.Tasks.TlbImpTask" />
+        <xs:element name="addglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddGlobalSection" />
+        <xs:element name="addproject8" type="nant:Studio.VisualStudio8.Tasks.AddProject" />
+        <xs:element name="addprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddToProjectSection" />
+        <xs:element name="removefromglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject8" type="nant:Studio.VisualStudio8.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveProjectSection" />
+        <xs:element name="addglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddGlobalSection" />
+        <xs:element name="addproject9" type="nant:Studio.VisualStudio9.Tasks.AddProject" />
+        <xs:element name="addprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddToProjectSection" />
+        <xs:element name="removefromglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject9" type="nant:Studio.VisualStudio9.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveProjectSection" />
         <xs:element name="attrib" type="nant:NAnt.Core.Tasks.AttribTask" />
         <xs:element name="available" type="nant:NAnt.Core.Tasks.AvailableTask" />
         <xs:element name="call" type="nant:NAnt.Core.Tasks.CallTask" />
@@ -417,6 +437,90 @@
     <xs:attribute name="failonempty" use="optional" />
     <xs:attribute name="defaultexcludes" use="optional" />
     <xs:attribute name="basedir" use="optional" />
+    <xs:attribute name="id" use="optional" />
+    <xs:attribute name="refid" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.DataTypes.PairElement">
+    <xs:attribute name="key" use="required" />
+    <xs:attribute name="value" use="required" />
+    <xs:attribute name="id" use="optional" />
+    <xs:attribute name="refid" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.DataTypes.GlobalSectionElement">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="1" name="pair" type="nant:Studio.VisualStudio8.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="sectionname" use="required" />
+    <xs:attribute name="timetoapply" use="required" />
+    <xs:attribute name="id" use="optional" />
+    <xs:attribute name="refid" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.DataTypes.GlobalElement">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="1" name="globalsection" type="nant:Studio.VisualStudio8.DataTypes.GlobalSectionElement" />
+    </xs:sequence>
+    <xs:attribute name="id" use="optional" />
+    <xs:attribute name="refid" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.DataTypes.ProjectSectionElement">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="1" name="pair" type="nant:Studio.VisualStudio8.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="sectionname" use="required" />
+    <xs:attribute name="timetoapply" use="required" />
+    <xs:attribute name="id" use="optional" />
+    <xs:attribute name="refid" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.DataTypes.ProjectElement">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="1" name="projectsection" type="nant:Studio.VisualStudio8.DataTypes.ProjectSectionElement" />
+    </xs:sequence>
+    <xs:attribute name="projectid" use="required" />
+    <xs:attribute name="parentid" use="required" />
+    <xs:attribute name="project" use="required" />
+    <xs:attribute name="location" use="required" />
+    <xs:attribute name="id" use="optional" />
+    <xs:attribute name="refid" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.DataTypes.PairElement">
+    <xs:attribute name="key" use="required" />
+    <xs:attribute name="value" use="required" />
+    <xs:attribute name="id" use="optional" />
+    <xs:attribute name="refid" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.DataTypes.GlobalSectionElement">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="1" name="pair" type="nant:Studio.VisualStudio9.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="sectionname" use="required" />
+    <xs:attribute name="timetoapply" use="required" />
+    <xs:attribute name="id" use="optional" />
+    <xs:attribute name="refid" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.DataTypes.GlobalElement">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="1" name="globalsection" type="nant:Studio.VisualStudio9.DataTypes.GlobalSectionElement" />
+    </xs:sequence>
+    <xs:attribute name="id" use="optional" />
+    <xs:attribute name="refid" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.DataTypes.ProjectSectionElement">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="1" name="pair" type="nant:Studio.VisualStudio9.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="sectionname" use="required" />
+    <xs:attribute name="timetoapply" use="required" />
+    <xs:attribute name="id" use="optional" />
+    <xs:attribute name="refid" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.DataTypes.ProjectElement">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="1" name="projectsection" type="nant:Studio.VisualStudio9.DataTypes.ProjectSectionElement" />
+    </xs:sequence>
+    <xs:attribute name="projectid" use="required" />
+    <xs:attribute name="parentid" use="required" />
+    <xs:attribute name="project" use="required" />
+    <xs:attribute name="location" use="required" />
     <xs:attribute name="id" use="optional" />
     <xs:attribute name="refid" use="optional" />
   </xs:complexType>
@@ -3320,6 +3424,210 @@
     <xs:attribute name="if" use="optional" />
     <xs:attribute name="unless" use="optional" />
   </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.Tasks.AddGlobalSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="section" type="nant:Studio.VisualStudio8.DataTypes.GlobalSectionElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.Tasks.AddProject">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="project" type="nant:Studio.VisualStudio8.DataTypes.ProjectElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.Tasks.AddProjectSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="project" type="nant:Studio.VisualStudio8.DataTypes.ProjectElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.Tasks.AddToGlobalSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="pairs" type="nant:Studio.VisualStudio8.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="sectionname" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.Tasks.AddToProjectSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="pairs" type="nant:Studio.VisualStudio8.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="projectid" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.Tasks.RemoveFromGlobalSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="pairs" type="nant:Studio.VisualStudio8.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="sectionname" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.Tasks.RemoveFromProjectSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="pairs" type="nant:Studio.VisualStudio8.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="projectid" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.Tasks.RemoveGlobalSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="section" type="nant:Studio.VisualStudio8.DataTypes.GlobalSectionElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.Tasks.RemoveProject">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="project" type="nant:Studio.VisualStudio8.DataTypes.ProjectElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio8.Tasks.RemoveProjectSection">
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="projectid" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.Tasks.AddGlobalSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="section" type="nant:Studio.VisualStudio9.DataTypes.GlobalSectionElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.Tasks.AddProject">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="project" type="nant:Studio.VisualStudio9.DataTypes.ProjectElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.Tasks.AddProjectSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="project" type="nant:Studio.VisualStudio9.DataTypes.ProjectElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.Tasks.AddToGlobalSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="pairs" type="nant:Studio.VisualStudio9.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="sectionname" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.Tasks.AddToProjectSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="pairs" type="nant:Studio.VisualStudio9.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="projectid" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.Tasks.RemoveFromGlobalSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="pairs" type="nant:Studio.VisualStudio9.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="sectionname" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.Tasks.RemoveFromProjectSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="pairs" type="nant:Studio.VisualStudio9.DataTypes.PairElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="projectid" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.Tasks.RemoveGlobalSection">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="section" type="nant:Studio.VisualStudio9.DataTypes.GlobalSectionElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.Tasks.RemoveProject">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="project" type="nant:Studio.VisualStudio9.DataTypes.ProjectElement" />
+    </xs:sequence>
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Studio.VisualStudio9.Tasks.RemoveProjectSection">
+    <xs:attribute name="solutionfile" use="required" />
+    <xs:attribute name="projectid" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
   <xs:complexType name="NAnt.Core.Tasks.AttribTask">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element minOccurs="0" maxOccurs="1" name="fileset" type="nant:NAnt.Core.Types.FileSet" />
@@ -3601,6 +3909,26 @@
         <xs:element name="readregistry" type="nant:NAnt.Win32.Tasks.ReadRegistryTask" />
         <xs:element name="tlbexp" type="nant:NAnt.Win32.Tasks.TlbExpTask" />
         <xs:element name="tlbimp" type="nant:NAnt.Win32.Tasks.TlbImpTask" />
+        <xs:element name="addglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddGlobalSection" />
+        <xs:element name="addproject8" type="nant:Studio.VisualStudio8.Tasks.AddProject" />
+        <xs:element name="addprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddToProjectSection" />
+        <xs:element name="removefromglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject8" type="nant:Studio.VisualStudio8.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveProjectSection" />
+        <xs:element name="addglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddGlobalSection" />
+        <xs:element name="addproject9" type="nant:Studio.VisualStudio9.Tasks.AddProject" />
+        <xs:element name="addprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddToProjectSection" />
+        <xs:element name="removefromglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject9" type="nant:Studio.VisualStudio9.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveProjectSection" />
         <xs:element name="attrib" type="nant:NAnt.Core.Tasks.AttribTask" />
         <xs:element name="available" type="nant:NAnt.Core.Tasks.AvailableTask" />
         <xs:element name="call" type="nant:NAnt.Core.Tasks.CallTask" />
@@ -3789,6 +4117,26 @@
         <xs:element name="readregistry" type="nant:NAnt.Win32.Tasks.ReadRegistryTask" />
         <xs:element name="tlbexp" type="nant:NAnt.Win32.Tasks.TlbExpTask" />
         <xs:element name="tlbimp" type="nant:NAnt.Win32.Tasks.TlbImpTask" />
+        <xs:element name="addglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddGlobalSection" />
+        <xs:element name="addproject8" type="nant:Studio.VisualStudio8.Tasks.AddProject" />
+        <xs:element name="addprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddToProjectSection" />
+        <xs:element name="removefromglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject8" type="nant:Studio.VisualStudio8.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveProjectSection" />
+        <xs:element name="addglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddGlobalSection" />
+        <xs:element name="addproject9" type="nant:Studio.VisualStudio9.Tasks.AddProject" />
+        <xs:element name="addprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddToProjectSection" />
+        <xs:element name="removefromglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject9" type="nant:Studio.VisualStudio9.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveProjectSection" />
         <xs:element name="attrib" type="nant:NAnt.Core.Tasks.AttribTask" />
         <xs:element name="available" type="nant:NAnt.Core.Tasks.AvailableTask" />
         <xs:element name="call" type="nant:NAnt.Core.Tasks.CallTask" />
@@ -4012,6 +4360,26 @@
         <xs:element name="readregistry" type="nant:NAnt.Win32.Tasks.ReadRegistryTask" />
         <xs:element name="tlbexp" type="nant:NAnt.Win32.Tasks.TlbExpTask" />
         <xs:element name="tlbimp" type="nant:NAnt.Win32.Tasks.TlbImpTask" />
+        <xs:element name="addglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddGlobalSection" />
+        <xs:element name="addproject8" type="nant:Studio.VisualStudio8.Tasks.AddProject" />
+        <xs:element name="addprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddToProjectSection" />
+        <xs:element name="removefromglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject8" type="nant:Studio.VisualStudio8.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveProjectSection" />
+        <xs:element name="addglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddGlobalSection" />
+        <xs:element name="addproject9" type="nant:Studio.VisualStudio9.Tasks.AddProject" />
+        <xs:element name="addprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddToProjectSection" />
+        <xs:element name="removefromglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject9" type="nant:Studio.VisualStudio9.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveProjectSection" />
         <xs:element name="attrib" type="nant:NAnt.Core.Tasks.AttribTask" />
         <xs:element name="available" type="nant:NAnt.Core.Tasks.AvailableTask" />
         <xs:element name="call" type="nant:NAnt.Core.Tasks.CallTask" />
@@ -4476,6 +4844,26 @@
       <xs:element name="readregistry" type="nant:NAnt.Win32.Tasks.ReadRegistryTask" />
       <xs:element name="tlbexp" type="nant:NAnt.Win32.Tasks.TlbExpTask" />
       <xs:element name="tlbimp" type="nant:NAnt.Win32.Tasks.TlbImpTask" />
+      <xs:element name="addglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddGlobalSection" />
+      <xs:element name="addproject8" type="nant:Studio.VisualStudio8.Tasks.AddProject" />
+      <xs:element name="addprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddProjectSection" />
+      <xs:element name="addtoglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddToGlobalSection" />
+      <xs:element name="addtoprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddToProjectSection" />
+      <xs:element name="removefromglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromGlobalSection" />
+      <xs:element name="removefromprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromProjectSection" />
+      <xs:element name="removeglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveGlobalSection" />
+      <xs:element name="removeproject8" type="nant:Studio.VisualStudio8.Tasks.RemoveProject" />
+      <xs:element name="removeprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveProjectSection" />
+      <xs:element name="addglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddGlobalSection" />
+      <xs:element name="addproject9" type="nant:Studio.VisualStudio9.Tasks.AddProject" />
+      <xs:element name="addprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddProjectSection" />
+      <xs:element name="addtoglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddToGlobalSection" />
+      <xs:element name="addtoprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddToProjectSection" />
+      <xs:element name="removefromglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromGlobalSection" />
+      <xs:element name="removefromprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromProjectSection" />
+      <xs:element name="removeglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveGlobalSection" />
+      <xs:element name="removeproject9" type="nant:Studio.VisualStudio9.Tasks.RemoveProject" />
+      <xs:element name="removeprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveProjectSection" />
       <xs:element name="attrib" type="nant:NAnt.Core.Tasks.AttribTask" />
       <xs:element name="available" type="nant:NAnt.Core.Tasks.AvailableTask" />
       <xs:element name="call" type="nant:NAnt.Core.Tasks.CallTask" />
@@ -4523,6 +4911,16 @@
       <xs:element name="warnaserror" type="nant:NAnt.DotNet.Types.WarningAsError" />
       <xs:element name="categoryset" type="nant:NAnt.NUnit2.Types.CategorySet" />
       <xs:element name="cvsfileset" type="nant:NAnt.SourceControl.Types.CvsFileSet" />
+      <xs:element name="global8" type="nant:Studio.VisualStudio8.DataTypes.GlobalElement" />
+      <xs:element name="globalsection8" type="nant:Studio.VisualStudio8.DataTypes.GlobalSectionElement" />
+      <xs:element name="pair8" type="nant:Studio.VisualStudio8.DataTypes.PairElement" />
+      <xs:element name="project8" type="nant:Studio.VisualStudio8.DataTypes.ProjectElement" />
+      <xs:element name="projectsection8" type="nant:Studio.VisualStudio8.DataTypes.ProjectSectionElement" />
+      <xs:element name="global9" type="nant:Studio.VisualStudio9.DataTypes.GlobalElement" />
+      <xs:element name="globalsection9" type="nant:Studio.VisualStudio9.DataTypes.GlobalSectionElement" />
+      <xs:element name="pair9" type="nant:Studio.VisualStudio9.DataTypes.PairElement" />
+      <xs:element name="project9" type="nant:Studio.VisualStudio9.DataTypes.ProjectElement" />
+      <xs:element name="projectsection9" type="nant:Studio.VisualStudio9.DataTypes.ProjectSectionElement" />
       <xs:element name="filterchain" type="nant:NAnt.Core.Filters.FilterChain" />
       <xs:element name="credential" type="nant:NAnt.Core.Types.Credential" />
       <xs:element name="fileset" type="nant:NAnt.Core.Types.FileSet" />
@@ -4675,6 +5073,26 @@
         <xs:element name="readregistry" type="nant:NAnt.Win32.Tasks.ReadRegistryTask" />
         <xs:element name="tlbexp" type="nant:NAnt.Win32.Tasks.TlbExpTask" />
         <xs:element name="tlbimp" type="nant:NAnt.Win32.Tasks.TlbImpTask" />
+        <xs:element name="addglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddGlobalSection" />
+        <xs:element name="addproject8" type="nant:Studio.VisualStudio8.Tasks.AddProject" />
+        <xs:element name="addprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddToProjectSection" />
+        <xs:element name="removefromglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject8" type="nant:Studio.VisualStudio8.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveProjectSection" />
+        <xs:element name="addglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddGlobalSection" />
+        <xs:element name="addproject9" type="nant:Studio.VisualStudio9.Tasks.AddProject" />
+        <xs:element name="addprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddToProjectSection" />
+        <xs:element name="removefromglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject9" type="nant:Studio.VisualStudio9.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveProjectSection" />
         <xs:element name="attrib" type="nant:NAnt.Core.Tasks.AttribTask" />
         <xs:element name="available" type="nant:NAnt.Core.Tasks.AvailableTask" />
         <xs:element name="call" type="nant:NAnt.Core.Tasks.CallTask" />
@@ -4722,6 +5140,16 @@
         <xs:element name="warnaserror" type="nant:NAnt.DotNet.Types.WarningAsError" />
         <xs:element name="categoryset" type="nant:NAnt.NUnit2.Types.CategorySet" />
         <xs:element name="cvsfileset" type="nant:NAnt.SourceControl.Types.CvsFileSet" />
+        <xs:element name="global8" type="nant:Studio.VisualStudio8.DataTypes.GlobalElement" />
+        <xs:element name="globalsection8" type="nant:Studio.VisualStudio8.DataTypes.GlobalSectionElement" />
+        <xs:element name="pair8" type="nant:Studio.VisualStudio8.DataTypes.PairElement" />
+        <xs:element name="project8" type="nant:Studio.VisualStudio8.DataTypes.ProjectElement" />
+        <xs:element name="projectsection8" type="nant:Studio.VisualStudio8.DataTypes.ProjectSectionElement" />
+        <xs:element name="global9" type="nant:Studio.VisualStudio9.DataTypes.GlobalElement" />
+        <xs:element name="globalsection9" type="nant:Studio.VisualStudio9.DataTypes.GlobalSectionElement" />
+        <xs:element name="pair9" type="nant:Studio.VisualStudio9.DataTypes.PairElement" />
+        <xs:element name="project9" type="nant:Studio.VisualStudio9.DataTypes.ProjectElement" />
+        <xs:element name="projectsection9" type="nant:Studio.VisualStudio9.DataTypes.ProjectSectionElement" />
         <xs:element name="filterchain" type="nant:NAnt.Core.Filters.FilterChain" />
         <xs:element name="credential" type="nant:NAnt.Core.Types.Credential" />
         <xs:element name="fileset" type="nant:NAnt.Core.Types.FileSet" />
