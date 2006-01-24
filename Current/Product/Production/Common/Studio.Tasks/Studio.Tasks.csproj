@@ -1,4 +1,4 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -43,6 +43,7 @@
     <Compile Include="VisualStudio8\DataTypes\ProjectElement.cs" />
     <Compile Include="VisualStudio8\DataTypes\ProjectSectionElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\ProjectInfo.cs" />
     <Compile Include="VisualStudio8\Solution\SolutionFile.cs" />
     <Compile Include="VisualStudio8\Solution\Global.cs" />
     <Compile Include="VisualStudio8\Solution\GlobalSection.cs" />
@@ -64,6 +65,32 @@
     <Compile Include="VisualStudio8\Tasks\RemoveGlobalSection.cs" />
     <Compile Include="VisualStudio8\Tasks\RemoveProject.cs" />
     <Compile Include="VisualStudio8\Tasks\RemoveProjectSection.cs" />
+    <Compile Include="VisualStudio9\DataTypes\GlobalElement.cs" />
+    <Compile Include="VisualStudio9\DataTypes\GlobalSectionElement.cs" />
+    <Compile Include="VisualStudio9\DataTypes\PairElement.cs" />
+    <Compile Include="VisualStudio9\DataTypes\ProjectElement.cs" />
+    <Compile Include="VisualStudio9\DataTypes\ProjectSectionElement.cs" />
+    <Compile Include="VisualStudio9\Solution\Global.cs" />
+    <Compile Include="VisualStudio9\Solution\GlobalSection.cs" />
+    <Compile Include="VisualStudio9\Solution\GlobalSectionList.cs" />
+    <Compile Include="VisualStudio9\Solution\Pair.cs" />
+    <Compile Include="VisualStudio9\Solution\PairMap.cs" />
+    <Compile Include="VisualStudio9\Solution\Project.cs" />
+    <Compile Include="VisualStudio9\Solution\ProjectList.cs" />
+    <Compile Include="VisualStudio9\Solution\ProjectSection.cs" />
+    <Compile Include="VisualStudio9\Solution\Section.cs" />
+    <Compile Include="VisualStudio9\Solution\Solution.cs" />
+    <Compile Include="VisualStudio9\Solution\SolutionFile.cs" />
+    <Compile Include="VisualStudio9\Tasks\AddGlobalSection.cs" />
+    <Compile Include="VisualStudio9\Tasks\AddProject.cs" />
+    <Compile Include="VisualStudio9\Tasks\AddProjectSection.cs" />
+    <Compile Include="VisualStudio9\Tasks\AddToGlobalSection.cs" />
+    <Compile Include="VisualStudio9\Tasks\AddToProjectSection.cs" />
+    <Compile Include="VisualStudio9\Tasks\RemoveFromGlobalSection.cs" />
+    <Compile Include="VisualStudio9\Tasks\RemoveFromProjectSection.cs" />
+    <Compile Include="VisualStudio9\Tasks\RemoveGlobalSection.cs" />
+    <Compile Include="VisualStudio9\Tasks\RemoveProject.cs" />
+    <Compile Include="VisualStudio9\Tasks\RemoveProjectSection.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|.NET 1.1' ">
     <OutputPath>bin\.NET 1.1\Release\</OutputPath>

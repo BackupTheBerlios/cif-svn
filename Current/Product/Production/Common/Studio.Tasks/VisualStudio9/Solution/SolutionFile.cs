@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 
-namespace Studio.VisualStudio8.Solution
+namespace Studio.VisualStudio9.Solution
 {
     internal class SolutionFile
     {
@@ -107,6 +107,10 @@ namespace Studio.VisualStudio8.Solution
                     this.Solution.Title = Matched.Groups[1].Value;
                     this.Solution.FormatVersion = Matched.Groups[2].Value;
                     this.Solution.Version = float.Parse(Matched.Groups[3].Value);
+                }
+                else if (LineCount == 2)
+                {
+                	this.Solution.ShortDeclaration = Line.Trim();
                 }
                 else if (Line.StartsWith(ProjectDeclaration))
                 {
@@ -230,6 +234,7 @@ namespace Studio.VisualStudio8.Solution
             using(Writer = this.File.CreateText())
             {
                 Writer.WriteLine(string.Format("{0}, {1}", this.Solution.Title, this.Solution.FormatVersion));
+                Writer.WriteLine(this.Solution.ShortDeclaration);
 
                 foreach (Project CurrentProject in this.Solution.Projects)
                 {

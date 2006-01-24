@@ -3,7 +3,7 @@ using System.Collections;
 using System.Text;
 using System.IO;
 
-namespace Studio.VisualStudio8.Solution
+namespace Studio.VisualStudio9.Solution
 {
     public class Solution
     {
@@ -15,6 +15,7 @@ namespace Studio.VisualStudio8.Solution
         private string _Title;
         private string _FormatVersion;
         private float _Version;
+        private string _ShortDeclaration;
         private ProjectList _Projects;
         private Global _Global;
         private SolutionFile _SolutionFile;
@@ -76,9 +77,23 @@ namespace Studio.VisualStudio8.Solution
             {
                 if (_Version == value)
                     return;
-                if (value != 8)
+                if (value != 9)
                     throw new Exception(string.Format("The version {0} is not supported.", value));
                 _Version = value;
+            }
+        }
+
+        public string ShortDeclaration
+        {
+            get
+            {
+                return _ShortDeclaration;
+            }
+            set
+            {
+                if (_ShortDeclaration == value)
+                    return;
+                _ShortDeclaration = value;
             }
         }
 
