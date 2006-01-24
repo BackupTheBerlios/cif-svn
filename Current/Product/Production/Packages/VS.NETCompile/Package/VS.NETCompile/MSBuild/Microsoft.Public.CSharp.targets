@@ -18,7 +18,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   <Import Project="Microsoft.Public.Common.targets" />
 
-  <PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == '.NET 1.1'">
     <MSBuildAllProjects>$(MSBuildAllProjects)</MSBuildAllProjects>
     <DefaultLanguageSourceExtension>.cs</DefaultLanguageSourceExtension>
     <Language>C#</Language>
@@ -35,12 +35,12 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     instance where _DisabledWarnings is changed so this approach appears safe.
   -->
 
-  <PropertyGroup>	
+  <PropertyGroup Condition=" '$(Platform)' == '.NET 1.1'">	
     <CscToolPath>$(TargetFrameworkDirectory)</CscToolPath>	
     <_DisabledWarnings>$(NoWarn)</_DisabledWarnings>
-  </PropertyGroup>   
+  </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == '.NET 1.1'">
     <CoreCompileDependsOn>_ComputeNonExistentFileProperty</CoreCompileDependsOn>
   </PropertyGroup>
   <Target Condition=" '$(Platform)' == '.NET 1.1' "

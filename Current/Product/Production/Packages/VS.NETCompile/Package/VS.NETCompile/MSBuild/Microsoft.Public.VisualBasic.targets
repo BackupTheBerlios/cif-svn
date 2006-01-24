@@ -18,7 +18,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   <Import Project="Microsoft.Public.Common.targets" />
 
-  <PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == '.NET 1.1'">
     <MSBuildAllProjects>$(MSBuildAllProjects)</MSBuildAllProjects>
     <DefaultLanguageSourceExtension>.vb</DefaultLanguageSourceExtension>
     <Language>VB</Language>
@@ -30,11 +30,11 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   VbcToolPath - controls where msbuild looks for vbc.exe
   -->
 
-  <PropertyGroup>
-    <VbcToolPath>$(TargetFrameworkDirectory)</VbcToolPath>	
-  </PropertyGroup>   
+  <PropertyGroup Condition=" '$(Platform)' == '.NET 1.1'">
+    <VbcToolPath>$(TargetFrameworkDirectory)</VbcToolPath>
+  </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == '.NET 1.1'">
     <CoreCompileDependsOn>_ComputeNonExistentFileProperty</CoreCompileDependsOn>
   </PropertyGroup>
   <Target Condition=" '$(Platform)' == '.NET 1.1' "
