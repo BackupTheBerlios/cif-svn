@@ -58,8 +58,10 @@ namespace Tracker.Tasks
             this.Logout();
         }
 
-        private string FormatIdList(int[] IDs)
+        public string FormatIdList(int[] IDs)
         {
+            if (IDs.Length == 0)
+                return string.Empty;
             StringBuilder builder = new StringBuilder();
             builder.Append(IDs[0]);
             for (int i = 1; i < IDs.Length; ++i)
@@ -70,7 +72,19 @@ namespace Tracker.Tasks
             return builder.ToString();
          }
 
-        public void Test()
+        internal void FormatIdList()
+        {
+            try
+            {
+                this.FormatIdList(new int[0]);
+            }
+            catch (Exception ex)
+            {
+                string stop = ex.Message;
+            }
+        }
+
+        internal void Test()
         {
             this.Query = "For Me";
             this.ConnectionInformation = new ConnectionInformation();
