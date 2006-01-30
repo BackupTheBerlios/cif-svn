@@ -13,4 +13,8 @@ Public MustInherit Class LoopItems
     End Function
 
     Protected MustOverride Function GetStrings() As IEnumerator
+
+    Public Overridable Sub Executing(ByVal item As String)
+
+    End Sub
 End Class

@@ -50,6 +50,7 @@ Public Class LoopThrough
             Else
                 Me.Properties.Add(Me.PropertyName, Item)
             End If
+            Me.Items.Items.Executing(Item)
             Me.Actions.Execute()
         Next
     End Sub
