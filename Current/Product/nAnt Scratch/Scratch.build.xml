@@ -11,6 +11,13 @@
         <echo message="${string}"/>
       </do>
     </loopthrough>
+    
+    <replace file="">
+      <filterchain >
+        <regexreplace rx="" replacingText=""/>
+      </filterchain>
+    </replace>
+    
     <addglobalsection8 solutionfile="">
       <section sectionname="" timetoapply="">
         <pair key="" value=""/>

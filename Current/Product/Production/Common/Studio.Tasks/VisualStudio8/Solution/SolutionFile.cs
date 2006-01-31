@@ -205,7 +205,7 @@ namespace Studio.VisualStudio8.Solution
                 }
                 else if (Regex.IsMatch(ProjectLine, "\\s+=\\s+"))
                 {
-                    Match Matched = Regex.Match(ProjectLine, "^\\s{0,}([\\w+\\\\?\\.?\\-?\\s?]+)\\s+=\\s+([\\w+\\\\?\\.?\\-?\\s?]+)");
+                    Match Matched = Regex.Match(ProjectLine, "^\\s{0,}([\\{?\\}?\\|?\\w+?\\\\?\\.?\\-?\\s?]+)\\s+=\\s+([\\{?\\}?\\|?\\w+?\\\\?\\.?\\-?\\s?]+)");
                     CurrentPair = new Pair();
                     CurrentPair.Key = Matched.Groups[1].Value;
                     CurrentPair.Value = Matched.Groups[2].Value;

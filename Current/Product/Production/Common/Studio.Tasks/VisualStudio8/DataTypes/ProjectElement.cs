@@ -38,7 +38,7 @@ namespace Studio.VisualStudio8.DataTypes
             }
         }
 
-        private Solution.Project Project
+        private Solution.Project VSProject
         {
             get
             {
@@ -97,7 +97,7 @@ namespace Studio.VisualStudio8.DataTypes
         }
 
         [TaskAttribute("location", Required = true)]
-        public string Location
+        public string ProjectLocation
         {
             get
             {
@@ -135,14 +135,14 @@ namespace Studio.VisualStudio8.DataTypes
             this._Project.Id = this.ProjectId;
             this._Project.ParentId = this.ParentId;
             this._Project.Name = this.ProjectName;
-            this._Project.Location = this.Location;
+            this._Project.Location = this.ProjectLocation;
             this._Project.Section = this.ProjectSections.GetProjectSection();
             this.InSync = true;
         }
 
         public Solution.Project GetProject()
         {
-            return this.Project;
+            return this.VSProject;
         }
     }
 }

@@ -4,16 +4,6 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "%ProjectName%", "Install\%P
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(SourceCodeControl) = preSolution
-		SccNumberOfProjects = 2
-		SccLocalPath0 = .
-		CanCheckoutShared = false
-		SolutionUniqueID = {B0A7495F-2345-43E7-A7AF-BD47D78CA7BB}
-		SccProjectUniqueName1 = Install\\%ProjectName%\\%ProjectName%.vdproj
-		SccLocalPath1 = .
-		CanCheckoutShared = false
-		SccProjectFilePathRelativizedFromConnection1 = Install\\%ProjectName%\\
-	EndGlobalSection
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
 		Release = Release

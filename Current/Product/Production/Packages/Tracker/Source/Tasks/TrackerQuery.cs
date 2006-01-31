@@ -72,7 +72,7 @@ namespace Tracker.Tasks
             return builder.ToString();
          }
 
-        internal void FormatIdList()
+        internal void TestFormatIdList()
         {
             try
             {
