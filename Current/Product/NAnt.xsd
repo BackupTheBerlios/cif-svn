@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:nant="http://nant.sf.net/schemas/nant.xsd" elementFormDefault="qualified" targetNamespace="http://nant.sf.net/schemas/nant.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:annotation>
-    <xs:documentation>NAnt schema generated at 01/24/2006 16:48:28</xs:documentation>
+    <xs:documentation>NAnt schema generated at 02/06/2006 14:46:17</xs:documentation>
   </xs:annotation>
   <xs:complexType name="NAnt.Core.TaskContainer">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -198,6 +198,7 @@
         <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
         <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
         <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+        <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
       </xs:choice>
     </xs:sequence>
     <xs:attribute name="failonerror" use="optional" />
@@ -4002,6 +4003,7 @@
         <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
         <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
         <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+        <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
       </xs:choice>
     </xs:sequence>
     <xs:attribute name="uptodatefile" use="optional" />
@@ -4212,6 +4214,7 @@
         <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
         <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
         <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+        <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
       </xs:choice>
     </xs:sequence>
     <xs:attribute name="uptodatefile" use="optional" />
@@ -4457,6 +4460,7 @@
         <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
         <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
         <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+        <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
       </xs:choice>
     </xs:sequence>
     <xs:attribute name="property" use="required" />
@@ -4749,6 +4753,19 @@
     <xs:attribute name="if" use="optional" />
     <xs:attribute name="unless" use="optional" />
   </xs:complexType>
+  <xs:complexType name="TestCoverage.Tasks.CreateTestCoverageReport">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="productionassemblies" type="nant:NAnt.Core.Types.FileSet" />
+      <xs:element minOccurs="1" maxOccurs="1" name="testasseblies" type="nant:NAnt.Core.Types.FileSet" />
+    </xs:sequence>
+    <xs:attribute name="projectname" use="required" />
+    <xs:attribute name="format" use="required" />
+    <xs:attribute name="reportfile" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
   <xs:complexType name="Target">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="write" type="nant:Common.Tasks.WriteTask" />
@@ -4943,6 +4960,7 @@
       <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
       <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
       <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+      <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
       <xs:element name="xmlquery" type="nant:Common.Tasks.XmlQuery" />
       <xs:element name="strings" type="nant:Common.Tasks.StringList" />
       <xs:element name="regexmatch" type="nant:Common.Tasks.RegexMatch" />
@@ -5176,6 +5194,7 @@
         <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
         <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
         <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+        <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
         <xs:element name="xmlquery" type="nant:Common.Tasks.XmlQuery" />
         <xs:element name="strings" type="nant:Common.Tasks.StringList" />
         <xs:element name="regexmatch" type="nant:Common.Tasks.RegexMatch" />

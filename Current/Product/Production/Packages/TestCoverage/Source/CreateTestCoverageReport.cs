@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Text;
+using System.Text.RegularExpressions;
 using NAnt.Core;
 using NAnt.Core.Attributes;
 using System.IO;
@@ -121,7 +122,6 @@ namespace TestCoverage.Tasks
 
         protected override void ExecuteTask()
         {
-            System.Diagnostics.Debugger.Break();
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyResolve);
             this.BuildTestSubjectsCovered();
             this.WriteXmlReport();
@@ -276,8 +276,11 @@ namespace TestCoverage.Tasks
                     }
                     else if (Member is MethodInfo)
                     {
-                        IsCoverable = true;
-                        MemberType = "Method";
+                        if (!Regex.IsMatch(Member.Name, @"get_|set_"))
+                        {
+                            IsCoverable = true;
+                            MemberType = "Method";
+                        }
                     }
                     else if (Member is PropertyInfo)
                     {

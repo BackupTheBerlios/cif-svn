@@ -49,8 +49,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Package\TestCoverage\CoverageDetail.xsl" />
+    <EmbeddedResource Include="Package\TestCoverage\CoverageDetail.xsl" />
     <Content Include="Package\TestCoverage\CoverageSummary.xsl" />
+    <Content Include="UpdatenAnt.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UpdatenAnt.bat" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|.NET 1.1' ">
     <OutputPath>bin\.NET 1.1\Release\</OutputPath>

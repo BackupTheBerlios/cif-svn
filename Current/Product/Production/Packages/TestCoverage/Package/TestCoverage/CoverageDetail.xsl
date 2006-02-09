@@ -146,14 +146,14 @@
     <TABLE width="800px" align="left" border="0">
       <TR>
         <td colspan="3">
-          <H3>
+          <H2>
             <a>
               <xsl:attribute name="name">
                 <xsl:value-of select="$AssemblyName"/>
               </xsl:attribute>
             </a>
             Assembly :<xsl:value-of select="$AssemblyName"/>
-          </H3>
+          </H2>
         </td>
       </TR>
       <TR>
@@ -187,28 +187,47 @@
           <xsl:value-of select="$CoveredMemeberCount"/>/<xsl:value-of select="$MemeberCount"/>&#160;<xsl:value-of select="$PercentCoverage"/>%
         </TD>
       </TR>
-      <tr>
-        <td colspan="3">
-          <hr/>
-        </td>
-      </tr>
-      <TR>
-        <TD  width="*">
-          <H4>Covered</H4>
-        </TD>
+      <xsl:for-each select="Class">
+        <tr>
+          <td colspan="3">
+            <hr/>
+          </td>
+        </tr>
+        <TR>
+          <td colspan="3">
+            <H3>
+              Class: <xsl:value-of select="@FullName"/>
+            </H3>
+          </td>
+        </TR>
+        <TR>
+          <td colspan="3">
+            <H3>
+              Test Fixture: <xsl:value-of select="@TestFixture"/>
+            </H3>
+          </td>
+        </TR>
+        <tr>
+          <td colspan="3">
+            <hr/>
+          </td>
+        </tr>
+        <TR>
+          <TD  width="*">
+            <H4>Covered</H4>
+          </TD>
 
-        <TD width="10%">
-          <H4>Test</H4>
-        </TD>
+          <TD width="10%">
+            <H4>Test</H4>
+          </TD>
 
-        <TD width="40%">
-          <H4>Memeber</H4>
-        </TD>
-      </TR>
-      <xsl:for-each select="Class/Member">
-        
+          <TD width="40%">
+            <H4>Memeber</H4>
+          </TD>
+        </TR>
+        <xsl:for-each select="Member">  
           <xsl:call-template name="Function" />
-        
+        </xsl:for-each>
       </xsl:for-each>
     </TABLE>
   </xsl:template>
@@ -229,14 +248,20 @@
       <TD style="width:300px;height:10px" valign="bottom">
         <TABLE style="width:100%;" border="0" cellpadding="0" cellspacing="0">
           <TR height='10px'>
-            <xsl:call-template name="CreateBar">
-              <xsl:with-param name="width" select="$PercentageCovered"></xsl:with-param>
-              <xsl:with-param name="colour">Green</xsl:with-param>
-            </xsl:call-template>
-            <xsl:call-template name="CreateBar">
-              <xsl:with-param name="width" select="100 - $PercentageCovered"></xsl:with-param>
-              <xsl:with-param name="colour">Red</xsl:with-param>
-            </xsl:call-template>
+            <xsl:choose>
+              <xsl:when test="$PercentageCovered = '100'" >
+                <xsl:call-template name="CreateBar">
+                  <xsl:with-param name="width" select="$PercentageCovered"></xsl:with-param>
+                  <xsl:with-param name="colour">Green</xsl:with-param>
+                </xsl:call-template>    
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:call-template name="CreateBar">
+                  <xsl:with-param name="width" select="100 - $PercentageCovered"></xsl:with-param>
+                  <xsl:with-param name="colour">Red</xsl:with-param>
+                </xsl:call-template>    
+              </xsl:otherwise>
+            </xsl:choose>
           </TR>
         </TABLE>
       </TD>
