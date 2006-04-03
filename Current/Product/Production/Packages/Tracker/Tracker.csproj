@@ -73,6 +73,7 @@
     <Compile Include="Source\DataTypes\ReadFieldSet.cs" />
     <Compile Include="Source\Tasks\TrackerAddNote.cs" />
     <Compile Include="Source\Tasks\TrackerChange.cs" />
+    <Compile Include="Source\Tasks\TrackerCreate.cs" />
     <Compile Include="Source\Tasks\TrackerGetField.cs" />
     <Compile Include="Source\Tasks\TrackerQuery.cs" />
     <Compile Include="Source\Tasks\TrackerReport.cs" />
