@@ -94,7 +94,7 @@
   </target>
 
   <target name="SourceControl.SetUp">
-    <mkdir if="${directory::exists(Private.SVN.ReportDirectory) == false}" dir="${Private.SVN.ReportDirectory}"/>
+    <mkdir unless="${directory::exists(Private.SVN.ReportDirectory)}" dir="${Private.SVN.ReportDirectory}"/>
   </target>
 
   <target name="SourceControl.TearDown">
