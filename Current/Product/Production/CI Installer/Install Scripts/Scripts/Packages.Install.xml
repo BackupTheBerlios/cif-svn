@@ -42,12 +42,12 @@
   </target>
 
   <target name="Private.Packages.InstallArtifacts" >
-    <mkdir if="${directory::exists(BuildDirectory + '\Installs') == false}" dir="${BuildDirectory}\Installs"/>
+    <mkdir unless="${directory::exists(BuildDirectory + '\Installs')}" dir="${BuildDirectory}\Installs"/>
     <mkiisdir dirpath="${BuildDirectory}\Installs" vdirname="${ProjectName} Installs" />
   </target>
 
   <target name="Private.Packages.SourceModificationReport" >
-    <mkdir if="${directory::exists(BuildDirectory + '\SourceModificationReports') == false}" dir="${BuildDirectory}\SourceModificationReports"/>
+    <mkdir unless="${directory::exists(BuildDirectory + '\SourceModificationReports')}" dir="${BuildDirectory}\SourceModificationReports"/>
   </target>
 
   <target name="Private.Packages.DotNetUnitTest" >

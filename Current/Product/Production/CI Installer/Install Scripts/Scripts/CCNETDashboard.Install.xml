@@ -10,7 +10,7 @@
   <property name="Private.CCNETDashboard.DefaultConfigFile" value="${Private.CCNETDashboard.DefaultDashboardDirectory}\dashboard.config"/>
   
   <target name="CCNETDashboard.Install" depends="CCNETDashboard.ValidateParameters">
-    <mkdir if="${directory::exists(CCNETDashboard.DashboardDirectory) == false}" dir="${CCNETDashboard.DashboardDirectory}"/>
+    <mkdir unless="${directory::exists(CCNETDashboard.DashboardDirectory)}" dir="${CCNETDashboard.DashboardDirectory}"/>
     
     <property name="Private.CCNETDashboard.SourceFile" value="${Private.CCNETDashboard.DefaultConfigFile}"/>
     <property name="Private.CCNETDashboard.TargetFile" value="${CCNETDashboard.ConfigFile}"/>
@@ -36,7 +36,7 @@
   </target>
 
   <target name="Private.CCNETDashboard.InstallFile" >
-    <mkdir if="${directory::exists('C:\temp') == false}" dir="C:\temp"/>
+    <mkdir unless="${directory::exists('C:\temp')}" dir="C:\temp"/>
     <delete file="C:\temp\nant.tmp" failonerror="false"/>
     <property name="Common.TargetFile" value="C:\temp\nant.tmp"/>
     <property name="Common.SourceFile" value="${Private.CCNETDashboard.SourceFile}"/>

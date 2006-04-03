@@ -6,7 +6,7 @@
   <property name="Private.VSS.Password" value="password"/>
 
   <target name="VSS.Install" depends="VSS.ValidateParameters" >
-    <mkdir if="${directory::exists(VSSRootShare + '\' + ProjectName) == false}" dir="${VSSRootShare}\${ProjectName}"/>
+    <mkdir unless="${directory::exists(VSSRootShare + '\' + ProjectName)}" dir="${VSSRootShare}\${ProjectName}"/>
     <unzip todir="${VSSRootShare}\${ProjectName}" zipfile="Zips\Template.zip"/>
     <!--Will need to modify this to support creation of additional codelines.-->
     <vssaddproject

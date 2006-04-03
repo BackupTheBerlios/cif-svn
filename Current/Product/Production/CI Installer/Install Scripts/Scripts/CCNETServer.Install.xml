@@ -28,7 +28,7 @@
   </target>
 
   <target name="CCNETServer.ValidateParameters">
-    <fail if="${property::exists('CCNETServer.ServerPort') == false}" message="Property CCNETServer.ServerPort was not set on the commandline."/>
+    <fail unless="${property::exists('CCNETServer.ServerPort')}" message="Property CCNETServer.ServerPort was not set on the commandline."/>
   </target>
 
   <target name="Private.CCNETServer.InstallBuildDirectoryFiles">
@@ -42,7 +42,7 @@
   </target>
 
   <target name="Private.CCNETServer.InstallBuildServerDirectoryFiles">
-    <mkdir if="${directory::exists(CCNETServer.ServerDirectory) == false}" dir="${CCNETServer.ServerDirectory}"/>
+    <mkdir unless="${directory::exists(CCNETServer.ServerDirectory)}" dir="${CCNETServer.ServerDirectory}"/>
     <property name="Private.CCNETServer.SourceFile" value="${Private.CCNETServer.DefaultExeConfigFile}"/>
     <property name="Private.CCNETServer.TargetFile" value="${CCNETServer.ExeConfigFile}"/>
     <call target="Private.CCNETServer.InstallFile"/>
@@ -56,7 +56,7 @@
   </target>
 
   <target name="Private.CCNETServer.InstallBuildServerXslDirectoryFiles">
-    <mkdir if="${directory::exists(CCNETServer.ServerXslDirectory) == false}" dir="${CCNETServer.ServerXslDirectory}"/>
+    <mkdir unless="${directory::exists(CCNETServer.ServerXslDirectory)}" dir="${CCNETServer.ServerXslDirectory}"/>
     <copy todir="${CCNETServer.ServerXslDirectory}">
       <fileset basedir="${Private.CCNETServer.DefaultBuildServerXslDirectory}">
         <include name="*.*" />
@@ -65,7 +65,7 @@
   </target>
 
   <target name="Private.CCNETServer.InstallFile" >
-    <mkdir if="${directory::exists('C:\temp') == false}" dir="C:\temp"/>
+    <mkdir unless="${directory::exists('C:\temp')}" dir="C:\temp"/>
     <delete file="C:\temp\nant.tmp" failonerror="false"/>
     <property name="Common.TargetFile" value="C:\temp\nant.tmp"/>
     <property name="Common.SourceFile" value="${Private.CCNETServer.SourceFile}"/>

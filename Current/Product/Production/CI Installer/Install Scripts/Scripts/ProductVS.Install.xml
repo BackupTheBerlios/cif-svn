@@ -40,7 +40,7 @@
     <property name="Common.TargetFile" value="${ProductVS.ProjectInfo}"/>
     <call target="Common.InstallFile"/>
 
-    <mkdir if="${directory::exists(InstallProjectDirectory) == false}" dir="${InstallProjectDirectory}"/>
+    <mkdir unless="${directory::exists(InstallProjectDirectory)}" dir="${InstallProjectDirectory}"/>
 
     <property name="Common.SourceFile" value="${Private.ProductVS.DefaultInstallProjectFile}"/>
     <property name="Common.TargetFile" value="${ProductVS.InstallProjectFile}"/>

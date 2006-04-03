@@ -33,7 +33,7 @@
   </target>
 
   <target name="Private.Install.ValidateParameters" >
-    <fail if="${property::exists('ProjectName') == false}" message="Property ProjectName was not set on the commandline."/>
+    <fail unless="${property::exists('ProjectName')}" message="Property ProjectName was not set on the commandline."/>
     
     <call target="CCNETServer.ValidateParameters"/>
     <call target="nAnt.ValidateParameters"/>
@@ -45,16 +45,16 @@
   </target>
 
   <target name="Private.Install.CreateDirectoryStructure">
-    <mkdir if="${directory::exists(ProjectsDirectory) == false}"        dir="${ProjectsDirectory}"/>
-    <mkdir if="${directory::exists(ProjectRootDirectory) == false}"     dir="${ProjectRootDirectory}"/>
-    <mkdir if="${directory::exists(ProjectCodeLineDirectory) == false}" dir="${ProjectCodeLineDirectory}"/>
-    <mkdir if="${directory::exists(ProductDirectory) == false}"         dir="${ProductDirectory}"/>
-    <mkdir if="${directory::exists(ThirdPartyDirectory) == false}"      dir="${ThirdPartyDirectory}"/>
-    <mkdir if="${directory::exists(ProductionDirectory) == false}"      dir="${ProductionDirectory}"/>
-    <mkdir if="${directory::exists(InstallDirectory) == false}"         dir="${InstallDirectory}"/>
-    <mkdir if="${directory::exists(UnitTestDirectory) == false}"        dir="${UnitTestDirectory}"/>
-    <mkdir if="${directory::exists(BuildDirectory) == false}"           dir="${BuildDirectory}"/>
-    <mkdir if="${directory::exists(BuildPackagesDirectory) == false}"   dir="${BuildPackagesDirectory}"/>
+    <mkdir unless="${directory::exists(ProjectsDirectory)}"        dir="${ProjectsDirectory}"/>
+    <mkdir unless="${directory::exists(ProjectRootDirectory)}"     dir="${ProjectRootDirectory}"/>
+    <mkdir unless="${directory::exists(ProjectCodeLineDirectory)}" dir="${ProjectCodeLineDirectory}"/>
+    <mkdir unless="${directory::exists(ProductDirectory)}"         dir="${ProductDirectory}"/>
+    <mkdir unless="${directory::exists(ThirdPartyDirectory)}"      dir="${ThirdPartyDirectory}"/>
+    <mkdir unless="${directory::exists(ProductionDirectory)}"      dir="${ProductionDirectory}"/>
+    <mkdir unless="${directory::exists(InstallDirectory)}"         dir="${InstallDirectory}"/>
+    <mkdir unless="${directory::exists(UnitTestDirectory)}"        dir="${UnitTestDirectory}"/>
+    <mkdir unless="${directory::exists(BuildDirectory)}"           dir="${BuildDirectory}"/>
+    <mkdir unless="${directory::exists(BuildPackagesDirectory)}"   dir="${BuildPackagesDirectory}"/>
   </target>
   
 </project>
