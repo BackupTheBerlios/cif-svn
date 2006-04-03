@@ -213,8 +213,6 @@ namespace Tracker
         #endregion
         
 #region Public Actions
-
-
         public void AddNote(int scrId, string noteTitle, string noteText)
         {
             int NoteHandle = 0;
@@ -445,6 +443,54 @@ namespace Tracker
             }
         }
 
+        public void NewRecordBegin(ref int RecordHandle)
+        {
+            RecordHandle = 0;
+
+            try
+            {
+                RecordHandle = this.ToolKit.AllocateRecordHandle();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                this.ToolKit.ReleaseRecordHandle(RecordHandle);
+                return;
+            }
+
+            try
+            {
+                this.ToolKit.NewRecordBegin(RecordHandle, 1);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                this.ToolKit.CancelTransaction(RecordHandle);
+                return;
+            }
+        }
+
+        public int NewRecordCommit(int RecordHandle)
+        {
+            try
+            {
+                int transactionID = 0;
+                this.ToolKit.NewRecordCommit(RecordHandle, ref transactionID);
+                int Id = this.ToolKit.GetNumericFieldValue(RecordHandle, "Id");
+
+                return Id;
+            }
+            finally
+            {
+                this.ToolKit.ReleaseRecordHandle(RecordHandle);
+            }
+            return 0;
+        }
+
+        public void SaveStringFieldValue(string FieldName, string newValue, int RecordHandle)
+        {
+            this.ToolKit.SaveStringFieldValue(FieldName, newValue, RecordHandle);
+        }
 #endregion
 
     }
