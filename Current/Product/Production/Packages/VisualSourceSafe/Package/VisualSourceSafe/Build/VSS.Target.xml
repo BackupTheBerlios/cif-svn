@@ -153,7 +153,7 @@
   </target>
 
   <target name="SourceControl.SetUp">
-    <mkdir if="${directory::exists(Private.VSS.ReportDirectory) == false}" dir="${Private.VSS.ReportDirectory}"/>
+    <mkdir unless="${directory::exists(Private.VSS.ReportDirectory)}" dir="${Private.VSS.ReportDirectory}"/>
   </target>
 
   <target name="SourceControl.TearDown">
