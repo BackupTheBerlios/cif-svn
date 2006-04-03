@@ -16,7 +16,7 @@
   <property name="Private.Versioning.NewerThanDateTime" value="" />
   
   <target name="Versioning.IncrementBuildNumberOfModifiedAssemblies">
-    <mkdir if="${directory::exists(ProductionDirectory) == false}" dir="${ProductionDirectory}"/>
+    <mkdir unless="${directory::exists(ProductionDirectory)}" dir="${ProductionDirectory}"/>
     <call target="SourceModificationReport.GetOldestModificationTime"/>
     <script language="VB">
       <code><![CDATA[
@@ -32,7 +32,7 @@
     </script>
     
     <property name="Private.Versioning.Directory" value="${BuildDirectory}\Versioning"/>
-    <mkdir if="${directory::exists(Private.Versioning.Directory) == false}" dir="${Private.Versioning.Directory}"/>
+    <mkdir unless="${directory::exists(Private.Versioning.Directory)}" dir="${Private.Versioning.Directory}"/>
     <property name="Private.Versioning.ListOfAssemblyInfoFiles" value="${Private.Versioning.Directory}\ListOfAssemblyInfoFiles.txt"/>
 
     <GenerateAssemblyInfoList SearchDirectory="${ProductionDirectory}" DateTime="${Private.Versioning.NewerThanDateTime}" Output="${Private.Versioning.ListOfAssemblyInfoFiles}" SearchPattern="*.vb" />
