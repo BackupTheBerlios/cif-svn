@@ -120,7 +120,7 @@
 
   <target name="UnitTest.SetUp">
     <call target="Private.Coverage.GetConfigFile"/>
-    <mkdir if="${directory::exists(Coverage.ReportFolder) == false}" dir="${Coverage.ReportFolder}"/>
+    <mkdir unless="${directory::exists(Coverage.ReportFolder)}" dir="${Coverage.ReportFolder}"/>
     
     <property name="Common.FilesToDelete" value="${Coverage.FilesToDeleteAtSetup}"/>
     <call target="Common.DeleteFiles"/>

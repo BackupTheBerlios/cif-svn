@@ -31,7 +31,7 @@
 	</target>
 
   <target name="UnitTest.SetUp">
-    <mkdir if="${directory::exists(UnitTest.ReportFolder) == false}" dir="${UnitTest.ReportFolder}"/>
+    <mkdir unless="${directory::exists(UnitTest.ReportFolder)}" dir="${UnitTest.ReportFolder}"/>
     <property name="Common.FilesToDelete" value="${UnitTest.FilesToDeleteAtSetup}"/>
     <call target="Common.DeleteFiles"/>
   </target>

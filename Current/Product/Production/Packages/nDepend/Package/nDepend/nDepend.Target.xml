@@ -144,13 +144,13 @@
   </target>
 
   <target name="nDepend.SetUp">
-    <mkdir if="${directory::exists(nDepend.BuildFolder) == false}" dir="${nDepend.BuildFolder}"/>
+    <mkdir unless="${directory::exists(nDepend.BuildFolder)}" dir="${nDepend.BuildFolder}"/>
 
     <property name="Common.FilesToDelete" value="${nDepend.FilesToDeleteAtSetup}"/>
     <call target="Common.DeleteFiles"/>
 
-    <mkdir if="${directory::exists(nDepend.ReportFolder) == false}" dir="${nDepend.ReportFolder}"/>
-    <mkdir if="${directory::exists(nDepend.AssembliesFolder) == false}" dir="${nDepend.AssembliesFolder}"/>
+    <mkdir unless="${directory::exists(nDepend.ReportFolder)}" dir="${nDepend.ReportFolder}"/>
+    <mkdir unless="${directory::exists(nDepend.AssembliesFolder)}" dir="${nDepend.AssembliesFolder}"/>
   </target>
 
   <target name="nDepend.TearDown">
