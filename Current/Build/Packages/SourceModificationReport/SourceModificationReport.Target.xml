@@ -155,7 +155,7 @@
   </target>
 
   <target name="SourceModificationReport.SetUp">
-    <mkdir if="${directory::exists(SourceModificationReport.ReportDirectory) == false}" dir="${SourceModificationReport.ReportDirectory}"/>
+    <mkdir unless="${directory::exists(SourceModificationReport.ReportDirectory)}" dir="${SourceModificationReport.ReportDirectory}"/>
     <property name="Common.FilesToDelete" value="${SourceModificationReport.FilesToDeleteAtSetup}"/>
     <call target="Common.DeleteFiles"/>
   </target>
