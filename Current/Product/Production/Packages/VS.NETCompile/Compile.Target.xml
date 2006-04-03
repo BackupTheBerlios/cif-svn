@@ -78,7 +78,7 @@
 			</fileset>
 		</attrib>
 
-    <mkdir if="${directory::exists(Compile.Bin) == false}" dir="${Compile.Bin}"/>
+    <mkdir unless="${directory::exists(Compile.Bin)}" dir="${Compile.Bin}"/>
 		
 		<copy failonerror="true" overwrite="true" flatten="true" todir="${Compile.Bin}">
 			<fileset>
@@ -138,7 +138,7 @@
 	</target>
 
   <target name="Compile.SetUp">
-    <mkdir if="${directory::exists(Compile.LogFileDirectory) == false}" dir="${Compile.LogFileDirectory}"/>
+    <mkdir unless="${directory::exists(Compile.LogFileDirectory)}" dir="${Compile.LogFileDirectory}"/>
     <property name="Common.FilesToDelete" value="${Compile.FilesToDeleteAtSetup}"/>
     <call target="Common.DeleteFiles"/>
   </target>
