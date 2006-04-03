@@ -104,7 +104,7 @@
   </target>
 
   <target name="Tracker.SetUp">
-    <mkdir if="${directory::exists(Tracker.ReportDirectory) == false}" dir="${Tracker.ReportDirectory}"/>
+    <mkdir unless="${directory::exists(Tracker.ReportDirectory)}" dir="${Tracker.ReportDirectory}"/>
     <property name="Common.FilesToDelete" value="${Tracker.FilesToDeleteAtSetup}"/>
     <call target="Common.DeleteFiles"/>
   </target>

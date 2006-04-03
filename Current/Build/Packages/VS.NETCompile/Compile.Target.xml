@@ -78,7 +78,7 @@
 			</fileset>
 		</attrib>
 
-    <mkdir if="${directory::exists(Compile.Bin) == false}" dir="${Compile.Bin}"/>
+    <mkdir unless="${directory::exists(Compile.Bin)}" dir="${Compile.Bin}"/>
 		
 		<copy failonerror="true" overwrite="true" flatten="true" todir="${Compile.Bin}">
 			<fileset>
@@ -116,8 +116,8 @@
 							{
 								line = line.Replace("\0",string.Empty);
 								bool isError = error.IsMatch(line);
-                bool notErrorReport = errorReport.IsMatch(line) == false;
-                bool notWarnAsError = warnAsError.IsMatch(line) == false;
+                bool notErrorReport = !errorReport.IsMatch(line);
+                bool notWarnAsError = !warnAsError.IsMatch(line);
 								if (isError && notErrorReport && notWarnAsError)
 								{
 									writer.WriteStartElement("builderror");
@@ -143,7 +143,7 @@
 	</target>
 
   <target name="Compile.SetUp">
-    <mkdir if="${directory::exists(Compile.LogFileDirectory) == false}" dir="${Compile.LogFileDirectory}"/>
+    <mkdir unless="${directory::exists(Compile.LogFileDirectory)}" dir="${Compile.LogFileDirectory}"/>
     <property name="Common.FilesToDelete" value="${Compile.FilesToDeleteAtSetup}"/>
     <call target="Common.DeleteFiles"/>
   </target>
