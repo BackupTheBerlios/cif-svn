@@ -309,7 +309,27 @@ namespace Tracker
         public void SaveStringFieldValue(string fieldName, string newValue, int recordHandle)
         {
             int Status = PVCSToolKit.TrkSetStringFieldValue(recordHandle, ref fieldName, ref newValue);
-            this.Helper.CheckStatus("Unable to save field value.", Status);
+            this.Helper.CheckStatus("Unable to save field value: fieldName=" + fieldName + " newValue=" + newValue, Status);
+        }
+
+        public void NewRecordBegin(int recordHandle, int recordType)
+        {
+            int Status = PVCSToolKit.TrkNewRecordBegin(recordHandle, recordType);
+            this.Helper.CheckStatus("Unable to submission of a new record.", Status);
+        }
+
+        public void NewRecordCommit(int recordHandle, ref int pNewTransactionID)
+        {
+            int Status = PVCSToolKit.TrkNewRecordCommit(recordHandle, ref pNewTransactionID);
+            this.Helper.CheckStatus("Unable to submit a new record.", Status);
+        }
+
+        public int GetNumericFieldValue(int recordHandle, string fieldName)
+        {
+            int newValue = 0;
+            int Status = PVCSToolKit.TrkGetNumericFieldValue(recordHandle, ref fieldName, ref newValue);
+            this.Helper.CheckStatus("Unable to retrieve numeric field value: " + fieldName, Status);
+            return newValue;
         }
 
         //private void GetFieldNamesExtracted()
@@ -614,6 +634,9 @@ namespace Tracker
 
         [DllImport("trktooln", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
         private static extern int TrkProjectLogin(int trkHandle, [MarshalAs(UnmanagedType.VBByRefStr)] ref string userName, [MarshalAs(UnmanagedType.VBByRefStr)] ref string password, [MarshalAs(UnmanagedType.VBByRefStr)] ref string projectName, [MarshalAs(UnmanagedType.VBByRefStr)] ref string DBMSType, [MarshalAs(UnmanagedType.VBByRefStr)] ref string DBMSName, [MarshalAs(UnmanagedType.VBByRefStr)] ref string DBMSUserName, [MarshalAs(UnmanagedType.VBByRefStr)] ref string DBMSPassword, int DBMSLoginMode);
+
+        [DllImport("trktooln", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
+        private static extern int TrkProjectLoginEx(int trkHandle, [MarshalAs(UnmanagedType.VBByRefStr)] ref string userName, [MarshalAs(UnmanagedType.VBByRefStr)] ref string password, [MarshalAs(UnmanagedType.VBByRefStr)] ref string projectName, [MarshalAs(UnmanagedType.VBByRefStr)] ref string serverName);
 
         [DllImport("trktooln", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
         private static extern int TrkProjectLogout(int trkHandle);
