@@ -37,9 +37,9 @@ namespace Tracker.Tasks
             }
             set
             {
-                if (value.ToLower() == "id" || value.ToLower() == "description")
+                if (value.ToLower() == "id")
                 {
-                    throw new BuildException("Id and Description are not allowed as field names.");
+                    throw new BuildException("Id is not allowed as a field name.");
                 }
                 this._FieldName = value;
             }
