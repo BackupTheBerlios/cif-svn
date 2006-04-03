@@ -20,7 +20,7 @@
   </target>
 
   <target name="Private.Deployment.CopyDeplymentToPublicationDir" >
-    <mkdir if="${directory::exists(Deployment.TargetDir) == false}" dir="${Deployment.TargetDir}" />
+    <mkdir unless="${directory::exists(Deployment.TargetDir)}" dir="${Deployment.TargetDir}" />
     <copy file="${Deployment.SourceDir}/${Deployment.SourceFileName}" tofile="${Deployment.TargetDir}/${Deployment.TargetFile}" />
   </target>
 
