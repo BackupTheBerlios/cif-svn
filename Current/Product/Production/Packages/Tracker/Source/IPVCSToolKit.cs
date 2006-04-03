@@ -31,5 +31,8 @@ namespace Tracker
         int GetFieldTransactionId(string fieldName, int recordHandle);
         void SaveNumericFieldValue(string fieldName, int newValue, int recordHandle);
         void SaveStringFieldValue(string fieldName, string newValue, int recordHandle);
+        int GetNumericFieldValue(int recordHandle, string fieldName);
+        void NewRecordBegin(int recordHandle, int recordType);
+        void NewRecordCommit(int recordHandle, ref int transactionID);
     }
 }
