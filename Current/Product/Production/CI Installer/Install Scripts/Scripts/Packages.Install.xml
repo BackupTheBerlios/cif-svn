@@ -6,56 +6,14 @@
   <property name="Private.Packages.DefaultDirectory" value="..\Packages"/>
 
   <target name="Packages.Install" depends="Packages.ValidateParameters" >
-    <copy todir="${BuildPackagesDirectory}">
-      <fileset basedir="${Private.Packages.DefaultDirectory}">
-        <include name="**\*"/>
-        <exclude name="**\*.xml"/>
-        <exclude name="**\*.txt"/>
-        <exclude name="**\*.xsl"/>
-      </fileset>
-    </copy>
-    <copy todir="${BuildPackagesDirectory}">
-      <fileset basedir="${Private.Packages.DefaultDirectory}">
-        <include name="**\*.xml"/>
-        <include name="**\*.txt"/>
-        <include name="**\*.xsl"/>
-      </fileset>
-      <filterchain>
-        <replacestring from="%ProjectName%"  to="${ProjectName}"   />
-        <replacestring from="%ProjectCodeLineName%" to="${ProjectCodeLineName}"  />
-
-        <replacestring from="%ProjectsDirectory%"        to="${ProjectsDirectory}"  />
-        <replacestring from="%ProjectRootDirectory%"     to="${ProjectRootDirectory}"  />
-        <replacestring from="%ProjectCodeLineDirectory%" to="${ProjectCodeLineDirectory}"  />
-        <replacestring from="%ProductDirectory%"         to="${ProductDirectory}"  />
-        <replacestring from="%ThirdPartyDirectory%"      to="${ThirdPartyDirectory}"  />
-        <replacestring from="%ProductionDirectory%"      to="${ProductionDirectory}"  />
-        <replacestring from="%InstallDirectory%"         to="${InstallDirectory}"  />
-        <replacestring from="%UnitTestDirectory%"        to="${UnitTestDirectory}"  />
-        <replacestring from="%BuildDirectory%"           to="${BuildDirectory}"  />
-        <replacestring from="%VSSRootShare%"             to="${VSSRootShare}"  />
-      </filterchain>
-    </copy>
-    <call target="Private.Packages.InstallArtifacts"/>
-    <call target="Private.Packages.SourceModificationReport"/>
-    <call target="Private.Packages.DotNetUnitTest"/>
-  </target>
-
-  <target name="Private.Packages.InstallArtifacts" >
-    <mkdir unless="${directory::exists(BuildDirectory + '\Installs')}" dir="${BuildDirectory}\Installs"/>
-    <mkiisdir dirpath="${BuildDirectory}\Installs" vdirname="${ProjectName} Installs" />
-  </target>
-
-  <target name="Private.Packages.SourceModificationReport" >
-    <mkdir unless="${directory::exists(BuildDirectory + '\SourceModificationReports')}" dir="${BuildDirectory}\SourceModificationReports"/>
-  </target>
-
-  <target name="Private.Packages.DotNetUnitTest" >
-    <copy todir="${ThirdPartyDirectory}\MbUnit">
-      <fileset basedir="..\Default\Third Party\MbUnit">
-        <include name="**/*" />
-      </fileset>
-    </copy>
+    <loopthrough property="Private.Packages.Install.PackageName">
+      <items>
+        <strings refid="Packages.InstallList"/>
+      </items>
+      <do>
+        <call target="${Private.Packages.Install.PackageName}.Install"/>
+      </do>
+    </loopthrough>
   </target>
 
   <target name="Packages.ValidateParameters">

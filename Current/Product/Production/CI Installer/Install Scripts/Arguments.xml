@@ -3,4 +3,23 @@
   <property name="ProjectName" value="TestProject" />
   <property name="CCNETServer.ServerPort" value="21236"/>
   <property name="VSSRootShare" value="C:\Source Safe DataBases"/>
+
+  <strings id="Packages.InstallList">
+    <string value="CoverageEye"/>
+    <string value="Deployment"/>
+    <string value="DotNetUnitTest"/>
+    <string value="InstallShield"/>
+    <string value="nDepend"/>
+    <string value="SourceModificationReport"/>
+    <string value="Subversion"/>
+    <string value="TestCoverage"/>
+    <string value="Tracker"/>
+    <string value="Version"/>
+    <string value="VisualSourceSafe"/>
+    <string value="VS.NETCompile"/>
+
+    <!--<string value="CodeVeilObfuscation"/>
+    <string value="LinesOfCode"/>
+    <string value="Ant"/>-->
+  </strings>
 </project>

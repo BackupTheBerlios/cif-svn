@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:nant="http://nant.sf.net/schemas/nant.xsd" elementFormDefault="qualified" targetNamespace="http://nant.sf.net/schemas/nant.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:annotation>
-    <xs:documentation>NAnt schema generated at 02/08/2006 23:18:28</xs:documentation>
+    <xs:documentation>NAnt schema generated at 04/08/2006 16:59:31</xs:documentation>
   </xs:annotation>
   <xs:complexType name="NAnt.Core.TaskContainer">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -11,6 +11,7 @@
         <xs:element name="replace" type="nant:Common.Tasks.Replace" />
         <xs:element name="loopthrough" type="nant:Common.Tasks.LoopThrough" />
         <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
+        <xs:element name="ifthenelse" type="nant:Common.Tasks.IfThenTask" />
         <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
         <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
         <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
@@ -198,6 +199,7 @@
         <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
         <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
         <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+        <xs:element name="function" type="nant:Common.Functions.FunctionTask" />
         <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
       </xs:choice>
     </xs:sequence>
@@ -684,6 +686,221 @@
     <xs:attribute name="if" use="optional" />
     <xs:attribute name="unless" use="optional" />
   </xs:complexType>
+  <xs:complexType name="Common.Tasks.IfThenTask">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="then" type="nant:NAnt.Core.TaskContainer" />
+      <xs:element minOccurs="1" maxOccurs="1" name="else" type="nant:NAnt.Core.TaskContainer" />
+      <xs:element minOccurs="0" maxOccurs="1" name="comparefiles" type="nant:NAnt.Core.Types.FileSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="uptodatefiles" type="nant:NAnt.Core.Types.FileSet" />
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="write" type="nant:Common.Tasks.WriteTask" />
+        <xs:element name="saveproperties" type="nant:Common.Tasks.SaveProperties" />
+        <xs:element name="replace" type="nant:Common.Tasks.Replace" />
+        <xs:element name="loopthrough" type="nant:Common.Tasks.LoopThrough" />
+        <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
+        <xs:element name="ifthenelse" type="nant:Common.Tasks.IfThenTask" />
+        <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
+        <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
+        <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
+        <xs:element name="zip" type="nant:NAnt.Compression.Tasks.ZipTask" />
+        <xs:element name="grep" type="nant:NAnt.Contrib.Tasks.Grep.GrepTask" />
+        <xs:element name="mkscheckpoint" type="nant:NAnt.Contrib.Tasks.Mks.CheckpointTask" />
+        <xs:element name="mksget" type="nant:NAnt.Contrib.Tasks.Mks.GetTask" />
+        <xs:element name="mkschanges" type="nant:NAnt.Contrib.Tasks.Mks.ChangesTask" />
+        <xs:element name="msi" type="nant:NAnt.Contrib.Tasks.Msi.MsiTask" />
+        <xs:element name="msm" type="nant:NAnt.Contrib.Tasks.Msi.MsmTask" />
+        <xs:element name="pvcsaddfiles" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSAddFilesTask" />
+        <xs:element name="pvcsadduser" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSAddUserTask" />
+        <xs:element name="pvcsassigngroup" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSAssignGroupTask" />
+        <xs:element name="pvcschangegroup" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSChangeGroupTask" />
+        <xs:element name="pvcscreateproject" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSCreateProjectTask" />
+        <xs:element name="pvcsdeletegroup" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSDeleteGroupTask" />
+        <xs:element name="pvcsdeletelabel" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSDeleteLabelTask" />
+        <xs:element name="pvcsdelete" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSDeleteTask" />
+        <xs:element name="pvcsdeleteusers" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSDeleteUsersTask" />
+        <xs:element name="pvcsget" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSGetTask" />
+        <xs:element name="pvcslabel" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSLabelTask" />
+        <xs:element name="pvcslock" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSLockTask" />
+        <xs:element name="pvcspromotegroup" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSPromoteGroupTask" />
+        <xs:element name="pvcsput" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSPutTask" />
+        <xs:element name="pvcsrenamelabel" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSRenameLabelTask" />
+        <xs:element name="pvcsunlock" type="nant:NAnt.Contrib.Tasks.PVCS.PVCSUnlockTask" />
+        <xs:element name="p4add" type="nant:NAnt.Contrib.Tasks.Perforce.P4Add" />
+        <xs:element name="p4change" type="nant:NAnt.Contrib.Tasks.Perforce.P4Change" />
+        <xs:element name="p4client" type="nant:NAnt.Contrib.Tasks.Perforce.P4Client" />
+        <xs:element name="p4delete" type="nant:NAnt.Contrib.Tasks.Perforce.P4Delete" />
+        <xs:element name="p4edit" type="nant:NAnt.Contrib.Tasks.Perforce.P4Edit" />
+        <xs:element name="p4info" type="nant:NAnt.Contrib.Tasks.Perforce.P4Info" />
+        <xs:element name="p4label" type="nant:NAnt.Contrib.Tasks.Perforce.P4Label" />
+        <xs:element name="p4labelsync" type="nant:NAnt.Contrib.Tasks.Perforce.P4Labelsync" />
+        <xs:element name="p4print" type="nant:NAnt.Contrib.Tasks.Perforce.P4Print" />
+        <xs:element name="p4reopen" type="nant:NAnt.Contrib.Tasks.Perforce.P4Reopen" />
+        <xs:element name="p4revert" type="nant:NAnt.Contrib.Tasks.Perforce.P4Revert" />
+        <xs:element name="p4set" type="nant:NAnt.Contrib.Tasks.Perforce.P4Set" />
+        <xs:element name="p4submit" type="nant:NAnt.Contrib.Tasks.Perforce.P4Submit" />
+        <xs:element name="p4sync" type="nant:NAnt.Contrib.Tasks.Perforce.P4Sync" />
+        <xs:element name="vssadd" type="nant:NAnt.Contrib.Tasks.SourceSafe.AddTask" />
+        <xs:element name="vsscheckin" type="nant:NAnt.Contrib.Tasks.SourceSafe.CheckinTask" />
+        <xs:element name="vsscheckout" type="nant:NAnt.Contrib.Tasks.SourceSafe.CheckoutTask" />
+        <xs:element name="vssdiff" type="nant:NAnt.Contrib.Tasks.SourceSafe.DiffTask" />
+        <xs:element name="vssget" type="nant:NAnt.Contrib.Tasks.SourceSafe.GetTask" />
+        <xs:element name="vsshistory" type="nant:NAnt.Contrib.Tasks.SourceSafe.History" />
+        <xs:element name="vsslabel" type="nant:NAnt.Contrib.Tasks.SourceSafe.LabelTask" />
+        <xs:element name="vssundocheckout" type="nant:NAnt.Contrib.Tasks.SourceSafe.UndoCheckoutTask" />
+        <xs:element name="stautolabel" type="nant:NAnt.Contrib.Tasks.StarTeam.StarTeamAutoLabel" />
+        <xs:element name="stcheckin" type="nant:NAnt.Contrib.Tasks.StarTeam.StarTeamCheckin" />
+        <xs:element name="stcheckout" type="nant:NAnt.Contrib.Tasks.StarTeam.StarTeamCheckout" />
+        <xs:element name="stlabel" type="nant:NAnt.Contrib.Tasks.StarTeam.StarTeamLabel" />
+        <xs:element name="stlist" type="nant:NAnt.Contrib.Tasks.StarTeam.StarTeamList" />
+        <xs:element name="sscmbatch" type="nant:NAnt.Contrib.Tasks.SurroundSCM.SSCMBatch" />
+        <xs:element name="sscmbranch" type="nant:NAnt.Contrib.Tasks.SurroundSCM.SSCMBranch" />
+        <xs:element name="sscmcheckin" type="nant:NAnt.Contrib.Tasks.SurroundSCM.SSCMCheckin" />
+        <xs:element name="sscmcheckout" type="nant:NAnt.Contrib.Tasks.SurroundSCM.SSCMCheckout" />
+        <xs:element name="sscmfreeze" type="nant:NAnt.Contrib.Tasks.SurroundSCM.SSCMFreeze" />
+        <xs:element name="sscmget" type="nant:NAnt.Contrib.Tasks.SurroundSCM.SSCMGet" />
+        <xs:element name="sscmlabel" type="nant:NAnt.Contrib.Tasks.SurroundSCM.SSCMLabel" />
+        <xs:element name="sscmunfreeze" type="nant:NAnt.Contrib.Tasks.SurroundSCM.SSCMUnFreeze" />
+        <xs:element name="svn-checkout" type="nant:NAnt.Contrib.Tasks.Svn.SvnCheckoutTask" />
+        <xs:element name="svn" type="nant:NAnt.Contrib.Tasks.Svn.SvnTask" />
+        <xs:element name="svn-update" type="nant:NAnt.Contrib.Tasks.Svn.SvnUpdateTask" />
+        <xs:element name="mkiisdir" type="nant:NAnt.Contrib.Tasks.Web.CreateVirtualDirectory" />
+        <xs:element name="deliisdir" type="nant:NAnt.Contrib.Tasks.Web.DeleteVirtualDirectory" />
+        <xs:element name="iisdirinfo" type="nant:NAnt.Contrib.Tasks.Web.VirtualDirectoryInfo" />
+        <xs:element name="adsigetprop" type="nant:NAnt.Contrib.Tasks.ADSIGetPropertyTask" />
+        <xs:element name="adsisetprop" type="nant:NAnt.Contrib.Tasks.ADSISetPropertyTask" />
+        <xs:element name="astyle" type="nant:NAnt.Contrib.Tasks.Astyle" />
+        <xs:element name="comregister" type="nant:NAnt.Contrib.Tasks.COMRegisterTask" />
+        <xs:element name="checksum" type="nant:NAnt.Contrib.Tasks.ChecksumTask" />
+        <xs:element name="codestats" type="nant:NAnt.Contrib.Tasks.CodeStatsTask" />
+        <xs:element name="concat" type="nant:NAnt.Contrib.Tasks.ConcatTask" />
+        <xs:element name="depends" type="nant:NAnt.Contrib.Tasks.DependsTask" />
+        <xs:element name="disco" type="nant:NAnt.Contrib.Tasks.DicsoTask" />
+        <xs:element name="fxcop" type="nant:NAnt.Contrib.Tasks.FxCopTask" />
+        <xs:element name="gac-install" type="nant:NAnt.Contrib.Tasks.GacInstallTask" />
+        <xs:element name="gac" type="nant:NAnt.Contrib.Tasks.GacTask" />
+        <xs:element name="gac-uninstall" type="nant:NAnt.Contrib.Tasks.GacUninstallTask" />
+        <xs:element name="hxcomp" type="nant:NAnt.Contrib.Tasks.HxCompTask" />
+        <xs:element name="hxreg" type="nant:NAnt.Contrib.Tasks.HxRegTask" />
+        <xs:element name="mgmtclassgen" type="nant:NAnt.Contrib.Tasks.MgmtClassGenTask" />
+        <xs:element name="ngen" type="nant:NAnt.Contrib.Tasks.NGenTask" />
+        <xs:element name="nunitreport" type="nant:NAnt.Contrib.Tasks.NUnitReportTask" />
+        <xs:element name="record" type="nant:NAnt.Contrib.Tasks.RecordTask" />
+        <xs:element name="regasm" type="nant:NAnt.Contrib.Tasks.RegasmTask" />
+        <xs:element name="scp" type="nant:NAnt.Contrib.Tasks.ScpTask" />
+        <xs:element name="slingshot" type="nant:NAnt.Contrib.Tasks.SlingshotTask" />
+        <xs:element name="sql" type="nant:NAnt.Contrib.Tasks.SqlTask" />
+        <xs:element name="trycatch" type="nant:NAnt.Contrib.Tasks.TryCatchTask" />
+        <xs:element name="typedcollection" type="nant:NAnt.Contrib.Tasks.TypedCollectionTask" />
+        <xs:element name="validatexml" type="nant:NAnt.Contrib.Tasks.ValidateXmlTask" />
+        <xs:element name="vb6" type="nant:NAnt.Contrib.Tasks.Vb6Task" />
+        <xs:element name="version" type="nant:NAnt.Contrib.Tasks.VersionTask" />
+        <xs:element name="wsdl" type="nant:NAnt.Contrib.Tasks.WsdlTask" />
+        <xs:element name="xsd" type="nant:NAnt.Contrib.Tasks.XsdTask" />
+        <xs:element name="asminfo" type="nant:NAnt.DotNet.Tasks.AssemblyInfoTask" />
+        <xs:element name="al" type="nant:NAnt.DotNet.Tasks.AssemblyLinkerTask" />
+        <xs:element name="csc" type="nant:NAnt.DotNet.Tasks.CscTask" />
+        <xs:element name="delay-sign" type="nant:NAnt.DotNet.Tasks.DelaySignTask" />
+        <xs:element name="ilasm" type="nant:NAnt.DotNet.Tasks.IlasmTask" />
+        <xs:element name="jsc" type="nant:NAnt.DotNet.Tasks.JscTask" />
+        <xs:element name="license" type="nant:NAnt.DotNet.Tasks.LicenseTask" />
+        <xs:element name="ndoc" type="nant:NAnt.DotNet.Tasks.NDocTask" />
+        <xs:element name="regsvcs" type="nant:NAnt.DotNet.Tasks.RegsvcsTask" />
+        <xs:element name="resgen" type="nant:NAnt.DotNet.Tasks.ResGenTask" />
+        <xs:element name="script" type="nant:NAnt.DotNet.Tasks.ScriptTask" />
+        <xs:element name="vbc" type="nant:NAnt.DotNet.Tasks.VbcTask" />
+        <xs:element name="vjc" type="nant:NAnt.DotNet.Tasks.VjcTask" />
+        <xs:element name="nunit" type="nant:NAnt.NUnit1.Tasks.NUnitTask" />
+        <xs:element name="nunit2" type="nant:NAnt.NUnit2.Tasks.NUnit2Task" />
+        <xs:element name="cvs-changelog" type="nant:NAnt.SourceControl.Tasks.ChangeLogTask" />
+        <xs:element name="cvs-checkout" type="nant:NAnt.SourceControl.Tasks.CheckoutTask" />
+        <xs:element name="cvs-pass" type="nant:NAnt.SourceControl.Tasks.CvsPass" />
+        <xs:element name="cvs" type="nant:NAnt.SourceControl.Tasks.CvsTask" />
+        <xs:element name="cvs-export" type="nant:NAnt.SourceControl.Tasks.ExportTask" />
+        <xs:element name="cvs-rtag" type="nant:NAnt.SourceControl.Tasks.RTagTask" />
+        <xs:element name="cvs-tag" type="nant:NAnt.SourceControl.Tasks.TagTask" />
+        <xs:element name="cvs-update" type="nant:NAnt.SourceControl.Tasks.UpdateTask" />
+        <xs:element name="cl" type="nant:NAnt.VisualCpp.Tasks.ClTask" />
+        <xs:element name="lib" type="nant:NAnt.VisualCpp.Tasks.LibTask" />
+        <xs:element name="link" type="nant:NAnt.VisualCpp.Tasks.LinkTask" />
+        <xs:element name="mc" type="nant:NAnt.VisualCpp.Tasks.McTask" />
+        <xs:element name="midl" type="nant:NAnt.VisualCpp.Tasks.MidlTask" />
+        <xs:element name="rc" type="nant:NAnt.VisualCpp.Tasks.RcTask" />
+        <xs:element name="solution" type="nant:NAnt.VSNet.Tasks.SolutionTask" />
+        <xs:element name="aximp" type="nant:NAnt.Win32.Tasks.AxImpTask" />
+        <xs:element name="readregistry" type="nant:NAnt.Win32.Tasks.ReadRegistryTask" />
+        <xs:element name="tlbexp" type="nant:NAnt.Win32.Tasks.TlbExpTask" />
+        <xs:element name="tlbimp" type="nant:NAnt.Win32.Tasks.TlbImpTask" />
+        <xs:element name="addglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddGlobalSection" />
+        <xs:element name="addproject8" type="nant:Studio.VisualStudio8.Tasks.AddProject" />
+        <xs:element name="addprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection8" type="nant:Studio.VisualStudio8.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection8" type="nant:Studio.VisualStudio8.Tasks.AddToProjectSection" />
+        <xs:element name="getglobalsectionpairvalue8" type="nant:Studio.VisualStudio8.Tasks.GetGlobalSectionPairValue" />
+        <xs:element name="removefromglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject8" type="nant:Studio.VisualStudio8.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection8" type="nant:Studio.VisualStudio8.Tasks.RemoveProjectSection" />
+        <xs:element name="updateglobalsectionpairvalue8" type="nant:Studio.VisualStudio8.Tasks.UpdateGlobalSectionPairValue" />
+        <xs:element name="addglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddGlobalSection" />
+        <xs:element name="addproject9" type="nant:Studio.VisualStudio9.Tasks.AddProject" />
+        <xs:element name="addprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddProjectSection" />
+        <xs:element name="addtoglobalsection9" type="nant:Studio.VisualStudio9.Tasks.AddToGlobalSection" />
+        <xs:element name="addtoprojectsection9" type="nant:Studio.VisualStudio9.Tasks.AddToProjectSection" />
+        <xs:element name="removefromglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromGlobalSection" />
+        <xs:element name="removefromprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveFromProjectSection" />
+        <xs:element name="removeglobalsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveGlobalSection" />
+        <xs:element name="removeproject9" type="nant:Studio.VisualStudio9.Tasks.RemoveProject" />
+        <xs:element name="removeprojectsection9" type="nant:Studio.VisualStudio9.Tasks.RemoveProjectSection" />
+        <xs:element name="attrib" type="nant:NAnt.Core.Tasks.AttribTask" />
+        <xs:element name="available" type="nant:NAnt.Core.Tasks.AvailableTask" />
+        <xs:element name="call" type="nant:NAnt.Core.Tasks.CallTask" />
+        <xs:element name="copy" type="nant:NAnt.Core.Tasks.CopyTask" />
+        <xs:element name="delete" type="nant:NAnt.Core.Tasks.DeleteTask" />
+        <xs:element name="description" type="nant:NAnt.Core.Tasks.DescriptionTask" />
+        <xs:element name="echo" type="nant:NAnt.Core.Tasks.EchoTask" />
+        <xs:element name="exec" type="nant:NAnt.Core.Tasks.ExecTask" />
+        <xs:element name="fail" type="nant:NAnt.Core.Tasks.FailTask" />
+        <xs:element name="get" type="nant:NAnt.Core.Tasks.GetTask" />
+        <xs:element name="if" type="nant:NAnt.Core.Tasks.IfTask" />
+        <xs:element name="ifnot" type="nant:NAnt.Core.Tasks.IfNotTask" />
+        <xs:element name="include" type="nant:NAnt.Core.Tasks.IncludeTask" />
+        <xs:element name="loadfile" type="nant:NAnt.Core.Tasks.LoadFileTask" />
+        <xs:element name="loadtasks" type="nant:NAnt.Core.Tasks.LoadTasksTask" />
+        <xs:element name="foreach" type="nant:NAnt.Core.Tasks.LoopTask" />
+        <xs:element name="mail" type="nant:NAnt.Core.Tasks.MailTask" />
+        <xs:element name="mkdir" type="nant:NAnt.Core.Tasks.MkDirTask" />
+        <xs:element name="move" type="nant:NAnt.Core.Tasks.MoveTask" />
+        <xs:element name="nantschema" type="nant:NAnt.Core.Tasks.NAntSchemaTask" />
+        <xs:element name="nant" type="nant:NAnt.Core.Tasks.NAntTask" />
+        <xs:element name="property" type="nant:NAnt.Core.Tasks.PropertyTask" />
+        <xs:element name="regex" type="nant:NAnt.Core.Tasks.RegexTask" />
+        <xs:element name="setenv" type="nant:NAnt.Core.Tasks.SetEnvTask" />
+        <xs:element name="sleep" type="nant:NAnt.Core.Tasks.SleepTask" />
+        <xs:element name="style" type="nant:NAnt.Core.Tasks.StyleTask" />
+        <xs:element name="sysinfo" type="nant:NAnt.Core.Tasks.SysInfoTask" />
+        <xs:element name="touch" type="nant:NAnt.Core.Tasks.TouchTask" />
+        <xs:element name="tstamp" type="nant:NAnt.Core.Tasks.TStampTask" />
+        <xs:element name="uptodate" type="nant:NAnt.Core.Tasks.UpToDateTask" />
+        <xs:element name="xmlpeek" type="nant:NAnt.Core.Tasks.XmlPeekTask" />
+        <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
+        <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
+        <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+        <xs:element name="function" type="nant:Common.Functions.FunctionTask" />
+        <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="uptodatefile" use="optional" />
+    <xs:attribute name="comparefile" use="optional" />
+    <xs:attribute name="propertytrue" use="optional" />
+    <xs:attribute name="propertyexists" use="optional" />
+    <xs:attribute name="targetexists" use="optional" />
+    <xs:attribute name="test" use="optional" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
   <xs:complexType name="NAnt.Compression.Tasks.GUnzip">
     <xs:attribute name="src" use="required" />
     <xs:attribute name="dest" use="required" />
@@ -716,6 +933,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element minOccurs="0" maxOccurs="1" name="fileset" type="nant:NAnt.Compression.Types.ZipFileSet" />
     </xs:sequence>
+    <xs:attribute name="append" use="optional" />
     <xs:attribute name="zipfile" use="required" />
     <xs:attribute name="comment" use="optional" />
     <xs:attribute name="stampdatetime" use="optional" />
@@ -3816,6 +4034,7 @@
         <xs:element name="replace" type="nant:Common.Tasks.Replace" />
         <xs:element name="loopthrough" type="nant:Common.Tasks.LoopThrough" />
         <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
+        <xs:element name="ifthenelse" type="nant:Common.Tasks.IfThenTask" />
         <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
         <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
         <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
@@ -4003,6 +4222,7 @@
         <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
         <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
         <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+        <xs:element name="function" type="nant:Common.Functions.FunctionTask" />
         <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
       </xs:choice>
     </xs:sequence>
@@ -4027,6 +4247,7 @@
         <xs:element name="replace" type="nant:Common.Tasks.Replace" />
         <xs:element name="loopthrough" type="nant:Common.Tasks.LoopThrough" />
         <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
+        <xs:element name="ifthenelse" type="nant:Common.Tasks.IfThenTask" />
         <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
         <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
         <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
@@ -4214,6 +4435,7 @@
         <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
         <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
         <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+        <xs:element name="function" type="nant:Common.Functions.FunctionTask" />
         <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
       </xs:choice>
     </xs:sequence>
@@ -4273,6 +4495,7 @@
         <xs:element name="replace" type="nant:Common.Tasks.Replace" />
         <xs:element name="loopthrough" type="nant:Common.Tasks.LoopThrough" />
         <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
+        <xs:element name="ifthenelse" type="nant:Common.Tasks.IfThenTask" />
         <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
         <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
         <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
@@ -4460,6 +4683,7 @@
         <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
         <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
         <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+        <xs:element name="function" type="nant:Common.Functions.FunctionTask" />
         <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
       </xs:choice>
     </xs:sequence>
@@ -4753,6 +4977,13 @@
     <xs:attribute name="if" use="optional" />
     <xs:attribute name="unless" use="optional" />
   </xs:complexType>
+  <xs:complexType name="Common.Functions.FunctionTask">
+    <xs:attribute name="execute" use="required" />
+    <xs:attribute name="failonerror" use="optional" />
+    <xs:attribute name="verbose" use="optional" />
+    <xs:attribute name="if" use="optional" />
+    <xs:attribute name="unless" use="optional" />
+  </xs:complexType>
   <xs:complexType name="TestCoverage.Tasks.CreateTestCoverageReport">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element minOccurs="0" maxOccurs="1" name="productionassemblies" type="nant:NAnt.Core.Types.FileSet" />
@@ -4773,6 +5004,7 @@
       <xs:element name="replace" type="nant:Common.Tasks.Replace" />
       <xs:element name="loopthrough" type="nant:Common.Tasks.LoopThrough" />
       <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
+      <xs:element name="ifthenelse" type="nant:Common.Tasks.IfThenTask" />
       <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
       <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
       <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
@@ -4960,6 +5192,7 @@
       <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
       <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
       <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+      <xs:element name="function" type="nant:Common.Functions.FunctionTask" />
       <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
       <xs:element name="xmlquery" type="nant:Common.Tasks.XmlQuery" />
       <xs:element name="strings" type="nant:Common.Tasks.StringList" />
@@ -5007,6 +5240,7 @@
         <xs:element name="replace" type="nant:Common.Tasks.Replace" />
         <xs:element name="loopthrough" type="nant:Common.Tasks.LoopThrough" />
         <xs:element name="largeproperty" type="nant:Common.Tasks.LargePropertyTask" />
+        <xs:element name="ifthenelse" type="nant:Common.Tasks.IfThenTask" />
         <xs:element name="gunzip" type="nant:NAnt.Compression.Tasks.GUnzip" />
         <xs:element name="tar" type="nant:NAnt.Compression.Tasks.TarTask" />
         <xs:element name="unzip" type="nant:NAnt.Compression.Tasks.UnZipTask" />
@@ -5194,6 +5428,7 @@
         <xs:element name="xmlpoke" type="nant:NAnt.Core.Tasks.XmlPokeTask" />
         <xs:element name="ildasm" type="nant:NAnt.MSNet.Tasks.IldasmTask" />
         <xs:element name="servicecontroller" type="nant:NAnt.MSNet.Tasks.ServiceControllerTask" />
+        <xs:element name="function" type="nant:Common.Functions.FunctionTask" />
         <xs:element name="createtestcoveragereport" type="nant:TestCoverage.Tasks.CreateTestCoverageReport" />
         <xs:element name="xmlquery" type="nant:Common.Tasks.XmlQuery" />
         <xs:element name="strings" type="nant:Common.Tasks.StringList" />

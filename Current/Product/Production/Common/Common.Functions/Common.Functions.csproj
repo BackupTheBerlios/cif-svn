@@ -1,31 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3E2EE397-A00B-4CE3-9E73-8FEC69641E7B}</ProjectGuid>
+    <ProjectGuid>{9147F7CE-B270-449A-B6EC-E9859FD68D7D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InstallShield.Tasks</RootNamespace>
-    <AssemblyName>InstallShield.Tasks</AssemblyName>
-    <StartupObject>
-    </StartupObject>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <RootNamespace>Common.Functions</RootNamespace>
+    <AssemblyName>Common.Functions</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>Package\InstallShield\bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -33,11 +22,31 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>Package\InstallShield\bin\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NAnt.Core, Version=0.85.1932.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Third Party\nAnt\bin\NAnt.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FileSetFunctions.cs" />
+    <Compile Include="FunctionTask.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UpdatenAnt.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UpdatenAnt.xml" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|.NET 1.1' ">
     <OutputPath>bin\.NET 1.1\Release\</OutputPath>
   </PropertyGroup>
@@ -53,28 +62,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Content Include="Package\InstallShield\InstallShield.Properties.xml" />
-    <Content Include="Package\InstallShield\InstallShield.Target.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Source\AssemblyInfo.cs" />
-    <Compile Include="..\..\..\ProjectInfo.cs" />
-    <Compile Include="Source\InstallShieldTask.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="NAnt.Contrib.Tasks, Version=0.85.1932.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Third Party\nAnt\bin\NAnt.Contrib.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="NAnt.Core, Version=0.85.1932.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Third Party\nAnt\bin\NAnt.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.XML" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Package\InstallShield\bin\" />
-  </ItemGroup>
 </Project>

@@ -107,6 +107,7 @@
     <Compile Include="..\..\..\ProjectInfo.vb">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IfThenTask.vb" />
     <Compile Include="LargePropertyTask.vb" />
     <Compile Include="LoopItemContainer.vb" />
     <Compile Include="LoopItems.vb" />

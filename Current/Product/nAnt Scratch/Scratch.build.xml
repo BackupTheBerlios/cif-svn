@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="scratch" default="test" >
 
+  <loadtasks assembly="..\..\Third Party\nAnt\bin\Common.Functions.dll" />
+
   <target name="test">
-    <property name="XmlReportFile" value="C:/Temp/TestCoverageReport.Xml" />
-    <saveproperties format="Include" file="C:\Temp\MyProperties.txt">
-      <property name="XmlReportFile"/>
-    </saveproperties>
+    <fileset id="FileSetRef">
+      <include name="C:\Tools\*.*"/>
+    </fileset>
+
+    <function execute="${fileset::include-add('FileSetRef', 'C:\Scripts\*.*')}"/>
+
+    <ifthenelse test="${fileset::include-contains('FileSetRef', 'C:\Scripts\*.*')}">
+      <then>
+        <echo message="Added Successfully"/>
+      </then>
+      <else>
+        <echo message="Add Failed"/>
+      </else>
+    </ifthenelse>
+
+    <echo message=" "/>
+    <echo message="**********************************"/>
+    <echo message=" "/>
+    
+    <function execute="${fileset::include-remove('FileSetRef', 'C:\Tools\*.*')}"/>
+
+    <ifthenelse test="${fileset::include-contains('FileSetRef', 'C:\Tools\*.*')}">
+      <then>
+        <echo message="Remove Failed"/>
+      </then>
+      <else>
+        <echo message="Removed Successfully"/>
+      </else>
+    </ifthenelse>
   </target>
 
 </project>

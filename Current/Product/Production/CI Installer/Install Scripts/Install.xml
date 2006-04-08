@@ -19,7 +19,6 @@
   <include buildfile="Scripts\CCNETDashboard.Install.xml"/>
   <include buildfile="Scripts\Packages.Install.xml"/>
   <include buildfile="Scripts\ProductVS.Install.xml"/>
-  <include buildfile="Scripts\VSS.Install.xml"/>
 
   <target name="Install" depends="Private.Install.ValidateParameters">
     <call target="Private.Install.CreateDirectoryStructure"/>
@@ -29,7 +28,6 @@
     <call target="CCNETDashboard.Install"/>
     <call target="Packages.Install"/>
     <call target="ProductVS.Install"/>
-    <call target="VSS.Install"/>
   </target>
 
   <target name="Private.Install.ValidateParameters" >
@@ -41,7 +39,6 @@
     <call target="CCNETDashboard.ValidateParameters"/>
     <call target="Packages.ValidateParameters"/>
     <call target="ProductVS.ValidateParameters"/>
-    <call target="ProductVS.Install"/>
   </target>
 
   <target name="Private.Install.CreateDirectoryStructure">

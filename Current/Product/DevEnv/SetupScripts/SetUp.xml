@@ -2,6 +2,7 @@
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="DevEnvSetUp" default="SetUp">
   <target name="SetUp">
 
+    <loadtasks assembly="..\..\..\Third Party\nAnt\bin\Common.Functions.dll" />
     <loadtasks assembly="..\..\Production\Packages\TestCoverage\Package\TestCoverage\bin\TestCoverage.Tasks.dll" />
     
     <property name="SchemaFile" value="..\..\NAnt.xsd"/>
