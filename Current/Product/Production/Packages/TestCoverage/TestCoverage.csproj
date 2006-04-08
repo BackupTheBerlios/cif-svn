@@ -38,11 +38,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Source\CreateTestCoverageReport.cs" />
-    <Compile Include="Source\FixtureTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Source\TestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\TestCoverageRunner\TestCoverageRunner.csproj">
+      <Project>{458E6146-3073-4546-A30F-63B122BE4C9F}</Project>
+      <Name>TestCoverageRunner</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\TestCoverage\TestCoverageAttributes.csproj">
       <Project>{80031A14-DF87-4AE6-94AE-348AA8BE0936}</Project>
       <Name>TestCoverageAttributes</Name>
