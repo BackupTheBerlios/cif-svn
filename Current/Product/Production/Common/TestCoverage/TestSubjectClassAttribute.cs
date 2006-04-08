@@ -25,5 +25,10 @@ namespace TestCoverage
         {
             _TestSubject = testSubject;
         }
+
+        public TestSubjectClassAttribute()
+        {
+            
+        }
     }
 }

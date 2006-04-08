@@ -5,7 +5,7 @@ using System.Text;
 namespace TestCoverage
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public class TestSubjectMemeberAttribute : Attribute
+    public class TestSubjectMemberAttribute : Attribute
     {
         private string _MemeberName;
 
@@ -21,9 +21,14 @@ namespace TestCoverage
             }
         }
 
-        public TestSubjectMemeberAttribute(string memeberName)
+        public TestSubjectMemberAttribute(string memeberName)
         {
             _MemeberName = memeberName;
+        }
+
+        public TestSubjectMemberAttribute()
+        {
+            
         }
     }
 }
