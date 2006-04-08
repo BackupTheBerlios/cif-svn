@@ -87,7 +87,7 @@ Public Class SaveProperties
         Try
             Writer = Me.GetWriter
             Writer.WriteLine("<?xml version='1.0' encoding='utf-8' ?>")
-            Writer.WriteLine(String.Format("<project xmlns='http://nant.sf.net/schemas/nant.xsd'  name='{0}'>"), Me.ProjectName)
+            Writer.WriteLine(String.Format("<project xmlns='http://nant.sf.net/schemas/nant.xsd'  name='{0}'>", Me.ProjectName))
             For Each [Property] As SaveProperty In Me.PropertyList
                 Writer.WriteLine(String.Format("<property name='{0}' value='{1}' />", [Property].PropertyName, [Property].PropertyValue))
             Next
