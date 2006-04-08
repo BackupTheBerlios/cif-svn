@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:nant="http://nant.sf.net/schemas/nant.xsd" elementFormDefault="qualified" targetNamespace="http://nant.sf.net/schemas/nant.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:annotation>
-    <xs:documentation>NAnt schema generated at 02/06/2006 14:46:17</xs:documentation>
+    <xs:documentation>NAnt schema generated at 02/08/2006 23:18:28</xs:documentation>
   </xs:annotation>
   <xs:complexType name="NAnt.Core.TaskContainer">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -4755,7 +4755,7 @@
   </xs:complexType>
   <xs:complexType name="TestCoverage.Tasks.CreateTestCoverageReport">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:element minOccurs="1" maxOccurs="1" name="productionassemblies" type="nant:NAnt.Core.Types.FileSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="productionassemblies" type="nant:NAnt.Core.Types.FileSet" />
       <xs:element minOccurs="1" maxOccurs="1" name="testasseblies" type="nant:NAnt.Core.Types.FileSet" />
     </xs:sequence>
     <xs:attribute name="projectname" use="required" />

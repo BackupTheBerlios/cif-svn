@@ -1,28 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="scratch" default="test" >
 
-  
   <target name="test">
-    <loopthrough property="string">
-      <items>
-        <xmlquery file="C:\Temp\WithCoverage.xml" query="//cruisecontrol/build/@date" />
-      </items>
-      <do>
-        <echo message="${string}"/>
-      </do>
-    </loopthrough>
-    
-    <replace file="">
-      <filterchain >
-        <regexreplace rx="" replacingText=""/>
-      </filterchain>
-    </replace>
-    
-    <addglobalsection8 solutionfile="">
-      <section sectionname="" timetoapply="">
-        <pair key="" value=""/>
-      </section>
-    </addglobalsection8>
+    <property name="XmlReportFile" value="C:/Temp/TestCoverageReport.Xml" />
+    <saveproperties format="Include" file="C:\Temp\MyProperties.txt">
+      <property name="XmlReportFile"/>
+    </saveproperties>
   </target>
-  
+
 </project>
