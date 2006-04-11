@@ -4,35 +4,38 @@
   <loadtasks assembly="..\..\Third Party\nAnt\bin\Common.Functions.dll" />
 
   <target name="test">
-    <fileset id="FileSetRef">
-      <include name="C:\Tools\*.*"/>
-    </fileset>
+    <strings id="Numbers">
+      <string value="1"/>
+      <string value="2"/>
+      <string value="3"/>
+      <string value="4"/>
+    </strings>
 
-    <function execute="${fileset::include-add('FileSetRef', 'C:\Scripts\*.*')}"/>
+    <function execute="${stringlist::add('Numbers', '5')}"/>
 
-    <ifthenelse test="${fileset::include-contains('FileSetRef', 'C:\Scripts\*.*')}">
+    <ifthenelse test="${stringlist::contains('Numbers', '5')}">
       <then>
-        <echo message="Added Successfully"/>
+        <echo message="Added number 5 to StringList, count = ${stringlist::count('Numbers')}."/>
       </then>
+      <elseif if="false" >
+        <echo message="This won't happen."/>
+      </elseif>
       <else>
-        <echo message="Add Failed"/>
+        <echo message="Did not add number 5 to StringList, count = ${stringlist::count('Numbers')}."/>
       </else>
     </ifthenelse>
-
-    <echo message=" "/>
-    <echo message="**********************************"/>
-    <echo message=" "/>
     
-    <function execute="${fileset::include-remove('FileSetRef', 'C:\Tools\*.*')}"/>
+    <function execute="${stringlist::remove('Numbers', '2')}"/>
 
-    <ifthenelse test="${fileset::include-contains('FileSetRef', 'C:\Tools\*.*')}">
-      <then>
-        <echo message="Remove Failed"/>
-      </then>
-      <else>
-        <echo message="Removed Successfully"/>
-      </else>
-    </ifthenelse>
+    <loopthrough property="Number">
+      <items>
+        <strings refid="Numbers" />
+      </items>
+      <do>
+        <echo message="Number ${Number}!"/>
+      </do>
+    </loopthrough>
+    
   </target>
 
 </project>

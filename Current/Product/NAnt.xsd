@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:nant="http://nant.sf.net/schemas/nant.xsd" elementFormDefault="qualified" targetNamespace="http://nant.sf.net/schemas/nant.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:annotation>
-    <xs:documentation>NAnt schema generated at 04/08/2006 16:59:31</xs:documentation>
+    <xs:documentation>NAnt schema generated at 04/11/2006 07:11:38</xs:documentation>
   </xs:annotation>
   <xs:complexType name="NAnt.Core.TaskContainer">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -689,7 +689,8 @@
   <xs:complexType name="Common.Tasks.IfThenTask">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element minOccurs="1" maxOccurs="1" name="then" type="nant:NAnt.Core.TaskContainer" />
-      <xs:element minOccurs="1" maxOccurs="1" name="else" type="nant:NAnt.Core.TaskContainer" />
+      <xs:element minOccurs="0" maxOccurs="1" name="else" type="nant:NAnt.Core.TaskContainer" />
+      <xs:element minOccurs="0" maxOccurs="1" name="elseif" type="nant:NAnt.Core.TaskContainer" />
       <xs:element minOccurs="0" maxOccurs="1" name="comparefiles" type="nant:NAnt.Core.Types.FileSet" />
       <xs:element minOccurs="0" maxOccurs="1" name="uptodatefiles" type="nant:NAnt.Core.Types.FileSet" />
       <xs:choice minOccurs="0" maxOccurs="unbounded">
