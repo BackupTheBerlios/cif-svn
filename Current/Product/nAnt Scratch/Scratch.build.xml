@@ -4,37 +4,18 @@
   <loadtasks assembly="..\..\Third Party\nAnt\bin\Common.Functions.dll" />
 
   <target name="test">
-    <strings id="Numbers">
-      <string value="1"/>
-      <string value="2"/>
-      <string value="3"/>
-      <string value="4"/>
-    </strings>
 
-    <function execute="${stringlist::add('Numbers', '5')}"/>
-
-    <ifthenelse test="${stringlist::contains('Numbers', '5')}">
-      <then>
-        <echo message="Added number 5 to StringList, count = ${stringlist::count('Numbers')}."/>
-      </then>
-      <elseif if="false" >
-        <echo message="This won't happen."/>
-      </elseif>
-      <else>
-        <echo message="Did not add number 5 to StringList, count = ${stringlist::count('Numbers')}."/>
-      </else>
-    </ifthenelse>
-    
-    <function execute="${stringlist::remove('Numbers', '2')}"/>
-
-    <loopthrough property="Number">
-      <items>
-        <strings refid="Numbers" />
-      </items>
-      <do>
-        <echo message="Number ${Number}!"/>
-      </do>
-    </loopthrough>
+    <switch value="True">
+      <case value="${directory::exists('C:\Temp')}">
+        <echo message="Boo!" />
+      </case>
+      <case value="${directory::exists('C:\Temps')}" break="true">
+        <echo message="Ahhh!" />
+      </case>
+      <case value="${directory::exists('C:\Temp')}" break="true">
+        <echo message="Hwoa!" />
+      </case>
+    </switch>
     
   </target>
 
