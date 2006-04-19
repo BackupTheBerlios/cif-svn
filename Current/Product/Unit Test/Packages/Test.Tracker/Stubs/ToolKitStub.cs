@@ -1667,7 +1667,27 @@ namespace Test.Tracker.Stubs
         }
 
 #endregion
-    
+
+
+        #region IPVCSToolKit Members
+
+
+        public int GetNumericFieldValue(int recordHandle, string fieldName)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public void NewRecordBegin(int recordHandle, int recordType)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public void NewRecordCommit(int recordHandle, ref int transactionID)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        #endregion
     }
 
     public class Note
