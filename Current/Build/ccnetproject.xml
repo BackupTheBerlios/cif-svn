@@ -27,7 +27,7 @@
       <username>cifactorybuild</username>
       <password>C0ntinuou2</password>
       <webUrlBuilder type="websvn">
-        <url>http://svn.berlios.de/wsvn/cif/Current/{0}?op=file&amp;rev=0&amp;sc=0</url>
+        <url>http://svn.berlios.de/wsvn/cif/Current/{0}?op=diff&amp;rev=0&amp;sc=0</url>
       </webUrlBuilder>
     </sourcecontrol>
     &labeller;
@@ -56,7 +56,7 @@
         <username>cifactorybuild</username>
         <password>C0ntinuou2</password>
         <webUrlBuilder type="websvn">
-          <url>http://svn.berlios.de/wsvn/cif/{0}?op=file&amp;rev=0&amp;sc=0</url>
+          <url>http://svn.berlios.de/wsvn/cif/{0}?op=diff&amp;rev=0&amp;sc=0</url>
         </webUrlBuilder>
         <tagBaseUrl>https://svn.berlios.de/svnroot/repos/cif/Tags</tagBaseUrl>
       </sourceControlProvider>
