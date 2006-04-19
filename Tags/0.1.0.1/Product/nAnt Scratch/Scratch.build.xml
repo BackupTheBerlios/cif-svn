@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="scratch" default="test" >
+
+  <loadtasks assembly="..\..\Third Party\nAnt\bin\Common.Functions.dll" />
+
+  <target name="test">
+
+    <switch value="True">
+      <case value="${directory::exists('C:\Temp')}">
+        <echo message="Boo!" />
+      </case>
+      <case value="${directory::exists('C:\Temps')}" break="true">
+        <echo message="Ahhh!" />
+      </case>
+      <case value="${directory::exists('C:\Temp')}" break="true">
+        <echo message="Hwoa!" />
+      </case>
+    </switch>
+    
+  </target>
+
+</project>

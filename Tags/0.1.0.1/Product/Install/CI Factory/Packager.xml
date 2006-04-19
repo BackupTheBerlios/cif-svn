@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="CI Factory Packager" default="Packager.Create">
+
+  <loadtasks assembly="..\..\..\Third Party\nAnt\bin\Common.Functions.dll" />
+
+  <target name="Packager.Create">
+
+    <delete file="Zip\CI Factory.zip" if="${file::exists('Zip\CI Factory.zip')}"/>
+
+    <zip zipfile="Zip\CI Factory.zip" includeemptydirs="true">
+      <fileset basedir="..\..\Production\CI Installer" >
+        <include name="Install Scripts\**\*"/>
+      </fileset>
+
+      <fileset basedir="..\..\Production\Foundation">
+        <include name="Default\**\*"/>
+      </fileset>
+
+      <fileset prefix="nAnt" basedir="..\..\Production\Foundation\Default\Build\nAnt">
+        <include name="**\*"/>
+      </fileset>
+    </zip>
+
+    <foreach item="Folder" property="PackageFolder" >
+      <in>
+        <items>
+          <include name="..\..\Production\Packages\*"/>
+          <exclude name="..\..\Production\Packages\.svn"/>
+        </items>
+      </in>
+      <do>
+        <zip zipfile="Zip\CI Factory.zip" includeemptydirs="true" append="true">
+          <fileset prefix="Packages" basedir="${PackageFolder}\Package">
+            <include name="**\*"/>
+          </fileset>
+        </zip>
+      </do>
+    </foreach>
+    
+  </target>
+  
+</project>

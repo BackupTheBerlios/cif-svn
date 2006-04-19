@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="PackagesInstaller" >
+
+  <!-- These are private... -->
+
+  <property name="Private.Packages.DefaultDirectory" value="..\Packages"/>
+
+  <target name="Packages.Install" depends="Packages.ValidateParameters" >
+    <loopthrough property="Private.Packages.Install.PackageName">
+      <items>
+        <strings refid="Packages.InstallList"/>
+      </items>
+      <do>
+        <call target="${Private.Packages.Install.PackageName}.Install"/>
+      </do>
+    </loopthrough>
+  </target>
+
+  <target name="Packages.ValidateParameters">
+
+  </target>
+
+</project>

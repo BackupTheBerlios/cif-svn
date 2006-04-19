@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="VSS.Installer" default="Private.VSS.BindSolution8">
+
+  <script language="C#" prefix="guid">
+    <code>
+      <![CDATA[
+        [Function("new")]
+        public static string MakeNewGuidString()
+        {
+          return Guid.NewGuid().ToString();
+        }
+      ]]>
+    </code>
+  </script>
+  
+  <include buildfile="Properties.xml" />
+  
+  <target name="VSS.Install">
+
+    
+    
+  </target>
+
+  <!---->
+  <property name="SolutionFile" value="C:\Temp\test.sln.txt"/>
+
+  <target name="Private.VSS.BindSolution8">
+    <removeglobalsection8 solutionfile="${SolutionFile}">
+      <section sectionname="SourceCodeControl" timetoapply="Pre" />
+    </removeglobalsection8>
+    <!--
+GlobalSection(SourceCodeControl) = preSolution
+	SccNumberOfProjects = 2
+	SccLocalPath0 = .
+	CanCheckoutShared = false
+	SolutionUniqueID = {B0A7495F-2345-43E7-A7AF-BD47D78CA7BB}
+	SccProjectUniqueName1 = Install\\%ProjectName%\\%ProjectName%.vdproj
+	SccLocalPath1 = .
+	CanCheckoutShared = false
+	SccProjectFilePathRelativizedFromConnection1 = Install\\%ProjectName%\\
+EndGlobalSection
+    -->
+
+    <property name="SccNumberOfProjects" value="1"/>
+    <addglobalsection8 solutionfile="${SolutionFile}" >
+      <section sectionname="SourceCodeControl" timetoapply="Pre" >
+        <pair key="SccNumberOfProjects" value="${SccNumberOfProjects}"/>
+        <pair key="SccLocalPath0" value="."/>
+        <pair key="CanCheckoutShared" value="false"/>
+        <pair key="SolutionUniqueID" value="${guid::new()}"/>
+      </section>
+    </addglobalsection8>
+
+    <loopthrough property="Project.Id">
+      <items>
+        <projects8 solutionfile="${SolutionFile}" valuetoget="Id">
+          <property name="Project.Location" value="Location"/>
+        </projects8>
+      </items>
+      <do>
+        <addtoglobalsection8 solutionfile="${SolutionFile}" sectionname="SourceCodeControl">
+          <pairs key="SccProjectUniqueName${SccNumberOfProjects}" value="${Project.Location}"/>
+          <pairs key="SccLocalPath${SccNumberOfProjects}" value="."/>
+          <pairs key="CanCheckoutShared${SccNumberOfProjects}" value="false"/>
+          <pairs key="SccProjectFilePathRelativizedFromConnection${SccNumberOfProjects}" value="${path::get-directory-name(Project.Location)}"/>
+        </addtoglobalsection8>
+        <property name="SccNumberOfProjects" value="${int::parse(SccNumberOfProjects) + 1}"/>
+      </do>
+    </loopthrough>
+
+    <updateglobalsectionpairvalue8 solutionfile="${SolutionFile}" sectionname="SourceCodeControl" >
+      <pairs key="SccNumberOfProjects" value="${SccNumberOfProjects}"/>
+    </updateglobalsectionpairvalue8>
+  </target>
+  
+</project>

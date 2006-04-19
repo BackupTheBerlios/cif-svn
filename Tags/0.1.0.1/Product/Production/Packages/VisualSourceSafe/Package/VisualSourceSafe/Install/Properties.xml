@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="VSS.Installer">
+
+  <property name="SourceControl.TargetFile" value=".\Packages\VisualSourceSafe\Build\VSS.Target.xml"/>
+
+  <largeproperty name="SourceControl.MainBuildBlock">
+    <value xml="true">
+      <sourcecontrol type="filtered">
+        <sourceControlProvider  type="vss" applyLabel="true">
+          <executable>C:\Program Files\Microsoft Visual Studio\VSS\win32\SS.EXE</executable>
+          <project>$/%ProjectName%/%ProjectCodeLineName%</project>
+          <username>Build</username>
+          <password>password</password>
+          <ssdir>%VSSRootShare%\%ProjectName%</ssdir>
+          <workingDirectory>%ProjectCodeLineDirectory%</workingDirectory>
+        </sourceControlProvider >
+        <exclusionFilters>
+          <pathFilter>
+            <pattern>$/%ProjectName%/%ProjectCodeLineName%/Product/**/AssemblyInfo.*</pattern>
+          </pathFilter>
+          <pathFilter>
+            <pattern>$/%ProjectName%/%ProjectCodeLineName%/Product/ProjectInfo.*</pattern>
+          </pathFilter>
+          <pathFilter>
+            <pattern>$/%ProjectName%/%ProjectCodeLineName%/Product/**/ProjectInfo.*</pattern>
+          </pathFilter>
+          <pathFilter>
+            <pattern>$/%ProjectName%/%ProjectCodeLineName%/Build/*.*</pattern>
+          </pathFilter>
+          <pathFilter>
+            <pattern>$/%ProjectName%/%ProjectCodeLineName%/Build/**/*.*</pattern>
+          </pathFilter>
+        </exclusionFilters>
+      </sourcecontrol>
+    </value>
+  </largeproperty>
+
+  <largeproperty name="SourceControl.BuildUpdateBlock">
+    <value xml="true">
+      <sourcecontrol  type="vss" applyLabel="false" autoGetSource="true" >
+        <executable>C:\Program Files\Microsoft Visual Studio\VSS\win32\SS.EXE</executable>
+        <project>$/%ProjectName%/%ProjectCodeLineName%/Build</project>
+        <username>Build</username>
+        <password>password</password>
+        <ssdir>%VSSRootShare%\%ProjectName%</ssdir>
+        <workingDirectory>%BuildDirectory%</workingDirectory>
+      </sourcecontrol>
+    </value>
+  </largeproperty>
+
+</project>
