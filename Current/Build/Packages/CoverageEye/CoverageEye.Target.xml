@@ -113,10 +113,10 @@
   <target name="Private.Coverage.MergeInToSingleReport">
     <exec program="cemerge.exe" 
 			basedir="${BuildDirectory}\Packages\CoverageEye\bin">
-      <arg value="${Coverage.ReportFolder}\ConsolidatedReport.xml" />
+      <arg value='"${Coverage.ReportFolder}\ConsolidatedReport.xml"' />
       <arg value=".\" />
       <!-- This is a bogas value. -->
-      <arg value="${Coverage.ReportFolder}\Report.*.xml" />
+      <arg value='"${Coverage.ReportFolder}\Report.*.xml"' />
     </exec>
   </target>
 	
@@ -130,7 +130,7 @@
             <variable name="Cor_Enable_Profiling" value="1"/>
             <variable name="Cor_Profiler" value="${Private.Coverage.CorProfiler}"/>
           </environment>
-          <arg line="-buildfile:${Coverage.UnitTestPackageInclude}"/>
+          <arg line='-buildfile:"${Coverage.UnitTestPackageInclude}"'/>
           <arg line='@"${Coverage.CommonPropertiesFile}"' />
           <arg line="UnitTest.RunTests"/>
         </exec>
@@ -176,7 +176,7 @@
     <call target="Private.Coverage.CreatePropertiesFile"/>
     
     <exec program="${BuildDirectory}\nAnt\bin\nant.exe">
-      <arg line="-buildfile:${Coverage.UnitTestPackageInclude}"/>
+      <arg line='-buildfile:"${Coverage.UnitTestPackageInclude}"'/>
       <arg line='@"${Coverage.CommonPropertiesFile}"' />
       <arg line="UnitTest.SetUp"/>
     </exec>
@@ -184,7 +184,7 @@
 
   <target name="UnitTest.TearDown">
     <exec program="${BuildDirectory}\nAnt\bin\nant.exe">
-      <arg line="-buildfile:${Coverage.UnitTestPackageInclude}"/>
+      <arg line='-buildfile:"${Coverage.UnitTestPackageInclude}"'/>
       <arg line='@"${Coverage.CommonPropertiesFile}"' />
       <arg line="UnitTest.TearDown"/>
     </exec>
