@@ -131,10 +131,10 @@
 	</xsl:template>
 
 	<xsl:template name="counter-literal">
-		<xsl:value-of select="@run-count"/> test,
-		<xsl:value-of select="@success-count"/> success,
-		<xsl:value-of select="@failure-count"/> failures,
-        <xsl:value-of select="@skip-count" /> skipped,
+		<xsl:value-of select="@run-count"/> tests,
+		<xsl:value-of select="@success-count"/> succeeded,
+    <xsl:value-of select="@failure-count"/> failed,
+    <xsl:value-of select="@skip-count" /> skipped,
 		<xsl:value-of select="@ignore-count"/> ignored,
 		<xsl:value-of select="@assert-count"/> asserts
 	</xsl:template>
@@ -210,10 +210,11 @@
                 <td class="unittests-sectionheader" colspan="3">
                     MbUnit Tests run:
                     <xsl:value-of select="counter/@run-count" /> tests,
-                    <xsl:value-of select="counter/@success-count" /> success,
-                    <xsl:value-of select="counter/@failure-count" /> failure,
+                    <xsl:value-of select="counter/@success-count" /> succeeded,
+                  <xsl:value-of select="counter/@failure-count" /> failed,
+                    <xsl:value-of select="counter/@skip-count" /> skipped,
                     <xsl:value-of select="counter/@ignore-count" /> ignored,
-                    <xsl:value-of select="counter/@skip-count" /> skipped,                    
+                    <xsl:value-of select="counter/@assert-count"/> asserts
                     <xsl:value-of select="format-number(counter/@duration,'##.##')" /> s
                     </td>
             </tr>

@@ -28,23 +28,25 @@
       <imports >
         <import namespace="System.Xml"/>
       </imports >
-      <code><![CDATA[
-
+      <code>
+        <![CDATA[
 					Public Shared Sub ScriptMain(ByVal project As NAnt.Core.Project)
 						Dim pd As PropertyDictionary = project.Properties
             Dim OldestModificationTime As DateTime = DateTime.Now.Subtract(New TimeSpan(100, 0, 0, 0))
-            Dim HoldOldestModificationTime as DateTime = OldestModificationTime
+            Dim SaveOldestModificationTime As DateTime = OldestModificationTime
 						Dim ModificationList As ThoughtWorks.CruiseControl.Core.Modification()
 						ModificationList = Deserialize(GetType(ThoughtWorks.CruiseControl.Core.Modification()), pd("SourceModificationReport.ReportFile"))
-						
+
             For Each modification As ThoughtWorks.CruiseControl.Core.Modification In ModificationList
-						  If OldestModificationTime.CompareTo(modification.ModifiedTime) Then
+					    If (OldestModificationTime.CompareTo(modification.ModifiedTime) < 0) Then
                 OldestModificationTime = modification.ModifiedTime
               End If
             Next
-            If HoldOldestModificationTime.ToString = OldestModificationTime.ToString Then
-              OldestModificationTime = DateTime.Now()
+            
+            If (SaveOldestModificationTime = OldestModificationTime) Then
+              OldestModificationTime = DateTime.Now
             End If
+
             pd("SourceModificationReport.OldestModificationTime") = OldestModificationTime.ToString
 					End Sub
 					
@@ -60,9 +62,9 @@
 								myFileStream.Close()
 							End If
 						End Try
-					End Function
-				
-      ]]></code>
+					End Function	
+      ]]>
+      </code>
     </script>
   </target>
 
@@ -73,7 +75,7 @@
       </imports >
       <code>
         <![CDATA[
-				Public Shared Sub ScriptMain(ByVal project As NAnt.Core.Project)
+        Public Shared Sub ScriptMain(ByVal project As NAnt.Core.Project)
 					Dim pd As PropertyDictionary = project.Properties
 					Dim ReadStream As New IO.StreamReader(pd("SourceModificationReport.ReportFile"), System.Text.Encoding.Default)
 					Dim content As String = ReadStream.ReadToEnd
@@ -81,12 +83,12 @@
 					Dim WriteStream As New IO.StreamWriter(pd("SourceModificationReport.ReportFile"), False, System.Text.Encoding.Default)
 					WriteStream.Write(content.Replace("utf-16", "utf-8"))
 					WriteStream.Close()
-				End Sub
+        End Sub
 			]]>
       </code>
     </script>
 
-    <if test="${CCNetIntegrationStatus  != 'Success'}" >
+    <if test="${CCNetIntegrationStatus != 'Success'}" >
       <script language="VB">
         <references>
           <include name="${BuildDirectory}\server\ThoughtWorks.CruiseControl.Core.dll" />
@@ -96,8 +98,7 @@
         </imports >
         <code>
           <![CDATA[
-
-					Public Shared Sub ScriptMain(ByVal project As NAnt.Core.Project)
+          Public Shared Sub ScriptMain(ByVal project As NAnt.Core.Project)
 						Dim pd As PropertyDictionary = project.Properties
 						Dim NewModificationList As ThoughtWorks.CruiseControl.Core.Modification()
 						Dim OldModificationList As ThoughtWorks.CruiseControl.Core.Modification()
@@ -114,7 +115,7 @@
 							Count += 1
 						Next
 						Serialize(CombineModificationList, pd("SourceModificationReport.ReportFile"))
-					End Sub
+          End Sub
 					
 					Private Shared Function Deserialize(ByVal ObjectType As System.Type, ByVal SourceFile As String) As Object
 						Dim mySerializer As System.Xml.Serialization.XmlSerializer = New System.Xml.Serialization.XmlSerializer(ObjectType)
@@ -129,8 +130,8 @@
 							End If
 						End Try
 					End Function
-					
-					Private Shared Sub Serialize(ByVal SourceObject As Object, ByVal SourceFile As String)
+          
+          Private Shared Sub Serialize(ByVal SourceObject As Object, ByVal SourceFile As String)
 							Dim stream As System.IO.FileStream
 							Try
 								stream = New System.IO.FileStream(SourceFile, System.IO.FileMode.Create, IO.FileAccess.Write)
@@ -149,13 +150,13 @@
       </if>
       <copy 
         file="${SourceModificationReport.ReportFile}"
-			tofile="${Private.SourceModificationReport.OldSourceModificationReportFile}"
-			verbose="true"
-		/>
+			  tofile="${Private.SourceModificationReport.OldSourceModificationReportFile}"
+			  verbose="true"
+		  />
   </target>
 
   <target name="SourceModificationReport.SetUp">
-    <mkdir unless="${directory::exists(SourceModificationReport.ReportDirectory)}" dir="${SourceModificationReport.ReportDirectory}"/>
+    <mkdir if="${directory::exists(SourceModificationReport.ReportDirectory) == false}" dir="${SourceModificationReport.ReportDirectory}"/>
     <property name="Common.FilesToDelete" value="${SourceModificationReport.FilesToDeleteAtSetup}"/>
     <call target="Common.DeleteFiles"/>
   </target>

@@ -22,36 +22,31 @@
   <property name="SourceControl.ThirdPartyChanged" value=""/>
   -->
   <target name="SourceControl.CleanGetOfThirdPartyDirectory" >
-    <call target="SourceModificationReport.GetOldestModificationTime"/>
 
-    <property name="Private.SourceControl.CleanGetOfThirdPartyDirectory.ThirdPartyHistoryFile" value="${Private.SVN.ReportDirectory}\ThirdPartyHistory.xml"/>
-    <exec program="svn" output="${Private.SourceControl.CleanGetOfThirdPartyDirectory.ThirdPartyHistoryFile}">
-      <arg line="log" />
-      <arg line="--xml" />
-      <arg line="-r HEAD" />
-      <arg line="${SVN.URI}" />
-      <arg line='"${SVN.PackageName}/Third Party"' />
-    </exec>
+    <trycatch>
+      <try>
+        <exec program="svn" workingdir="${ThirdPartyDirectory}" verbose="true">
+          <arg line="update" />
+          <arg line="--non-interactive" />
+          <arg line="--username ${SVN.Username}" />
+          <arg line="--password ${SVN.Password}" />
+        </exec>
+      </try>
+      <catch>
+        <if test="${directory::exists(ThirdPartyDirectory)}" >
+          <attrib readonly="false">
+            <fileset>
+              <include name="${ThirdPartyDirectory}\*" />
+            </fileset>
+          </attrib>
 
-    <property name="Private.SourceControl.CleanGetOfThirdPartyDirectory.ThirdPartyHistoryPathsFile" value="${Private.SVN.ReportDirectory}\ThirdPartyHistoryPaths.txt"/>
-    <style style="Packages\VisualSourceSafe\HistoryPaths.xsl" in="${Private.SourceControl.CleanGetOfThirdPartyDirectory.ThirdPartyHistoryFile}" out="${Private.SourceControl.CleanGetOfThirdPartyDirectory.ThirdPartyHistoryPathsFile}" />
-
-    <property name="SourceControl.ThirdPartyChanged" value="false"/>
-    <loadfile file="${Private.SourceControl.CleanGetOfThirdPartyDirectory.ThirdPartyHistoryPathsFile}" property="SourceControl.ThirdPartyChanged" />
-
-    <if test="${SourceControl.ThirdPartyChanged}" >
-      <if test="${directory::exists(ThirdPartyDirectory)}" >
-        <attrib readonly="false">
-          <fileset>
-            <include name="${ThirdPartyDirectory}\*" />
-          </fileset>
-        </attrib>
-
-        <delete dir="${ThirdPartyDirectory}"/>
-      </if>
-      <mkdir dir="${ThirdPartyDirectory}" />
-      <svn-checkout username="${SVN.Username}" password="${SVN.Password}" uri="${SVN.URI}/${SVN.PackageName}/Third Party" recursive ="true" destination ="${ThirdPartyDirectory}" />
-    </if>
+          <delete dir="${ThirdPartyDirectory}"/>
+        </if>
+        <mkdir dir="${ThirdPartyDirectory}" />
+        <svn-checkout username="${SVN.Username}" password="${SVN.Password}" uri="${SVN.URI}/${SVN.PackageName}/Third Party" recursive ="true" destination ="${ThirdPartyDirectory}" />
+      </catch>
+    </trycatch>
+      
   </target>
 
   <target name="SourceControl.CleanGetOfProductDirectory" >
@@ -83,18 +78,39 @@
   <property name="SourceControl.CheckIn.File" value="${Private.Versioning.AssemblyInfoFile}"/>
   -->
   <target name="SourceControl.CheckIn" >
-    <exec program="svn" >
+    <exec program="svn" workingdir="${path::get-directory-name(SourceControl.CheckIn.File)}" verbose="true">
+      <arg line="update" />
+      <arg line="--non-interactive" />
+      <arg line="--username ${SVN.Username}" />
+      <arg line="--password ${SVN.Password}" />
+      <arg line='"${path::get-file-name(SourceControl.CheckIn.File)}"' />
+    </exec>
+    <exec program="svn" workingdir="${path::get-directory-name(SourceControl.CheckIn.File)}" verbose="true">
       <arg line="commit" />
       <arg line="--non-interactive" />
       <arg line="--username ${SVN.Username}" />
       <arg line="--password ${SVN.Password}" />
       <arg line='-m "Modified by build script in build ${CCNetLabel}"' />
-      <arg line='"${SourceControl.CheckIn.File}"' />
+      <arg line='"${path::get-file-name(SourceControl.CheckIn.File)}"' />
+    </exec>
+  </target>
+
+  <!--
+  This works on the primis that SVN.PackageName = trunk and there is a tag directory sibling to trunk.
+  -->
+  <target name="SourceControl.Label">
+    <exec program="svn" verbose="true">
+      <arg line="copy"/>
+      <arg line="--username ${SVN.Username}" />
+      <arg line="--password ${SVN.Password}" />
+      <arg line="${SVN.URI}/${SVN.PackageName}" />
+      <arg line="${SVN.URI}/tags/${CCNetLabel}" />
+      <arg line='-m "Tagged by build script in build ${CCNetLabel}"' />
     </exec>
   </target>
 
   <target name="SourceControl.SetUp">
-    <mkdir unless="${directory::exists(Private.SVN.ReportDirectory)}" dir="${Private.SVN.ReportDirectory}"/>
+    <mkdir if="${directory::exists(Private.SVN.ReportDirectory) == false}" dir="${Private.SVN.ReportDirectory}"/>
   </target>
 
   <target name="SourceControl.TearDown">

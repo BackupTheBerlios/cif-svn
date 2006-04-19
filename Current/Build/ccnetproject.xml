@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE cruisecontrol [
+  <!ENTITY email '<email from="CIFactory.Build@noreply.com" mailhost="localhost" includeDetails="true">
+        <users>
+          <user name="jay flowers" group="buildmaster" address="jay.flowers@gmail.com"/>
+        </users>
+        <groups>
+          <group name="buildmaster" notification="failed"/>
+        </groups>
+      </email>'>
+  <!ENTITY labeller '<labeller type="stateFileLabeller">
+      <project>CI Factory</project>
+    </labeller>'>
+  <!ENTITY webURL '<webURL>http://cifactory/CI Factory/default.aspx?_action_ViewFarmReport=true</webURL>'>
+]>
 <cruisecontrol>
   <project name="CI Factory Build">
-    <webURL>http:/JFLOWERSXP4/CI Factory</webURL>
+    &webURL;
     <state type="state" />
     <triggers>
       <intervalTrigger seconds="90" />
@@ -16,28 +30,19 @@
         <url>http://svn.berlios.de/wsvn/cif</url>
       </webUrlBuilder>
     </sourcecontrol>
-    <labeller type="defaultlabeller">
-      <prefix>1.0.0.</prefix>
-    </labeller>
+    &labeller;
     <tasks>
       <nullTask/>
     </tasks>
     <publishers>
       <xmllogger />
-      <email from="CIFactory@gmail.com" mailhost="localhost" includeDetails="true">
-        <users>
-          <user name="Jay Flowers" group="buildmaster" address="jay.flowers@gmail.com"/>
-        </users>
-        <groups>
-          <group name="buildmaster" notification="failed"/>
-        </groups>
-      </email>
+      &email;
     </publishers>
   </project>
   <project name="CI Factory">
-    <webURL>http:/JFLOWERSXP4/CI Factory</webURL>
+    &webURL;
     <externalLinks>
-        <externalLink name="Home Page" url="http://www.mertner.com/confluence/display/CIF/CI+Factory+Home" />
+      <externalLink name="Home Page" url="http://www.mertner.com/confluence/display/CIF/CI+Factory+Home" />
     </externalLinks>
     <state type="state" />
     <triggers>
@@ -74,7 +79,7 @@
       </exclusionFilters>
     </sourcecontrol>
     <labeller type="defaultlabeller">
-      <prefix>1.0.0.</prefix>
+      <prefix>0.1.0.</prefix>
     </labeller>
     <tasks>
       <modificationWriter>
@@ -99,17 +104,11 @@
           <file>c:\Projects\CI Factory\Current\Build\CompileLogs\*.xml</file>
           <file>c:\Projects\CI Factory\Current\Build\Tracker Reports\*.xml</file>
           <file>c:\Projects\CI Factory\Current\Build\Unit Test Reports\*.xml</file>
+          <file>C:\Projects\Doubler\trunk\Build\Coverage Reports\ConsolidatedReport.xml</file>
         </files>
       </merge>
       <xmllogger />
-      <email from="CI Factory.Build@noreply.com" mailhost="localhost" includeDetails="true">
-        <users>
-          <user name="Jay Flowers" group="buildmaster" address="jay.flowers@gmail.com"/>
-        </users>
-        <groups>
-          <group name="buildmaster" notification="failed"/>
-        </groups>
-      </email>
+      &email;
     </publishers>
   </project>
 </cruisecontrol>

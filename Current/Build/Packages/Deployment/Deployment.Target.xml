@@ -8,7 +8,7 @@
   <property name="Deployment.SourceDir"	value="${ProductionDirectory}\lib" />
   <property name="Deployment.TargetDir"	value="${BuildDirectory}\Installs\${CCNetLabel}" />
   <property name="Deployment.TargetFile"	value="${DeploymentTargetDir}\${DeploymentFileName}" />
-  <property name="Deployment.FileWebPath"	value="/${ProjectName}/Current/Build/Installs/${CCNetLabel}/${DeploymentFileName}" />
+  <property name="Deployment.FileWebPath"	value="/${ProjectName}/trunk/Build/Installs/${CCNetLabel}/${DeploymentFileName}" />
   <property name="Deployment.FileWebName"	value="${CCNetLabel} ${DeploymentFileName}" />
   
   -->
@@ -19,8 +19,17 @@
     <call target="Private.Deployment.EchoDeploymentFileWebPath" />
   </target>
 
+  <target name="Deployment.PublishFileSilently">
+    <call target="Private.Deployment.CopyDeplymentToPublicationDir" />
+    <call target="Private.Deployment.EchoDeploymentWebPath" />
+  </target>
+
+  <target name="Private.Deployment.EchoDeploymentWebPath" >
+    <echo message="/${ProjectName} Installs/${CCNetLabel}" level="Info"/>
+  </target>
+
   <target name="Private.Deployment.CopyDeplymentToPublicationDir" >
-    <mkdir unless="${directory::exists(Deployment.TargetDir)}" dir="${Deployment.TargetDir}" />
+    <mkdir if="${directory::exists(Deployment.TargetDir) == false}" dir="${Deployment.TargetDir}" />
     <copy file="${Deployment.SourceDir}/${Deployment.SourceFileName}" tofile="${Deployment.TargetDir}/${Deployment.TargetFile}" />
   </target>
 
