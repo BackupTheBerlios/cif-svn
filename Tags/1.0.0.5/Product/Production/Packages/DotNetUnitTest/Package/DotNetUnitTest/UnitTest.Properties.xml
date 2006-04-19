@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="UnitTest.Properties">
-  <property name="UnitTest.TestPath" value="${ProductDirectory}"/>
-  <property name="UnitTest.TestAssemblyFormat" value="Test.*.dll"/>
-  <property name="UnitTest.ReportFolder" value="${BuildDirectory}\Unit Test Reports"/>
-  <property name="UnitTest.ReportNameFormat" value="${ProjectName}UnitTests"/>
-  <property name="UnitTest.FilesToDeleteAtSetup" value="${UnitTest.ReportFolder}\${UnitTest.ReportNameFormat}.${UnitTest.ReportFormat}"/>
-</project>

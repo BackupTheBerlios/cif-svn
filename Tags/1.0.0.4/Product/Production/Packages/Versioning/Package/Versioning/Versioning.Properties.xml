@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="Versioning.Properties">
-
-  <property name="Versioning.ProductInformationFileLocation" value="${ProductDirectory}" />
-  <property name="Versioning.ProductInformationFile" value="ProjectInfo.vb" />
-  <property name="Versioning.ProductVersion" value="${CCNetLabel}" />
-
-</project>

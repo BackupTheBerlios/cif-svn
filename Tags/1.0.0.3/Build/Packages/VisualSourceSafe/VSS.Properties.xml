@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="VSS.Properties">
-  
-  <property name="VSS.DBPath" value="C:\Source Safe DataBases\${ProjectName}\srcsafe.ini" />
-  <property name="VSS.Username" value="build" />
-  <property name="VSS.Password" value="password" />
-
-</project>
