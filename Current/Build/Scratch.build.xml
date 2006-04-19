@@ -6,20 +6,16 @@
   <property name="CCNetLabel" value="Dev"/>
   <property name="CCNetProject" value="CI Factory"/>
   <include buildfile="Properties.Build.xml"/>
-  <include buildfile="Common.Build.xml" />
-  <include buildfile=".\Packages\Subversion\SVN.Target.xml" />
+  <!--<include buildfile="Common.Build.xml" />-->
+
+  <property name="Compile.ConfigName" value="debug"/>
+  <include buildfile=".\Packages\DotNetUnitTest\UnitTest.Target.xml" />
 
 
   <target name="test">
-    <property name="Private.SourceControl.CleanGetOfThirdPartyDirectory.ThirdPartyHistoryFile" value="${Private.SVN.ReportDirectory}\ThirdPartyHistory.xml"/>
-    <exec program="svn" output="${Private.SourceControl.CleanGetOfThirdPartyDirectory.ThirdPartyHistoryFile}">
-      <arg line="log" />
-      <arg line="--xml" />
-      <arg line="-r HEAD" />
-      <arg line="${SVN.URI}" />
-      <arg line='"${SVN.PackageName}/Third Party"' />
-    </exec>
-    
+
+    <call target="UnitTest.RunTests" />
+
   </target>
 
 </project>
