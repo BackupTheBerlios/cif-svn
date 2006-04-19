@@ -38,9 +38,7 @@
             	<xsl:choose>
             		<xsl:when test="count(url) = 1 ">
 						<a>
-							<xsl:attribute name="href">
-								<xsl:value-of select="url" />
-							</xsl:attribute>
+							<xsl:attribute name="href"><xsl:value-of select="url" /><xsl:if test="project != ''"><xsl:value-of select="project"/>/</xsl:if><xsl:value-of select="filename"/>?op=file&rev=0&sc=0</xsl:attribute>
 							<xsl:if test="project != ''"><xsl:value-of select="project"/>/</xsl:if>
 							<xsl:value-of select="filename"/>
 						</a>
