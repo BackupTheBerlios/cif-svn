@@ -17,6 +17,7 @@
   <project name="CI Factory Build">
     &webURL;
     <state type="state" />
+    <publishExceptions>false</publishExceptions>
     <triggers>
       <intervalTrigger seconds="90" />
     </triggers>
@@ -45,6 +46,7 @@
       <externalLink name="Home Page" url="http://www.mertner.com/confluence/display/CIF/CI+Factory+Home" />
     </externalLinks>
     <state type="state" />
+    <publishExceptions>false</publishExceptions>
     <triggers>
       <intervalTrigger seconds="90" />
     </triggers>
