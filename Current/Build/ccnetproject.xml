@@ -11,7 +11,7 @@
   <!ENTITY labeller '<labeller type="stateFileLabeller">
       <project>CI Factory</project>
     </labeller>'>
-  <!ENTITY webURL '<webURL>http://cifactory/CI Factory/default.aspx?_action_ViewFarmReport=true</webURL>'>
+  <!ENTITY webURL '<webURL>http://66.92.154.37/CI Factory/default.aspx?_action_ViewFarmReport=true</webURL>'>
 ]>
 <cruisecontrol>
   <project name="CI Factory Build">
