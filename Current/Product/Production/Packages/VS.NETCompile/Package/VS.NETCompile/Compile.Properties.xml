@@ -4,5 +4,10 @@
   <property name="Compile.XmlLogFileName" value="Debug.xml" />
   <property name="Compile.ToConvertLogFile" value="true" />
   <property name="Compile.ConfigName" value="debug"/>
-  <property name="Compile.FilesToDeleteAtSetup" value="${Compile.LogFileDirectory}\${Compile.XmlLogFileName}" />
+  <property name="Compile.ZipFileName" value="${ProjectName}.zip"/>
+  <property name="Compile.FilesToDeleteAtSetup" value="${Compile.LogFileDirectory}\*.xml" />
+
+  <fileset id="Compile.ToCopy">
+    <include name="${ProductionDirectory}\**\Debug\*.*"/>
+  </fileset>
 </project>

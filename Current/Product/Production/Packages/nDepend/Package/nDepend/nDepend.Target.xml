@@ -2,7 +2,7 @@
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="nDepend" >
 
   <include buildfile="nDepend.Properties.xml" />
-  
+
   <!--
 	The following properties should be specified in the calling script.
   
@@ -28,11 +28,11 @@
   <target name="nDepend.Calculate" >
     <call target="Private.nDepend.CreateConfiguration"/>
 
-    <copy todir="${nDepend.AssembliesFolder}">
+    <copy todir="${nDepend.AssembliesFolder}" verbose="true">
       <fileset refid="nDepend.AssebliesFileSet" />
     </copy>
 
-    <copy todir="${nDepend.AssembliesFolder}">
+    <copy todir="${nDepend.AssembliesFolder}" verbose="true">
       <fileset refid="nDepend.DependenciesFileSet" />
     </copy>
 
@@ -61,7 +61,7 @@
       <filterchain>
         <replacestring from="%nDepend.AssembliesFolder%" to="${nDepend.AssembliesFolder}" />
       </filterchain>
-      </write>
+    </write>
 
     <write file="${nDepend.ConfigurationFile}" append="true">
       <text>
@@ -88,7 +88,7 @@
         </write>
       </do>
     </foreach>
-    
+
 
     <write file="${nDepend.ConfigurationFile}" append="true">
       <text>
@@ -116,7 +116,7 @@
         </write>
       </do>
     </foreach>
-        
+
     <write file="${nDepend.ConfigurationFile}" append="true">
       <text>
         <![CDATA[
@@ -133,28 +133,30 @@
       <DontWarn>WARNING: In the context of this application, the property getter {NDepend.DependenciesContainers.OnAssembly.NAssembly.get_ListOfType()} is never used.</DontWarn>
     </WarnFilter>
         ]]>
-        </text>
-      </write>
+      </text>
+    </write>
 
     <write file="${nDepend.ConfigurationFile}" append="true">
       <text>
-</NDepend>]]>
+        <![CDATA[
+        </NDepend>
+        ]]>
       </text>
     </write>
   </target>
 
   <target name="nDepend.SetUp">
-    <mkdir unless="${directory::exists(nDepend.BuildFolder)}" dir="${nDepend.BuildFolder}"/>
+    <mkdir if="${directory::exists(nDepend.BuildFolder) == false}" dir="${nDepend.BuildFolder}"/>
 
     <property name="Common.FilesToDelete" value="${nDepend.FilesToDeleteAtSetup}"/>
     <call target="Common.DeleteFiles"/>
 
-    <mkdir unless="${directory::exists(nDepend.ReportFolder)}" dir="${nDepend.ReportFolder}"/>
-    <mkdir unless="${directory::exists(nDepend.AssembliesFolder)}" dir="${nDepend.AssembliesFolder}"/>
+    <mkdir if="${directory::exists(nDepend.ReportFolder) == false}" dir="${nDepend.ReportFolder}"/>
+    <mkdir if="${directory::exists(nDepend.AssembliesFolder) == false}" dir="${nDepend.AssembliesFolder}"/>
   </target>
 
   <target name="nDepend.TearDown">
-    
+
   </target>
-  
+
 </project>

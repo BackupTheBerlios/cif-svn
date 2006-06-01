@@ -67,15 +67,61 @@
 	</target>
 
 	<target name="Private.Coverage.MergeReports">
-		<exec program="cemerge.exe" 
-			basedir="${BuildDirectory}\Packages\CoverageEye\bin">
-			<arg value="${Coverage.ReportFolder}\ConsolidatedReport.xml" />
-			<arg value=".\" /><!-- This is a bogas value. -->
-			<arg value="${Coverage.ReportFolder}\Report.*.xml" />
-		</exec>
+    <property name="CoverageReports" value="${list::create('CoverageReports')}"/>
+    <foreach item="File" property="ReportFilePath">
+      <in>
+        <items>
+          <include name="${Coverage.ReportFolder}\Report.*.xml" />
+        </items>
+      </in>
+      <do>
+        <regex pattern="Report\.\{[\w|\d|-]+\}\.(?'AssemblyFileName'[\w\.?]+)\.xml$" input="${ReportFilePath}" />
+        <ifnot test="${list::contains(CoverageReports, AssemblyFileName)}">
+          <property name="nothing" value="${list::add(CoverageReports, AssemblyFileName)}"/>
+        </ifnot>
+      </do>
+    </foreach>
+
+    <foreach item="String" delim="," property="AssemblyFileName" in="${list::flatten(CoverageReports)}">
+      <do>
+        
+        <property name="ReportFiles" value="${Coverage.ReportFolder}\Report.*.${AssemblyFileName}.xml"/>
+
+        <regex pattern="^(?'AssemblyName'[\w\.?]+)\.(dll|exe)$" input="${AssemblyFileName}" />
+        <property name="AssemblyBinLocation" value="${ProductionDirectory}\${AssemblyName}\bin"/>
+        
+        <property name="AssemblyReportName" value="CoverageReport.${AssemblyFileName}.xml"/>
+
+        <exec program="cemerge.exe" basedir="${BuildDirectory}\Packages\CoverageEye\bin">
+            <arg value="${Coverage.ReportFolder}\${AssemblyReportName}" />
+            <arg value="${AssemblyBinLocation}" />
+            <arg value="${ReportFiles}" />
+        </exec>
+
+        <property name="Deployment.SourceFileName" value="${AssemblyReportName}" />
+        <property name="Deployment.SourceDir"	value="${Coverage.ReportFolder}" />
+        <property name="Deployment.TargetDir"	value="${BuildDirectory}\Installs\${CCNetLabel}" />
+        <property name="Deployment.TargetFile"	value="${Deployment.SourceFileName}" />
+        <call target="Deployment.PublishFileSilently"/>
+        
+      </do>
+    </foreach>
+
+    <call target="Private.Coverage.MergeInToSingleReport"/>
 	</target>
+
+  <target name="Private.Coverage.MergeInToSingleReport">
+    <exec program="cemerge.exe" 
+			basedir="${BuildDirectory}\Packages\CoverageEye\bin">
+      <arg value="${Coverage.ReportFolder}\ConsolidatedReport.xml" />
+      <arg value=".\" />
+      <!-- This is a bogas value. -->
+      <arg value="${Coverage.ReportFolder}\Report.*.xml" />
+    </exec>
+  </target>
 	
   <target name="UnitTest.RunTests">
+    <call target="Private.Coverage.CreatePropertiesFile"/>
     <call target="Private.Coverage.WriteConfiguration"/>
     <trycatch>
       <try>
@@ -96,6 +142,7 @@
   </target>
 
   <target name="Private.Coverage.CreatePropertiesFile">
+    <property name="Compile.ConfigName" value="debug" overwrite="false"/>
     <saveproperties file="${Coverage.CommonPropertiesFile}" format="CommandLine" >
       <property name="CCNetBuildCondition"/>
       <property name="CCNetIntegrationStatus"/>
@@ -115,12 +162,13 @@
       <property name="ThirdPartyDirectory"/>
       <property name="ProductionDirectory"/>
       <property name="BuildDirectory"/>
+      <property name="Compile.ConfigName"/>
     </saveproperties>
   </target>
 
   <target name="UnitTest.SetUp">
     <call target="Private.Coverage.GetConfigFile"/>
-    <mkdir unless="${directory::exists(Coverage.ReportFolder)}" dir="${Coverage.ReportFolder}"/>
+    <mkdir if="${directory::exists(Coverage.ReportFolder) == false}" dir="${Coverage.ReportFolder}"/>
     
     <property name="Common.FilesToDelete" value="${Coverage.FilesToDeleteAtSetup}"/>
     <call target="Common.DeleteFiles"/>
@@ -141,4 +189,5 @@
       <arg line="UnitTest.TearDown"/>
     </exec>
   </target>
+
 </project>

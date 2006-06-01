@@ -36,7 +36,7 @@
                     <xsl:with-param name="colour">Green</xsl:with-param>
                   </xsl:call-template>
                   <xsl:call-template name="CreateBar">
-                    <xsl:with-param name="width" select="100 - ($TotalPercentCoverage)"></xsl:with-param>
+                    <xsl:with-param name="width" select="100 - $TotalPercentCoverage"></xsl:with-param>
                     <xsl:with-param name="colour">Red</xsl:with-param>
                   </xsl:call-template>
                 </TR>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <project name="Deployment" xmlns="http://nant.sf.net/schemas/nant.xsd" basedir="Deployment">
 
   <!--
@@ -15,12 +15,25 @@
   
   <target name="Deployment.PublishFile">
     <call target="Private.Deployment.CopyDeplymentToPublicationDir" />
+    <call target="Deployment.PublishLink" />
+  </target>
+  
+  <target name="Deployment.PublishLink">
     <call target="Private.Deployment.EchoDeploymentFileWebName" />
     <call target="Private.Deployment.EchoDeploymentFileWebPath" />
   </target>
 
+  <target name="Deployment.PublishFileSilently">
+    <call target="Private.Deployment.CopyDeplymentToPublicationDir" />
+    <call target="Private.Deployment.EchoDeploymentWebPath" />
+  </target>
+
+  <target name="Private.Deployment.EchoDeploymentWebPath" >
+    <echo message="/${ProjectName} Installs/${CCNetLabel}" level="Info"/>
+  </target>
+
   <target name="Private.Deployment.CopyDeplymentToPublicationDir" >
-    <mkdir unless="${directory::exists(Deployment.TargetDir)}" dir="${Deployment.TargetDir}" />
+    <mkdir if="${directory::exists(Deployment.TargetDir) == false}" dir="${Deployment.TargetDir}" />
     <copy file="${Deployment.SourceDir}/${Deployment.SourceFileName}" tofile="${Deployment.TargetDir}/${Deployment.TargetFile}" />
   </target>
 
@@ -30,6 +43,15 @@
   
   <target name="Private.Deployment.EchoDeploymentFileWebPath" >
     <echo message="${Deployment.FileWebPath}" level="Info"/>
+  </target>
+
+  <target name="Deployment.PublishZip">
+    <mkdir if="${directory::exists(Deployment.TargetDir) == false}" dir="${Deployment.TargetDir}" />
+    <zip zipfile="${Deployment.TargetDir}/${Deployment.ZipFileName}">
+      <fileset refid="Deployment.ZipFileSet" />
+    </zip>
+
+    <call target="Deployment.PublishLink"/>
   </target>
 
   <target name="Deployment.SetUp">

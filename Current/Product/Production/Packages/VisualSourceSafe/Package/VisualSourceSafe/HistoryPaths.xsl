@@ -8,10 +8,10 @@
   <xsl:variable name="Count" select="count(/VssHistory/Entry)"/>
 
   <xsl:template match="/">
-    <xsl:if test="$Count > 0">
+    <xsl:if test="$Count > 1">
       true
     </xsl:if>
-    <xsl:if test="$Count = 0">
+    <xsl:if test="$Count &lt; 2">
       false
     </xsl:if>
   </xsl:template>

@@ -15,6 +15,8 @@
   <xsl:variable name="Exclusions" select="document($ExclusionFile)"/>
   
 	<xsl:output method="html"/>
+  
+  <xsl:variable name="WebPath" select="(//target[@name='Deployment.PublishFileSilently']//target[@name='Private.Deployment.EchoDeploymentWebPath']/task[@name='echo']/message)[1]"/>
 	
   <xsl:template match="/">
     <xsl:apply-templates select="/cruisecontrol/build/root" mode="Statistics"/>
@@ -54,7 +56,7 @@
                           <xsl:with-param name="colour">Green</xsl:with-param>
                         </xsl:call-template>
                         <xsl:call-template name="CreateBar">
-                          <xsl:with-param name="width" select="100 - ($TotalPercentCoverage)"></xsl:with-param>
+                          <xsl:with-param name="width" select="100 - $TotalPercentCoverage"></xsl:with-param>
                           <xsl:with-param name="colour">Red</xsl:with-param>
                         </xsl:call-template>
                       </TR>
@@ -92,6 +94,7 @@
   <xsl:template name="AssemblyTable">
     <table style="width:100%;" border="1" cellpadding="0" cellspacing="0">
       <tr>
+        <td>Report</td>
         <td>Assembly</td>
         <td>Percent Coverage</td>
         <td>Lines Covered</td>
@@ -101,25 +104,32 @@
         <xsl:variable name="AssemblyName" select="Path:GetFileName(@AssemblyName)" />
 
         <xsl:if test="AssemblyStatisticsTable:ContainsAssembly($AssemblyName)">
-          <xsl:variable name="PercentCoverage" select="round(AssemblyStatisticsTable:AssemblyCoveredCountValue($AssemblyName) div AssemblyStatisticsTable:AssemblyLineCountValue($AssemblyName) * 100)" />
           <tr>
-          <td>
-            <a>
-              <xsl:attribute name="href">#<xsl:value-of select="$AssemblyName"/>
-            </xsl:attribute>
-              <xsl:value-of select="$AssemblyName"/>
-            </a>
-          </td>
-          <td>
-            <xsl:value-of select="$PercentCoverage"/>%
-          </td>
-          <td>
-            <xsl:value-of select="AssemblyStatisticsTable:AssemblyCoveredCountValue($AssemblyName)"/>
-          </td>
-          <td>
-            <xsl:value-of select="AssemblyStatisticsTable:AssemblyLineCountValue($AssemblyName)"/>
-          </td>
-        </tr>
+            <td>
+              <a>
+                <xsl:attribute name="href">
+                  <xsl:value-of select="$WebPath"/>/CoverageReport.<xsl:value-of select="$AssemblyName"/>.xml
+                </xsl:attribute>Download
+              </a>
+            </td>
+            <xsl:variable name="PercentCoverage" select="round(AssemblyStatisticsTable:AssemblyCoveredCountValue($AssemblyName) div AssemblyStatisticsTable:AssemblyLineCountValue($AssemblyName) * 100)" />
+            <td>
+              <a>
+                <xsl:attribute name="href">#<xsl:value-of select="$AssemblyName"/>
+              </xsl:attribute>
+                <xsl:value-of select="$AssemblyName"/>
+              </a>
+            </td>
+            <td>
+              <xsl:value-of select="$PercentCoverage"/>%
+            </td>
+            <td>
+              <xsl:value-of select="AssemblyStatisticsTable:AssemblyCoveredCountValue($AssemblyName)"/>
+            </td>
+            <td>
+              <xsl:value-of select="AssemblyStatisticsTable:AssemblyLineCountValue($AssemblyName)"/>
+            </td>
+          </tr>
         </xsl:if>
       </xsl:for-each>
     </table>

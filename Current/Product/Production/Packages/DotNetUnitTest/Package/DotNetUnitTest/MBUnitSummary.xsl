@@ -28,19 +28,19 @@
 
             <!-- Unit Tests -->
             <tr>
-                <td class="unittests-sectionheader" colspan="2">
-                   Tests run: <xsl:value-of select="$nunit2.testcount"/>, Failures: <xsl:value-of select="$nunit2.failures"/>, Not run: <xsl:value-of select="$nunit2.notrun"/>, Asserts: <xsl:value-of select="$UnitTest.AssertCount"/>, Time: <xsl:value-of select="$nunit2.time"/> seconds
+                <td class="sectionheader" colspan="2">
+                   Unit Tests (Executed: <xsl:value-of select="$nunit2.testcount"/>, Failed: <xsl:value-of select="$nunit2.failures"/>, Ignored: <xsl:value-of select="$nunit2.notrun"/>, Assert Count: <xsl:value-of select="$UnitTest.AssertCount"/>, Duration: <xsl:value-of select="$nunit2.time"/> seconds)
                 </td>
             </tr>
 
             <xsl:choose>
                 <xsl:when test="$nunit2.testcount = 0">
-                    <tr><td colspan="2" class="unittests-data">No Tests Run</td></tr>
-                    <tr><td colspan="2" class="unittests-error">This project doesn't have any tests</td></tr>
+                    <tr><td colspan="2" class="section-data">No Tests Run</td></tr>
+                    <tr><td colspan="2" class="section-error">This project doesn't have any tests</td></tr>
                 </xsl:when>
 
                 <xsl:when test="$totalErrorsAndFailures = 0">
-                    <tr><td colspan="2" class="unittests-data">All Tests Passed</td></tr>
+                    <tr><td colspan="2" class="section-data">All Tests Passed</td></tr>
                 </xsl:when>
             </xsl:choose>
 
@@ -52,7 +52,7 @@
 
             <xsl:if test="$totalErrorsAndFailures > 0">
                 <tr>
-                    <td class="unittests-sectionheader" colspan="2">
+                    <td class="sectionheader" colspan="2">
                         Unit Test Failure and Error Details (<xsl:value-of select="$totalErrorsAndFailures"/>)
                     </td>
                 </tr>
@@ -71,7 +71,7 @@
             
             <xsl:if test="$nunit2.notrun > 0">
                 <tr>
-                    <td class="unittests-sectionheader" colspan="2">
+                    <td class="sectionheader" colspan="2">
                         Warning Details (<xsl:value-of select="$nunit2.notrun"/>)
                     </td>
                 </tr>
@@ -88,10 +88,10 @@
     <xsl:template match="error">
         <tr>
             <xsl:if test="position() mod 2 = 0">
-                <xsl:attribute name="class">unittests-oddrow</xsl:attribute>
+                <xsl:attribute name="class">section-oddrow</xsl:attribute>
             </xsl:if>
-            <td class="unittests-data">Error</td>
-            <td class="unittests-data"><xsl:value-of select="../@name"/></td>
+            <td class="section-data">Error</td>
+            <td class="section-data"><xsl:value-of select="../@name"/></td>
         </tr>
     </xsl:template>
 
@@ -99,10 +99,10 @@
     <xsl:template match="failure">
         <tr>
             <xsl:if test="($testsuite.error.count + position()) mod 2 = 0">
-                <xsl:attribute name="class">unittests-oddrow</xsl:attribute>
+                <xsl:attribute name="class">section-oddrow</xsl:attribute>
             </xsl:if>
-            <td class="unittests-data">Failure</td>
-            <td class="unittests-data"><xsl:value-of select="/source"/></td>
+            <td class="section-data">Failure</td>
+            <td class="section-data"><xsl:value-of select="/source"/></td>
         </tr>
     </xsl:template>
 
@@ -110,10 +110,10 @@
     <xsl:template match="reason">
         <tr>
             <xsl:if test="($totalErrorsAndFailures + position()) mod 2 = 0">
-                <xsl:attribute name="class">unittests-oddrow</xsl:attribute>
+                <xsl:attribute name="class">section-oddrow</xsl:attribute>
             </xsl:if>
-            <td class="unittests-data">Warning</td>
-            <td class="unittests-data"><xsl:value-of select="../@name"/></td>
+            <td class="section-data">Warning</td>
+            <td class="section-data"><xsl:value-of select="../@name"/></td>
         </tr>
     </xsl:template>
 
@@ -127,14 +127,14 @@
         <tr><td colspan="2"><hr size="1" width="100%" color="#888888"/></td></tr>
         </xsl:if>
 
-        <tr><td class="unittests-data">Test:</td><td class="unittests-data"><xsl:value-of select="@name"/></td></tr>
+        <tr><td class="section-data">Test:</td><td class="section-data"><xsl:value-of select="@name"/></td></tr>
        
         <xsl:if test="error">
-        <tr><td class="unittests-data">Type:</td><td class="unittests-data"><xsl:value-of select="error/@type"/></td></tr>
-        <tr><td class="unittests-data">Message:</td><td class="unittests-data"><xsl:value-of select="error/@message"/></td></tr>
+        <tr><td class="section-data">Type:</td><td class="section-data"><xsl:value-of select="error/@type"/></td></tr>
+        <tr><td class="section-data">Message:</td><td class="section-data"><xsl:value-of select="error/@message"/></td></tr>
         <tr>
             <td></td>
-            <td class="unittests-error">
+            <td class="section-error">
                 <pre><xsl:call-template name="br-replace">
                         <xsl:with-param name="word" select="error"/>
                     </xsl:call-template></pre>
@@ -143,11 +143,11 @@
         </xsl:if>
 
         <xsl:if test="failure">
-        <tr><td class="unittests-data">Type:</td><td class="unittests-data"><xsl:value-of select="failure/@type"/></td></tr>
-        <tr><td class="unittests-data">Message:</td><td class="unittests-data"><xsl:value-of select="failure/@message"/></td></tr>
+        <tr><td class="section-data">Type:</td><td class="section-data"><xsl:value-of select="failure/@type"/></td></tr>
+        <tr><td class="section-data">Message:</td><td class="section-data"><xsl:value-of select="failure/@message"/></td></tr>
         <tr>
             <td></td>
-            <td class="unittests-error">
+            <td class="section-error">
                 <pre><xsl:call-template name="br-replace">
                         <xsl:with-param name="word" select="failure"/>
                     </xsl:call-template></pre>
@@ -170,24 +170,24 @@
 		
             <xsl:if test="exception">
 			<tr><td colspan="2"><hr size="1" width="100%" color="#888888"/></td></tr>
-            <tr><td class="unittests-data">Test:</td><td class="unittests-data"><xsl:value-of select="@name"/></td></tr>
-            <tr><td class="unittests-data">Type:</td><td class="unittests-data">Failure</td></tr>
-            <tr><td class="unittests-data">Message:</td><td class="unittests-data"><xsl:value-of select="exception/message"/></td></tr>
+            <tr><td class="section-data">Test:</td><td class="section-data"><xsl:value-of select="@name"/></td></tr>
+            <tr><td class="section-data">Type:</td><td class="section-data">Failure</td></tr>
+            <tr><td class="section-data">Message:</td><td class="section-data"><xsl:value-of select="exception/message"/></td></tr>
             <tr>
                 <td></td>
-                <td class="unittests-error">
+                <td class="section-error">
                     <pre><xsl:value-of select="exception/stack-trace"/></pre>
                 </td>
             </tr>
             </xsl:if>
 
             <xsl:if test="reason">
-            <tr><td class="unittests-data">Test:</td><td class="unittests-data"><xsl:value-of select="@name"/></td></tr>
-            <tr><td class="unittests-data">Type:</td><td class="unittests-data">Warning</td></tr>
-            <tr><td class="unittests-data">Message:</td><td class="unittests-data"><xsl:value-of select="reason//message"/></td></tr>
+            <tr><td class="section-data">Test:</td><td class="section-data"><xsl:value-of select="@name"/></td></tr>
+            <tr><td class="section-data">Type:</td><td class="section-data">Warning</td></tr>
+            <tr><td class="section-data">Message:</td><td class="section-data"><xsl:value-of select="reason//message"/></td></tr>
             <tr>
                 <td></td>
-                <td class="unittests-error">
+                <td class="section-error">
                     <pre><xsl:call-template name="br-replace">
                             <xsl:with-param name="word" select="/stack-trace"/>
                         </xsl:call-template></pre>
@@ -210,24 +210,24 @@
 			
             <xsl:if test="exception">
 			<tr><td colspan="2"><hr size="1" width="100%" color="#888888"/></td></tr>
-            <tr><td class="unittests-data">Test:</td><td class="unittests-data"><xsl:value-of select="@name"/></td></tr>
-            <tr><td class="unittests-data">Type:</td><td class="unittests-data">Failure</td></tr>
-            <tr><td class="unittests-data">Message:</td><td class="unittests-data"><xsl:value-of select="exception/message"/></td></tr>
+            <tr><td class="section-data">Test:</td><td class="section-data"><xsl:value-of select="@name"/></td></tr>
+            <tr><td class="section-data">Type:</td><td class="section-data">Failure</td></tr>
+            <tr><td class="section-data">Message:</td><td class="section-data"><xsl:value-of select="exception/message"/></td></tr>
             <tr>
                 <td></td>
-                <td class="unittests-error">
+                <td class="section-error">
                     <pre><xsl:value-of select="exception/stack-trace"/></pre>
                 </td>
             </tr>
             </xsl:if>
 
             <xsl:if test="reason">
-            <tr><td class="unittests-data">Test:</td><td class="unittests-data"><xsl:value-of select="@name"/></td></tr>
-            <tr><td class="unittests-data">Type:</td><td class="unittests-data">Warning</td></tr>
-            <tr><td class="unittests-data">Message:</td><td class="unittests-data"><xsl:value-of select="reason//message"/></td></tr>
+            <tr><td class="section-data">Test:</td><td class="section-data"><xsl:value-of select="@name"/></td></tr>
+            <tr><td class="section-data">Type:</td><td class="section-data">Warning</td></tr>
+            <tr><td class="section-data">Message:</td><td class="section-data"><xsl:value-of select="reason//message"/></td></tr>
             <tr>
                 <td></td>
-                <td class="unittests-error">
+                <td class="section-error">
                     <pre><xsl:call-template name="br-replace">
                             <xsl:with-param name="word" select="/stack-trace"/>
                         </xsl:call-template></pre>

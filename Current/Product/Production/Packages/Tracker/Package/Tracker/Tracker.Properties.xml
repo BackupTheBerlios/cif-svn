@@ -2,15 +2,15 @@
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="Tracker.Properties">
 
   <connectioninformation id="Tracker.Connection"
-	  username="auto_build"
-	  password="auto_build"
-	  dbmsserver="Jupiter"
+	  username="build"
+	  password="password"
+	  dbmsserver="servername"
 	  dbmstype="Tracker SQL Server Sys"
 	  dbmsloginmode="2"
-	  dbmsusername="tracker"
-	  dbmspassword="tracker12"
-	  projectname="CHCSII"
-    />
+	  dbmsusername="user"
+	  dbmspassword="password"
+	  projectname="${ProjectName}"
+  />
 
   <property name="Tracker.FailForNone" value="true" />
 
@@ -19,16 +19,28 @@
     <field name="Submit Type"/>
   </readfieldset>
   
-  <property name="Tracker.Query" value="${ProjectName}-Pending-Build" />
+  <property name="Tracker.Query" value="PendingBuild-${ProjectName}" />
   <property name="Tracker.ReportFile" value="${ProjectName}Trackers.xml" />
   <property name="Tracker.QueryScrList" value=""/>
+  <property name="Tracker.DailyScrFile" value="${BuildDirectory}\Tracker Reports\DailySCRList.txt"/>
+  <property name="Tracker.Property.MoveTrackersTo" value="false" />
 
   <writefieldset id="Tracker.ChangeFields">
-    <field name="Status" value="Complete Build"/>
-    <field name="Assignee" value="moyers"/>
+    <field name="Status" value="Pending Test"/>
+    <field name="Assignee" value="Build"/>
   </writefieldset>
-    
-  <property name="Tracker.NoteTitleForMoveTrackersTo" value="Successfully Built ${CCNetLabel}" />
   
+  <writefieldset id="Tracker.UnitTest">
+    <field name="Status" value="Development"/>
+  </writefieldset>
+
+  <property name="Tracker.NoteTitleForMoveTrackersTo" value="Successfully Built ${CCNetLabel}" />  
   <property name="Tracker.FilesToDeleteAtSetup" value="${Tracker.ReportDirectory}\${Tracker.ReportFile}" />
+  
+  <writefieldset id="Tracker.NewFields">
+    <field name="Title" value="Replace With Title"/>
+    <field name="Description" value="EF Build=${CCNetLabel} EF Trackers=${Tracker.QueryScrList}"/>
+    <field name="Status" value="Pending Build"/>
+    <field name="Assignee" value="build"/>
+  </writefieldset>
 </project>

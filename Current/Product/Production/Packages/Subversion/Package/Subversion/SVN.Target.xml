@@ -46,7 +46,14 @@
           </fileset>
         </attrib>
 
-        <delete dir="${ThirdPartyDirectory}"/>
+        <trycatch>
+          <try>
+            <delete dir="${ThirdPartyDirectory}"/>
+          </try>
+          <catch>
+            <exec program="cmd" commandline='/C "rmdir /S /Q "${ThirdPartyDirectory}""' />
+          </catch>
+        </trycatch>
       </if>
       <mkdir dir="${ThirdPartyDirectory}" />
       <svn-checkout username="${SVN.Username}" password="${SVN.Password}" uri="${SVN.URI}/Third Party" recursive ="true" destination ="${ThirdPartyDirectory}" />
@@ -61,7 +68,14 @@
         </fileset>
       </attrib>
 
-      <delete dir="${ProductDirectory}"/>
+      <trycatch>
+        <try>
+          <delete dir="${ProductDirectory}"/>
+        </try>
+        <catch>
+          <exec program="cmd" commandline='/C "rmdir /S /Q "${ProductDirectory}""' />
+        </catch>
+      </trycatch>
     </if>
     <mkdir dir="${ProductDirectory}" />
     <svn-checkout username="${SVN.Username}" password="${SVN.Password}" uri="${SVN.URI}/Product" recursive ="true" destination ="${ProductDirectory}" />
