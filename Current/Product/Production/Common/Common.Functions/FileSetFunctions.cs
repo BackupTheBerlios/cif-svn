@@ -18,6 +18,48 @@ namespace Common.Functions
         {
         }
 
+        [Function("file-count")]
+        public int FileCount(String refID)
+        {
+            if (!this.Project.DataTypeReferences.Contains(refID))
+                throw new BuildException(String.Format("The refid {0} is not defined.", refID));
+
+            FileSet RefFileSet = (FileSet)this.Project.DataTypeReferences[refID];
+            RefFileSet.Scan();
+            return RefFileSet.FileNames.Count;
+        }
+
+        [Function("directory-count")]
+        public int DirectoryCount(String refID)
+        {
+            if (!this.Project.DataTypeReferences.Contains(refID))
+                throw new BuildException(String.Format("The refid {0} is not defined.", refID));
+
+            FileSet RefFileSet = (FileSet)this.Project.DataTypeReferences[refID];
+            RefFileSet.Scan();
+            return RefFileSet.DirectoryNames.Count;
+        }
+
+        [Function("include-count")]
+        public int IncludeCount(String refID)
+        {
+            if (!this.Project.DataTypeReferences.Contains(refID))
+                throw new BuildException(String.Format("The refid {0} is not defined.", refID));
+
+            FileSet RefFileSet = (FileSet)this.Project.DataTypeReferences[refID];
+            return RefFileSet.Includes.Count;
+        }
+
+        [Function("exclude-count")]
+        public int ExcludeCount(String refID)
+        {
+            if (!this.Project.DataTypeReferences.Contains(refID))
+                throw new BuildException(String.Format("The refid {0} is not defined.", refID));
+
+            FileSet RefFileSet = (FileSet)this.Project.DataTypeReferences[refID];
+            return RefFileSet.Excludes.Count;
+        }
+
         [Function("include-add")]
         public void AddInclude(String refID, String name)
         {

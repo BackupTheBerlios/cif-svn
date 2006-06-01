@@ -31,6 +31,7 @@
     <Reference Include="NAnt.Core, Version=0.85.1932.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Third Party\nAnt\bin\NAnt.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -53,6 +54,7 @@
     <ProjectReference Include="..\Common.Tasks\Common.Tasks.vbproj">
       <Project>{ADB63057-43C2-4073-AED1-2401F47F140A}</Project>
       <Name>Common.Tasks</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|.NET 1.1' ">
