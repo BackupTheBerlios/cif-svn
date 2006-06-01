@@ -10,6 +10,7 @@ Public Class TextElement
 
     Private _Value As String
     Private _Xml As Boolean = False
+    Private _Expand As Boolean = False
 
     <TaskAttribute("xml", Required:=False), BooleanValidator()> _
     Public Property Xml() As Boolean
@@ -21,6 +22,16 @@ Public Class TextElement
         End Set
     End Property
 
+    <TaskAttribute("expand", Required:=False), BooleanValidator()> _
+    Public Property Expand() As Boolean
+        Get
+            Return _Expand
+        End Get
+        Set(ByVal value As Boolean)
+            _Expand = value
+        End Set
+    End Property
+
     Public ReadOnly Property [Value]() As String
         Get
             If Me._Value Is Nothing Then
@@ -29,6 +40,9 @@ Public Class TextElement
                 Else
                     Me._Value = Me.XmlNode.InnerText
                 End If
+                If Me.Expand Then
+                    Me._Value = Me.Project.ExpandProperties(Me._Value, Me.Location)
+                End If
             End If
             Return Me._Value
         End Get
@@ -36,11 +50,7 @@ Public Class TextElement
 
     Protected Overrides ReadOnly Property CustomXmlProcessing() As Boolean
         Get
-            If Me.Xml Then
-                Return True
-            Else
-                Return False
-            End If
+            Return True
         End Get
     End Property
 

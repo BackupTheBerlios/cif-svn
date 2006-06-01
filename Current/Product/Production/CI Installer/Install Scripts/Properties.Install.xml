@@ -13,6 +13,31 @@
   <property name="UnitTestDirectory"        value="${ProductDirectory}\Unit Test"  overwrite="false"/>
   <property name="BuildDirectory"           value="${ProjectsDirectory}\${ProjectName}\${ProjectCodeLineName}\Build"  overwrite="false"/>
   <property name="BuildPackagesDirectory"   value="${BuildDirectory}\Packages"  overwrite="false"/>
-  <property name="VSSRootShare"             value="\\saturn\Source Safe" overwrite="false"/>
+
+  <property name="SourceRoot" value="path::get-full-path('..')"/>
+  <property name="SourceDefaultDirectory"   value="${SourceRoot}\Default"/>
+  <property name="SourceBuildDirectory" value="${SourceDefaultDirectory}\Build"/>
+  <property name="SourceProductDirectory" value="${SourceDefaultDirectory}\Product"/>
+  <property name="SourceThirdPartyDirectory" value="${SourceDefaultDirectory}\Third Party"/>
+  <property name="SourcePackagesDirectory" value="${SourceRoot}\Packages"/>
+
+  <filterchain id="Common.FilterChain">
+    <replacestring from="%ProjectName%"  to="${ProjectName}"   />
+    <replacestring from="%ProjectCodeLineName%" to="${ProjectCodeLineName}"  />
+
+    <replacestring from="%ProjectsDirectory%"        to="${ProjectsDirectory}"  />
+    <replacestring from="%ProjectRootDirectory%"     to="${ProjectRootDirectory}"  />
+    <replacestring from="%ProjectCodeLineDirectory%" to="${ProjectCodeLineDirectory}"  />
+    <replacestring from="%ProductDirectory%"         to="${ProductDirectory}"  />
+    <replacestring from="%ThirdPartyDirectory%"      to="${ThirdPartyDirectory}"  />
+    <replacestring from="%ProductionDirectory%"      to="${ProductionDirectory}"  />
+    <replacestring from="%InstallDirectory%"         to="${InstallDirectory}"  />
+    <replacestring from="%UnitTestDirectory%"        to="${UnitTestDirectory}"  />
+    <replacestring from="%BuildDirectory%"           to="${BuildDirectory}"  />
+
+    
+
+    
+  </filterchain>
   
 </project>

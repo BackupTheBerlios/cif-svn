@@ -132,7 +132,6 @@
     <Content Include="Default\Build\server\xsl\cruisecontrol.css" />
     <Content Include="Default\Build\server\xsl\header.xsl" />
     <Content Include="Default\Build\server\xsl\modifications.xsl" />
-    <Content Include="Default\Product\ProjectInfo.vb.remove" />
     <Content Include="Default\Third Party\MbUnit\MbUnit.Core.dll" />
     <Content Include="Default\Third Party\MbUnit\MbUnit.Framework.1.1.dll" />
     <Content Include="Default\Third Party\MbUnit\MbUnit.Framework.dll" />
@@ -147,7 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Default\Build\Build.sln.remove" />
-    <None Include="Default\Build\Build.vssscc.remove" />
     <None Include="Default\Build\CCNETServer.Bat" />
     <None Include="Default\Build\dashboard\dashboard.config" />
     <None Include="Default\Build\dashboard\templates\ActionException.vm" />
@@ -172,14 +170,10 @@
     <None Include="Default\Build\dashboard\templates\SiteTemplate.vm" />
     <None Include="Default\Build\dashboard\templates\TopMenu.vm" />
     <None Include="Default\Build\dashboard\Web.config" />
-    <None Include="Default\Build\mssccprj.scc.remove" />
     <None Include="Default\Build\nAnt\bin\NAnt.exe.config" />
     <None Include="Default\Build\server\ccnet.exe.config" />
-    <None Include="Default\Product\Install\ProjectName\mssccprj.scc.remove" />
-    <None Include="Default\Product\Install\ProjectName\ProjectName.vdproj.remove" />
-    <None Include="Default\Product\Install\ProjectName\ProjectName.vdproj.vspscc.remove" />
-    <None Include="Default\Product\mssccprj.scc.remove" />
-    <None Include="Default\Product\ProjectName.sln.remove" />
-    <None Include="Default\Product\ProjectName.vssscc.remove" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Default\Product\" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="VS.NETCompile.Install" default="VS.NETCompile.Install">
+
+  <include buildfile="Properties.xml" />
+  
+  <target name="VS.NETCompile.Install">
+    <largeproperty name="Packages.AddCompileActions.Block">
+      <value xml="true">
+        <call target="Compile.CompileSource" />
+      </value>
+    </largeproperty>
+    <call target="Packages.AddCompileActions"/>
+  </target>
+
+  <target name="VS.NETCompile.SetAsCurrentPackage">
+    <property name="Packages.CurrenctPackage.PackageDirectoryName" value="VS.NETCompile"/>
+    <property name="Packages.CurrenctPackage.PackageTargetFileName" value="Compile.Target.xml"/>
+    <property name="Packages.CurrenctPackage.PackageName" value="Compile"/>
+  </target>
+
+  <target name="VS.NETCompile.ValidateParameters">
+    
+  </target>
+  
+</project>

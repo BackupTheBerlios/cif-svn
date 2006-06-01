@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -56,6 +56,8 @@
   <ItemGroup>
     <Content Include="Package\InstallShield\InstallShield.Properties.xml" />
     <Content Include="Package\InstallShield\InstallShield.Target.xml" />
+    <Content Include="Package\InstallShield\Install\Install.xml" />
+    <Content Include="Package\InstallShield\Install\Properties.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Source\AssemblyInfo.cs" />

@@ -23,16 +23,6 @@ Public Class IfThenTask
         End Set
     End Property
 
-    <BuildElement("else", Required:=False)> _
-        Public Property [Else]() As TaskContainer
-        Get
-            Return _Else
-        End Get
-        Set(ByVal value As TaskContainer)
-            _Else = value
-        End Set
-    End Property
-
     <BuildElementArray("elseif", Required:=False)> _
         Public Property [ElseIf]() As TaskContainerCollection
         Get
@@ -43,6 +33,16 @@ Public Class IfThenTask
         End Get
         Set(ByVal value As TaskContainerCollection)
             _ElseIf = value
+        End Set
+    End Property
+
+    <BuildElement("else", Required:=False)> _
+        Public Property [Else]() As TaskContainer
+        Get
+            Return _Else
+        End Get
+        Set(ByVal value As TaskContainer)
+            _Else = value
         End Set
     End Property
 

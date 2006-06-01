@@ -1,54 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="SVN.Installer.Properties" >
-  
-  <property name="SourceControl.TargetFile" value=".\Packages\SubVersion\SVN.Target.xml"/>
 
+  <property name="SVN.URI" value="https://svn.berlios.de/svnroot/repos/${ProjectName}/${ProjectCodeLineName}" />
+  <property name="SVN.WebRepoUrl" value="https://svn.berlios.de/svnroot/repos/${ProjectName}" />
+  <property name="SVN.Username" value="Build" />
+  <property name="SVN.Password" value="password" />
+  
   <largeproperty name="SourceControl.BuildUpdateBlock">
-    <value xml="true">
-      <sourcecontrol  type="svn" tagOnSuccess="false" autoGetSource="true" >
-        <trunkUrl>%SVN.RepoUri%/%ProjectName%/%ProjectCodeLineName%/Build</trunkUrl>
-        <workingDirectory>%BuildDirectory%</workingDirectory>
-        <username>build</username>
-        <password>password</password>
+    <value xml="false" expand="true"><![CDATA[<sourcecontrol  type="svn" tagOnSuccess="false" autoGetSource="true" >
+        <trunkUrl>${SVN.RepoUri}/Build</trunkUrl>
+        <workingDirectory${%BuildDirectory}</workingDirectory>
+        <username>${SVN.Username}</username>
+        <password>${SVN.Password}</password>
         <webUrlBuilder type="websvn">
-          <url>%SVN.WebRepoUrl%</url>
+          <url>${SVN.WebRepoUrl}/${ProjectCodeLineName}{0}</url>
         </webUrlBuilder>
-      </sourcecontrol>
-    </value>
-  </largeproperty>
+      </sourcecontrol>]]></value>
+    </largeproperty>
 
   <largeproperty name="SourceControl.MainBuildBlock">
-    <value xml="true">
-      <sourcecontrol type="filtered">
-        <sourceControlProvider  type="svn" tagOnSuccess="true">
-          <trunkUrl>%SVN.RepoUri%/%ProjectName%/%ProjectCodeLineName%</trunkUrl>
-          <workingDirectory>%ProjectCodeLineDirectory%</workingDirectory>
-          <username>build</username>
-          <password>password</password>
+    <value xml="false" expand="true"><![CDATA[<sourcecontrol type="filtered">
+        <sourceControlProvider  type="svn" tagOnSuccess="true" autoGetSource="false" >
+          <trunkUrl>${SVN.RepoUri}/${ProjectName}/${ProjectCodeLineName}</trunkUrl>
+          <workingDirectory>${ProjectCodeLineDirectory}</workingDirectory>
+          <username>${SVN.Username}</username>
+          <password>${SVN.Password}</password>
           <webUrlBuilder type="websvn">
-            <url>%SVN.WebRepoUrl%</url>
+            <url>${SVN.WebRepoUrl}{0}</url>
           </webUrlBuilder>
-          <tagBaseUrl>%SVN.RepoUri%/Tags</tagBaseUrl>
+          <tagBaseUrl>${SVN.RepoUri}/Tags</tagBaseUrl>
         </sourceControlProvider>
         <exclusionFilters>
           <pathFilter>
-            <pattern>**/%ProjectName%/%ProjectCodeLineName%/Product/**/AssemblyInfo.*</pattern>
+            <pattern>${ProjectCodeLineName}/Product/**/AssemblyInfo.*</pattern>
           </pathFilter>
           <pathFilter>
-            <pattern>**/%ProjectName%/%ProjectCodeLineName%/Product/ProjectInfo.*</pattern>
+            <pattern>${ProjectCodeLineName}/Product/ProjectInfo.*</pattern>
           </pathFilter>
           <pathFilter>
-            <pattern>**/%ProjectName%/%ProjectCodeLineName%/Product/**/ProjectInfo.*</pattern>
+            <pattern>${ProjectCodeLineName}/Product/**/ProjectInfo.*</pattern>
           </pathFilter>
           <pathFilter>
-            <pattern>**/%ProjectName%/%ProjectCodeLineName%/Build/*.*</pattern>
+            <pattern>${ProjectCodeLineName}/Build/*.*</pattern>
           </pathFilter>
           <pathFilter>
-            <pattern>**/%ProjectName%/%ProjectCodeLineName%/Build/**/*.*</pattern>
+            <pattern>${ProjectCodeLineName}/Build/**/*.*</pattern>
           </pathFilter>
         </exclusionFilters>
-      </sourcecontrol>
-    </value>
-  </largeproperty>
+      </sourcecontrol>]]></value>
+      </largeproperty>
 
+  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SourceControl.BuildUpdateBlock%', SourceControl.BuildUpdateBlock)"/>
+  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SourceControl.MainBuildBlock%', SourceControl.MainBuildBlock)"/>
+  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SVN.URI%', SVN.URI)" />
+  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SVN.WebRepoUrl%', SVN.WebRepoUrl)" />
+  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SVN.Username%', SVN.Username)" />
+  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SVN.Password%', SVN.Password)" />
 </project>

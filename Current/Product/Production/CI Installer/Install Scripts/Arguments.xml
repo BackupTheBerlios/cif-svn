@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="Arguments">
   <property name="ProjectName" value="TestProject" />
-  <property name="CCNETServer.ServerPort" value="21236"/>
+  <property name="CCNET.ServerPort" value="21236"/>
   <property name="VSSRootShare" value="C:\Source Safe DataBases"/>
 
   <strings id="Packages.InstallList">
+    <string value="SourceModificationReport"/>
+    <string value="Tracker"/>
+    <string value="VisualSourceSafe"/>
+    <string value="Version"/>
+    <string value="VS.NETCompile"/>
     <string value="CoverageEye"/>
-    <string value="Deployment"/>
     <string value="DotNetUnitTest"/>
     <string value="InstallShield"/>
     <string value="nDepend"/>
-    <string value="SourceModificationReport"/>
-    <string value="Subversion"/>
-    <string value="TestCoverage"/>
-    <string value="Tracker"/>
-    <string value="Version"/>
-    <string value="VisualSourceSafe"/>
-    <string value="VS.NETCompile"/>
+    
+    <string value="Deployment"/>
 
     <!--<string value="CodeVeilObfuscation"/>
+    <string value="TestCoverage"/>
+    <string value="Subversion"/>
     <string value="LinesOfCode"/>
     <string value="Ant"/>-->
   </strings>

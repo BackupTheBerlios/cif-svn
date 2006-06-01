@@ -13,8 +13,8 @@
     </labeller>'>
 ]>
 <cruisecontrol>
-  <project name="CI Factory Build">
-    <webURL>%CCNETServer.webURL%</webURL>
+  <project name="%ProjectName% Build">
+    <webURL>%CCNET.webURL%</webURL>
     <state type="state" />
     <triggers>
       <intervalTrigger seconds="90" />
@@ -31,7 +31,7 @@
   </publishers>
 </project>
 <project name="%ProjectName%">
-  <webURL>%CCNETServer.webURL%</webURL>
+  <webURL>%CCNET.webURL%</webURL>
   <state type="state" />
   <triggers>
     <intervalTrigger seconds="90" />

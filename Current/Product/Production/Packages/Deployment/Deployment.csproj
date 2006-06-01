@@ -47,5 +47,7 @@
   <ItemGroup>
     <Content Include="Package\Deployment\Deployment.Target.xml" />
     <Content Include="Package\Deployment\deployment.xsl" />
+    <Content Include="Package\Deployment\Install\Install.xml" />
+    <Content Include="Package\Deployment\Install\Properties.xml" />
   </ItemGroup>
 </Project>

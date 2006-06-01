@@ -64,6 +64,8 @@
     <Content Include="Package\DotNetUnitTest\images\mbunitlogo.png" />
     <Content Include="Package\DotNetUnitTest\images\Populator.png" />
     <Content Include="Package\DotNetUnitTest\images\Test.png" />
+    <Content Include="Package\DotNetUnitTest\Install\Install.xml" />
+    <Content Include="Package\DotNetUnitTest\Install\Properties.xml" />
     <Content Include="Package\DotNetUnitTest\MBUnitDetails.xsl" />
     <Content Include="Package\DotNetUnitTest\MBUnitSummary.xsl" />
     <Content Include="Package\DotNetUnitTest\UnitTest.Properties.xml" />

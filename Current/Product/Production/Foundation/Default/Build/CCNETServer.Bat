@@ -1,3 +1,3 @@
 
-cd "%CCNETServer.ServerDirectory%"
-"%CCNETServer.ServerExe%" -config:"%CCNETServer.ProjectFile%" -remoting:on
+cd "%CCNET.ServerDirectory%"
+"%CCNET.ServerExe%" -config:"%CCNET.ProjectFile%" -remoting:on

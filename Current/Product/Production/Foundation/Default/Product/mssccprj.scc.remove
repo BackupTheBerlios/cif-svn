@@ -1,5 +1,0 @@
-SCC = This is a Source Code Control file
-
-[%ProjectName%.sln]
-SCC_Aux_Path = "%VSSRootShare%\%ProjectName%"
-SCC_Project_Name = "$/%ProjectName%/%ProjectCodeLineName%/Product", DAAAAAAA

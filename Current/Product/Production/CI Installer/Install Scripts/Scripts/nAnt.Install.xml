@@ -8,10 +8,10 @@
 
   <!-- These are private... -->
   
-  <property name="Private.nAnt.DefaultThirdPartyDirectory" value="..\Default\Build\nAnt"/>
-  <property name="Private.nAnt.DefaultMainBuildFile" value="..\Default\Build\Main.build.xml"/>
-  <property name="Private.nAnt.DefaultPropertiesBuildFile" value="..\Default\Build\Properties.build.xml"/>
-  <property name="Private.nAnt.DefaultCommonBuildFile" value="..\Default\Build\Common.build.xml"/>
+  <property name="Private.nAnt.DefaultThirdPartyDirectory" value="${SourceBuildDirectory}\nAnt"/>
+  <property name="Private.nAnt.DefaultMainBuildFile" value="${SourceBuildDirectory}\Main.build.xml"/>
+  <property name="Private.nAnt.DefaultPropertiesBuildFile" value="${SourceBuildDirectory}\Properties.build.xml"/>
+  <property name="Private.nAnt.DefaultCommonBuildFile" value="${SourceBuildDirectory}\Common.build.xml"/>
 
   <target name="nAnt.Install" depends="nAnt.ValidateParameters" >
     <copy file="${Private.nAnt.DefaultMainBuildFile}" tofile="${nAnt.MainBuildFile}" />

@@ -50,6 +50,8 @@
     <Content Include="Package\VS.NETCompile\DevEnvCompileDetails.xsl" />
     <Content Include="Package\VS.NETCompile\Install.Properties.xml" />
     <Content Include="Package\VS.NETCompile\Install.Target.xml" />
+    <Content Include="Package\VS.NETCompile\Install\Install.xml" />
+    <Content Include="Package\VS.NETCompile\Install\Properties.xml" />
     <Content Include="Package\VS.NETCompile\MSBuild\MSBee.dll" />
   </ItemGroup>
   <ItemGroup>

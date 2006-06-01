@@ -37,14 +37,10 @@
   </Target>
   -->
   <ItemGroup>
-    <Content Include="Package\Install\Install.xml" />
-    <Content Include="Package\Install\Properties.xml" />
-    <Content Include="Package\Subversion\Build\HistoryPaths.xsl" />
-    <Content Include="Package\Subversion\Build\SVN.Properties.xml" />
-    <Content Include="Package\Subversion\Build\SVN.Target.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Package\Subversion\EnvScripts\" />
-    <Folder Include="Package\Subversion\Report\" />
+    <Content Include="Package\Subversion\HistoryPaths.xsl" />
+    <Content Include="Package\Subversion\Install\Install.xml" />
+    <Content Include="Package\Subversion\Install\Properties.xml" />
+    <Content Include="Package\Subversion\SVN.Properties.xml" />
+    <Content Include="Package\Subversion\SVN.Target.xml" />
   </ItemGroup>
 </Project>

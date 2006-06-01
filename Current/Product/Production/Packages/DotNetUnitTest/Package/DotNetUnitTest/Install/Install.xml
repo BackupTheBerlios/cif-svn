@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="DotNetUnitTest.Install" default="DotNetUnitTest.Install">
+
+  <include buildfile="Properties.xml" />
+  
+  <target name="DotNetUnitTest.Install">
+    <copy todir="${ThirdPartyDirectory}\MbUnit">
+      <fileset basedir="${SourceThirdPartyDirectory}\MbUnit">
+        <include name="**/*" />
+      </fileset>
+    </copy>
+
+    <ifnot test="${stringlist::contains('Packages.InstallList', 'CoverageEye')}">
+      <largeproperty name="Packages.AddVarificationActions.Block">
+        <value xml="true">
+          <call target="UnitTest.RunTests" />
+        </value>
+      </largeproperty>
+      <call target="Packages.AddVarificationActions"/>
+    </ifnot>
+  </target>
+
+  <target name="DotNetUnitTest.SetAsCurrentPackage">
+    <property name="Packages.CurrenctPackage.PackageDirectoryName" value="DotNetUnitTest"/>
+    <property name="Packages.CurrenctPackage.PackageTargetFileName" value="UnitTest.Target.xml"/>
+    <property name="Packages.CurrenctPackage.PackageName" value="UnitTest"/>
+  </target>
+
+  <target name="DotNetUnitTest.ValidateParameters">
+
+  </target>
+  
+</project>

@@ -43,6 +43,8 @@
     <Content Include="Package\CoverageEye\CoverageReport.xsl" />
     <Content Include="Package\CoverageEye\CoverageStuff.xsl" />
     <Content Include="Package\CoverageEye\CoverageSummary.xsl" />
+    <Content Include="Package\CoverageEye\Install\Install.xml" />
+    <Content Include="Package\CoverageEye\Install\Properties.xml" />
     <Content Include="Package\CoverageEye\PostExclusion.xml" />
   </ItemGroup>
   <ItemGroup>

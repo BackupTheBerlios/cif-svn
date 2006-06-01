@@ -45,6 +45,8 @@
   </Target>
   -->
   <ItemGroup>
+    <Content Include="Package\SourceModificationReport\Install\Install.xml" />
+    <Content Include="Package\SourceModificationReport\Install\Properties.xml" />
     <Content Include="Package\SourceModificationReport\SourceModificationReport.Properties.xml" />
     <Content Include="Package\SourceModificationReport\SourceModificationReport.Target.xml" />
   </ItemGroup>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<project xmlns="http://nant.sf.net/schemas/nant.xsd" name="CoverageEye.Install" default="CoverageEye.Install">
+
+  <include buildfile="Properties.xml" />
+  
+  <target name="CoverageEye.Install">
+    <largeproperty name="Packages.AddVarificationActions.Block">
+      <value xml="true">
+        <call target="UnitTest.RunTests" />
+      </value>
+    </largeproperty>
+    <call target="Packages.AddVarificationActions"/>
+  </target>
+
+  <target name="CoverageEye.SetAsCurrentPackage">
+    <property name="Packages.CurrenctPackage.PackageDirectoryName" value="CoverageEye"/>
+    <property name="Packages.CurrenctPackage.PackageTargetFileName" value="CoverageEye.Target.xml"/>
+    <property name="Packages.CurrenctPackage.PackageName" value="UnitTest"/>
+  </target>
+
+  <target name="CoverageEye.ValidateParameters">
+
+  </target>
+  
+</project>

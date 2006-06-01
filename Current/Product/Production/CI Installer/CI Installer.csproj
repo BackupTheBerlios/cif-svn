@@ -47,16 +47,11 @@
   <ItemGroup>
     <Content Include="Install Scripts\Arguments.xml" />
     <Content Include="Install Scripts\Install.xml" />
-    <Content Include="Install Scripts\installlog.xml" />
     <Content Include="Install Scripts\Properties.Install.xml" />
     <Content Include="Install Scripts\Scripts\BuildVS.Install.xml" />
-    <Content Include="Install Scripts\Scripts\CCNETDashboard.Install.xml" />
-    <Content Include="Install Scripts\Scripts\CCNETServer.Install.xml" />
-    <Content Include="Install Scripts\Scripts\Common.Install.xml" />
+    <Content Include="Install Scripts\Scripts\CCNET.Install.xml" />
     <Content Include="Install Scripts\Scripts\nAnt.Install.xml" />
     <Content Include="Install Scripts\Scripts\Packages.Install.xml" />
-    <Content Include="Install Scripts\Scripts\ProductVS.Install.xml" />
-    <Content Include="Install Scripts\Scripts\VSS.Install.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Install Scripts\run.bat" />

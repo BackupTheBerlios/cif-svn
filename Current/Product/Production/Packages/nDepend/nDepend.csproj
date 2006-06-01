@@ -56,6 +56,8 @@
     <Content Include="Package\nDepend\bin\QuickGraph.Exceptions.dll" />
     <Content Include="Package\nDepend\bin\QuickGraph.Predicates.dll" />
     <Content Include="Package\nDepend\bin\QuickGraph.Representations.dll" />
+    <Content Include="Package\nDepend\Install\Install.xml" />
+    <Content Include="Package\nDepend\Install\Properties.xml" />
     <Content Include="Package\nDepend\nDepend.Properties.xml" />
     <Content Include="Package\nDepend\nDepend.Target.xml" />
     <Content Include="Package\nDepend\nDependReport.xsl" />

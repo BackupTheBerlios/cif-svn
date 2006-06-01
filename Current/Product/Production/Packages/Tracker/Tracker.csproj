@@ -55,6 +55,8 @@
   </Target>
   -->
   <ItemGroup>
+    <Content Include="Package\Tracker\Install\Install.xml" />
+    <Content Include="Package\Tracker\Install\Properties.xml" />
     <Content Include="Package\Tracker\ModificationsText.xsl" />
     <Content Include="Package\Tracker\Tracker.Properties.xml" />
     <Content Include="Package\Tracker\Tracker.Target.xml" />
