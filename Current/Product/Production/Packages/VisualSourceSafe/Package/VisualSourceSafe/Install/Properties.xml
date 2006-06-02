@@ -50,6 +50,7 @@
   <function execute="${filterchain::replacestring-add('Common.FilterChain', '%SourceControl.BuildUpdateBlock%', SourceControl.BuildUpdateBlock)}"/>
   <function execute="${filterchain::replacestring-add('Common.FilterChain', '%SourceControl.MainBuildBlock%', SourceControl.MainBuildBlock)}"/>
   <function execute="${filterchain::replacestring-add('Common.FilterChain', '%VSSRootShare%', VSSRootShare)}"/>
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%VSS.DBPath%', VSS.DBPath)}"/>
   <function execute="${filterchain::replacestring-add('Common.FilterChain', '%VSS.Username%', VSS.Username)}"/>
   <function execute="${filterchain::replacestring-add('Common.FilterChain', '%VSS.Password%', VSS.Password)}"/>
 

@@ -12,9 +12,7 @@
     <call target="Packages.AddPreBuildActions"/>
     
     <largeproperty name="Packages.AddPostBuildActions.Block">
-      <value xml="true">
-        <call target="Tracker.MoveTrackersTo"/>
-      </value>
+      <value xml="false"><![CDATA[<call target="Tracker.MoveTrackersTo"/>]]></value>
     </largeproperty>
     <call target="Packages.AddPostBuildActions"/>
 

@@ -17,11 +17,11 @@
       <value xml="false"><![CDATA[<call target="Compile.CompileSource" />]]></value>
     </largeproperty>
     <call target="Packages.AddCompileActions"/>
-    <ifthenelse test="${Compile.DevEnv.Version == 2003}">
+    <ifthenelse test="${Compile.DevEnv.Version == '2003'}">
       <then>
         <copy file="${Compile.Default2003SolutionFile}" tofile="${Compile.SolutionFile}"/>
       </then>
-      <elseif if="${Compile.DevEnv.Version == 2005}">
+      <elseif if="${Compile.DevEnv.Version == '2005'}">
         <copy file="${Compile.Default2005SolutionFile}" tofile="${Compile.SolutionFile}"/>
       </elseif>
       <else>
@@ -51,9 +51,9 @@
   </target>
 
   <target name="VS.NETCompile.ValidateParameters">
-    <ifthenelse test="${Compile.DevEnv.Version == 2003}">
+    <ifthenelse test="${Compile.DevEnv.Version == '2003'}">
       <then></then>
-      <elseif if="${Compile.DevEnv.Version == 2005}"></elseif>
+      <elseif if="${Compile.DevEnv.Version == '2005'}"></elseif>
       <else>
         <fail message="The property Compile.DevEnv.Version must be of value '2003' or '2005', '${Compile.DevEnv.Version}' is not a valid value."/>
       </else>
