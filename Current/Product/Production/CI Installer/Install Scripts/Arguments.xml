@@ -3,6 +3,8 @@
   <property name="ProjectName" value="TestProject" />
   <property name="CCNET.ServerPort" value="21236"/>
   <property name="VSSRootShare" value="C:\Source Safe DataBases"/>
+  <property name="BuildMaster.Name" value="BuildMaster"/>
+  <property name="BuildMaster.Email" value="fake@bogas.com"/>
 
   <strings id="Packages.InstallList">
     <string value="SourceModificationReport"/>

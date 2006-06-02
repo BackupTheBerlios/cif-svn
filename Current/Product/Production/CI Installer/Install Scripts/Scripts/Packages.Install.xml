@@ -37,6 +37,20 @@
     <value xml="false"><![CDATA[<description>End Package Includes</description>]]></value>
   </largeproperty>
 
+  <largeproperty name="Private.Packages.buildReportBuildPlugin.EndTag">
+    <value><![CDATA[</xslFileNames>
+			</buildReportBuildPlugin>]]></value>
+  </largeproperty>
+
+  <largeproperty name="Private.Packages.buildPlugins.EndTag">
+    <value><![CDATA[</buildPlugins>]]></value>
+  </largeproperty>
+
+  <largeproperty name="Private.Packages.MergeFiles.EndTag">
+    <value><![CDATA[</files>
+      </merge>]]></value>
+  </largeproperty>
+
   <!-- These are private... -->
 
   <loopthrough property="Private.Packages.Install.PackageName">
@@ -113,6 +127,36 @@
       </fileset>
       <filterchain refid="Common.FilterChain" />
     </copy>
+  </target>
+
+  <property name="Packages.AddMergeFiles.Block" value=""/>
+  <target name="Packages.AddMergeFiles">
+    <largeproperty name="Private.Packages.CCNETProjectConfig.Replace.To">
+      <value xml="false" expand="true"><![CDATA[${Packages.AddMergeFiles.Block}
+  ${Private.Packages.MergeFiles.EndTag}]]></value>
+    </largeproperty>
+    <property name="Private.Packages.CCNETProjectConfig.Replace.From" value="${Private.Packages.MergeFiles.EndTag}" />
+    <call target="Private.Packages.CCNETProjectConfig.Replace"/>
+  </target>
+
+  <property name="Packages.AddbuildReportBuildPlugin.Block" value=""/>
+  <target name="Packages.AddbuildReportBuildPlugin">
+    <largeproperty name="Private.Packages.DashboardConfig.Replace.To">
+      <value xml="false" expand="true"><![CDATA[${Packages.AddbuildReportBuildPlugin.Block}
+  ${Private.Packages.buildReportBuildPlugin.EndTag}]]></value>
+    </largeproperty>
+    <property name="Private.Packages.DashboardConfig.Replace.From" value="${Private.Packages.buildReportBuildPlugin.EndTag}" />
+    <call target="Private.Packages.DashboardConfig.Replace"/>
+  </target>
+
+  <property name="Packages.AddbuildPlugins.Block" value=""/>
+  <target name="Packages.AddbuildPlugins">
+    <largeproperty name="Private.Packages.DashboardConfig.Replace.To">
+      <value xml="false" expand="true"><![CDATA[${Packages.AddbuildPlugins.Block}
+  ${Private.Packages.buildPlugins.EndTag}]]></value>
+    </largeproperty>
+    <property name="Private.Packages.DashboardConfig.Replace.From" value="${Private.Packages.buildPlugins.EndTag}" />
+    <call target="Private.Packages.DashboardConfig.Replace"/>
   </target>
 
   <target name="Private.Packages.AddInclude">
@@ -198,6 +242,26 @@
     <replace file="${BuildDirectory}\Main.Build.xml">
       <filterchain>
         <replacestring from="${Private.Packages.MainBuild.Replace.From}" to="${Private.Packages.MainBuild.Replace.To}" />
+      </filterchain>
+    </replace>
+  </target>
+
+  <property name="Private.Packages.DashboardConfig.Replace.To" value=""/>
+  <property name="Private.Packages.DashboardConfig.Replace.From" value=""/>
+  <target name="Private.Packages.DashboardConfig.Replace">
+    <replace file="${BuildDirectory}\dashboard\dashboard.config">
+      <filterchain>
+        <replacestring from="${Private.Packages.DashboardConfig.Replace.From}" to="${Private.Packages.DashboardConfig.Replace.To}" />
+      </filterchain>
+    </replace>
+  </target>
+
+  <property name="Private.Packages.CCNETProjectConfig.Replace.To" value=""/>
+  <property name="Private.Packages.CCNETProjectConfig.Replace.From" value=""/>
+  <target name="Private.Packages.CCNETProjectConfig.Replace">
+    <replace file="${BuildDirectory}\ccnetproject.xml">
+      <filterchain>
+        <replacestring from="${Private.Packages.CCNETProjectConfig.Replace.From}" to="${Private.Packages.CCNETProjectConfig.Replace.To}" />
       </filterchain>
     </replace>
   </target>

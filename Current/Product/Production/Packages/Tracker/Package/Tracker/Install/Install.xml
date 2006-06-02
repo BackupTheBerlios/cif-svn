@@ -16,8 +16,17 @@
         <call target="Tracker.MoveTrackersTo"/>
       </value>
     </largeproperty>
-    
     <call target="Packages.AddPostBuildActions"/>
+
+    <largeproperty name="Packages.AddbuildReportBuildPlugin.Block">
+      <value xml="false"><![CDATA[<xslFile>Packages\Tracker\Tracker.xsl</xslFile>]]></value>
+    </largeproperty>
+    <call target="Packages.AddbuildReportBuildPlugin"/>
+
+    <largeproperty name="Packages.AddMergeFiles.Block">
+      <value expand="true"><![CDATA[<file>${BuildDirectory}\Tracker Reports\*.xml</file>]]></value>
+    </largeproperty>
+    <call target="Packages.AddMergeFiles"/>
   </target>
 
   <target name="Tracker.SetAsCurrentPackage">

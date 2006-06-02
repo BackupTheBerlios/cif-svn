@@ -32,6 +32,16 @@
     <copy tofile="${Compile.OpenSolutionBat}" file="${Compile.DefaultOpenSolutionBat}">
       <filterchain refid="Common.FilterChain" />
     </copy>
+
+    <largeproperty name="Packages.AddbuildPlugins.Block">
+      <value xml="false"><![CDATA[<xslReportBuildPlugin description=".NET Compile Details" actionName="DevEnvCompileDetails" xslFileName="Packages\VS.NETCompile\DevEnvCompileDetails.xsl" />]]></value>
+    </largeproperty>
+    <call target="Packages.AddbuildPlugins"/>
+
+    <largeproperty name="Packages.AddMergeFiles.Block">
+      <value expand="true"><![CDATA[<file>${BuildDirectory}\CompileLogs\*.xml</file>]]></value>
+    </largeproperty>
+    <call target="Packages.AddMergeFiles"/>
   </target>
 
   <target name="VS.NETCompile.SetAsCurrentPackage">
