@@ -4,7 +4,7 @@
   <include buildfile="Properties.xml" />
   
   <target name="InstallShield.Install">
-    <ifthenelse if="${InstallShield.Type == 'MSI'}">
+    <ifthenelse test="${InstallShield.Type == 'MSI'}">
       <then>
         <largeproperty name="Packages.AddPostBuildActions.Block">
           <value xml="true">
@@ -27,14 +27,14 @@
     <call target="Packages.AddPostBuildActions"/>
   </target>
 
-  <target name="CoverageEye.SetAsCurrentPackage">
+  <target name="InstallShield.SetAsCurrentPackage">
     <property name="Packages.CurrenctPackage.PackageDirectoryName" value="InstallShield"/>
     <property name="Packages.CurrenctPackage.PackageTargetFileName" value="InstallShield.Target.xml"/>
     <property name="Packages.CurrenctPackage.PackageName" value="InstallShield"/>
   </target>
 
   <target name="InstallShield.ValidateParameters">
-    <ifthenelse if="${InstallShield.Type == 'MSI'}">
+    <ifthenelse test="${InstallShield.Type == 'MSI'}">
       <then>
 
       </then>

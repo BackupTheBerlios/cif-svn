@@ -14,7 +14,7 @@
   <property name="BuildDirectory"           value="${ProjectsDirectory}\${ProjectName}\${ProjectCodeLineName}\Build"  overwrite="false"/>
   <property name="BuildPackagesDirectory"   value="${BuildDirectory}\Packages"  overwrite="false"/>
 
-  <property name="SourceRoot" value="path::get-full-path('..')"/>
+  <property name="SourceRoot" value="${path::get-full-path('..')}"/>
   <property name="SourceDefaultDirectory"   value="${SourceRoot}\Default"/>
   <property name="SourceBuildDirectory" value="${SourceDefaultDirectory}\Build"/>
   <property name="SourceProductDirectory" value="${SourceDefaultDirectory}\Product"/>

@@ -39,15 +39,14 @@
 
   <!-- These are private... -->
 
-  <strings id="Private.Packages.CustomInstallerList"/>
-
   <loopthrough property="Private.Packages.Install.PackageName">
     <items>
       <strings refid="Packages.InstallList"/>
     </items>
     <do>
       <property name="InstallScript" value="${SourcePackagesDirectory}\${Private.Packages.Install.PackageName}\Install\Install.xml"/>
-      <ifthenelse  if="${file::exists(InstallScript)}">
+      <echo message="${InstallScript}" />
+      <ifthenelse  test="${file::exists(InstallScript)}">
         <then>
           <include buildfile="${InstallScript}" />
         </then>
@@ -87,28 +86,30 @@
   </target>
 
   <target name="Packages.Validate.CurrentSetPackage">
-    <fail unless="${Packages.CurrenctPackage.PackageDirectoryName == ''}" message="PackageDirectoryName was not set as the current package."/>
-    <fail unless="${Packages.CurrenctPackage.PackageTargetFileName == ''}" message="PackageTargetFileName was not set as the current package."/>
-    <fail unless="${Packages.CurrenctPackage.PackageName == ''}" message="PackageName was not set as the current package."/>
+    <fail if="${Packages.CurrenctPackage.PackageDirectoryName == ''}" message="PackageDirectoryName was not set as the current package."/>
+    <fail if="${Packages.CurrenctPackage.PackageTargetFileName == ''}" message="PackageTargetFileName was not set as the current package."/>
+    <fail if="${Packages.CurrenctPackage.PackageName == ''}" message="PackageName was not set as the current package."/>
   </target>
 
   <property name="Packages.CopyPackage.PackageName" value=""/>
 
   <target name="Private.Packages.CopyPackage" >
-    <mkdir dir="${Packages.DefaultDirectory}\${Packages.CopyPackage.PackageName}"/>
-    <copy todir="${BuildPackagesDirectory}">
-      <fileset basedir="${Packages.DefaultDirectory}\${Packages.CopyPackage.PackageName}">
-        <include name="**\*"/>
-        <exclude name="**\*.xml"/>
-        <exclude name="**\*.txt"/>
-        <exclude name="**\*.xsl"/>
+    <mkdir dir="${BuildPackagesDirectory}\${Packages.CopyPackage.PackageName}"/>
+    <copy todir="${BuildPackagesDirectory}" >
+      <fileset basedir="${SourcePackagesDirectory}">
+        <include name="${Packages.CopyPackage.PackageName}\**\*"/>
+        <exclude name="${Packages.CopyPackage.PackageName}\Install\*"/>
+        <exclude name="${Packages.CopyPackage.PackageName}\**\*.xml"/>
+        <exclude name="${Packages.CopyPackage.PackageName}\**\*.txt"/>
+        <exclude name="${Packages.CopyPackage.PackageName}\**\*.xsl"/>
       </fileset>
     </copy>
     <copy todir="${BuildPackagesDirectory}">
-      <fileset basedir="${Packages.DefaultDirectory}\${Packages.CopyPackage.PackageName}">
-        <include name="**\*.xml"/>
-        <include name="**\*.txt"/>
-        <include name="**\*.xsl"/>
+      <fileset basedir="${SourcePackagesDirectory}">
+        <include name="${Packages.CopyPackage.PackageName}\**\*.xml"/>
+        <include name="${Packages.CopyPackage.PackageName}\**\*.txt"/>
+        <include name="${Packages.CopyPackage.PackageName}\**\*.xsl"/>
+        <exclude name="${Packages.CopyPackage.PackageName}\Install\*"/>
       </fileset>
       <filterchain refid="Common.FilterChain" />
     </copy>

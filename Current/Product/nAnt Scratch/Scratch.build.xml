@@ -4,18 +4,6 @@
   <loadtasks assembly="..\..\Third Party\nAnt\bin\Common.Functions.dll" />
   
   <target name="test">
-    <property name="m" value="hello"/>
-    <largeproperty name="t">
-      <value xml="true" expand="true"><test message="${m}"/></value>
-    </largeproperty>
-
-    <echo message="${t}"/>
-
-    <ifthenelse if="">
-      <then></then>
-      <else></else>
-      <elseif if=""></elseif>
-    </ifthenelse>
     
   </target>
 
