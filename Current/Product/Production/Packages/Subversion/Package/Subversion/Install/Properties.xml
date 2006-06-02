@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="SVN.Installer.Properties" >
 
-  <property name="SVN.URI" value="https://svn.berlios.de/svnroot/repos/${ProjectName}/${ProjectCodeLineName}" />
-  <property name="SVN.WebRepoUrl" value="https://svn.berlios.de/svnroot/repos/${ProjectName}" />
-  <property name="SVN.Username" value="Build" />
-  <property name="SVN.Password" value="password" />
+  <property name="SVN.URI" value="https://svn.berlios.de/svnroot/repos/${ProjectName}/${ProjectCodeLineName}" overwrite="false" />
+  <property name="SVN.WebRepoUrl" value="https://svn.berlios.de/svnroot/repos/${ProjectName}" overwrite="false" />
+  <property name="SVN.Username" value="Build" overwrite="false" />
+  <property name="SVN.Password" value="password" overwrite="false" />
   
   <largeproperty name="SourceControl.BuildUpdateBlock">
     <value xml="false" expand="true"><![CDATA[<sourcecontrol  type="svn" tagOnSuccess="false" autoGetSource="true" >
@@ -50,10 +50,10 @@
       </sourcecontrol>]]></value>
       </largeproperty>
 
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SourceControl.BuildUpdateBlock%', SourceControl.BuildUpdateBlock)"/>
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SourceControl.MainBuildBlock%', SourceControl.MainBuildBlock)"/>
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SVN.URI%', SVN.URI)" />
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SVN.WebRepoUrl%', SVN.WebRepoUrl)" />
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SVN.Username%', SVN.Username)" />
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%SVN.Password%', SVN.Password)" />
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%SourceControl.BuildUpdateBlock%', SourceControl.BuildUpdateBlock)}"/>
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%SourceControl.MainBuildBlock%', SourceControl.MainBuildBlock)}"/>
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%SVN.URI%', SVN.URI)}" />
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%SVN.WebRepoUrl%', SVN.WebRepoUrl)}" />
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%SVN.Username%', SVN.Username)}" />
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%SVN.Password%', SVN.Password)}" />
 </project>

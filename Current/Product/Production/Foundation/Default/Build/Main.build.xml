@@ -15,27 +15,18 @@
         <description>Begin Main Build</description>
 
         <description>Begin Pre Build Actions</description>
-        <call target="SourceModificationReport.ConsolidateReports" />
         <description>End Pre Build Actions</description>
 
         <description>Begin Clean Up Actions</description>
-		    <call target="SourceControl.CleanGetOfThirdPartyDirectory" />
-		    <call target="SourceControl.CleanGetOfProductDirectory" />
         <description>End Clean Up Actions</description>
 
         <description>Begin Compile Actions</description>
-        <call target="Versioning.IncrementBuildNumberOfModifiedAssemblies"/>
-        <call target="Versioning.IncreamentBuildNumberOfProduct"/>
-    		
-		    <call target="Compile.CompileSource" />
         <description>End Compile Actions</description>
 
         <description>Begin Varification Actions</description>
-		    <call target="UnitTest.RunTests" />
         <description>End Varification Actions</description>
 
         <description>Begin Post Build Actions</description>
-		    <call target="Install.CreateSetup" />
         <description>End Post Build Actions</description>
 
         <description>End Main Build</description>

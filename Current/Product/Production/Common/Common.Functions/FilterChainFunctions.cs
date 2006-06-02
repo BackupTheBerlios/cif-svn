@@ -19,8 +19,18 @@ namespace Common.Functions
         {
         }
 
+        [Function("replacestring-count")]
+        public int ReplaceStringCount(String refID)
+        {
+            if (!this.Project.DataTypeReferences.Contains(refID))
+                throw new BuildException(String.Format("The refid {0} is not defined.", refID));
+
+            FilterChain RefFilterChain = (FilterChain)this.Project.DataTypeReferences[refID];
+            return RefFilterChain.Filters.Count;
+        }
+
         [Function("replacestring-add")]
-        public void AddInclude(String refID, String oldValue, String newValue)
+        public void AddReplaceString(String refID, String oldValue, String newValue)
         {
             if (!this.Project.DataTypeReferences.Contains(refID))
                 throw new BuildException(String.Format("The refid {0} is not defined.", refID));
@@ -33,7 +43,7 @@ namespace Common.Functions
         }
 
         [Function("replacestring-remove")]
-        public void RemoveInclude(String refID, String oldValue, String newValue)
+        public void RemoveReplaceString(String refID, String oldValue, String newValue)
         {
             if (!this.Project.DataTypeReferences.Contains(refID))
                 throw new BuildException(String.Format("The refid {0} is not defined.", refID));
@@ -57,7 +67,7 @@ namespace Common.Functions
         }
 
         [Function("replacestring-contains")]
-        public Boolean ContainsInclude(String refID, String oldValue, String newValue)
+        public Boolean ContainsReplaceString(String refID, String oldValue, String newValue)
         {
             if (!this.Project.DataTypeReferences.Contains(refID))
                 throw new BuildException(String.Format("The refid {0} is not defined.", refID));

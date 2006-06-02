@@ -26,13 +26,13 @@
   <property name="Private.CCNET.DefaultDashboardDirectory" value="${SourceBuildDirectory}\dashboard"/>
   <property name="Private.CCNET.DefaultConfigFile" value="${Private.CCNET.DefaultDashboardDirectory}\dashboard.config"/>
 
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%CCNET.ServerPort%', CCNET.ServerPort)"/>
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%CCNET.webURL%', CCNET.webURL)"        />
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%CCNET.ProjectFile%', CCNET.ProjectFile)"  />
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%CCNET.BatchFile%', CCNET.BatchFile)"  />
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%CCNET.ExeConfigFile%', CCNET.ExeConfigFile)"  />
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%CCNET.ServerDirectory%', CCNET.ServerDirectory)"  />
-  <function execute="filterchain::replacestring-add('Common.FilterChain', '%CCNET.ServerExe%', CCNET.ServerExe)"  />
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%CCNET.ServerPort%', CCNET.ServerPort)}"/>
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%CCNET.webURL%', CCNET.webURL)}"        />
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%CCNET.ProjectFile%', CCNET.ProjectFile)}"  />
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%CCNET.BatchFile%', CCNET.BatchFile)}"  />
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%CCNET.ExeConfigFile%', CCNET.ExeConfigFile)}"  />
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%CCNET.ServerDirectory%', CCNET.ServerDirectory)}"  />
+  <function execute="${filterchain::replacestring-add('Common.FilterChain', '%CCNET.ServerExe%', CCNET.ServerExe)}"  />
   
   <target name="CCNET.Install">
     <call target="Private.CCNET.InstallBuildDirectoryFiles"/>

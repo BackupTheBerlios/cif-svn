@@ -12,9 +12,7 @@
 
     <ifnot test="${stringlist::contains('Packages.InstallList', 'CoverageEye')}">
       <largeproperty name="Packages.AddVarificationActions.Block">
-        <value xml="true">
-          <call target="UnitTest.RunTests" />
-        </value>
+        <value xml="false"><![CDATA[<call target="UnitTest.RunTests" />]]></value>
       </largeproperty>
       <call target="Packages.AddVarificationActions"/>
     </ifnot>

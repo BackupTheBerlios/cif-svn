@@ -7,21 +7,18 @@
     <ifthenelse test="${InstallShield.Type == 'MSI'}">
       <then>
         <largeproperty name="Packages.AddPostBuildActions.Block">
-          <value xml="true">
-            <call target="InstallShield.BuildMsi" />
-          </value>
+          <value xml="false"><![CDATA[<call target="InstallShield.BuildMsi" />]]></value>
         </largeproperty>
       </then>
       <elseif if="${InstallShield.Type == 'SCRIPT'}">
         <largeproperty name="Packages.AddPostBuildActions.Block">
-          <value xml="true">
-            <call target="InstallShield.BuildInstallScript" />
-          </value>
+          <value xml="false"><![CDATA[<call target="InstallShield.BuildInstallScript" />]]></value>
         </largeproperty>
       </elseif>
       <else>
         <fail message="Property InstallShield.Type value must be 'MSI' or 'SCRIPT', '${InstallShield.Type}' is not a valid value."/>
       </else>
+      <call target="Packages.AddPostBuildActions"/>
     </ifthenelse>
     
     <call target="Packages.AddPostBuildActions"/>

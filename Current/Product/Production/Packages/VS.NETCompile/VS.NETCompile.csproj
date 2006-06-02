@@ -52,9 +52,13 @@
     <Content Include="Package\VS.NETCompile\Install.Target.xml" />
     <Content Include="Package\VS.NETCompile\Install\Install.xml" />
     <Content Include="Package\VS.NETCompile\Install\Properties.xml" />
+    <Content Include="Package\VS.NETCompile\Install\Scratch.build.xml" />
     <Content Include="Package\VS.NETCompile\MSBuild\MSBee.dll" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Package\VS.NETCompile\Install\2003.sln.remove" />
+    <None Include="Package\VS.NETCompile\Install\2005.sln.remove" />
+    <None Include="Package\VS.NETCompile\Install\OpenSolution.bat" />
     <None Include="Package\VS.NETCompile\MSBuild\Microsoft.Public.Common.targets" />
     <None Include="Package\VS.NETCompile\MSBuild\Microsoft.Public.CSharp.targets" />
     <None Include="Package\VS.NETCompile\MSBuild\Microsoft.Public.VisualBasic.targets" />

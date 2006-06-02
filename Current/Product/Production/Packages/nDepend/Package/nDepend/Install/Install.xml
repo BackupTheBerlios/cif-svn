@@ -5,9 +5,7 @@
   
   <target name="nDepend.Install">
     <largeproperty name="Packages.AddPostBuildActions.Block">
-      <value xml="true">
-        <call target="nDepend.Calculate" />
-      </value>
+      <value xml="false"><![CDATA[<call target="nDepend.Calculate" />]]></value>
     </largeproperty>
     
     <call target="Packages.AddPostBuildActions"/>

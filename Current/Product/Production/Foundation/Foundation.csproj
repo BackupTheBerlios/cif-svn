@@ -124,6 +124,7 @@
     <Content Include="Default\Build\nAnt\bin\SLiNgshoT.Core.dll" />
     <Content Include="Default\Build\nAnt\bin\SourceSafe.Interop.dll" />
     <Content Include="Default\Build\Properties.build.xml" />
+    <Content Include="Default\Build\Scratch.build.xml" />
     <Content Include="Default\Build\server\ccnet.exe" />
     <Content Include="Default\Build\server\NetReflector.dll" />
     <Content Include="Default\Build\server\ThoughtWorks.CruiseControl.Core.dll" />
@@ -132,6 +133,7 @@
     <Content Include="Default\Build\server\xsl\cruisecontrol.css" />
     <Content Include="Default\Build\server\xsl\header.xsl" />
     <Content Include="Default\Build\server\xsl\modifications.xsl" />
+    <Content Include="Default\Build\UpdatenAntSchema.xml" />
     <Content Include="Default\Third Party\MbUnit\MbUnit.Core.dll" />
     <Content Include="Default\Third Party\MbUnit\MbUnit.Framework.1.1.dll" />
     <Content Include="Default\Third Party\MbUnit\MbUnit.Framework.dll" />
@@ -171,7 +173,10 @@
     <None Include="Default\Build\dashboard\templates\TopMenu.vm" />
     <None Include="Default\Build\dashboard\Web.config" />
     <None Include="Default\Build\nAnt\bin\NAnt.exe.config" />
+    <None Include="Default\Build\OpenSolution.bat" />
+    <None Include="Default\Build\Packages.csproj.remove" />
     <None Include="Default\Build\server\ccnet.exe.config" />
+    <None Include="Default\Build\UpdatenAntSchema.bat" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Default\Product\" />

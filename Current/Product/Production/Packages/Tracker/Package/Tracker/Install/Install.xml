@@ -5,11 +5,9 @@
   
   <target name="Tracker.Install">
     <largeproperty name="Packages.AddPreBuildActions.Block">
-      <value xml="true">
-        <call target="Tracker.Queries" />
-        <call target="Tracker.AddToDailyList"/>
-        <call target="Tracker.Report"/>
-      </value>
+      <value xml="false"><![CDATA[<call target="Tracker.Queries" />
+      <call target="Tracker.AddToDailyList"/>
+      <call target="Tracker.Report"/>]]></value>
     </largeproperty>
     <call target="Packages.AddPreBuildActions"/>
     

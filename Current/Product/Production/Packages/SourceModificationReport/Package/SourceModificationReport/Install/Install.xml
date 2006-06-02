@@ -7,9 +7,7 @@
     <mkdir unless="${directory::exists(BuildDirectory + '\SourceModificationReports')}" dir="${BuildDirectory}\SourceModificationReports"/>
 
     <largeproperty name="Packages.AddPreBuildActions.Block">
-      <value xml="true">
-        <call target="SourceModificationReport.ConsolidateReports" />
-      </value>
+      <value xml="false"><![CDATA[<call target="SourceModificationReport.ConsolidateReports" />]]></value>
     </largeproperty>
     <call target="Packages.AddPreBuildActions"/>
   </target>

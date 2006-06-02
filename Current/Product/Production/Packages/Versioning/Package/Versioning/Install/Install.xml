@@ -5,10 +5,8 @@
   
   <target name="Versioning.Install">
     <largeproperty name="Packages.AddCompileActions.Block">
-      <value xml="true">
-        <call target="Versioning.IncrementBuildNumberOfModifiedAssemblies"/>
-        <call target="Versioning.IncreamentBuildNumberOfProduct"/>
-      </value>
+      <value xml="false"><![CDATA[<call target="Versioning.IncrementBuildNumberOfModifiedAssemblies"/>
+      <call target="Versioning.IncreamentBuildNumberOfProduct"/>]]></value>
     </largeproperty>
     <call target="Packages.AddCompileActions"/>
   </target>

@@ -5,9 +5,7 @@
   
   <target name="CoverageEye.Install">
     <largeproperty name="Packages.AddVarificationActions.Block">
-      <value xml="true">
-        <call target="UnitTest.RunTests" />
-      </value>
+      <value xml="false"><![CDATA[<call target="UnitTest.RunTests" />]]></value>
     </largeproperty>
     <call target="Packages.AddVarificationActions"/>
   </target>

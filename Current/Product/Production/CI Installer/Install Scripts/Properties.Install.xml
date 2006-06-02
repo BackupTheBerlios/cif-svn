@@ -34,10 +34,6 @@
     <replacestring from="%InstallDirectory%"         to="${InstallDirectory}"  />
     <replacestring from="%UnitTestDirectory%"        to="${UnitTestDirectory}"  />
     <replacestring from="%BuildDirectory%"           to="${BuildDirectory}"  />
-
-    
-
-    
   </filterchain>
   
 </project>
