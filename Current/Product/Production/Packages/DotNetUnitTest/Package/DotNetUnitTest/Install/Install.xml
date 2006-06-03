@@ -10,12 +10,21 @@
       </fileset>
     </copy>
 
-    <ifnot test="${stringlist::contains('Packages.InstallList', 'CoverageEye')}">
-      <largeproperty name="Packages.AddVarificationActions.Block">
-        <value xml="false"><![CDATA[<call target="UnitTest.RunTests" />]]></value>
-      </largeproperty>
-      <call target="Packages.AddVarificationActions"/>
-    </ifnot>
+    <ifthenelse test="${stringlist::contains('Packages.InstallList', 'CoverageEye')}">
+      <then>
+        <property name="Private.Packages.MainBuild.Replace.To" value=""/>
+        <largeproperty name="Private.Packages.MainBuild.Replace.From">
+          <value xml="false"><![CDATA[<include buildfile=".\Packages\DotNetUnitTest\UnitTest.Target.xml" />]]></value>
+        </largeproperty>
+        <call target="Private.Packages.MainBuild.Replace"/>  
+      </then>
+      <else>
+        <largeproperty name="Packages.AddVarificationActions.Block">
+          <value xml="false"><![CDATA[<call target="UnitTest.RunTests" />]]></value>
+        </largeproperty>
+        <call target="Packages.AddVarificationActions"/>
+      </else>
+    </ifthenelse>
 
     <largeproperty name="Packages.AddbuildReportBuildPlugin.Block">
       <value xml="false"><![CDATA[<xslFile>Packages\DotNetUnitTest\MBUnitSummary.xsl</xslFile>]]></value>
