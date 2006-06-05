@@ -25,12 +25,24 @@
   </target>
 
   <target name="InstallShield.BuildMsi">
-    <buildinstallshieldmsi
+    <if propertyexists="InstallShield.BuildConfigurations">
+      <foreach item="String" in="${InstallShield.BuildConfigurations}" delim="," property="BuildConfig">
+        <buildinstallshieldmsi
+		      p="${Private.InstallDirectory}\${ProjectName}\${InstallShield.IsmFile}"
+		      standalonebuildexe="${InstallShield.Guid}"
+		      o="${InstallShield.Msi.MergeModuleSearchPaths}"
+		      e="${InstallShield.Msi.CreateSetupExe}"
+	      />
+      </foreach>
+    </if>
+    <ifnot propertyexists="InstallShield.BuildConfigurations">
+      <buildinstallshieldmsi
 		    p="${Private.InstallDirectory}\${ProjectName}\${InstallShield.IsmFile}"
 		    standalonebuildexe="${InstallShield.Guid}"
 		    o="${InstallShield.Msi.MergeModuleSearchPaths}"
 		    e="${InstallShield.Msi.CreateSetupExe}"
-	  />
+	    />
+    </ifnot>
   </target>
 
   <target name="InstallShield.BuildInstallScript">

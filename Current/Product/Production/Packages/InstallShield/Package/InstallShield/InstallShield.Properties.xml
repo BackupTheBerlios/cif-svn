@@ -4,6 +4,7 @@
   <property name="InstallShield.InstallScript" value="false"/>
   <property name="InstallShield.IsmFile" value="${ProjectName}.ism"/>
   <property name="InstallShield.Msi.CreateSetupExe" value="true"/>
+  <!--InstallShield 11 Standalone Build GUID-->
   <property name="InstallShield.Guid" value="{2A3EF80F-2571-476A-BE44-431ABE54B96A}"/>
   <property name="InstallShield.Msi.MergeModuleSearchPaths" value="C:\Program Files\Installshield 11 StandaloneBuild\Modules\i386,C:\Program Files\Installshield 11 StandaloneBuild\Objects,C:\Program Files\Installshield 11 StandaloneBuild\Modules\i386\Japanese,C:\Program Files\Installshield 11 StandaloneBuild\Modules\i386\German,C:\Program Files\Common Files\Merge Modules"/>
 
