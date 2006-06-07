@@ -61,7 +61,7 @@
     <property name="SourceControl.ThirdPartyChanged" value="false"/>
     <loadfile file="${Private.SourceControl.CleanGetOfThirdPartyDirectory.ThirdPartyHistoryPathsFile}" property="SourceControl.ThirdPartyChanged" />
 
-    <if test="${SourceControl.ThirdPartyChanged}" >
+    <if test="${SourceControl.ThirdPartyChanged or not directory::exists(ThirdPartyDirectory)}" >
       <if test="${directory::exists(ThirdPartyDirectory)}" >
         <attrib readonly="false">
           <fileset>
