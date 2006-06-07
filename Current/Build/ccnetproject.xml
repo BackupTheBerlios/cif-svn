@@ -81,7 +81,7 @@
       </exclusionFilters>
     </sourcecontrol>
     <labeller type="defaultlabeller">
-      <prefix>0.1.0.</prefix>
+      <prefix>0.7.0.</prefix>
     </labeller>
     <tasks>
       <modificationWriter>
