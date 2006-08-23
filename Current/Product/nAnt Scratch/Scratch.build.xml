@@ -2,19 +2,35 @@
 <project xmlns="http://nant.sf.net/schemas/nant.xsd" name="scratch" default="test" >
 
   <loadtasks assembly="..\..\Third Party\nAnt\bin\Common.Functions.dll" />
+
+  <strings id="scrs">
+    <string value="1"/>
+    <string value="3"/>
+    <string value="2"/>
+    <string value="4"/>
+  </strings>
   
   <target name="test">
-
-    <filterchain id="Common.FilterChain">
-      <replacestring from="%ProjectName%"  to="ProjectName"   />
-    </filterchain>
-
-    <echo message="${filterchain::replacestring-count('Common.FilterChain')}"/>
-    
-    <property name="VSS.Password" value="password"  overwrite="false"/>
-    <function execute="${filterchain::replacestring-add('Common.FilterChain', '%VSS.Password%', VSS.Password)}"/>
-    
-    <echo message="${filterchain::replacestring-count('Common.FilterChain')}"/>
+    <function execute="${stringlist::sort-assending('scrs')}"/>
+    <echo message="Item 0 is ${stringlist::item('scrs', 0)}"/>
+    <loopthrough property="scr" >
+      <items>
+        <strings refid="scrs"/>
+      </items>
+      <do>
+        <echo message="${scr}"/>
+      </do>
+    </loopthrough>
+    <function execute="${stringlist::sort-dessending('scrs')}"/>
+    <echo message="Item 0 is ${stringlist::item('scrs', 0)}"/>
+    <loopthrough property="scr" >
+      <items>
+        <strings refid="scrs"/>
+      </items>
+      <do>
+        <echo message="${scr}"/>
+      </do>
+    </loopthrough>
   </target>
 
 </project>

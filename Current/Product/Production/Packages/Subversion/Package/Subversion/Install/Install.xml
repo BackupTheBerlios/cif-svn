@@ -3,7 +3,7 @@
 
   <include buildfile="Properties.xml" />
 
-  <target name="VisualSourceSafe.Install">
+  <target name="Subversion.Install">
     <largeproperty name="Packages.AddCleanUpActions.Block">
       <value xml="false"><![CDATA[<call target="SourceControl.CleanGetOfThirdPartyDirectory" />
       <call target="SourceControl.CleanGetOfProductDirectory" />]]></value>
@@ -11,13 +11,13 @@
     <call target="Packages.AddCleanUpActions"/>
   </target>
 
-  <target name="VisualSourceSafe.SetAsCurrentPackage">
+  <target name="Subversion.SetAsCurrentPackage">
     <property name="Packages.CurrenctPackage.PackageDirectoryName" value="Subversion"/>
     <property name="Packages.CurrenctPackage.PackageTargetFileName" value="SVN.Target.xml"/>
     <property name="Packages.CurrenctPackage.PackageName" value="SourceControl"/>
   </target>
 
-  <target name="VisualSourceSafe.ValidateParameters">
+  <target name="Subversion.ValidateParameters">
 
   </target>
   

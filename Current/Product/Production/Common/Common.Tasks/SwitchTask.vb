@@ -15,6 +15,7 @@ Public Class SwitchTask
 
     Private _Cases As CaseContainerCollection
     Private _LeftValue As String
+    Private _Else As TaskContainer
 
     <TaskAttribute("value", REquired:=True)> _
     Public Property LeftValue() As String
@@ -39,15 +40,26 @@ Public Class SwitchTask
         End Set
     End Property
 
+    <BuildElement("default", Required:=False)> _
+        Public Property [Else]() As TaskContainer
+        Get
+            Return _Else
+        End Get
+        Set(ByVal value As TaskContainer)
+            _Else = value
+        End Set
+    End Property
+
     Protected Overrides Sub ExecuteTask()
         For Each [Case] As CaseElement In Me.Cases
             If Me.LeftValue = [Case].RightValue Then
                 [Case].Execute()
                 If [Case].Break Then
-                    Exit For
+                    Exit Sub
                 End If
             End If
         Next
+        Me.Else.Execute()
     End Sub
 
 End Class

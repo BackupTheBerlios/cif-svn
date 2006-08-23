@@ -4,6 +4,7 @@ using System.Text;
 using Tracker;
 using MbUnit.Framework;
 using MbUnit.Core.Framework;
+using Tracker.Common;
 
 namespace Test.Tracker.Stubs
 {

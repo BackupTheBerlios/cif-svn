@@ -4,6 +4,7 @@ using System.Text;
 using MbUnit.Framework;
 using MbUnit.Core.Framework;
 using Tracker;
+using Tracker.Common;
 
 namespace Test.Tracker
 {

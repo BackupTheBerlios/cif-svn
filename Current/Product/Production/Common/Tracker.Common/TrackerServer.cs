@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-namespace Tracker
+namespace Tracker.Common
  {
      
     public class TrackerServer

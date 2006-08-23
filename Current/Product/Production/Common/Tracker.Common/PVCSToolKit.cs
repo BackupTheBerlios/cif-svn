@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Diagnostics;
 
-namespace Tracker
+namespace Tracker.Common
 {
-    public class PVCSToolKit : Tracker.IPVCSToolKit
+    public class PVCSToolKit : IPVCSToolKit
     {
         #region Fields
 

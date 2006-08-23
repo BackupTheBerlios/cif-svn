@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Tracker
+namespace Tracker.Common
 {
     public interface IPVCSToolKit
     {

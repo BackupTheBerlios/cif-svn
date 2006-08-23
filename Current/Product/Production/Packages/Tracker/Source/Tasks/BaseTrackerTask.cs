@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Xml;
+using Tracker.Common;
 
 using NAnt.Core;
 using NAnt.Core.Attributes;

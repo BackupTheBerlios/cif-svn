@@ -66,11 +66,8 @@
   <ItemGroup>
     <Compile Include="Source\AssemblyInfo.cs" />
     <Compile Include="..\..\..\ProjectInfo.cs" />
-    <Compile Include="Source\PVCSToolKit.cs" />
-    <Compile Include="Source\ServerHelper.cs" />
     <Compile Include="Source\Tasks\BaseTrackerTask.cs" />
     <Compile Include="Source\DataTypes\ConnectionInformation.cs" />
-    <Compile Include="Source\IPVCSToolKit.cs" />
     <Compile Include="Source\DataTypes\ReadField.cs" />
     <Compile Include="Source\DataTypes\ReadFieldSet.cs" />
     <Compile Include="Source\Tasks\TrackerAddNote.cs" />
@@ -79,7 +76,6 @@
     <Compile Include="Source\Tasks\TrackerGetField.cs" />
     <Compile Include="Source\Tasks\TrackerQuery.cs" />
     <Compile Include="Source\Tasks\TrackerReport.cs" />
-    <Compile Include="Source\TrackerServer.cs" />
     <Compile Include="Source\DataTypes\WriteField.cs" />
     <Compile Include="Source\DataTypes\WriteFieldSet.cs" />
   </ItemGroup>
@@ -92,6 +88,12 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Tracker.Common\Tracker.Common.csproj">
+      <Project>{AEC5D271-59E7-4B6A-B0C7-07C2D637206F}</Project>
+      <Name>Tracker.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Package\Tracker\bin\" />

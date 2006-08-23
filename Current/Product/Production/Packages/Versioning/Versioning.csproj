@@ -64,6 +64,7 @@
     <Compile Include="..\..\..\ProjectInfo.cs" />
     <Compile Include="Source\Tasks\GenerateAssemblyInfoList.cs" />
     <Compile Include="Source\Tasks\IncrementVersion.cs" />
+    <Compile Include="Source\Tasks\UpdateAssemblyVersion.cs" />
     <Compile Include="Source\Tasks\UpdateProductVersion.cs" />
     <Compile Include="Source\Versioning\Options.cs" />
     <Compile Include="Source\Versioning\RunUpdateVersion.cs" />
@@ -78,6 +79,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Package\Versioning\bin\" />

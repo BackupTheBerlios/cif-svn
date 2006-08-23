@@ -8,8 +8,8 @@
   
   <largeproperty name="SourceControl.BuildUpdateBlock">
     <value xml="false" expand="true"><![CDATA[<sourcecontrol  type="svn" tagOnSuccess="false" autoGetSource="true" >
-        <trunkUrl>${SVN.RepoUri}/Build</trunkUrl>
-        <workingDirectory${%BuildDirectory}</workingDirectory>
+        <trunkUrl>${SVN.URI}/Build</trunkUrl>
+        <workingDirectory>${BuildDirectory}</workingDirectory>
         <username>${SVN.Username}</username>
         <password>${SVN.Password}</password>
         <webUrlBuilder type="websvn">
@@ -21,14 +21,14 @@
   <largeproperty name="SourceControl.MainBuildBlock">
     <value xml="false" expand="true"><![CDATA[<sourcecontrol type="filtered">
         <sourceControlProvider  type="svn" tagOnSuccess="true" autoGetSource="false" >
-          <trunkUrl>${SVN.RepoUri}/${ProjectName}/${ProjectCodeLineName}</trunkUrl>
+          <trunkUrl>${SVN.URI}/${ProjectName}/${ProjectCodeLineName}</trunkUrl>
           <workingDirectory>${ProjectCodeLineDirectory}</workingDirectory>
           <username>${SVN.Username}</username>
           <password>${SVN.Password}</password>
           <webUrlBuilder type="websvn">
             <url>${SVN.WebRepoUrl}{0}</url>
           </webUrlBuilder>
-          <tagBaseUrl>${SVN.RepoUri}/Tags</tagBaseUrl>
+          <tagBaseUrl>${SVN.URI}/Tags</tagBaseUrl>
         </sourceControlProvider>
         <exclusionFilters>
           <pathFilter>

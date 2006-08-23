@@ -4,19 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{65D87CD1-4049-446A-996C-DCEC30449CDD}</ProjectGuid>
+    <ProjectGuid>{160AD2B8-639E-4C91-A050-C14193D7481B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test.Tracker</RootNamespace>
-    <AssemblyName>Test.Tracker</AssemblyName>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <RootNamespace>CCNET.Extensions</RootNamespace>
+    <AssemblyName>CCNET.Extensions.plugin</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,40 +28,44 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MbUnit.Framework, Version=2.22.1.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
+    <Reference Include="NetReflector">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Third Party\MbUnit\MbUnit.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="NAnt.Core, Version=0.85.1932.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Third Party\nAnt\bin\NAnt.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph, Version=2.21.1.0, Culture=neutral, PublicKeyToken=975e84d0c8d6464d">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Third Party\MbUnit\QuickGraph.dll</HintPath>
+      <HintPath>..\..\..\..\Third Party\CCNET\NetReflector.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.CruiseControl.Core">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Third Party\CCNET\ThoughtWorks.CruiseControl.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ThoughtWorks.CruiseControl.Remote">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Third Party\CCNET\ThoughtWorks.CruiseControl.Remote.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Stubs\ToolKitStub.cs" />
-    <Compile Include="tServerHelper.cs" />
-    <Compile Include="Tasks\tTrackerQuery.cs" />
+    <Compile Include="ForceFilters\ProjectForceFilter.cs" />
+    <Compile Include="ExclusionFilters.cs" />
+    <Compile Include="ForceFilters\UserForceFilter.cs" />
+    <Compile Include="ForceFilters\UserForceFilter\UserName.cs" />
+    <Compile Include="InclusionFilters.cs" />
+    <Compile Include="ProjectFilter.cs" />
+    <Compile Include="ProjectFilterList.cs" />
+    <Compile Include="Triggers\ProjectTriggerFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="tTrackerServer.cs" />
+    <Compile Include="Zation.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Production\Common\Tracker.Common\Tracker.Common.csproj">
-      <Project>{AEC5D271-59E7-4B6A-B0C7-07C2D637206F}</Project>
-      <Name>Tracker.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Production\Packages\Tracker\Tracker.csproj">
-      <Project>{D4C8C890-0DF5-4612-AF4F-F82CDE0A2E04}</Project>
-      <Name>Tracker</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|.NET 1.1' ">
+    <OutputPath>bin\.NET 1.1\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|.NET 1.1' ">
+    <OutputPath>bin\.NET 1.1\Debug\</OutputPath>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="C:\Projects\CI Factory\Current\Build\Packages\VS.NETCompile\MSBuild\Microsoft.Public.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
