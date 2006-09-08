@@ -148,7 +148,7 @@ namespace CCNET.Extensions.ForceFilters
             get { return true; }
         }
 
-        public bool ShouldRunIntegration(ForceFilterClientInfo[] clientInfo)
+        public bool ShouldRunIntegration(ForceFilterClientInfo[] clientInfo, IIntegrationResult result)
         {
             UserInformation UserInfo = null;
             foreach (ForceFilterClientInfo Info in clientInfo)
@@ -166,14 +166,21 @@ namespace CCNET.Extensions.ForceFilters
             bool ToRun = false;
 
             if (this.UserList.Contains(UserInfo.Name))
+            {
+                this.AddUserNameToResults(result, UserInfo);
                 return true;
+            }
 
             foreach (string GroupName in this.Groups)
             {
                 if (UserInfo.Groups.Contains(GroupName))
+                {
+                    this.AddUserNameToResults(result, UserInfo);
                     return true;
+                }
             }
 
+            Log.Info(string.Format("{0} is not allowed to force the build for project {1}.", UserInfo.Name, result.ProjectName));
             return ToRun;
         }
 
@@ -181,6 +188,10 @@ namespace CCNET.Extensions.ForceFilters
         
 #region Helpers
 
+        private void AddUserNameToResults(IIntegrationResult result, UserInformation UserInfo)
+        {
+            result.AddTaskResult(string.Format("<ForcedBuildInformation UserName=\"{0}\" />", UserInfo.Name));
+        }
         private StringCollection GetADUserGroups(string userName)
         {
             string Path = string.Format("LDAP://dc={0},dc={1}", DomainName, TopLevelDomainName);

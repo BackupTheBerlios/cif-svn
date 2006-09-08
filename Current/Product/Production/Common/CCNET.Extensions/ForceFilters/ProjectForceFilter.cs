@@ -27,7 +27,7 @@ namespace CCNET.Extensions.ForceFilters
 
         #region IForceFilter Members
 
-        public bool ShouldRunIntegration(ForceFilterClientInfo[] clientInfo)
+        public bool ShouldRunIntegration(ForceFilterClientInfo[] clientInfo, IIntegrationResult result)
         {
             foreach (ProjectFilter Project in this.ProjectFilters)
             {
@@ -48,5 +48,6 @@ namespace CCNET.Extensions.ForceFilters
         }
 
         #endregion
+
     }
 }

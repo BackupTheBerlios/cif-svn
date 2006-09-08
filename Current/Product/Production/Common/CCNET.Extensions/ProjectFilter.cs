@@ -31,13 +31,17 @@ namespace CCNET.Extensions
         
 #region Properties
 
-        private IRemotingService RemoteService
+        public IRemotingService RemoteService
         {
             get
             {
                 if (_RemoteService == null)
                     _RemoteService = new RemotingServiceAdapter();
                 return _RemoteService;
+            }
+            set
+            {
+                _RemoteService = value;
             }
         }
 

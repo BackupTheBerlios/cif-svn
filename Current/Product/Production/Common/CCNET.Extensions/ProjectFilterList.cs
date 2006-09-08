@@ -24,6 +24,11 @@ namespace CCNET.Extensions
             }
         }
 
+        public void Add(ProjectFilter filter)
+        {
+            this.InnerList.Add(filter);
+        }
+
     }
 
 }
