@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Xml;
 using System.Collections;
 using Exortech.NetReflector;
 using ThoughtWorks.CruiseControl.Core;
@@ -89,7 +91,7 @@ namespace Tracker.CCNET.Plugin.IntegrationFilters
             }
         }
 
-        private IPVCSToolKit ToolKit
+        public IPVCSToolKit ToolKit
         {
             get
             {
@@ -168,5 +170,6 @@ namespace Tracker.CCNET.Plugin.IntegrationFilters
 
 #endregion
 
+        
     }
 }

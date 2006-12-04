@@ -22,10 +22,24 @@ namespace CCNET.Extensions.ForceFilters
         private StringCollection _UserList;
         private string _UserName;
         private string _Password;
+        private bool _DontCheck = false ;
 
 #endregion
         
 #region Properties
+
+        [ReflectorProperty("dontCheck", Required = false)]
+        public bool DontCheck
+        {
+            get
+            {
+                return _DontCheck;
+            }
+            set
+            {
+                _DontCheck = value;
+            }
+        }
 
         [ReflectorProperty("password", Required = true)]
         public string Password
@@ -138,7 +152,8 @@ namespace CCNET.Extensions.ForceFilters
             UserInformation info = new UserInformation();
             info.Name = this.ExtractUserName(Identity.Name);
 
-            info.Groups = this.GetADUserGroups(info.Name);
+            if (this.Groups.Length != 0)
+                info.Groups = this.GetADUserGroups(info.Name);
             
             return info;
         }
@@ -163,11 +178,15 @@ namespace CCNET.Extensions.ForceFilters
             if (UserInfo == null)
                 throw new InvalidOperationException("No user information was found.");
 
+            this.AddUserNameToResults(result, UserInfo);
+
+            if (this.DontCheck)
+                return true;
+
             bool ToRun = false;
 
             if (this.UserList.Contains(UserInfo.Name))
             {
-                this.AddUserNameToResults(result, UserInfo);
                 return true;
             }
 
@@ -175,7 +194,6 @@ namespace CCNET.Extensions.ForceFilters
             {
                 if (UserInfo.Groups.Contains(GroupName))
                 {
-                    this.AddUserNameToResults(result, UserInfo);
                     return true;
                 }
             }
@@ -194,18 +212,18 @@ namespace CCNET.Extensions.ForceFilters
         }
         private StringCollection GetADUserGroups(string userName)
         {
+            StringCollection groupsList = new StringCollection();
+
             string Path = string.Format("LDAP://dc={0},dc={1}", DomainName, TopLevelDomainName);
             string DomainUser = string.Format("{0}\\{1}", this.DomainName, this.UserName);
             DirectoryEntry Directory = new DirectoryEntry(Path, DomainUser, this.Password);
             DirectorySearcher search = new DirectorySearcher(Directory);
             search.Filter = String.Format("(SAMAccountName={0})", userName);
             SearchResult result = search.FindOne();
-
-            StringCollection groupsList = new StringCollection();
-            if (result != null)
+            
+            if (result != null && result.Properties != null && result.Properties.Contains("memberOf"))
             {
                 int groupCount = result.Properties["memberOf"].Count;
-
                 for (int counter = 0; counter < groupCount; counter++)
                 {
                     string Dirty = (string)result.Properties["memberOf"][counter];
@@ -214,7 +232,7 @@ namespace CCNET.Extensions.ForceFilters
                     groupsList.Add(Clean);
                 }
             }
-
+            
             return groupsList;
         }
 

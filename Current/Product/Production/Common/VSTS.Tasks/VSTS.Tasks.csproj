@@ -50,6 +50,7 @@
     <Compile Include="ResultsOutputCommand.cs" />
     <Compile Include="RunConfigCommand.cs" />
     <Compile Include="TestContainerCommand.cs" />
+    <Compile Include="TestMetaDataCommand.cs" />
     <Compile Include="TestToolsHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -69,8 +69,8 @@ namespace UpdateVersion.Tasks.Tasks
 
 		public void test()
 		{
-			this.Version = "2.0.2.665";
-			this.File = "C:\\Projects\\Test CI\\Current\\Product\\ProjectInfo.vb";
+			this.Version = "2.844.0.42";
+			this.File = "C:\\Projects\\dod.ahlta\\Current\\Product\\ProjectInfo.vb";
 			this.ExecuteTask();
 		}
 

@@ -4,9 +4,10 @@ using System.Text;
 
 namespace VSTS.Tasks
 {
-    public class TestContainerCommand : Command
+
+    public class TestMetaDataCommand : Command
     {
-        private string _TestAssemblyPath;
+        private string _VsmidPath;
         private object _WrappedSubject;
 
         protected override Object WrappedSubject
@@ -15,28 +16,29 @@ namespace VSTS.Tasks
             {
                 if (_WrappedSubject == null)
                 {
-                    _WrappedSubject = TestToolsHelper.CreateInstance("Microsoft.VisualStudio.TestTools.CommandLine.TestContainerCommand");
+                    _WrappedSubject = TestToolsHelper.CreateInstance("Microsoft.VisualStudio.TestTools.CommandLine.TestMetaDataCommand");
                 }
                 return _WrappedSubject;
             }
         }
 
-        public string TestAssemblyPath
+        public string VsmidPath
         {
             get
             {
-                return _TestAssemblyPath;
+                return _VsmidPath;
             }
             set
             {
-                _TestAssemblyPath = value;
+                _VsmidPath = value;
             }
         }
 
-        public TestContainerCommand(string testAssemblyPath)
+        public TestMetaDataCommand(string vsmidPath)
         {
-            _TestAssemblyPath = testAssemblyPath;
-            this.Initialize(this.TestAssemblyPath);
+            _VsmidPath = vsmidPath;
+            this.Initialize(this.VsmidPath);
         }
     }
+
 }

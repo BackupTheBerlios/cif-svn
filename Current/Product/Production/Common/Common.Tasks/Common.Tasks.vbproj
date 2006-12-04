@@ -107,6 +107,8 @@
     <Compile Include="..\..\..\ProjectInfo.vb">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AsyncExec.vb" />
+    <Compile Include="AsyncExecList.vb" />
     <Compile Include="CaseContainerCollection.vb" />
     <Compile Include="CaseElement.vb" />
     <Compile Include="IfThenTask.vb" />
@@ -125,6 +127,7 @@
     <Compile Include="TextElement.vb">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="WaitForExit.vb" />
     <Compile Include="Write.vb">
       <SubType>Code</SubType>
     </Compile>

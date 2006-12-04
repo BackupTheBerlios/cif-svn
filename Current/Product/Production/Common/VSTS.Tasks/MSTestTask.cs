@@ -17,7 +17,9 @@ namespace VSTS.Tasks
         private string _RunConfig;
         private string _ResultsFile;
         private bool _FailOnTestFailure = true;
+        private string _TestMetaData;
         private System.Collections.Specialized.StringCollection _AssembliesFileNames;
+        
         
         [TaskAttribute("failontestfailure"), BooleanValidatorAttribute()]
         public bool FailOnTestFailure
@@ -71,6 +73,19 @@ namespace VSTS.Tasks
             }
         }
 
+        [TaskAttribute("testmetadata")]
+        public string TestMetaData
+        {
+            get
+            {
+                return _TestMetaData;
+            }
+            set
+            {
+                _TestMetaData = value;
+            }
+        }
+
         private System.Collections.Specialized.StringCollection AssembliesFileNames
         {
             get
@@ -95,14 +110,22 @@ namespace VSTS.Tasks
                 }
 
                 TestExecutor.Add(new ResultsOutputCommand(this.ResultsFile));
+
                 if (!String.IsNullOrEmpty(this.RunConfig))
                     TestExecutor.Add(new RunConfigCommand(this.RunConfig));
+
+                if (!String.IsNullOrEmpty(this.TestMetaData))
+                    TestExecutor.Add(new TestMetaDataCommand(this.TestMetaData));
 
                 TestExecutor.Add(new NoIsolationCommand());
 
                 TestExecutor.ValidateCommands();
 
                 Result = TestExecutor.Execute();
+            }
+            catch(System.Reflection.TargetInvocationException ex)
+            {
+                throw new BuildException(ex.InnerException.Message, ex.InnerException);
             }
             finally
             {
@@ -121,6 +144,8 @@ namespace VSTS.Tasks
             this.AssembliesFileNames.Add(@"C:\Projects\dod.ahlta\Current\Product\Unit Test\BusinessLayer\BusinessEntities.Test\bin\Dod.CHCSII.BusinessLayer.BusinessEntities.Test.dll");
 
             this.ResultsFile = @"C:\Projects\dod.ahlta\Current\Product\report.xml";
+
+            this.TestMetaData = @"C:\Projects\dod.ahlta\Current\Product\Dod.Ahlta1.vsmdi";
 
             this.ExecuteTask();
         }
